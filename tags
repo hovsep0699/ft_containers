@@ -1,0 +1,20 @@
+Mmain.cpp	main.cpp	/^int main(int argc, char *argv[])$/
+allocator	allocator.hpp	/^    struct allocator$/
+allocator_type	vector.hpp	/^				typedef Allocator allocator_type;$/
+const_iterator	vector.hpp	/^				typedef ft::random_access_iterator<const value/
+const_pointer	allocator.hpp	/^        typedef const T*        const_pointer;$/
+const_reference	allocator.hpp	/^        typedef const T&        const_reference;$/
+const_reverse_iterator	vector.hpp	/^				typedef ft::reverse_iterator<iterator> const_r/
+container_type	queue.hpp	/^        typedef Container container_type;$/
+difference_type	allocator.hpp	/^        typedef std::ptrdiff_t  difference_type;$/
+first_type	utility.hpp	/^			typedef T1 first_type;$/
+iterator	vector.hpp	/^				typedef ft::random_access_iterator<value_type>/
+other	allocator.hpp	/^        typedef allocator<U> other;$/
+pair	utility.hpp	/^		struct pair$/
+pointer	allocator.hpp	/^        typedef T*              pointer;$/
+rebind	allocator.hpp	/^    struct rebind$/
+reference	allocator.hpp	/^        typedef T&              reference;$/
+reverse_iterator	vector.hpp	/^				typedef ft::reverse_iterator<const_iterator> r/
+second_type	utility.hpp	/^			typedef T2 second_type;$/
+size_type	allocator.hpp	/^        typedef std::size_t     size_type;$/
+value_type	allocator.hpp	/^        typedef T               value_type;$/
