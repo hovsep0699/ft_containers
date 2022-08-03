@@ -31,6 +31,8 @@ namespace ft
 
 				allocator_type get_allocator() const;
 
+				size_type max_size() const;
+
 				bool empty() const;
 
 				void push_back(const_reference val );
@@ -40,7 +42,7 @@ namespace ft
 				// void resize(size_type new_capacity);
 				void resize( size_type count, value_type value = value_type() );
 				void resize( size_type count );
-				void resize( size_type count, const value_type& value );
+				// void resize( size_type count, const value_type& value = value_type() );
 
 				iterator begin();
 
@@ -75,10 +77,11 @@ namespace ft
 				const_reference operator[] (size_type n) const;
 
 			protected:
-				allocator_type allocator;
-				pointer	elems;
+				allocator_type _allocator;
+				pointer	_elems;
 				size_type _size;
 				size_type _capacity;
+				size_type _max_size;
 
 		};
 
