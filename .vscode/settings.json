@@ -80,6 +80,7 @@
     "__bits": "cpp",
     "clocale": "cpp",
     "complex": "cpp",
-    "sstream": "cpp"
+    "sstream": "cpp",
+    "strstream": "cpp"
   }
 }

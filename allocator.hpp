@@ -35,17 +35,20 @@ namespace ft
             return &x;
         }
 
-        pointer allocate( size_type n )
+        pointer allocate( size_type _n )
         {
             pointer allocate_ptr;
-            size_type size = n * sizeof(value_type);
-            if ( std::numeric_limits<std::size_t>::max() / sizeof(value_type) < n)
+            size_type size = _n * sizeof(value_type);
+            if ( std::numeric_limits<size_type>::max() / sizeof(value_type) < _n)
                 throw std::bad_array_new_length();
+            if (_n > max_size())
+                throw std::bad_alloc();
             allocate_ptr = reinterpret_cast<pointer>(::operator new(size));
             return allocate_ptr;
         }
-        size_type max_size () const throw() {
-           return std::numeric_limits<std::size_t>::max() / sizeof(value_type);
+        size_type max_size () const throw()
+        {
+           return std::numeric_limits<difference_type>::max() / sizeof(value_type);
         }
 
         void deallocate( pointer p, std::size_t n )

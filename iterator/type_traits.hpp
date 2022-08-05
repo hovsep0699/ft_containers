@@ -26,7 +26,7 @@ namespace ft
 	//   
 	//
 	template<typename T>
-		struct is_integral : integral_constant<T, false> {};
+		struct is_integral : integral_constant<bool, false> {};
 
 	template<>
 		struct is_integral<char> : integral_constant<bool, true> {};

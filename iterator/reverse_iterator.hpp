@@ -55,7 +55,12 @@ namespace ft
 			// access operator
 			//
 			reference operator[](difference_type n) const;
-		};
+
+			template<typename IterBase>
+			friend typename reverse_iterator<IterBase>::difference_type operator-(reverse_iterator<IterBase> rhs, reverse_iterator<IterBase> lhs);
+			template<typename LIter, typename RIter>
+			friend typename reverse_iterator<LIter>::difference_type operator-(reverse_iterator<LIter> rhs, reverse_iterator<RIter> lhs);
+		}; // class reverse_iterator
 		//
 		// compare operations
 		//
@@ -82,8 +87,8 @@ namespace ft
 		//
 		template< typename Iter >
 			ft::reverse_iterator<Iter> make_reverse_iterator( Iter it );
+} // namespace ft
 
-};
 
 #include "reverse_iterator_impl.hpp"
 

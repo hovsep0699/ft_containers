@@ -131,11 +131,32 @@ namespace ft
 			{
 				return _ptr != it._ptr;
 			}
+			// pointer base()
+			// {
+			// 	return _ptr;
+			// }
+			// const_pointer base() const
+			// {
+			// 	return _ptr;
+			// }
+			template<typename IType>
+			friend typename random_access_iterator<IType>::difference_type operator-(random_access_iterator<IType> rhs, random_access_iterator<IType> lhs);
+			template<typename LIter, typename RIter>
+			friend typename random_access_iterator<LIter>::difference_type operator-(random_access_iterator<LIter> rhs, random_access_iterator<RIter> lhs);
 		protected:
 			pointer	_ptr;
 
 	};
-
+	template<typename T>
+	typename random_access_iterator<T>::difference_type operator-(random_access_iterator<T> rhs, random_access_iterator<T> lhs)
+	{
+		return rhs._ptr - lhs._ptr;
+	}
+	template<typename LIter, typename RIter>
+	typename random_access_iterator<LIter>::difference_type operator-(random_access_iterator<LIter> rhs, random_access_iterator<RIter> lhs)
+	{
+		return rhs._ptr - lhs._ptr;
+	}
 }
 
 

@@ -171,4 +171,14 @@ namespace ft
 			{
 				return ft::reverse_iterator<Iter>(it);
 			}
+		template<typename Iter>
+		typename reverse_iterator<Iter>::difference_type operator-(reverse_iterator<Iter> rhs, reverse_iterator<Iter> lhs)
+		{
+			return rhs.base() - lhs.base();
+		}
+		template<typename LIter, typename RIter>
+		typename reverse_iterator<LIter>::difference_type operator-(reverse_iterator<LIter> rhs, reverse_iterator<RIter> lhs)
+		{
+			return rhs.base() - lhs.base();
+		}
 }

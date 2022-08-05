@@ -1,6 +1,7 @@
 #pragma once
 
 #include "iterator.hpp"
+#include <sstream>
 //#include "allocator.hpp"
 #include <memory>
 #include <iostream>
@@ -25,7 +26,14 @@ namespace ft
 				typedef typename ft::iterator_traits<iterator>::difference_type difference_type;
 
 				explicit vector(const allocator_type& alloc = allocator_type());
-				explicit vector(size_type n, const allocator_type& alloc = allocator_type());
+				explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+				vector(vector& vec);
+				template <class InputIterator>
+         		vector (InputIterator first, InputIterator last, 
+				 		const allocator_type& alloc = allocator_type(),
+						typename enable_if<!is_integral<InputIterator>::value, bool>::type = true);
+
+				vector& operator= (const vector& x);
 
 				virtual ~vector();
 
@@ -41,7 +49,6 @@ namespace ft
 
 				// void resize(size_type new_capacity);
 				void resize( size_type count, value_type value = value_type() );
-				void resize( size_type count );
 				// void resize( size_type count, const value_type& value = value_type() );
 
 				iterator begin();
@@ -75,6 +82,12 @@ namespace ft
 				reference operator[] (size_type n);
 
 				const_reference operator[] (size_type n) const;
+
+				reference at (size_type _n);
+
+				void clear();
+
+				const_reference at (size_type _n) const;
 
 			protected:
 				allocator_type _allocator;
