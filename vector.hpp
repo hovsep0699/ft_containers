@@ -35,6 +35,12 @@ namespace ft
 
 				vector& operator= (const vector& x);
 
+				void assign( size_type count, const T& value );
+
+				template< class InputIt >
+				void assign( InputIt first, InputIt last,
+							typename enable_if<!is_integral<InputIt>::value, bool>::type = true);
+
 				virtual ~vector();
 
 				allocator_type get_allocator() const;

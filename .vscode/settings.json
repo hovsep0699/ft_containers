@@ -81,6 +81,7 @@
     "clocale": "cpp",
     "complex": "cpp",
     "sstream": "cpp",
-    "strstream": "cpp"
+    "strstream": "cpp",
+    "__functional_03": "cpp"
   }
 }

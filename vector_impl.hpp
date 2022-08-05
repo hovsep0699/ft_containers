@@ -1,6 +1,7 @@
 #pragma once
 
 #include "vector.hpp"
+#include <assert.h>
 // #include <stdexcept>
 namespace ft
 {
@@ -15,19 +16,22 @@ namespace ft
     {}
     template<typename T, typename Alloc>
     vector<T, Alloc>::vector(size_type n, const value_type& val, const allocator_type& alloc)
-        :	_size(n), 
-            _capacity(n),
+        :	_elems(ft_nullptr),
+            _size(0), 
+            _capacity(0),
             _allocator(alloc),
             _max_size(alloc.max_size())
     {
-        _elems = _allocator.allocate(n);
-        for (size_type i = 0; i < _size; ++i)
-            _allocator.construct(_elems + i, val);
+        resize(n, val);
     }
 
     template<typename T, typename Alloc>
     vector<T, Alloc>::vector(vector<T, Alloc>& other)
-        :	vector<T, Alloc>(other._alloc)
+        :	_elems(ft_nullptr),
+            _size(0), 
+            _capacity(0),
+            _allocator(other._allocator),
+            _max_size(other._allocator.max_size())
     {
         resize(other._size);
         for (size_type i = 0; i < _size; i++)
@@ -44,10 +48,8 @@ namespace ft
             _allocator(alloc),
             _max_size(alloc.max_size())
     {
-        _size = distance(first, last);
-        _capacity = _size;
+        resize(distance(first, last));
         size_type i = 0;
-        _elems = _allocator.allocate(_size);
         for (InputIterator it = first; it != last; ++it, ++i)
             _allocator.construct(_elems + i, *it);
     }
@@ -76,17 +78,19 @@ namespace ft
     template<typename T, typename Alloc>
     void vector<T, Alloc>::push_back(vector<T, Alloc>::const_reference val )
     {
-       this->resize(_size + 1, val);
+       resize(_size + 1, val);
     }
     template<typename T, typename Alloc>
     void vector<T, Alloc>::reserve(vector<T, Alloc>::size_type new_capacity)
     {
         if (new_capacity > _max_size)
-            throw std::length_error("ft::vector::reserve: length_error");
+            throw std::length_error("ft::vector::reserve");
         if (new_capacity > _capacity)
 		{
+            std::cout << "after: " << new_capacity << std::endl;
 			_capacity = new_capacity;
             size_type _size = this->_size;
+            // std::cout << _capacity << std::endl;
 			pointer _elems = _allocator.allocate(_capacity);
 			for (size_type i = 0; i < this->_size; ++i)
 				_allocator.construct(_elems + i, this->_elems[i]);
@@ -95,12 +99,13 @@ namespace ft
 			_allocator.deallocate(this->_elems, _capacity);
 			this->_elems = _elems;
 		}
+            // assert(_elems == ft_nullptr);
     }
     template<typename T, typename Alloc>
     void vector<T, Alloc>::resize( typename vector<T, Alloc>::size_type count, T value )
     {
         if (count > _max_size)
-            throw std::length_error("ft::vector::resize: length_error");
+            throw std::length_error("ft::vector::resize");
         if (count == _size) return ;
         if (count < _size)
         {
@@ -201,10 +206,8 @@ namespace ft
     template<typename T, typename Alloc>
     vector<T, Alloc>::~vector()
     {
-        for (size_type i = 0; i < _size; ++i)
-            _allocator.destroy(_elems + i);
+        clear();
         _allocator.deallocate(_elems, _size);
-        _size = 0;
         _elems = ft_nullptr;
     }
 
@@ -247,5 +250,30 @@ namespace ft
             std::out_of_range(ss.str());
         }
         return _elems[_n];
+    }
+
+    template<typename T, typename Alloc>
+    template< class InputIt >
+	void vector<T, Alloc>::assign( InputIt first, InputIt last,
+        typename enable_if<!is_integral<InputIt>::value, bool>::type)
+    {
+        clear();
+        std::cout << "ASSIGN: ***************" << std::endl;
+        _size = distance(first, last);
+        std::cout << _size << std::endl;
+        reserve(_size);
+        // std::cout << "\nbefore: " << _size << std::endl;
+        size_type i = 0;
+        for (InputIt it = first; it != last; ++it, ++i)
+            _allocator.construct(_elems + i, *it);
+    }
+    template<typename T, typename Alloc>
+    void vector<T, Alloc>::assign( size_type count, const T& value )
+    {
+        clear();
+        reserve(count);
+        _size = count;
+        for (size_type i = 0; i < count; ++i)
+            _allocator.construct(_elems + i, value);
     }
 }

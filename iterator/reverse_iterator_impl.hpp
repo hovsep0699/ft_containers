@@ -1,5 +1,6 @@
 #pragma once
 
+#include "reverse_iterator.hpp"
 
 namespace ft
 {
