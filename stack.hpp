@@ -1,12 +1,13 @@
 #pragma once
 
 #include "algorithm.hpp"
+#include "utility.hpp"
 #include "vector.hpp"
 
 namespace ft
 {
 
-    template<typename T, typename Container = ft::vector<T> >
+    template<typename T, typename Container>
 		class stack
 		{
 			public:
@@ -45,35 +46,22 @@ namespace ft
 		};
     
 	template< typename Elem_Type, typename Base_Container >
-		bool operator==( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 )
-		{
-			return s1.c == s2.c;
-		}
+	bool operator==( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+
 	template< typename Elem_Type, typename Base_Container >
-		bool operator!=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 )
-		{
-			return s1.c != s2.c;
-		}
+	bool operator!=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+
 	template< typename Elem_Type, typename Base_Container >
-		bool operator>( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 )
-		{
-			return s1.c > s2.c;
-		}
+	bool operator>( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+
 	template< typename Elem_Type, typename Base_Container >
-		bool operator<( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 )
-		{
-			return s1.c < s2.c;
-		}
+	bool operator<( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+
 	template< typename Elem_Type, typename Base_Container >
-		bool operator>=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 )
-		{
-			return s1.c >= s2.c;
-		}
+	bool operator>=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+
 	template< typename Elem_Type, typename Base_Container >
-		bool operator<=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 )
-		{
-			return s1.c <= s2.c;
-		}
+	bool operator<=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
 };
 
 #include "stack_impl.hpp"

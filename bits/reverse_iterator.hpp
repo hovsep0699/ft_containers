@@ -8,7 +8,7 @@ namespace ft
 	template<typename Iter>
 	class reverse_iterator
 	{
-		Iter _base;
+		Iter current;
 		//
 		// default constructor illegal
 		//
@@ -51,6 +51,8 @@ namespace ft
 			reverse_iterator<Iter> operator--(int);
 			reverse_iterator<Iter>& operator+=(difference_type offset);
 			reverse_iterator<Iter>& operator-=(difference_type offset);
+			reverse_iterator operator+( difference_type offset ) const;
+			reverse_iterator operator-( difference_type offset ) const;
 			//
 			// access operator
 			//

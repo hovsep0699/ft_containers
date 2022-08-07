@@ -1,13 +1,23 @@
 #pragma once
-// #include <memory>
+
+#include <memory>
 
 namespace ft
 {
-    template<class T> struct allocator;
-    template<class T, class Allocator = ft::allocator<T> >
-		class vector;
-    template<class T, class Container = ft::vector<T> >
-		class stack;
 
+	template<typename T1, typename T2>
+	struct pair;
+
+    template<typename T>
+    struct allocator;
+
+	template<typename T, typename Allocator = allocator<T> >
+	class vector;
+
+	template<typename T, typename Container = vector<T> >
+	class queue;
+
+	template<typename T, typename Container = vector<T> >
+	class stack;
 };
 

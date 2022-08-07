@@ -5,7 +5,7 @@
 namespace ft
 {
     
-    template<typename T, typename Container = std::deque<T> >
+    template<typename T, typename Container>
     class queue
     {
     public:
@@ -33,7 +33,7 @@ namespace ft
         friend bool operator>  (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
         friend bool operator>= (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
     protected:
-        Container _cont;
+        Container c;
     }; // class queue
 }
 

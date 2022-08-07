@@ -85,4 +85,10 @@ namespace ft
 		{
 			return s1.c <= s2.c;
 		}
+
+    template< class T, class Container >
+    void swap( stack<T,Container>& lhs, stack<T,Container>& rhs )
+    {
+        lhs.swap(rhs);
+    }
 }

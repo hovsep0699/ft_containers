@@ -1,8 +1,6 @@
 #pragma once
 
 #include <exception>
-#include <iostream>
-// #include <climits>
 
 namespace ft
 {
@@ -17,74 +15,36 @@ namespace ft
         typedef std::size_t     size_type;
         typedef std::ptrdiff_t  difference_type;
 
-        allocator() throw() {}
-        allocator(const allocator& ) throw() {}
+        allocator() throw();
+        allocator(const allocator& ) throw();
 
         template<typename M>
-        allocator(const allocator<M>& ) throw() {}
+        allocator(const allocator<M>& ) throw();
 
-        ~allocator() {}
+        ~allocator();
 
-        pointer address( reference x ) const
-        {
-            return &x;
-        }
+        pointer address( reference x ) const;
 
-        const_pointer address( const_reference x ) const
-        {
-            return &x;
-        }
+        const_pointer address( const_reference x ) const;
 
-        pointer allocate( size_type _n )
-        {
-            pointer allocate_ptr;
-            size_type size = _n * sizeof(value_type);
-            if ( std::numeric_limits<size_type>::max() / sizeof(value_type) < _n)
-                throw std::bad_array_new_length();
-            if (_n > max_size())
-                throw std::bad_alloc();
-            allocate_ptr = reinterpret_cast<pointer>(::operator new(size));
-            return allocate_ptr;
-        }
-        size_type max_size () const throw()
-        {
-           return std::numeric_limits<difference_type>::max() / sizeof(value_type);
-        }
+        pointer allocate( size_type _n );
 
-        void deallocate( pointer p, std::size_t n )
-        {
-            (void)n;
-            ::operator delete((void *)p);
-        }
+        size_type max_size () const throw();
 
-        void construct( pointer p, const_reference val )
-        {
-            new((pointer)p)value_type(val);
-        }
+        void deallocate( pointer p, std::size_t n );
 
-        void destroy(pointer p)
-        {
-            p->~T();
-        }
+        void construct( pointer p, const_reference val );
+
+        void destroy(pointer p);
+
+		template< class U >
+			struct rebind;
     };
     template< typename T1, typename T2 >
-    bool operator==( const allocator<T1>& lhs, const allocator<T2>& rhs )
-    {
-        return true;
-    }
+    bool operator==( const allocator<T1>& lhs, const allocator<T2>& rhs );
 
     template< typename T1, typename T2 >
-    bool operator!=( const allocator<T1>& lhs, const allocator<T2>& rhs )
-    {
-        return false;
-    }
-    template< class U >
-    struct rebind
-    {
-        typedef allocator<U> other;
-    };
-    
+    bool operator!=( const allocator<T1>& lhs, const allocator<T2>& rhs );
 }
 
-
-
+#include "allocator_impl.hpp"
