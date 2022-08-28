@@ -17,6 +17,17 @@ namespace ft
 	template<typename T, T v>
 	struct integral_constant;
 
+	template<typename T, typename U>
+	struct is_same;
+
+	template<typename T>
+	struct is_same<T,T>;  //specialization
+
+	template<typename T >
+	struct remove_const;
+
+	template<typename T>
+	struct remove_const<const T>;
 	//
 	//   
 	//

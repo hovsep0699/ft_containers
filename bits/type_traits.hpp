@@ -18,16 +18,41 @@ namespace ft
 	// Wrapper structure for integral types
 	// 
 	template<typename T, T v>
-		struct integral_constant
+	struct integral_constant
+	{
+		static const T value = v;
+		typedef T value_type;
+		typedef integral_constant type; 
+		operator value_type() const 
 		{
-			static const T value = v;
-			typedef T value_type;
-			typedef integral_constant type; 
-			operator value_type() const 
-			{
-				return value;
-			}
-		};
+			return value;
+		}
+	};
+
+
+	template<typename T, typename U>
+	struct is_same
+	{
+		static const bool value = false;
+	};
+
+	template<typename T>
+	struct is_same<T,T>  //specialization
+	{
+	   static const bool value = true;
+	};
+
+	template<typename T >
+	struct remove_const
+	{
+		typedef T type;
+	};
+
+	template<typename T>
+	struct remove_const<const T>
+	{
+		typedef T type;
+	};
 	//
 	//   
 	//

@@ -21,9 +21,14 @@
 #include "./bits/reverse_iterator.hpp"
 #include "./bits/reverse_iterator_def.hpp"
 #include "./bits/reverse_iterator_impl.hpp"
+#include "./bits/tree_iterator_def.hpp"
 #include "./bits/type_traits.hpp"
 #include "./bits/type_traits_def.hpp"
+#include "./functional.hpp"
+#include "./functional_def.hpp"
+#include "./functional_impl.hpp"
 #include "./iterator.hpp"
+#include "./map.hpp"
 #include "./queue.hpp"
 #include "./queue_impl.hpp"
 #include "./stack.hpp"
@@ -34,64 +39,99 @@
 #include "./vector.hpp"
 #include "./vector_impl.hpp"
 
-template<typename T>
-void printVec(T& v)
+#include <iostream>
+#include <map>
+struct A
 {
-	for (size_t i = 0; i < v.size(); i++)
+	int x;
+	A(int x) : x(x)
 	{
-		std::cout << v[i] << " ";
+//		std::cout << "A()\n";
 	}
-	// std::cout << std::endl;
-	// std::cout << "v.capacity() = " << v.capacity() << std::endl;
-	// std::cout << "v.size() = " << v.size() << std::endl;
-}
+	~A()
+	{
 
-template<typename T>
-void fillVec(T& v, typename T::size_type start, typename T::size_type end)
-{
-	for (size_t i = start; i < end; i++)
-		v.push_back(i);
-}
+//		std::cout << "~A()\n";
+	}
+	bool operator<(const A& b)
+	{
+		return x < b.x;
+	}
+	bool operator>(const A& b)
+	{
+		return x > b.x;
+	}
+	bool operator==(const A& b)
+	{
+		return x == b.x;
+	}
+	bool operator!=(const A& b)
+	{
+		return x != b.x;
+	}
+	bool operator<=(const A& b)
+	{
+		return x <= b.x;
+	}
+	bool operator>=(const A& b)
+	{
+		return x >= b.x;
+	}
+	template<typename T>
+	operator T()
+	{
+		return T(x);
+	}
+	
+	friend bool operator<(const A& b, const A& a);
+	friend bool operator>(const A& b, const A& a);
+	friend bool operator<=(const A& b, const A& a);
+	friend bool operator<=(const A& b, const A& a);
+	friend bool operator!=(const A& b, const A& a);
+	friend bool operator==(const A& b, const A& a);
+};
 
+	bool operator<(const A& b, const A& a)
+	{
+		return a.x < b.x;
+	}
+	bool operator>(const A& b, const A& a)
+	{
+		return a.x > b.x;
+	}
+	bool operator<=(const A& b, const A& a)
+	{
+		return a.x <= b.x;
+	}
+	bool operator>=(const A& b, const A& a)
+	{
+		return a.x >= b.x;
+	}
+	bool operator!=(const A& b, const A& a)
+	{
+		return a.x != b.x;
+	}
+	bool operator==(const A& b, const A& a)
+	{
+		return a.x == b.x;
+	}
+
+
+#include <vector>
 int main(int argc, char *argv[])
 {
-	ft::vector<int> v;
-	ft::vector<int> v2;
 
-	fillVec(v, 56, 60);
-	fillVec(v2, 30,56);
-	ft::vector<int> v3(v2);
-	ft::vector<int> v4(30);
-	v4.assign(30, 8);
-	ft::vector<int> v5(v4.begin(), v4.end());
-	v5 = v2;
-	// for (ft::vector<int>::iterator i = v.rbegin(); i != v.rend(); i++)
-	// {
-	// 	/* code */
-	// }
-	// std::cout << "rev: " << *v5.rbegin() << std::endl;
-	// printVec(v5);
-	// v5.insert(v5.cend() - 10 ,v.begin(), v.end());
-	printVec(v5);
-	v5.erase(v5.cbegin() + 2, v5.cbegin() + 5);
-	// v5.erase(v5.cbegin() + 2);
-	// v5.erase(v5.cbegin() + 2);
-	std::cout << "***************\n";
-
-	//  for (ft::vector<int>::reverse_iterator i = v5.rbegin(); i != v5.rend(); ++i)
-    //     {
-    //        std::cout << *i << " ";
-    //     }
-	// std::cout << *(v5.rbegin() + v5.size() - 1) << " ";
-//	v5.insert(v5.cbegin(), v.begin(), v.end());
-	// v5.resize(10);
-	// v4.assign(v2.begin(), v2.begin() + 2);
-	// printVec(v);
-	// printVec(v2);
-	// printVec(v3);
-	// printVec(v4);
-	printVec(v5);
-	// std::cout << "front() = " << v5.front() << std::endl;
-	// std::cout << "back() = " << v5.back() << std::endl;
+	//createNode(ft::make_pair("hello", A(5)));
+	ft::map<std::string, A> f;
+	f.insert(ft::make_pair("hello", A(5)));
+	f.insert(ft::make_pair("he", A(6)));
+	f.insert(ft::make_pair("a", A(9)));
+	f.insert(ft::make_pair("hel", A(8)));
+	ft::map<std::string, A>::iterator it = f.begin();
+	while (it != f.end())
+	{
+		std::cout << it->first << std::endl;;
+		++it;
+	}
 	return 0;
 }

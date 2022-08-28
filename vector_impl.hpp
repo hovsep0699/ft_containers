@@ -12,17 +12,17 @@ namespace ft
     vector<T, Alloc>::vector(const allocator_type& alloc)
         :	_data(ft_nullptr),
             _size(0),
-            _capacity(0),
             _allocator(alloc),
-            _max_size(alloc.max_size())
+            _max_size(alloc.max_size()),
+		  _capacity(0)
     {}
     template<typename T, typename Alloc>
-    vector<T, Alloc>::vector(size_type n, const value_type& val, const allocator_type& alloc)
+    vector<T, Alloc>::vector(size_type n, const_reference val, const allocator_type& alloc)
         :	_data(ft_nullptr),
             _size(0), 
-            _capacity(0),
             _allocator(alloc),
-            _max_size(alloc.max_size())
+            _max_size(alloc.max_size()),
+		  _capacity(0)
     {
         resize(n, val);
     }
@@ -45,9 +45,9 @@ namespace ft
                             typename enable_if<!is_integral<InputIterator>::value, bool>::type)
     :	_data(ft_nullptr),
         _size(0),
-        _capacity(0),
         _allocator(alloc),
-        _max_size(alloc.max_size())
+        _max_size(alloc.max_size()),
+	  	_capacity(0)
     {
         size_type i = 0;
         for (InputIterator it = first; it != last; ++it, ++i)
@@ -90,17 +90,28 @@ namespace ft
 			_capacity = new_capacity;
             size_type _size = this->_size;
 			pointer _data = _allocator.allocate(_capacity);
-			for (size_type i = 0; i < this->_size; ++i)
-				_allocator.construct(_data + i, this->_data[i]);
-            clear();
-            this->_size = _size;
-			_allocator.deallocate(this->_data, _capacity);
-			this->_data = _data;
+			size_type except_size;
+			try
+			{
+				for (except_size = 0; except_size < this->_size; ++except_size)
+					_allocator.construct(_data + except_size, this->_data[except_size]);
+				clear();
+				this->_size = _size;
+				_allocator.deallocate(this->_data, _capacity);
+				this->_data = _data;
+
+			}
+			catch(...)
+			{
+				for (size_type i = 0; i < except_size; ++i)
+					_allocator.destroy(_data + i);
+				_allocator.deallocate(_data, _capacity);
+			}
 		}
             // assert(_data == ft_nullptr);
     }
     template<typename T, typename Alloc>
-    void vector<T, Alloc>::resize( typename vector<T, Alloc>::size_type count, T value )
+    void vector<T, Alloc>::resize( typename vector<T, Alloc>::size_type count, value_type value )
     {
         if (count > _max_size)
             throw std::length_error("ft::vector::resize");
@@ -266,7 +277,7 @@ namespace ft
         
     }
     template<typename T, typename Alloc>
-    void vector<T, Alloc>::assign( size_type count, const T& value )
+    void vector<T, Alloc>::assign( size_type count, const_reference value )
     {
         clear();
         for (size_type i = 0; i < count; ++i)
@@ -309,34 +320,47 @@ namespace ft
     void vector<T, Alloc>::shrink_to_fit()
     {
         size_type _size = this->_size;
-        pointer _data = _allocator.allocate(_size);
-        for (size_type i = 0; i < this->_size; ++i)
-            _allocator.construct(_data + i, this->_data[i]);
-        clear();
-        this->_size = _size;
-        _allocator.deallocate(this->_data, _capacity);
-        this->_data = _data;
-        _capacity = _size;
+		pointer _data;
+		size_type except_size;
+		try
+		{
+			_data = _allocator.allocate(_size);
+			for (except_size = 0; except_size < this->_size; ++except_size)
+				_allocator.construct(_data + except_size, this->_data[except_size]);
+			clear();
+			this->_size = _size;
+			_allocator.deallocate(this->_data, _capacity);
+			this->_data = _data;
+			_capacity = _size;
+		}
+		catch(...)
+		{
+			for (size_type i = 0; i < except_size; ++i)
+				_allocator.destroy(_data + i);
+			_allocator.deallocate(_data, _size);
+			throw ;
+		}
     }
-    template<typename T, typename Alloc>
-    typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( const_iterator pos, const T& value )
-    {
-        size_type position = distance(cbegin(), pos);
-        size_type old_size = _size;
-        resize(_size + 1);
+    //template<typename T, typename Alloc>
+    //typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( const_iterator pos, const_reference value )
+    //{
+    //    size_type position = distance(cbegin(), pos);
+    //    size_type old_size = _size;
+    //    resize(_size + 1);
 
-        size_type i = _size;
-        while ( i >= position && i)
-        {
-            *(_data + i) = *(_data + old_size);
-            --old_size;
-            --i;
-        }
-        *(_data + position) = value;
-        return iterator(begin() + position - 1);
-    }
-     template<typename T, typename Alloc>
-    typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( iterator pos, const T& value )
+    //    size_type i = _size;
+    //    while ( i >= position && i)
+    //    {
+    //        *(_data + i) = *(_data + old_size);
+    //        --old_size;
+    //        --i;
+    //    }
+    //    *(_data + position) = value;
+    //    return iterator(begin() + position - 1);
+    //}
+
+    template<typename T, typename Alloc>
+    typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( iterator pos, const_reference value )
     {
         size_type position = distance(begin(), pos);
         size_type old_size = _size;
@@ -352,31 +376,31 @@ namespace ft
         *(_data + position) = value;
         return iterator(begin() + position - 1);
     }
+    //template<typename T, typename Alloc>
+    //typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( const_iterator pos, size_type count, const_reference value )
+    //{
+    //    size_type position = distance(cbegin(), pos);
+    //    size_type old_size = _size;
+    //    resize(_size + count);
+    //
+    //    size_type i = _size;
+    //    while ( i >= position && i)
+    //    {
+    //        *(_data + i) = *(_data + old_size);
+    //        --old_size;
+    //        --i;
+    //    }
+    //    i = position;
+    //    while (count)
+    //    {
+    //        _data[i] = value;
+    //        ++i;
+    //        --count;
+    //    }
+    //    return iterator(begin() + position);
+    //}
     template<typename T, typename Alloc>
-    typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( const_iterator pos, size_type count, const T& value )
-    {
-        size_type position = distance(cbegin(), pos);
-        size_type old_size = _size;
-        resize(_size + count);
-    
-        size_type i = _size;
-        while ( i >= position && i)
-        {
-            *(_data + i) = *(_data + old_size);
-            --old_size;
-            --i;
-        }
-        i = position;
-        while (count)
-        {
-            _data[i] = value;
-            ++i;
-            --count;
-        }
-        return iterator(begin() + position);
-    }
-    template<typename T, typename Alloc>
-    void vector<T, Alloc>::insert( iterator pos, size_type count, const T& value )
+    void vector<T, Alloc>::insert( iterator pos, size_type count, const_reference value )
     {
         size_type position = distance(begin(), pos);
         size_type old_size = _size;
@@ -435,18 +459,18 @@ namespace ft
         resize(_size - 1);
         return iterator(begin() + position);
     }
-    template<typename T, typename Alloc>
-    typename vector<T, Alloc>::iterator vector<T, Alloc>::erase( const_iterator pos )
-    {
-        if (pos == cend()) return end();
-        value_type tmp = *pos;
-        size_type position = distance(cbegin(), pos);
-        for (size_type i = position; i < _size - 1; ++i)
-            *(_data + i) = *(_data + i + 1);
-        *(_data + _size - 1) = tmp;
-        resize(_size - 1);
-        return iterator(begin() + position);
-    }
+    //template<typename T, typename Alloc>
+    //typename vector<T, Alloc>::iterator vector<T, Alloc>::erase( const_iterator pos )
+    //{
+    //    if (pos == cend()) return end();
+    //    value_type tmp = *pos;
+    //    size_type position = distance(cbegin(), pos);
+    //    for (size_type i = position; i < _size - 1; ++i)
+    //        *(_data + i) = *(_data + i + 1);
+    //    *(_data + _size - 1) = tmp;
+    //    resize(_size - 1);
+    //    return iterator(begin() + position);
+    //}
     template<typename T, typename Alloc>
     typename vector<T, Alloc>::iterator vector<T, Alloc>::erase( iterator first, iterator last )
     {
@@ -466,24 +490,24 @@ namespace ft
         return iterator(begin() + distance(begin(), last));
 
     }
-    template<typename T, typename Alloc>
-    typename vector<T, Alloc>::iterator vector<T, Alloc>::erase( const_iterator first, const_iterator last )
-    {
-        bool isEnd = (last == cend());
-        size_type position = distance(first, last);
+    //template<typename T, typename Alloc>
+    //typename vector<T, Alloc>::iterator vector<T, Alloc>::erase( const_iterator first, const_iterator last )
+    //{
+    //    bool isEnd = (last == cend());
+    //    size_type position = distance(first, last);
 
-        if (position <= 0) return iterator(begin() + distance(cbegin(), last));
+    //    if (position <= 0) return iterator(begin() + distance(cbegin(), last));
 
-        size_type len = position;
-        while (len)
-        {
-            erase(first);
-            --len;
-        }
-        resize(_size - position);
-        if (isEnd) return end(); 
-        return iterator(begin() + distance(cbegin(), last));
-    }
+    //    size_type len = position;
+    //    while (len)
+    //    {
+    //        erase(first);
+    //        --len;
+    //    }
+    //    resize(_size - position);
+    //    if (isEnd) return end(); 
+    //    return iterator(begin() + distance(cbegin(), last));
+    //}
 
     template<typename T, typename Alloc>
     void vector<T, Alloc>::swap( vector& other )

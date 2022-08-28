@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include "functional.hpp"
 
 namespace ft
 {
@@ -19,5 +20,11 @@ namespace ft
 
 	template<typename T, typename Container = vector<T> >
 	class stack;
+
+	template<typename Key,
+		typename T,
+		typename Compare = less<Key>,
+		typename Allocator = allocator<pair<const Key, T> > >
+	class map;
 };
 

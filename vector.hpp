@@ -25,7 +25,7 @@ namespace ft
 			typedef typename ft::iterator_traits<iterator>::difference_type difference_type;
 
 			explicit vector(const allocator_type& alloc = allocator_type());
-			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+			explicit vector(size_type n, const_reference val = value_type(), const allocator_type& alloc = allocator_type());
 			vector(vector& vec);
 			template <class InputIterator>
 			vector (InputIterator first, InputIterator last, 
@@ -34,7 +34,7 @@ namespace ft
 
 			vector& operator= (const vector& x);
 
-			void assign( size_type count, const T& value );
+			void assign( size_type count, const_reference value );
 
 			template< class InputIt >
 			void assign( InputIt first, InputIt last,
@@ -106,21 +106,21 @@ namespace ft
 
 			void shrink_to_fit();
 
-			iterator insert( const_iterator pos, const T& value );
-			iterator insert( iterator pos, const T& value );
+			//iterator insert( const_iterator pos, const_reference value );
+			iterator insert( iterator pos, const_reference value );
 
-			iterator insert( const_iterator pos, size_type count, const T& value );
+			//iterator insert( const_iterator pos, size_type count, const_reference value );
 
-			void insert( iterator pos, size_type count, const T& value );
+			void insert( iterator pos, size_type count, const_reference value );
 
 			template<typename InputIt>
 			iterator insert( const_iterator pos, InputIt first, InputIt last );
 
 			iterator erase( iterator pos );
-			iterator erase( const_iterator pos );
+			//iterator erase( const_iterator pos );
 
 			iterator erase( iterator first, iterator last );
-			iterator erase( const_iterator first, const_iterator last );
+			//iterator erase( const_iterator first, const_iterator last );
 
 			void swap( vector& other );
 

@@ -17,12 +17,17 @@ namespace ft
 			typedef typename ft::iterator<random_access_iterator_tag, T>::value_type value_type;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::reference reference;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::pointer pointer;
+			typedef const pointer const_pointer;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::iterator_category iterator_category;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::difference_type difference_type;
 
 			random_access_iterator();
 			random_access_iterator(pointer ptr);
 			random_access_iterator(const random_access_iterator& it);
+
+			template<typename Iter>
+			random_access_iterator(const random_access_iterator<Iter>& it);
+
 			random_access_iterator& operator=(const random_access_iterator& it);
 			//
 			// dereference operators
@@ -66,6 +71,7 @@ namespace ft
 			bool operator!=(const random_access_iterator& it);
 
 			pointer base();
+			const_pointer base() const;
 
 			template<typename IType>
 			friend typename random_access_iterator<IType>::difference_type operator-(random_access_iterator<IType> rhs, 
@@ -85,6 +91,7 @@ namespace ft
 	template<typename LIter, typename RIter>
 	typename random_access_iterator<LIter>::difference_type operator-(random_access_iterator<LIter> rhs,
 			random_access_iterator<RIter> lhs);
+
 }
 
 #include "random_access_iterator_impl.hpp"

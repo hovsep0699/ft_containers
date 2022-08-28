@@ -1,0 +1,15 @@
+conditional	type_traits.hpp	/^	struct conditional$/
+container_type	back_insert_iterator.hpp	/^			typedef Container container_type;$/
+difference_type	iterator_traits_impl.hpp	/^		typedef Distance difference_type;$/
+enable_if	type_traits.hpp	/^	struct enable_if {};$/
+input_iterator_tag	iterator_traits_impl.hpp	/^    struct input_iterator_tag {};$/
+integral_constant	type_traits.hpp	/^		struct integral_constant$/
+iterator	iterator_traits_impl.hpp	/^	struct iterator$/
+iterator_category	iterator_traits_impl.hpp	/^		typedef Category iterator_category;$/
+iterator_traits	iterator_traits_impl.hpp	/^	struct iterator_traits$/
+iterator_type	reverse_iterator.hpp	/^			typedef Iter iterator_type;$/
+output_iterator_tag	iterator_traits_impl.hpp	/^    struct output_iterator_tag {};$/
+pointer	iterator_traits_impl.hpp	/^		typedef Pointer pointer;$/
+reference	iterator_traits_impl.hpp	/^		typedef Reference reference;$/
+type	type_traits.hpp	/^		typedef T type;$/
+value_type	iterator_traits_impl.hpp	/^		typedef T value_type;$/

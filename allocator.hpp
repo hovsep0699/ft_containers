@@ -25,7 +25,7 @@ namespace ft
 
         pointer address( reference x ) const;
 
-        const_pointer address( const_reference x ) const;
+        //const_pointer address( const_reference x ) const;
 
         pointer allocate( size_type _n );
 

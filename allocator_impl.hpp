@@ -29,11 +29,11 @@ namespace ft
 		return &x;
 	}
 
-	template<typename T>
-	typename allocator<T>::const_pointer allocator<T>::address( const_reference x ) const
-	{
-		return &x;
-	}
+	//template<typename T>
+	//typename allocator<T>::const_pointer allocator<T>::address( const_reference x ) const
+	//{
+	//	return &x;
+	//}
 
 	template<typename T>
 	typename allocator<T>::pointer allocator<T>::allocate( size_type _n )
@@ -57,13 +57,13 @@ namespace ft
 	void allocator<T>::deallocate( pointer p, std::size_t n )
 	{
 		(void)n;
-		::operator delete((void *)p);
+		::operator delete( ( void* )p );
 	}
 
 	template<typename T>
 	void allocator<T>::construct( pointer p, const_reference val )
 	{
-		new((pointer)p)value_type(val);
+		new( ( void* )p ) value_type(val);
 	}
 
 	template<typename T>

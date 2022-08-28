@@ -7,27 +7,27 @@
 namespace ft
 {
 	template<typename T1,typename T2>
-		struct pair
-		{
-			//
-			// type of pair elements
-			//
-			typedef T1 first_type;
-			typedef T2 second_type;
-			T1 first;
-			T2 second;
-			pair();
-			pair(const first_type& first, const second_type& second);
-			template<typename K, typename V>
-			pair(const pair<K,V>& p);
-			pair(const pair& p);
-			pair& operator=(const pair& p);
-			// 
-			// swap pair contents
-			//
-			void swap(pair& p);
+	struct pair
+	{
+		//
+		// type of pair elements
+		//
+		typedef T1 first_type;
+		typedef T2 second_type;
+		T1 first;
+		T2 second;
+		pair();
+		pair(const first_type& first, const second_type& second);
+		template<typename K, typename V>
+		pair(const pair<K,V>& p);
+		pair(const pair& p);
+		pair& operator=(const pair& p);
+		// 
+		// swap pair contents
+		//
+		void swap(pair& p);
 
-		};
+	};
 	//
 	// compare operations
 	//
@@ -62,3 +62,4 @@ namespace ft
 	void swap(pair<T1, T2>& lhs, pair<T1, T2>& rhs );
 
 }
+#include "utility_impl.hpp"
