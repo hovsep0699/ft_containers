@@ -215,5 +215,17 @@ namespace ft
 		random_access_iterator<T>::random_access_iterator(const random_access_iterator<Iter>& it)
 			: _ptr(it.base()) 
 		{}
+
+		template<typename T>
+		random_access_iterator<T>::operator random_access_iterator<const value_type>()
+		{
+			return random_access_iterator<const value_type>(*this);
+		}
+
+		template<typename LIter, typename RIter>
+		typename random_access_iterator<LIter>::difference_type operator+(random_access_iterator<LIter> rhs,  typename random_access_iterator<LIter>::size_type lhs)
+		{
+			return rhs.base()  + lhs;
+		}
 }
 

@@ -28,6 +28,8 @@ namespace ft
 			template<typename Iter>
 			random_access_iterator(const random_access_iterator<Iter>& it);
 
+			operator random_access_iterator<const value_type>();
+
 			random_access_iterator& operator=(const random_access_iterator& it);
 			//
 			// dereference operators
@@ -84,13 +86,6 @@ namespace ft
 		protected:
 			pointer _ptr;
 	};
-	template<typename T>
-	typename random_access_iterator<T>::difference_type operator-(random_access_iterator<T> rhs,
-			random_access_iterator<T> lhs);
-
-	template<typename LIter, typename RIter>
-	typename random_access_iterator<LIter>::difference_type operator-(random_access_iterator<LIter> rhs,
-			random_access_iterator<RIter> lhs);
 
 }
 

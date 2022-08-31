@@ -90,7 +90,7 @@ namespace ft
 			}
 			virtual ~map()
 			{
-				clear();
+	//			clear();
 			}
 			explicit map( const Compare& comp,
               const Allocator& alloc = Allocator() )

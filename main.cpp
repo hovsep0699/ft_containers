@@ -120,18 +120,20 @@ struct A
 #include <vector>
 int main(int argc, char *argv[])
 {
+	ft::vector<const int> v;
+	v.push_back(5);
 
 	//createNode(ft::make_pair("hello", A(5)));
-	ft::map<std::string, A> f;
-	f.insert(ft::make_pair("hello", A(5)));
-	f.insert(ft::make_pair("he", A(6)));
-	f.insert(ft::make_pair("a", A(9)));
-	f.insert(ft::make_pair("hel", A(8)));
-	ft::map<std::string, A>::iterator it = f.begin();
-	while (it != f.end())
-	{
-		std::cout << it->first << std::endl;;
-		++it;
-	}
+	//ft::map<std::string, A> f;
+	//f.insert(ft::make_pair("hello", A(5)));
+	//f.insert(ft::make_pair("he", A(6)));
+	//f.insert(ft::make_pair("a", A(9)));
+	//f.insert(ft::make_pair("hel", A(8)));
+	//ft::map<std::string, A>::iterator it = f.begin();
+	//while (it != f.end())
+	//{
+	//	std::cout << it->first << std::endl;;
+	//	++it;
+	//}
 	return 0;
 }
