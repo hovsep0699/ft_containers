@@ -184,4 +184,25 @@ namespace ft
 	{
 		return binary_negate<Predicate>(pred);
 	}
-}
+
+	template <typename _Pair>
+	typename _Pair::first_type& select1st<_Pair>::operator()(_Pair& p) const
+	{
+		return p.first;
+	}
+	template <typename _Pair>
+	const typename _Pair::first_type& select1st<_Pair>::operator()(const _Pair& p) const
+	{
+		return p.first;
+	}
+	template <typename _Pair>
+	typename _Pair::second_type& select2nd<_Pair>::operator()(_Pair& p) const
+	{
+		return p.second;
+	}
+	template <typename _Pair>
+	const typename _Pair::second_type& select2nd<_Pair>::operator()(const _Pair& p) const
+	{
+		return p.second;
+	}
+}	

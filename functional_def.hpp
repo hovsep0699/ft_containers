@@ -94,5 +94,11 @@ namespace ft
 
 	template <class Arg1, class Arg2, class Result>
 	pointer_to_binary_function<Arg1, Arg2, Result> ptr_fun (Result (*f)(Arg1, Arg2));
+
+	template<typename _Pair>
+	struct select1st;
+
+	template<typename _Pair>
+	struct select2nd;
 }
 

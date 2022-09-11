@@ -3,6 +3,7 @@
 #include "stl.hpp"
 #include "bits/tree_iterator_def.hpp"
 #include "bits/reverse_iterator.hpp"
+#include "bits/rb_tree.hpp"
 #include "utility.hpp"
 #include <iostream>
 namespace ft
@@ -20,69 +21,42 @@ namespace ft
 			typedef typename Allocator::size_type			size_type;
 			typedef typename Allocator::difference_type		difference_type;
 			typedef Compare									key_compare;
-			typedef ft::rb_tree_iterator<const value_type>	const_iterator;
 			typedef Allocator								allocator_type;
 			typedef value_type&								reference;
 			typedef const value_type&						const_reference;
 			typedef typename Allocator::pointer				pointer;
 			typedef typename Allocator::const_pointer		const_pointer;
 			typedef ft::rb_tree_iterator<value_type>		iterator;
+			typedef ft::rb_tree_iterator<const value_type>	const_iterator;
 			typedef ft::reverse_iterator<iterator>			reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 			
 
-			map()
-				: _root(rb_node_base::nil)
-			{}
-			//void print()
-			//{
-			//	std::cout << "###############################################" << std::endl;
-			//	rb_node_base* begin = _root->min();
-			//	while (begin != rb_node_base::nil)
-			//	{
-
-			//		rb_node<value_type>* curr = static_cast<rb_node<value_type>*>(begin);
-			//		std::cout << "node: "<< curr->data.first << " : color: " << (curr->color ? "red" : "black") << std::endl;
-			//		if (begin->right != rb_node_base::nil)
-			//		{
-			//			begin = begin->right->min();
-			//		}
-			//		else 
-			//		{
-			//			rb_node_base* parent = begin->parent;
-			//			while (parent != rb_node_base::nil && begin != rb_node_base::nil && begin == parent->right)
-			//			{
-			//				begin = parent;
-			//				parent = parent->parent;
-			//			}
-			//			begin = parent;
-
-			//		}
-
-			//	}
-			//	std::cout << "###############################################" << std::endl;
-			//}
 			iterator begin()
 			{
-				return iterator(_root->min());
+				return iterator(_tree.begin());
+			}
+			const_iterator begin() const
+			{
+				return const_iterator(_tree.begin());
 			}
 			iterator end()
 			{
-				return iterator(rb_node_base::nil);
+				return iterator(_tree.end());
+			}
+			const_iterator end() const
+			{
+				return const_iterator(_tree.end());
 			}
 			void clear()
 			{
-				rb_node_base* node = _root;
-				while (node != rb_node_base::nil)
+				iterator it = begin();
+				while (it != end())
 				{
-					value_type data = static_cast<rb_node<value_type>* >(node)->data;
-					erase(data);
-					iterator it(node);
+					erase(it);
 					++it;
-					node = it.base();
 				}
-				_root = rb_node_base::nil;
 			}
 			void get_allocator()
 			{
@@ -92,6 +66,8 @@ namespace ft
 			{
 	//			clear();
 			}
+			map() : _tree(), _comp(key_compare()), _alloc(allocator_type())
+			{}
 			explicit map( const Compare& comp,
               const Allocator& alloc = Allocator() )
 				: _root(rb_node_base::nil), _comp(comp), _alloc(alloc)
@@ -145,13 +121,7 @@ namespace ft
 			};
 			allocator_type				_alloc;
 			key_compare					_comp;
-			rb_node_base*				_root;
-			rb_node_base* createNode(const_reference data)
-			{
-				rb_node<value_type>* node =_alloc_node.allocate(1);
-				_alloc_node.construct(node, data);
-				return node;
-			}
+			rb_tree						_tree;
 			void insert_fixup(rb_node_base* z)
 			{
 				while (z->parent->color == rb_red)
@@ -163,40 +133,6 @@ namespace ft
 				}
 			}
 
-			void left_rotate(rb_node_base* x)
-			{
-				rb_node_base*  y = x->right;
-				x->right = y->left;
-				if (y->left != rb_node_base::nil)
-					y->left->parent = x;
-				y->parent = x->parent;
-				if (x->parent == rb_node_base::nil)
-					_root = y;
-				else if (x == x->parent->left)
-					x->parent->left = y;
-				else
-					x->parent->right = y;
-				y->left = x;
-				x->parent = y;
-				
-			}
-			void right_rotate(rb_node_base* x)
-			{
-				rb_node_base*  y = x->left;
-				x->left = y->right;
-				if (y->right != rb_node_base::nil)
-					y->right->parent = x;
-				y->parent = x->parent;
-				if (x->parent == rb_node_base::nil)
-					_root = y;
-				else if (x == x->parent->right)
-					x->parent->right = y;
-				else
-					x->parent->left = y;
-				y->right = x;
-				x->parent = y;
-
-			}
 			void erase(const_reference data)
 			{
 				rb_node_base* z = search(data);

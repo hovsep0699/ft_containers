@@ -5,8 +5,8 @@
 namespace ft
 {
 	template<typename Arg1,
-			typename Arg2,
-			typename Result>
+		typename Arg2,
+		typename Result>
 	struct binary_function
 	{
 		typedef Arg1 first_argument_type;
@@ -14,7 +14,8 @@ namespace ft
 		typedef Result result_type;
 	};
 
-	template<typename Arg, typename Result>
+	template<typename Arg, 
+		typename Result>
 	struct unary_function
 	{
 		typedef Arg argument_type;
@@ -22,7 +23,7 @@ namespace ft
 	};
 
 	template<typename T>
-    struct plus : binary_function<T, T, T>
+	struct plus : binary_function<T, T, T>
 	{
 		T operator()(const T& x, const T& y);
 	};
@@ -178,6 +179,20 @@ namespace ft
 		protected:
 			Result (*pFunc)(Arg1, Arg2);
 	};
+
+	template<typename _Pair>
+	struct select1st : unary_function<_Pair, typename _Pair::first_type>
+	{
+		typename _Pair::first_type& operator()(_Pair& p) const;
+		const typename _Pair::first_type& operator()(const _Pair& p) const;
+		
+	};
+
+	template<typename _Pair>
+	struct select2nd : unary_function<_Pair, typename _Pair::second_type>
+	{
+		typename _Pair::second_type& operator()(_Pair& p) const;
+		const typename _Pair::second_type& operator()(const _Pair& p) const;
+		
+	};
 }
-
-

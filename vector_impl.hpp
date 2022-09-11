@@ -14,7 +14,7 @@ namespace ft
             _size(0),
             _allocator(alloc),
             _max_size(alloc.max_size()),
-		  _capacity(0)
+			_capacity(0)
     {}
     template<typename T, typename Alloc>
     vector<T, Alloc>::vector(size_type n, const_reference val, const allocator_type& alloc)
@@ -22,7 +22,7 @@ namespace ft
             _size(0), 
             _allocator(alloc),
             _max_size(alloc.max_size()),
-		  _capacity(0)
+			_capacity(0)
     {
         resize(n, val);
     }
@@ -43,11 +43,11 @@ namespace ft
     vector<T, Alloc>::vector (InputIterator first, InputIterator last, 
                             const allocator_type& alloc,
                             typename enable_if<!is_integral<InputIterator>::value, bool>::type)
-    :	_data(ft_nullptr),
-        _size(0),
-        _allocator(alloc),
-        _max_size(alloc.max_size()),
-	  	_capacity(0)
+		:	_data(ft_nullptr),
+			_size(0),
+			_allocator(alloc),
+			_max_size(alloc.max_size()),
+			_capacity(0)
     {
         size_type i = 0;
         for (InputIterator it = first; it != last; ++it, ++i)
