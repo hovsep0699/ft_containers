@@ -56,11 +56,11 @@ namespace ft
 			}
 			size_type count(const key_type& key)
 			{
-				rb_tree_node_base* node = find(key);
+                return (find(key) != rb_tree_node_base::nil) ? 1 : 0;
 			}
-			base_ptr lower_bound(const_reference data)
+			base_ptr lower_bound(link_type _begin, link_type _end, const key_type& key)
 			{
-				
+				while ()
 			}
 			base_ptr upper_bound()
 			{

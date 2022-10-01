@@ -56,4 +56,6 @@ namespace ft
 		}
 
 	};
+	template<typename T>
+	class rb_tree_iterator;
 }
