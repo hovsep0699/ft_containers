@@ -48,33 +48,16 @@ namespace ft
 	   /* ============================= */ 
 
 		template<typename T>	
-		void rb_tree_iterator<T>::increment()
-		{
-			if (_base->right != rb_tree_node_base::nil)
-				_base = _base->right->min();
-			else
-			{
-				rb_tree_node_base* node = _base->parent;
-				while (_base == node->right)
-				{
-					_base = node;
-					node = node->parent;
-				}
-				if (_base->right != node)
-					_base = node;
-			}
-		}
-		template<typename T>	
 		rb_tree_iterator<T>& rb_tree_iterator<T>::operator++()
 		{
-			increment();
+			_base = rb_tree_node_base::increment(_base);
 			return *this;
 		}
 		template<typename T>	
 		rb_tree_iterator<T> rb_tree_iterator<T>::operator++(int)
 		{
 			rb_tree_iterator<T> tmp(*this);
-			increment();
+			_base = rb_tree_node_base::increment(_base);
 			return tmp;
 		}
 
@@ -83,27 +66,9 @@ namespace ft
 	   /* ============================= */ 
 		
 		template<typename T>	
-		void rb_tree_iterator<T>::decrement()
-		{
-			if (_base->parent->parent == _base && _base->color == rb_red)
-				_base = _base->left;
-			else if (_base->left != rb_tree_node_base::nil)
-				_base = _base->max();
-			else
-			{
-				rb_tree_node_base* node = _base->parent;
-				while (node->left == _base)
-				{
-					_base = node;
-					node = node->parent;
-				}
-				_base = node;
-			}
-		}
-		template<typename T>	
 		rb_tree_iterator<T>& rb_tree_iterator<T>::operator--()
 		{
-			decrement();
+			_base = rb_tree_node_base::decrement(_base);
 			return *this;
 		}
 
@@ -111,7 +76,7 @@ namespace ft
 		rb_tree_iterator<T> rb_tree_iterator<T>::operator--(int)
 		{
 			rb_tree_iterator<T> tmp(*this);
-			decrement();
+			_base = rb_tree_node_base::decrement(_base);
 			return tmp;
 		}
 		

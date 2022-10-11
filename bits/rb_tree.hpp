@@ -3,6 +3,7 @@
 #include "iterator_traits.hpp"
 #include "type_traits.hpp"
 #include "rb_tree_node.hpp"
+#include "rb_tree_iterator.hpp"
 
 namespace ft
 {
@@ -39,6 +40,7 @@ namespace ft
 			_Compare			_comp;
 			key_of_value_type	_key_of_value;
 			base_ptr			_root;
+			base_ptr			_begin;
 			size_type			_size;
 		public:
 			rb_tree(const _Allocator& alloc = _Allocator(), const _Compare comp = _Compare()) : _root(rb_tree_node_base::nil), _comp(comp), _alloc(alloc), _size(0) {}
@@ -58,13 +60,37 @@ namespace ft
 			{
                 return (find(key) != rb_tree_node_base::nil) ? 1 : 0;
 			}
-			base_ptr lower_bound(link_type _begin, link_type _end, const key_type& key)
+			base_ptr lower_bound(const key_type& key)
 			{
-				while ()
+				rb_tree_node<value_type>* node_begin = static_cast<rb_tree_node<value_type>* >(_begin);
+				rb_tree_node_base* node = rb_tree_node_base::nil;
+				while (node_begin != rb_tree_node_base::nil)
+				{
+					if ( !_comp(s_key(node_begin), key) )
+					{
+						node = node_begin;
+						node_begin = s_left(node_begin);
+					}
+					else
+						node_begin = s_right(node_begin);
+				}
+				return node;
 			}
-			base_ptr upper_bound()
+			base_ptr upper_bound(const key_type& key)
 			{
-
+				rb_tree_node<value_type>* node_begin = static_cast<rb_tree_node<value_type>* >(_begin);
+				rb_tree_node_base* node = rb_tree_node_base::nil;
+				while (node_begin != rb_tree_node_base::nil)
+				{
+					if ( _comp(s_key(node_begin), key) )
+					{
+						node = node_begin;
+						node_begin = s_left(node_begin);
+					}
+					else
+						node_begin = s_right(node_begin);
+				}
+				return node;
 			}
 			rb_tree_node_base* createNode(const_reference data)
 			{
@@ -72,7 +98,7 @@ namespace ft
 				_alloc_node.construct(node, data);
 				return node;
 			}
-			static key_type key(const_link_type link)
+			static key_type s_key(const_link_type link)
 			{
 				return key_of_value_type()(link->data);
 			}
@@ -82,11 +108,19 @@ namespace ft
 			}
 			static reference value(const_base_ptr ptr)
 			{
-				return static_cast<rb_tree_node<value_type> *>(ptr)->data;
+				return static_cast<rb_tree_node<value_type>* >(ptr)->data;
 			}
 			static reference value(const_link_type link)
 			{
 				return link->data;
+			}
+			static link_type s_left(const_base_ptr ptr)
+			{
+				return static_cast<rb_tree_node<value_type>* >(ptr->left);
+			}
+			static link_type s_right(const_base_ptr ptr)
+			{
+				return static_cast<rb_tree_node<value_type>* >(ptr->right);
 			}
 			void clear()
 			{
@@ -101,11 +135,11 @@ namespace ft
 			}
 			link_type begin()
 			{
-				return static_cast<rb_tree_node<value_type> *>(_root->min());
+				return static_cast<rb_tree_node<value_type> *>(_begin);
 			}
 			const_link_type begin() const
 			{
-				return static_cast<rb_tree_node<value_type> *>(_root->min());
+				return static_cast<rb_tree_node<value_type> *>(_begin);
 			}
 			link_type end()
 			{
@@ -123,6 +157,7 @@ namespace ft
 					_root = createNode(data);
 					_root->color = rb_black;
 					_size = 1;
+					_begin = _root;
 					return ;
 				}
 				rb_tree_node_base* y = rb_tree_node_base::nil;
@@ -147,6 +182,10 @@ namespace ft
 					y->right = z;
 				insert_fixup(z);
 				++_size;
+				rb_tree_node<value_type>* begin_node = static_cast<rb_tree_node<value_type>*>(_begin);
+				rb_tree_node<value_type>* z_node = static_cast<rb_tree_node<value_type>*>(z);
+				if ( _comp(s_key(z_node), s_key(begin_node)) )
+					_begin = z;
 			}
 
 			void insert_fixup(rb_tree_node_base* z)
@@ -235,6 +274,10 @@ namespace ft
 				rb_tree_node_base* z = find(data);
 				if (z == rb_tree_node_base::nil)
 					return ;
+				rb_tree_node<value_type>* begin_node = static_cast<rb_tree_node<value_type>*>(begin);
+				rb_tree_node<value_type>* z_node = static_cast<rb_tree_node<value_type>*>(z);
+				if ( !_comp(begin_node->data.first, z_node->data.first) && !_comp(z_node->data.first, begin_node->data.first) )
+					_begin = z->parent;
 				rb_tree_node_base* y = z;
 				rb_tree_node_base* x;
 				rb_tree_color orig_color = y->color;
@@ -345,7 +388,10 @@ namespace ft
 			void transplant(rb_tree_node_base* u, rb_tree_node_base* v)
 			{
 				if (u->parent == rb_tree_node_base::nil)
+				{
 					_root = v;
+					_begin = _root->min();	
+				}
 				else if (u == u->parent->left)
 					u->parent->left = v;
 				else

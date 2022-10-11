@@ -20,6 +20,53 @@ namespace ft
 			rb_tree_node_base*	parent;
 			rb_tree_color		color;
 			rb_tree_node_base(rb_tree_color color = rb_red) : left(nullptr), right(nullptr), parent(nullptr), color(color) {}
+
+	   	   /* ============================= */
+	   	   /*            increment          */
+	   	   /* ============================= */ 
+
+			static rb_tree_node_base* increment(rb_tree_node_base* node)
+			{
+				rb_tree_node_base* _base = node;
+				if (_base->right != rb_tree_node_base::nil)
+					_base = _base->right->min();
+				else
+				{
+					rb_tree_node_base* node = _base->parent;
+					while (_base == node->right)
+					{
+						_base = node;
+						node = node->parent;
+					}
+					if (_base->right != node)
+						_base = node;
+				}
+				return _base;
+			}
+
+	   	   /* ============================= */
+	   	   /*            decrement          */
+	   	   /* ============================= */ 
+
+			static rb_tree_node_base* decrement(rb_tree_node_base* node)
+			{
+				rb_tree_node_base* _base = node;
+				if (_base->parent->parent == _base && _base->color == rb_red)
+					_base = _base->left;
+				else if (_base->left != rb_tree_node_base::nil)
+					_base = _base->max();
+				else
+				{
+					rb_tree_node_base* node = _base->parent;
+					while (node->left == _base)
+					{
+						_base = node;
+						node = node->parent;
+					}
+					_base = node;
+				}
+				return _base;
+			}
 			rb_tree_node_base* min()
 			{
 				rb_tree_node_base* node = this;
