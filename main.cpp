@@ -1,46 +1,8 @@
 
-#include "./algorithm.hpp"
-#include "./algorithm_impl.hpp"
-#include "./allocator.hpp"
-#include "./allocator_impl.hpp"
-#include "./bits/back_insert_iterator.hpp"
-#include "./bits/back_insert_iterator_impl.hpp"
-#include "./bits/front_insert_iterator.hpp"
-#include "./bits/front_insert_iterator_impl.hpp"
-#include "./bits/insert_iterator.hpp"
-#include "./bits/insert_iterator_def.hpp"
-#include "./bits/insert_iterator_impl.hpp"
-#include "./bits/iterator_def.hpp"
-#include "./bits/iterator_impl.hpp"
-#include "./bits/iterator_traits.hpp"
-#include "./bits/iterator_traits_def.hpp"
-#include "./bits/iterator_traits_impl.hpp"
-#include "./bits/random_access_iterator.hpp"
-#include "./bits/random_access_iterator_def.hpp"
-#include "./bits/random_access_iterator_impl.hpp"
-#include "./bits/reverse_iterator.hpp"
-#include "./bits/reverse_iterator_def.hpp"
-#include "./bits/reverse_iterator_impl.hpp"
-#include "./bits/tree_iterator_def.hpp"
-#include "./bits/type_traits.hpp"
-#include "./bits/type_traits_def.hpp"
-#include "./functional.hpp"
-#include "./functional_def.hpp"
-#include "./functional_impl.hpp"
-#include "./iterator.hpp"
-#include "./map.hpp"
-#include "./queue.hpp"
-#include "./queue_impl.hpp"
-#include "./stack.hpp"
-#include "./stack_impl.hpp"
-#include "./stl.hpp"
-#include "./utility.hpp"
-#include "./utility_impl.hpp"
-#include "./vector.hpp"
-#include "./vector_impl.hpp"
 
 #include <iostream>
 #include <map>
+#include "bits/rb_tree.hpp"
 struct A
 {
 	int x;
@@ -117,11 +79,16 @@ struct A
 	}
 
 
-#include <vector>
 int main(int argc, char *argv[])
 {
-	ft::vector<const int> v;
-	v.push_back(5);
+	ft::rb_tree<int, ft::pair<int, int>, ft::select1st<ft::pair<int, int> >, ft::less<int> > tree;
+	tree.insert(ft::make_pair(1,5));
+	//tree.insert(ft::make_pair(2,6));
+	//tree.insert(ft::make_pair(3,7));
+	//tree.insert(ft::make_pair(4,8));
+	typename ft::rb_tree<int, ft::pair<int, int>, ft::select1st<ft::pair<int, int> >, ft::less<int> >::iterator it = tree.begin();
+//	int p = it->first;
+		std::cout << it->first << " " << it->second << std::endl;
 
 	//createNode(ft::make_pair("hello", A(5)));
 	//ft::map<std::string, A> f;

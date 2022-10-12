@@ -47,7 +47,6 @@ namespace ft
            /*            increment          */
            /* ============================= */ 
 
-			void increment();
 			rb_tree_iterator& operator++();
 			rb_tree_iterator operator++(int);
 
@@ -55,7 +54,6 @@ namespace ft
            /*            decrement          */
            /* ============================= */ 
 			
-			void decrement();
 			rb_tree_iterator& operator--();
 
 			rb_tree_iterator operator--(int);

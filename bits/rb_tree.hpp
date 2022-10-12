@@ -4,11 +4,14 @@
 #include "type_traits.hpp"
 #include "rb_tree_node.hpp"
 #include "rb_tree_iterator.hpp"
+#include "rb_tree_iterator.hpp"
+#include "../utility.hpp"
+#include "../functional.hpp"
 
 namespace ft
 {
 
-	template<typename _K, typename _V, typename _KOV, typename _Compare, typename _Allocator>
+	template<typename _K, typename _V, typename _KOV, typename _Compare = ft::less<_K>, typename _Allocator = std::allocator<_K> >
 	class rb_tree
 	{
 		
@@ -17,12 +20,13 @@ namespace ft
 			rb_right = true,
 			rb_left = false
 		};
-		typedef typename _Allocator::template rebind<_V>::other node_allocator;
-		protected:
+		typedef typename _Allocator::template rebind<rb_tree_node<_V> >::other node_allocator;
+		public:
 			typedef _K key_type;
 			typedef _V value_type;
 			typedef _KOV key_of_value_type;
 			typedef _Compare key_compare;
+			typedef rb_tree_iterator<_V> iterator;
 			typedef _Allocator allocator_type;
 			typedef rb_tree_node_base* base_ptr;
 			typedef const rb_tree_node_base* const_base_ptr;
@@ -43,7 +47,11 @@ namespace ft
 			base_ptr			_begin;
 			size_type			_size;
 		public:
-			rb_tree(const _Allocator& alloc = _Allocator(), const _Compare comp = _Compare()) : _root(rb_tree_node_base::nil), _comp(comp), _alloc(alloc), _size(0) {}
+			explicit rb_tree(const _Allocator& alloc = _Allocator(), const _Compare comp = _Compare()) : _root(rb_tree_node_base::nil), _comp(comp), _alloc(alloc), _size(0) {}
+			~rb_tree()
+			{
+//				clear();
+			}
 			base_ptr root()
 			{
 				return _root;
@@ -60,7 +68,7 @@ namespace ft
 			{
                 return (find(key) != rb_tree_node_base::nil) ? 1 : 0;
 			}
-			base_ptr lower_bound(const key_type& key)
+			iterator lower_bound(const key_type& key)
 			{
 				rb_tree_node<value_type>* node_begin = static_cast<rb_tree_node<value_type>* >(_begin);
 				rb_tree_node_base* node = rb_tree_node_base::nil;
@@ -74,9 +82,9 @@ namespace ft
 					else
 						node_begin = s_right(node_begin);
 				}
-				return node;
+				return iterator(node);
 			}
-			base_ptr upper_bound(const key_type& key)
+			iterator upper_bound(const key_type& key)
 			{
 				rb_tree_node<value_type>* node_begin = static_cast<rb_tree_node<value_type>* >(_begin);
 				rb_tree_node_base* node = rb_tree_node_base::nil;
@@ -90,7 +98,11 @@ namespace ft
 					else
 						node_begin = s_right(node_begin);
 				}
-				return node;
+				return iterator(node);
+			}
+			ft::pair<iterator, iterator> equal_range(const key_type& key)
+			{
+				return ft::make_pair(lower_bound(key), upper_bound(key));
 			}
 			rb_tree_node_base* createNode(const_reference data)
 			{
@@ -106,11 +118,11 @@ namespace ft
 			{
 				return _root;
 			}
-			static reference value(const_base_ptr ptr)
+			static reference s_value(const_base_ptr ptr)
 			{
 				return static_cast<rb_tree_node<value_type>* >(ptr)->data;
 			}
-			static reference value(const_link_type link)
+			static reference s_value(const_link_type link)
 			{
 				return link->data;
 			}
@@ -127,19 +139,20 @@ namespace ft
 				rb_tree_node_base* node = root();
 				while (node != rb_tree_node_base::nil)
 				{
-					value_type data = value(node);
+					value_type data = s_value(node);
 					erase(data);
 					node = root();
 				}
 				_root = rb_tree_node_base::nil;
 			}
-			link_type begin()
+			iterator  begin()
 			{
-				return static_cast<rb_tree_node<value_type> *>(_begin);
+				return iterator(static_cast<rb_tree_node<value_type> *>(_begin));
 			}
-			const_link_type begin() const
+			iterator  begin() const
 			{
-				return static_cast<rb_tree_node<value_type> *>(_begin);
+				std::cout << "beg\n";
+				return iterator(0);
 			}
 			link_type end()
 			{
@@ -274,7 +287,7 @@ namespace ft
 				rb_tree_node_base* z = find(data);
 				if (z == rb_tree_node_base::nil)
 					return ;
-				rb_tree_node<value_type>* begin_node = static_cast<rb_tree_node<value_type>*>(begin);
+				rb_tree_node<value_type>* begin_node = static_cast<rb_tree_node<value_type>*>(_begin);
 				rb_tree_node<value_type>* z_node = static_cast<rb_tree_node<value_type>*>(z);
 				if ( !_comp(begin_node->data.first, z_node->data.first) && !_comp(z_node->data.first, begin_node->data.first) )
 					_begin = z->parent;
@@ -415,3 +428,4 @@ namespace ft
 			}
 	};
 }
+

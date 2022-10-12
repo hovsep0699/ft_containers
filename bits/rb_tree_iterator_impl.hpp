@@ -14,7 +14,7 @@ namespace ft
 		{}
 		template<typename T>	
 		rb_tree_iterator<T>::rb_tree_iterator(rb_tree_iterator<T> const& it)
-			: _base(it._ptr)
+			: _base(it._base)
 		{}
 		template<typename T>	
 		rb_tree_iterator<T>& rb_tree_iterator<T>::operator=(rb_tree_iterator<T> const& it)
@@ -40,7 +40,9 @@ namespace ft
 		template<typename T>	
 		typename rb_tree_iterator<T>::pointer rb_tree_iterator<T>::operator->() const
 		{
-			return _alloc.address(static_cast<rb_tree_node<value_type>* >(_base)->data);
+			rb_tree_node<value_type>* ptr = static_cast<rb_tree_node<value_type>* >(_base);
+			std::cout << ptr->data.first << " " << ptr->data.second << std::endl;
+			return (rb_tree_iterator<T>::pointer)( _alloc.address(ptr->data));
 		}
 
 	   /* ============================= */

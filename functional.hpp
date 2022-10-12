@@ -196,3 +196,4 @@ namespace ft
 		
 	};
 }
+#include "functional_impl.hpp"
