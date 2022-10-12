@@ -3,14 +3,13 @@
 #include "iterator_traits.hpp"
 #include "type_traits.hpp"
 #include "rb_tree_node.hpp"
-#include <memory>
 
 namespace ft
 {
 	template<typename T>
 	class rb_tree_iterator : public iterator<bidirectional_iterator_tag, T>
 	{
-		typedef std::allocator<rb_tree_node<T> > _allocator_type;
+		typedef std::allocator<T> _allocator_type;
 		_allocator_type _alloc;
 		public:
 

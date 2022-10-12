@@ -11,7 +11,11 @@
 namespace ft
 {
 
-	template<typename _K, typename _V, typename _KOV, typename _Compare = ft::less<_K>, typename _Allocator = std::allocator<_K> >
+	template<typename _K, 
+			typename _V, 
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
 	class rb_tree
 	{
 		
@@ -22,6 +26,11 @@ namespace ft
 		};
 		typedef typename _Allocator::template rebind<rb_tree_node<_V> >::other node_allocator;
 		public:
+
+			/* ========================= */
+			/*        member types       */
+			/* ========================= */
+
 			typedef _K key_type;
 			typedef _V value_type;
 			typedef _KOV key_of_value_type;
@@ -50,7 +59,7 @@ namespace ft
 			explicit rb_tree(const _Allocator& alloc = _Allocator(), const _Compare comp = _Compare()) : _root(rb_tree_node_base::nil), _comp(comp), _alloc(alloc), _size(0) {}
 			~rb_tree()
 			{
-//				clear();
+				clear();
 			}
 			base_ptr root()
 			{
@@ -148,11 +157,6 @@ namespace ft
 			iterator  begin()
 			{
 				return iterator(static_cast<rb_tree_node<value_type> *>(_begin));
-			}
-			iterator  begin() const
-			{
-				std::cout << "beg\n";
-				return iterator(0);
 			}
 			link_type end()
 			{
@@ -306,7 +310,7 @@ namespace ft
 				}
 				else
 				{
-					y = z->right->min();
+					y = rb_tree_node_base::min(z->right);
 					orig_color = y->color;
 					x = y->right;
 					if (y->parent == z)
@@ -403,7 +407,7 @@ namespace ft
 				if (u->parent == rb_tree_node_base::nil)
 				{
 					_root = v;
-					_begin = _root->min();	
+					_begin =rb_tree_node_base::min(_root);	
 				}
 				else if (u == u->parent->left)
 					u->parent->left = v;

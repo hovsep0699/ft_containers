@@ -39,6 +39,7 @@ struct A
 	{
 		return x >= b.x;
 	}
+
 	template<typename T>
 	operator T()
 	{
@@ -83,11 +84,12 @@ int main(int argc, char *argv[])
 {
 	ft::rb_tree<int, ft::pair<int, int>, ft::select1st<ft::pair<int, int> >, ft::less<int> > tree;
 	tree.insert(ft::make_pair(1,5));
-	//tree.insert(ft::make_pair(2,6));
-	//tree.insert(ft::make_pair(3,7));
-	//tree.insert(ft::make_pair(4,8));
-	typename ft::rb_tree<int, ft::pair<int, int>, ft::select1st<ft::pair<int, int> >, ft::less<int> >::iterator it = tree.begin();
+	tree.insert(ft::make_pair(2,6));
+	tree.insert(ft::make_pair(3,7));
+	tree.insert(ft::make_pair(4,8));
+	//typename ft::rb_tree<int, ft::pair<int, int>, ft::select1st<ft::pair<int, int> >, ft::less<int> >::iterator it = tree.begin();
 //	int p = it->first;
+	for (auto it = tree.begin(); it != tree.end(); ++it)
 		std::cout << it->first << " " << it->second << std::endl;
 
 	//createNode(ft::make_pair("hello", A(5)));
