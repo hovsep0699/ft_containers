@@ -79,19 +79,33 @@ struct A
 		return a.x == b.x;
 	}
 
-
+#include <map>
 int main(int argc, char *argv[])
 {
-	ft::rb_tree<int, ft::pair<int, int>, ft::select1st<ft::pair<int, int> >, ft::less<int> > tree;
-	tree.insert(ft::make_pair(1,5));
-	tree.insert(ft::make_pair(2,6));
-	tree.insert(ft::make_pair(3,7));
-	tree.insert(ft::make_pair(4,8));
+	ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree;
+	tree.insert(ft::make_pair(1.8,5));
+	tree.insert(ft::make_pair(2.2,6));
+	tree.insert(ft::make_pair(-3.5,7));
+	tree.insert(ft::make_pair(-7.2,8));
+	
+	const ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree1(tree);
+//	auto it = tree.end();
+	
+//	std::map<float, int> m;
+//	
+//	m.insert(std::make_pair(1.8,5));
+//	m.insert(std::make_pair(2.2,6));
+//	m.insert(std::make_pair(-3.5,7));
+//	m.insert(std::make_pair(-7.2,8));
+//	std::cout << it1->first;
 	//typename ft::rb_tree<int, ft::pair<int, int>, ft::select1st<ft::pair<int, int> >, ft::less<int> >::iterator it = tree.begin();
 //	int p = it->first;
-	for (auto it = tree.begin(); it != tree.end(); ++it)
-		std::cout << it->first << " " << it->second << std::endl;
-
+	for (auto it = tree1.begin(); it != tree1.end(); ++it)
+	{
+		std::cout << it->first << ": " << it->second << "\n";
+		
+	}
+	//std::cout << tree.empty();
 	//createNode(ft::make_pair("hello", A(5)));
 	//ft::map<std::string, A> f;
 	//f.insert(ft::make_pair("hello", A(5)));

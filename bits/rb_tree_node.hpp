@@ -14,11 +14,11 @@ namespace ft
 		static rb_tree_node_base _nil_node;
 		public:
 			static rb_tree_node_base* nil;
-			rb_tree_node_base*	left;
-			rb_tree_node_base*	right;
-			rb_tree_node_base*	parent;
-			rb_tree_color		color;
-			rb_tree_node_base(rb_tree_color color = rb_red) : left(nullptr), right(nullptr), parent(nullptr), color(color) {}
+			rb_tree_node_base*	_left;
+			rb_tree_node_base*	_right;
+			rb_tree_node_base*	_parent;
+			rb_tree_color		_color;
+			rb_tree_node_base(rb_tree_color _color = rb_red) : _left(ft_nullptr), _right(ft_nullptr), _parent(ft_nullptr), _color(_color) {}
 
 
 			/*!
@@ -37,17 +37,17 @@ namespace ft
 			static rb_tree_node_base* increment(rb_tree_node_base* node)
 			{
 				rb_tree_node_base* _base = node;
-				if (_base->right != rb_tree_node_base::nil)
-					_base = rb_tree_node_base::min(_base->right);
+				if (_base->_right != rb_tree_node_base::nil)
+					_base = rb_tree_node_base::min(_base->_right);
 				else
 				{
-					rb_tree_node_base* node = _base->parent;
-					while (_base == node->right)
+					rb_tree_node_base* node = _base->_parent;
+					while (_base == node->_right)
 					{
 						_base = node;
-						node = node->parent;
+						node = node->_parent;
 					}
-					if (_base->right != node)
+					if (_base->_right != node)
 						_base = node;
 				}
 				return _base;
@@ -70,17 +70,17 @@ namespace ft
 			static rb_tree_node_base* decrement(rb_tree_node_base* node)
 			{
 				rb_tree_node_base* _base = node;
-				if (_base->parent->parent == _base && _base->color == rb_red)
-					_base = _base->left;
-				else if (_base->left != rb_tree_node_base::nil)
+				if (_base->_parent->_parent == _base && _base->_color == rb_red)
+					_base = _base->_left;
+				else if (_base->_left != rb_tree_node_base::nil)
 					_base = rb_tree_node_base::max(_base);
 				else
 				{
-					rb_tree_node_base* node = _base->parent;
-					while (node->left == _base)
+					rb_tree_node_base* node = _base->_parent;
+					while (node->_left == _base)
 					{
 						_base = node;
-						node = node->parent;
+						node = node->_parent;
 					}
 					_base = node;
 				}
@@ -104,8 +104,8 @@ namespace ft
 				rb_tree_node_base* node = base;
 				if (node == nil)
 					return node;
-				while (node->left != nil)
-					node = node->left;
+				while (node->_left != nil)
+					node = node->_left;
 				return node;
 			}
 			/*!
@@ -126,8 +126,8 @@ namespace ft
 				rb_tree_node_base* node = base;
 				if (node == nil)
 					return node;
-				while (node->right != nil)
-					node = node->right;
+				while (node->_right != nil)
+					node = node->_right;
 				return node;
 			}
 
@@ -138,13 +138,13 @@ namespace ft
 	class rb_tree_node : public rb_tree_node_base
 	{
 		public:
-			T data;
+			T _value;
 			typedef rb_tree_node_base* base_ptr;
-			rb_tree_node(T data, rb_tree_color color = rb_red) : rb_tree_node_base(color), data(data)
+			rb_tree_node(T _value, rb_tree_color _color = rb_red) : rb_tree_node_base(_color), _value(_value)
 		{
-			parent = nil;
-			left = nil;
-			right = nil;
+			_parent = nil;
+			_left = nil;
+			_right = nil;
 		}
 
 	};

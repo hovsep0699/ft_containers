@@ -5,110 +5,110 @@
 namespace ft
 {
 	template<typename T>
-    T plus<T>::operator()(const T& x, const T& y)
+    T plus<T>::operator()(const T& x, const T& y) const
 	{
 		return x + y;
 	}
 
 	template<typename T>
-	T minus<T>::operator()(T const& x, T const& y)
+	T minus<T>::operator()(T const& x, T const& y) const
 	{
 		return x - y;
 	}
 
 	template<typename T>
-	T multiplies<T>::operator()(T const& x, T const& y)
+	T multiplies<T>::operator()(T const& x, T const& y) const
 	{
 		return x * y;
 	}
 
 	template<typename T>
-	T divides<T>::operator()(T const& x, T const& y)
+	T divides<T>::operator()(T const& x, T const& y) const
 	{
 		return x / y;
 	}
 
 	template<typename T>
-	T modulus<T>::operator()(T const& x, T const& y)
+	T modulus<T>::operator()(T const& x, T const& y) const
 	{
 		return x % y;
 	}
 
 	template<typename T>
-	T negate<T>::operator()(T const& x)
+	T negate<T>::operator()(T const& x) const
 	{
 		return -x;
 	}
 
 	template<typename T>
-	bool equal_to<T>::operator()(T const& x, T const& y)
+	bool equal_to<T>::operator()(T const& x, T const& y) const
 	{
 		return x == y;
 	}
 
 	template<typename T>
-	bool not_equal_to<T>::operator()(T const& x, T const& y)
+	bool not_equal_to<T>::operator()(T const& x, T const& y) const
 	{
 		return x != y;
 	}
 
 	template<typename T>
-	bool greater<T>::operator()(T const& x, T const& y)
+	bool greater<T>::operator()(T const& x, T const& y) const
 	{
 		return x > y;
 	}
 
 	template<typename T>
-	bool less<T>::operator()(T const& x, T const& y)
+	bool less<T>::operator()(T const& x, T const& y) const
 	{
 		return x < y;
 	}
 
 	template<typename T>
-	bool greater_equal<T>::operator()(T const& x, T const& y)
+	bool greater_equal<T>::operator()(T const& x, T const& y) const
 	{
 		return x >= y;
 	}
 
 	template<typename T>
-	bool less_equal<T>::operator()(T const& x, T const& y)
+	bool less_equal<T>::operator()(T const& x, T const& y) const
 	{
 		return x <= y;
 	}
 
 	template<typename T>
-	bool logical_and<T>::operator()(T const& x, T const& y)
+	bool logical_and<T>::operator()(T const& x, T const& y) const
 	{
 		return x && y;
 	}
 	template<typename T>
-	bool logical_or<T>::operator()(T const& x, T const& y)
+	bool logical_or<T>::operator()(T const& x, T const& y) const
 	{
 		return x || y;
 	}
 	template<typename T>
-	bool logical_not<T>::operator()(T const& x)
+	bool logical_not<T>::operator()(T const& x) const
 	{
 		return !x;
 	}
 	template<typename T>
-	T bit_and<T>::operator()(T const& x, T const& y)
+	T bit_and<T>::operator()(T const& x, T const& y) const
 	{
 		return x & y;
 	}
 
 	template<typename T>
-	T bit_or<T>::operator()(T const& x, T const& y)
+	T bit_or<T>::operator()(T const& x, T const& y) const
 	{
 		return x | y;
 	}
 	template<typename T>
-	T bit_xor<T>::operator()(T const& x, T const& y)
+	T bit_xor<T>::operator()(T const& x, T const& y) const
 	{
 		return x ^ y;
 	}
 	template<typename T>
-	T bit_not<T>::operator()(T const& x)
+	T bit_not<T>::operator()(T const& x) const
 	{
 		return ~x;
 	}

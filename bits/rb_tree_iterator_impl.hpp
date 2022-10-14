@@ -34,13 +34,13 @@ namespace ft
 		template<typename T>	
 		typename rb_tree_iterator<T>::reference rb_tree_iterator<T>::operator*() const
 		{
-			return static_cast<rb_tree_node<value_type>* >(_base)->data;
+			return static_cast<rb_tree_node<value_type>* >(_base)->_value;
 		}
 		
 		template<typename T>	
 		typename rb_tree_iterator<T>::pointer rb_tree_iterator<T>::operator->() const
 		{
-			return  _alloc.address(static_cast<rb_tree_node<value_type>* >(_base)->data);
+			return  _alloc.address(static_cast<rb_tree_node<value_type>* >(_base)->_value);
 		}
 
 	   /* ============================= */

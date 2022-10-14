@@ -25,115 +25,115 @@ namespace ft
 	template<typename T>
 	struct plus : binary_function<T, T, T>
 	{
-		T operator()(const T& x, const T& y);
+		T operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct minus : binary_function<T, T, T>
 	{
-		T operator()(const T& x, const T& y);
+		T operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct multiplies : binary_function<T, T, T>
 	{
-		T operator()(const T& x, const T& y);
+		T operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct divides : binary_function<T, T, T>
 	{
-		T operator()(const T& x, const T& y);
+		T operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct modulus : binary_function<T, T, T>
 	{
-		T operator()(const T& x, const T& y);
+		T operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct negate : unary_function<T, T>
 	{
-		T operator()(const T& x);
+		T operator()(const T& x) const;
 	};
 
 	template<typename T>
     struct equal_to : binary_function<T, T, bool>
 	{
-		bool operator()(const T& x, const T& y);
+		bool operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct not_equal_to : binary_function<T, T, bool>
 	{
-		bool operator()(const T& x, const T& y);
+		bool operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct greater : binary_function<T, T, bool>
 	{
-		bool operator()(const T& x, const T& y);
+		bool operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct less : binary_function<T, T, bool>
 	{
-		bool operator()(const T& x, const T& y);
+		bool operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct greater_equal : binary_function<T, T, bool>
 	{
-		bool operator()(const T& x, const T& y);
+		bool operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct less_equal : binary_function<T, T, bool>
 	{
-		bool operator()(const T& x, const T& y);
+		bool operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
     struct logical_and : binary_function<T, T, bool>
 	{
-		bool operator()(const T& x, const T& y);
+		bool operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct logical_or : binary_function<T, T, bool>
 	{
-		bool operator()(const T& x, const T& y);
+		bool operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct logical_not : unary_function<T, bool>
 	{
-		bool operator()(const T& x);
+		bool operator()(const T& x) const;
 	};
 
 	template<typename T>
     struct bit_and : binary_function<T, T, T>
 	{
-		T operator()(const T& x, const T& y);
+		T operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct bit_or : binary_function<T, T, T>
 	{
-		T operator()(const T& x, const T& y);
+		T operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct bit_xor : binary_function<T, T, T>
 	{
-		T operator()(const T& x, const T& y);
+		T operator()(const T& x, const T& y) const;
 	};
 
 	template<typename T>
 	struct bit_not : unary_function<T, T>
 	{
-		T operator()(const T& x);
+		T operator()(const T& x) const;
 	};
 
 	template <typename Predicate>
