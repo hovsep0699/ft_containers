@@ -26,6 +26,16 @@ namespace ft
 		template<typename T>	
 		rb_tree_iterator<T>::~rb_tree_iterator() {}
 
+		//template <typename T>
+		//template<typename Iter>
+		//rb_tree_iterator<T>::rb_tree_iterator(const rb_tree_iterator<Iter>& it)
+		//	: _base(it.base())
+		//{}
+		template<typename T>
+		rb_tree_iterator<T>::operator rb_tree_iterator<const value_type>()
+		{
+			return rb_tree_iterator<const value_type>(*this);
+		}
 
 	   /* ============================= */
 	   /*     dereference operators     */
@@ -86,11 +96,16 @@ namespace ft
 	   /* ============================= */ 
 		
 		template<typename T>	
-		rb_tree_node_base* rb_tree_iterator<T>::base()
+		typename rb_tree_iterator<T>::node_pointer rb_tree_iterator<T>::base()
 		{
 			return _base;
 		}
 
+		template<typename T>	
+		typename rb_tree_iterator<T>::const_node_pointer rb_tree_iterator<T>::base() const
+		{
+			return _base;
+		}
 
 
 	   /* ============================= */

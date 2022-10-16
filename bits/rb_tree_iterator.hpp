@@ -20,6 +20,8 @@ namespace ft
 			typedef typename ft::iterator<bidirectional_iterator_tag, T>::value_type value_type;
 			typedef typename ft::iterator<bidirectional_iterator_tag, T>::reference reference;
 			typedef typename ft::iterator<bidirectional_iterator_tag, T>::pointer pointer;
+			typedef rb_tree_node_base* node_pointer;
+			typedef const rb_tree_node_base* const_node_pointer;
 			typedef bidirectional_iterator_tag iterator_category;
 			typedef typename ft::iterator<bidirectional_iterator_tag, T>::difference_type difference_type;
 
@@ -30,6 +32,10 @@ namespace ft
 			rb_tree_iterator();
 			rb_tree_iterator(rb_tree_node_base* _base);
 			rb_tree_iterator(rb_tree_iterator const& it);
+//			template<typename Iter>
+//			rb_tree_iterator(const rb_tree_iterator<Iter>& it);
+
+			operator rb_tree_iterator<const value_type>();
 			rb_tree_iterator& operator=(rb_tree_iterator const& it);
 			virtual ~rb_tree_iterator();
 
@@ -62,8 +68,10 @@ namespace ft
            /*       	   base             */
            /* ============================= */ 
 			
-			rb_tree_node_base* base();
 
+			node_pointer base();
+
+			const_node_pointer base() const;
 
 
            /* ============================= */

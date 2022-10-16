@@ -4,6 +4,7 @@
 #include "type_traits.hpp"
 #include <iostream>
 #include "rb_tree_def.hpp"
+#include "../utility.hpp"
 namespace ft
 {
 	class rb_tree_node_base
@@ -70,19 +71,25 @@ namespace ft
 			static rb_tree_node_base* decrement(rb_tree_node_base* node)
 			{
 				rb_tree_node_base* _base = node;
+
 				if (_base->_parent->_parent == _base && _base->_color == rb_red)
 					_base = _base->_left;
 				else if (_base->_left != rb_tree_node_base::nil)
-					_base = rb_tree_node_base::max(_base);
+				{
+					_base = _base->_left;
+            		while (_base->_right != rb_tree_node_base::nil)
+            			_base = _base->_right;
+				}
 				else
 				{
-					rb_tree_node_base* node = _base->_parent;
-					while (node->_left == _base)
+					if (_base == _base->_parent->_right)
+						_base = _base->_parent;
+					else
 					{
-						_base = node;
-						node = node->_parent;
+						while (_base == _base->_parent->_left)
+							_base = _base->_parent;
+						_base = _base->_parent;
 					}
-					_base = node;
 				}
 				return _base;
 			}
