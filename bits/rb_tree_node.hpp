@@ -15,11 +15,15 @@ namespace ft
 		static rb_tree_node_base _nil_node;
 		public:
 			static rb_tree_node_base* nil;
-			rb_tree_node_base*	_left;
-			rb_tree_node_base*	_right;
-			rb_tree_node_base*	_parent;
-			rb_tree_color		_color;
-			rb_tree_node_base(rb_tree_color _color = rb_red) : _left(ft_nullptr), _right(ft_nullptr), _parent(ft_nullptr), _color(_color) {}
+			typedef rb_tree_node_base* 			base_ptr;
+			typedef const rb_tree_node_base*	const_base_ptr;			
+
+			base_ptr							_left;
+			base_ptr							_right;
+			base_ptr							_parent;
+			rb_tree_color						_color;
+
+			rb_tree_node_base(rb_tree_color _color = rb_red) : _left(rb_tree_node_base::nil), _right(rb_tree_node_base::nil), _parent(rb_tree_node_base::nil), _color(_color) {}
 
 
 			/*!
@@ -35,14 +39,14 @@ namespace ft
 			 * @result		A poiner to next node of tree
 			 *
 			*/
-			static rb_tree_node_base* increment(rb_tree_node_base* node)
+			static base_ptr increment(base_ptr node)
 			{
-				rb_tree_node_base* _base = node;
+				base_ptr _base = node;
 				if (_base->_right != rb_tree_node_base::nil)
 					_base = rb_tree_node_base::min(_base->_right);
 				else
 				{
-					rb_tree_node_base* node = _base->_parent;
+					base_ptr node = _base->_parent;
 					while (_base == node->_right)
 					{
 						_base = node;
@@ -68,9 +72,9 @@ namespace ft
 			 * @result		A poiner to previous node of tree
 			 *
 			*/
-			static rb_tree_node_base* decrement(rb_tree_node_base* node)
+			static base_ptr decrement(base_ptr node)
 			{
-				rb_tree_node_base* _base = node;
+				base_ptr _base = node;
 
 				if (_base->_parent->_parent == _base && _base->_color == rb_red)
 					_base = _base->_left;
@@ -106,9 +110,9 @@ namespace ft
 			 * @result		A poiner to leftmost node of subtree
 			 *
 			*/
-			static rb_tree_node_base* min(rb_tree_node_base* base)
+			static base_ptr min(base_ptr base)
 			{
-				rb_tree_node_base* node = base;
+				base_ptr node = base;
 				if (node == nil)
 					return node;
 				while (node->_left != nil)
@@ -128,9 +132,9 @@ namespace ft
 			 * @result		A poiner to rightmost node of subtree
 			 *
 			*/
-			static rb_tree_node_base* max(rb_tree_node_base* base)
+			static base_ptr max(base_ptr base)
 			{
-				rb_tree_node_base* node = base;
+				base_ptr node = base;
 				if (node == nil)
 					return node;
 				while (node->_right != nil)
@@ -146,7 +150,7 @@ namespace ft
 	{
 		public:
 			T _value;
-			typedef rb_tree_node_base* base_ptr;
+			typedef rb_tree_node_base::base_ptr base_ptr;
 			rb_tree_node(T _value, rb_tree_color _color = rb_red) : rb_tree_node_base(_color), _value(_value)
 		{
 			_parent = nil;

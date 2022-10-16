@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 //	ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree1(tree);
 	ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> >::reverse_iterator it = tree.rbegin();
 	
-	//std::cout << "first: " << it->first << "\n";
+	std::cout << "first: " << it->first << "\n";
 	for (; it != tree.rend() ; ++it) {
 		std::cout << it->first << ": " << it->second << "\n";
 	}

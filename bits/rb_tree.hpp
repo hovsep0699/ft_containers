@@ -62,6 +62,10 @@ namespace ft
 					}
 			};
 		private:
+			/* ========================= */
+			/*           members         */
+			/* ========================= */
+
 			node_allocator		_alloc_node;
 			_Allocator			_alloc;
 			_Compare			_comp;
@@ -69,18 +73,33 @@ namespace ft
 			key_of_value_type	_key_of_value;
 			base_ptr			_root;
 			base_ptr			_begin;
+			base_ptr			_end;
 			base_ptr			_tail;
-			mutable base_ptr	_end;
 			size_type			_size;
 		public:
-			rb_tree() : _root(rb_tree_node_base::nil), _begin(rb_tree_node_base::nil), _comp(key_compare()),
-						_value_comp(_comp), _alloc(allocator_type()), _size(0), _tail(rb_tree_node_base::nil), _end(rb_tree_node_base::nil) {}
-			explicit rb_tree( const key_compare& comp,
-            			const allocator_type& alloc = allocator_type() ) : _root(rb_tree_node_base::nil),
-            			_begin(rb_tree_node_base::nil), _comp(comp), _alloc(alloc), _size(0), _value_comp(_comp), _tail(rb_tree_node_base::nil), _end(rb_tree_node_base::nil) {}
-            explicit rb_tree( const allocator_type& alloc ) : _root(rb_tree_node_base::nil), _begin(rb_tree_node_base::nil), _comp(key_compare()), _value_comp(_comp), _alloc(alloc), _size(0), _tail(rb_tree_node_base::nil), _end(rb_tree_node_base::nil) {}
-            rb_tree(const rb_tree& tree) : _alloc(tree._alloc), _comp(tree._comp), _value_comp(tree._value_comp), _begin(rb_tree_node_base::nil), _root(rb_tree_node_base::nil), _size(tree._size), _tail(rb_tree_node_base::nil), _end(rb_tree_node_base::nil)
+			void initialize()
 			{
+				_root = rb_tree_node_base::nil;
+				_begin = rb_tree_node_base::nil;
+				_end = rb_tree_node_base::nil;
+				_tail = rb_tree_node_base::nil;
+			}
+			rb_tree() :  _comp(key_compare()), _value_comp(_comp), _alloc(allocator_type()), _size(0)
+			{
+				initialize();
+			}
+			explicit rb_tree( const key_compare& comp,
+            			const allocator_type& alloc = allocator_type() ) : _comp(comp), _alloc(alloc), _size(0), _value_comp(_comp)
+        	{
+				initialize();
+        	}
+            explicit rb_tree( const allocator_type& alloc ) : _comp(key_compare()), _value_comp(_comp), _alloc(alloc), _size(0)
+        	{
+        		initialize();
+        	}
+            rb_tree(const rb_tree& tree) : _alloc(tree._alloc), _comp(tree._comp), _value_comp(tree._value_comp), _size(tree._size)
+			{
+				initialize();
 				for (const_iterator it = tree.begin(); it != tree.end(); ++it)
 					insert(*it);
 			}
@@ -88,8 +107,9 @@ namespace ft
 			template< class InputIt >
 			rb_tree( InputIt first, InputIt last,
      			const key_compare& comp = key_compare(),
-     			const allocator_type& alloc = allocator_type() ) : _root(rb_tree_node_base::nil), _begin(rb_tree_node_base::nil), _size(0), _comp(comp), _value_comp(_comp), _alloc(alloc), _tail(rb_tree_node_base::nil), _end(rb_tree_node_base::nil)
+     			const allocator_type& alloc = allocator_type() ) : _size(0), _comp(comp), _value_comp(_comp), _alloc(alloc)
      		{
+     			initialize();
      			while (first != last)
      			{
      				insert(*first);
@@ -213,35 +233,35 @@ namespace ft
 			}
 			reverse_iterator rbegin()
 			{
-				base_ptr node = rb_tree_node_base::increment(_tail);
-				node->_parent = _tail;
-				node->_left = _end;
-				node->_right = _end;
-				return reverse_iterator(node);
+				//base_ptr node = rb_tree_node_base::increment(_tail);
+				//node->_parent = _tail;
+				//node->_left = _end;
+				//node->_right = _end;
+				return reverse_iterator(_end);
 			}
 			const_reverse_iterator rbegin() const
 			{
-				base_ptr node = rb_tree_node_base::increment(_tail);
-				node->_parent = _tail;
-				node->_left = _end;
-				node->_right = _end;
-				return reverse_iterator(node);
+				//base_ptr node = rb_tree_node_base::increment(_tail);
+				//node->_parent = _tail;
+				//node->_left = _end;
+				//node->_right = _end;
+				return reverse_iterator(_begin);
 			}
 			const_reverse_iterator crbegin() const
 			{
-				base_ptr node = rb_tree_node_base::increment(_tail);
-				node->_parent = _tail;
-				node->_left = _end;
-				node->_right = _end;
-				return const_reverse_iterator(node);
+				//base_ptr node = rb_tree_node_base::increment(_tail);
+				//node->_parent = _tail;
+				//node->_left = _end;
+				//node->_right = _end;
+				return const_reverse_iterator(_begin);
 			}
 			reverse_iterator rend()
 			{
-				base_ptr node = rb_tree_node_base::decrement(_begin);
-				//std::cout << "nil: " << (node == _end);
-				node->_parent = _begin;
-				node->_left = _end;
-				node->_right = _end;
+				//base_ptr node = rb_tree_node_base::decrement(_begin);
+				////std::cout << "nil: " << (node == _end);
+				//node->_parent = _begin;
+				//node->_left = _end;
+				//node->_right = _end;
 				return reverse_iterator(_begin);
 
 			}
@@ -251,27 +271,27 @@ namespace ft
 			}
 			iterator end()
 			{
-				base_ptr node = rb_tree_node_base::increment(_tail);
-				node->_parent = _tail;
-				node->_left = _end;
-				node->_right = _end;
-				return iterator(node);
+				//base_ptr node = rb_tree_node_base::increment(_tail);
+				//node->_parent = _tail;
+				//node->_left = _end;
+				//node->_right = _end;
+				return iterator(_end);
 			}
 			const_iterator end() const
 			{
-				base_ptr node = rb_tree_node_base::increment(_tail);
-				node->_parent = _tail;
-				node->_left = _end;
-				node->_right = _end;
+				//base_ptr node = rb_tree_node_base::increment(_tail);
+				//node->_parent = _tail;
+				//node->_left = _end;
+				//node->_right = _end;
 				return const_iterator(_end);
 			}
 			const_iterator  cend() const
 			{
-				base_ptr node = rb_tree_node_base::increment(_tail);
-				node->_parent = _tail;
-				node->_left = _end;
-				node->_right = _end;
-				std::cout << s_value(_tail).first;
+				//base_ptr node = rb_tree_node_base::increment(_tail);
+				//node->_parent = _tail;
+				//node->_left = _end;
+				//node->_right = _end;
+				//std::cout << s_value(_tail).first;
 				return const_iterator(_end);
 			}
 
