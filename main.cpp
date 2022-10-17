@@ -82,23 +82,24 @@ struct A
 #include <map>
 int main(int argc, char *argv[])
 {
-	ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree;
+	typedef ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree_type;
+	tree_type tree;
 	tree.insert(ft::make_pair(1.8,5));
 	tree.insert(ft::make_pair(2.2,6));
 	tree.insert(ft::make_pair(-3.5,7));
 	tree.insert(ft::make_pair(-7.2,8));
 	
-//	ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree1(tree);
-	ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> >::reverse_iterator it = tree.rbegin();
+	//ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree1(tree);
+	tree_type::iterator it = tree.begin();
 	
-	std::cout << "first: " << it->first << "\n";
-	for (; it != tree.rend() ; ++it) {
-		std::cout << it->first << ": " << it->second << "\n";
-	}
+	//
+	//for (; it != tree.end() ; ++it) {
+	//	std::cout << it->first << ": " << it->second << "\n";
+	//}
 	
-//	std::cout << (it == ft::rb_tree_node_base::nil);
+	std::cout << (it.get_impl()._begin == tree.get_impl()._nil) << " : " << (it.get_impl()._begin == it.get_impl()._nil) << " : " << (it.get_impl()._nil == tree.get_impl()._nil)  << " : " << (it.base() == it.get_impl()._nil) << " : " <<  (tree.get_impl()._root == tree.get_impl()._nil)<< "\n";
 	//--it;
-	//std::cout << it->first;
+	std::cout << it->second;
 //	auto it = tree.end();
 	
 //	std::map<float, int> m;

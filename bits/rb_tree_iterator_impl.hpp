@@ -5,22 +5,25 @@
 namespace ft
 {
 		template<typename T>	
-		rb_tree_iterator<T>::rb_tree_iterator()
-			: _base(rb_tree_node_base::nil)
+		rb_tree_iterator<T>::rb_tree_iterator(rb_tree_impl<value_type, node_allocator_type> _impl)
+			: _rb_tree_impl(_impl), _base(_rb_tree_impl._nil)
 		{}
 		template<typename T>	
-		rb_tree_iterator<T>::rb_tree_iterator(rb_tree_node_base* _base)
-			: _base(_base)
+		rb_tree_iterator<T>::rb_tree_iterator(base_ptr _base, rb_tree_impl<value_type, node_allocator_type> _impl)
+			: _base(_base), _rb_tree_impl(_impl)
 		{}
 		template<typename T>	
 		rb_tree_iterator<T>::rb_tree_iterator(rb_tree_iterator<T> const& it)
-			: _base(it._base)
+			: _base(it._base), _rb_tree_impl(it._rb_tree_impl)
 		{}
 		template<typename T>	
 		rb_tree_iterator<T>& rb_tree_iterator<T>::operator=(rb_tree_iterator<T> const& it)
 		{
 			if (this != &it)
+			{
 				_base = it._base;
+				_rb_tree_impl = it._rb_tree_impl;
+			}
 			return *this;
 		}
 		template<typename T>	
@@ -50,7 +53,7 @@ namespace ft
 		template<typename T>	
 		typename rb_tree_iterator<T>::pointer rb_tree_iterator<T>::operator->() const
 		{
-			return  _alloc.address(static_cast<rb_tree_node<value_type>* >(_base)->_value);
+			return  _alloc.address(static_cast<link_type>(_base)->_value);
 		}
 
 	   /* ============================= */
@@ -60,14 +63,14 @@ namespace ft
 		template<typename T>	
 		rb_tree_iterator<T>& rb_tree_iterator<T>::operator++()
 		{
-			_base = rb_tree_node_base::increment(_base);
+			_base = _rb_tree_impl.increment(_base);
 			return *this;
 		}
 		template<typename T>	
 		rb_tree_iterator<T> rb_tree_iterator<T>::operator++(int)
 		{
 			rb_tree_iterator<T> tmp(*this);
-			_base = rb_tree_node_base::increment(_base);
+			_base = _rb_tree_impl.increment(_base);
 			return tmp;
 		}
 
@@ -78,7 +81,7 @@ namespace ft
 		template<typename T>	
 		rb_tree_iterator<T>& rb_tree_iterator<T>::operator--()
 		{
-			_base = rb_tree_node_base::decrement(_base);
+			_base = _rb_tree_impl.decrement(_base);
 			return *this;
 		}
 
@@ -86,7 +89,7 @@ namespace ft
 		rb_tree_iterator<T> rb_tree_iterator<T>::operator--(int)
 		{
 			rb_tree_iterator<T> tmp(*this);
-			_base = rb_tree_node_base::decrement(_base);
+			_base = _rb_tree_impl.decrement(_base);
 			return tmp;
 		}
 		
@@ -96,13 +99,13 @@ namespace ft
 	   /* ============================= */ 
 		
 		template<typename T>	
-		typename rb_tree_iterator<T>::node_pointer rb_tree_iterator<T>::base()
+		typename rb_tree_iterator<T>::base_ptr rb_tree_iterator<T>::base()
 		{
 			return _base;
 		}
 
 		template<typename T>	
-		typename rb_tree_iterator<T>::const_node_pointer rb_tree_iterator<T>::base() const
+		typename rb_tree_iterator<T>::const_base_ptr rb_tree_iterator<T>::base() const
 		{
 			return _base;
 		}
