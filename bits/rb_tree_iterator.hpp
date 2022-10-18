@@ -32,8 +32,8 @@ namespace ft
            /*         Orthodox form         */
            /* ============================= */ 
 
-			rb_tree_iterator(rb_tree_impl<value_type, node_allocator_type> _impl = rb_tree_impl<value_type, node_allocator_type>());
-			rb_tree_iterator(base_ptr _base, rb_tree_impl<value_type, node_allocator_type> _impl);
+			rb_tree_iterator();
+			rb_tree_iterator(base_ptr _base);
 			rb_tree_iterator(rb_tree_iterator const& it);
 //			template<typename Iter>
 //			rb_tree_iterator(const rb_tree_iterator<Iter>& it);

@@ -5,25 +5,22 @@
 namespace ft
 {
 		template<typename T>	
-		rb_tree_iterator<T>::rb_tree_iterator(rb_tree_impl<value_type, node_allocator_type> _impl)
-			: _rb_tree_impl(_impl), _base(_rb_tree_impl._nil)
+		rb_tree_iterator<T>::rb_tree_iterator()
+			: _base(_rb_tree_impl._nil), _rb_tree_impl()
 		{}
 		template<typename T>	
-		rb_tree_iterator<T>::rb_tree_iterator(base_ptr _base, rb_tree_impl<value_type, node_allocator_type> _impl)
-			: _base(_base), _rb_tree_impl(_impl)
+		rb_tree_iterator<T>::rb_tree_iterator(base_ptr _base)
+			: _base(_base)
 		{}
 		template<typename T>	
 		rb_tree_iterator<T>::rb_tree_iterator(rb_tree_iterator<T> const& it)
-			: _base(it._base), _rb_tree_impl(it._rb_tree_impl)
+			: _base(it._base)
 		{}
 		template<typename T>	
 		rb_tree_iterator<T>& rb_tree_iterator<T>::operator=(rb_tree_iterator<T> const& it)
 		{
 			if (this != &it)
-			{
 				_base = it._base;
-				_rb_tree_impl = it._rb_tree_impl;
-			}
 			return *this;
 		}
 		template<typename T>	
