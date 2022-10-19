@@ -12,25 +12,25 @@ namespace ft
 		//
 		// NIL node of tree
 		// 
-		//static rb_tree_node_base _nil_node;
 		public:
-		//	static rb_tree_node_base* nil;
 			typedef rb_tree_node_base* 			base_ptr;
 			typedef const rb_tree_node_base*	const_base_ptr;			
 
 			base_ptr							_left;
 			base_ptr							_right;
 			base_ptr							_parent;
+			bool								_is_nil;
 			rb_tree_color						_color;
 
-			rb_tree_node_base(rb_tree_color _color = rb_red) : _left(ft_nullptr), _right(ft_nullptr), _parent(ft_nullptr), _color(_color) {}
-			rb_tree_node_base(const rb_tree_node_base& node) : _left(node._left), _right(node._right), _parent(node._parent), _color(node._color) {}
+			rb_tree_node_base(rb_tree_color _color = rb_red) : _left(ft_nullptr), _right(ft_nullptr), _parent(ft_nullptr), _is_nil(true), _color(_color) {}
+			rb_tree_node_base(const rb_tree_node_base& node) : _left(node._left), _right(node._right), _parent(node._parent), _is_nil(true), _color(node._color) {}
 			rb_tree_node_base& operator=(const rb_tree_node_base& node)
 			{
 				_left = node._left;
 				_right = node._right;
 				_parent = node._parent;
 				_color = node._color;
+				_is_nil = node._is_nil;
 				return *this;
 			}
 
@@ -46,11 +46,7 @@ namespace ft
 			T _value;
 			typedef rb_tree_node_base::base_ptr base_ptr;
 			rb_tree_node(T _value, rb_tree_color _color = rb_red) : rb_tree_node_base(_color), _value(_value)
-		{
-			_parent = ft_nullptr;
-			_left = ft_nullptr;
-			_right = ft_nullptr;
-		}
+		{}
 
 	};
 	template<typename T, typename _Allocator>
@@ -58,11 +54,13 @@ namespace ft
 	{
 		void initialize()
 		{
-			_head = base_type();
-			_nil = &_head;
-			_root = _nil;
-			_begin = _nil;
-			_end = _nil;
+			_left_sentinel = base_type();
+			_right_sentinel = base_type();
+			_nil_left = &_left_sentinel;
+			_nil_right = &_right_sentinel;
+			_root = _nil_left;
+			_begin = _nil_left;
+			_end = _nil_left;
 		}
 		public:
 			typedef T										value_type;
@@ -78,8 +76,10 @@ namespace ft
 			allocator_type		_alloc;
 			base_ptr			_root;
 			base_ptr			_begin;
-			base_type			_head;
-			base_ptr			_nil;
+			base_ptr			_nil_left;
+			base_ptr			_nil_right;
+			base_type			_left_sentinel;
+			base_type			_right_sentinel;
 			base_ptr			_end;
 			size_type			_size;
 		
@@ -101,9 +101,10 @@ namespace ft
 				try
 				{
 					_alloc.construct(node, _value);
-					node->_parent = _nil;
-					node->_left = _nil;
-					node->_right = _nil;
+					node->_parent = _nil_left;
+					node->_left = _nil_left;
+					node->_right = _nil_left;
+					node->_is_nil = false;
 				}
 				catch (...)
 				{
@@ -126,13 +127,18 @@ namespace ft
 			 * @result		A poiner to next node of tree
 			 *
 			*/
-			base_ptr increment(base_ptr node)
+			static base_ptr increment(base_ptr node)
 			{
 				base_ptr _base = node;
-				if (_base->_right != _nil)
+				if (!_base->_right->_is_nil)
+				{
+					std::cout << "if_case\n";
 					_base = min(_base->_right);
+				}
 				else
 				{
+					if (_base->_left->_is_nil)
+						return _base->_right;
 					base_ptr node = _base->_parent;
 					while (_base == node->_right)
 					{
@@ -159,16 +165,16 @@ namespace ft
 			 * @result		A poiner to previous node of tree
 			 *
 			*/
-			base_ptr decrement(base_ptr node)
+			static base_ptr decrement(base_ptr node)
 			{
 				base_ptr _base = node;
 
 				if (_base->_parent->_parent == _base && _base->_color == rb_red)
 					_base = _base->_left;
-				else if (_base->_left != _nil)
+				else if (!_base->_left->_is_nil)
 				{
 					_base = _base->_left;
-            		while (_base->_right != _nil)
+            		while (!_base->_right->_is_nil)
             			_base = _base->_right;
 				}
 				else
@@ -197,12 +203,12 @@ namespace ft
 			 * @result		A poiner to leftmost node of subtree
 			 *
 			*/
-			base_ptr min(base_ptr base)
+			static base_ptr min(base_ptr base)
 			{
 				base_ptr node = base;
-				if (node == _nil)
+				if (node->_is_nil)
 					return node;
-				while (node->_left != _nil)
+				while (!node->_left->_is_nil)
 					node = node->_left;
 				return node;
 			}
@@ -219,12 +225,12 @@ namespace ft
 			 * @result		A poiner to rightmost node of subtree
 			 *
 			*/
-			base_ptr max(base_ptr base)
+			static base_ptr max(base_ptr base)
 			{
 				base_ptr node = base;
-				if (node == _nil)
+				if (node->_is_nil)
 					return node;
-				while (node->_right != _nil)
+				while (!node->_right->_is_nil)
 					node = node->_right;
 				return node;
 			}
@@ -237,8 +243,11 @@ namespace ft
 			_begin = _rb_impl._begin;
 			_end = _rb_impl._end;
 			_root = _rb_impl._root;
-			_head = _rb_impl._head;
-			_nil = _rb_impl._nil;
+			_left_sentinel = _rb_impl._left_sentinel;
+			_right_sentinel = _rb_impl._right_sentinel;
+			_nil_left = _rb_impl._nil_left;
+			_nil_right = _rb_impl._nil_right;
+
 		}
 		rb_tree_impl& operator=(const rb_tree_impl& _rb_impl)
 		{
@@ -249,8 +258,10 @@ namespace ft
 				_begin = _rb_impl._begin;
 				_end = _rb_impl._end;
 				_root = _rb_impl._root;
-				_head = _rb_impl._head;
-				_nil = _rb_impl._nil;
+				_left_sentinel = _rb_impl._left_sentinel;
+				_right_sentinel = _rb_impl._right_sentinel;
+				_nil_left = _rb_impl._nil_left;
+				_nil_right = _rb_impl._nil_right;
 			}
 			return *this;
 		}
