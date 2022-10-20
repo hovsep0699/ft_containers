@@ -86,11 +86,11 @@ int main(int argc, char *argv[])
 	tree_type tree;
 	tree.insert(ft::make_pair(1.8,5));
 	tree.insert(ft::make_pair(2.2,6));
-	//tree.insert(ft::make_pair(-3.5,7));
+	tree.insert(ft::make_pair(-3.5,7));
 	//tree.insert(ft::make_pair(-7.2,8));
 	
 	//ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree1(tree);
-	tree_type::iterator it = tree.begin();
+	//tree_type::iterator it = tree.begin();
 	
 	//
 	//for (; it != tree.end() ; ++it) {

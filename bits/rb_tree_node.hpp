@@ -131,22 +131,16 @@ namespace ft
 			{
 				base_ptr _base = node;
 				if (!_base->_right->_is_nil)
-				{
-					std::cout << "if_case\n";
 					_base = min(_base->_right);
-				}
 				else
 				{
-					if (_base->_left->_is_nil)
-						return _base->_right;
 					base_ptr node = _base->_parent;
 					while (_base == node->_right)
 					{
 						_base = node;
 						node = node->_parent;
 					}
-					if (_base->_right != node)
-						_base = node;
+					_base = node;
 				}
 				return _base;
 			}
@@ -169,24 +163,17 @@ namespace ft
 			{
 				base_ptr _base = node;
 
-				if (_base->_parent->_parent == _base && _base->_color == rb_red)
-					_base = _base->_left;
-				else if (!_base->_left->_is_nil)
-				{
-					_base = _base->_left;
-            		while (!_base->_right->_is_nil)
-            			_base = _base->_right;
-				}
+				if (!_base->_left->_is_nil)
+					_base = max(_base->_left);
 				else
 				{
-					if (_base == _base->_parent->_right)
-						_base = _base->_parent;
-					else
+					base_ptr node = _base->_parent;
+					while (_base == node->_left)
 					{
-						while (_base == _base->_parent->_left)
-							_base = _base->_parent;
-						_base = _base->_parent;
+						_base = node;
+						node = node->_parent;
 					}
+					_base = node;
 				}
 				return _base;
 			}
