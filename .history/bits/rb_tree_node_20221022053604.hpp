@@ -130,7 +130,7 @@ namespace ft
 			static base_ptr increment(base_ptr node)
 			{
 				base_ptr _base = node;
-				if (_base->_right && !_base->_right->_is_nil)
+				if (!_base->_right->_is_nil)
 					_base = min(_base->_right);
 				else
 				{
@@ -163,7 +163,7 @@ namespace ft
 			{
 				base_ptr _base = node;
 
-				if (_base->_left && !_base->_left->_is_nil)
+				if (_base-> && !_base->_left->_is_nil)
 					_base = max(_base->_left);
 				else
 				{

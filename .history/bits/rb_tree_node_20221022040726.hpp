@@ -130,12 +130,12 @@ namespace ft
 			static base_ptr increment(base_ptr node)
 			{
 				base_ptr _base = node;
-				if (_base->_right && !_base->_right->_is_nil)
+				if (!_base->_right->_is_nil)
 					_base = min(_base->_right);
 				else
 				{
 					base_ptr node = _base->_parent;
-					while (!_base->_is_nil && _base == node->_right)
+					while (_base == node->_right)
 					{
 						_base = node;
 						node = node->_parent;
@@ -163,12 +163,12 @@ namespace ft
 			{
 				base_ptr _base = node;
 
-				if (_base->_left && !_base->_left->_is_nil)
+				if (!_base->_left->_is_nil)
 					_base = max(_base->_left);
 				else
 				{
 					base_ptr node = _base->_parent;
-					while (!_base->_is_nil && _base == node->_left)
+					while (_base_base == node->_left)
 					{
 						_base = node;
 						node = node->_parent;
