@@ -231,10 +231,9 @@ namespace ft
 			}
 			iterator end()
 			{
-				// base_ptr p = _rb_tree_impl.increment(_rb_tree_impl._end);
-				// std::cout << "end: " << (p->_left == 0) << "\n";
-				//  _rb_tree_impl.decrement(p);
-				// std::cout << "end_right: " << (p == _rb_tree_impl._nil_right) << "\n";
+				base_ptr p = _rb_tree_impl.increment(_rb_tree_impl._end);
+				std::cout << "end: " << (p->_parent == _rb_tree_impl._nil_left) << "\n";
+				std::cout << "end_right: " << (p == _rb_tree_impl._nil_right) << "\n";
 				return iterator(_rb_tree_impl.increment(_rb_tree_impl._end));
 			}
 			const_iterator end() const
@@ -556,14 +555,14 @@ namespace ft
 				if ( _value_comp(s_value(_rb_tree_impl._end), s_value(p_insert.first.base()) ))
 					_rb_tree_impl._end = p_insert.first.base();
 				//std::cout << "end: " << iterator(_rb_tree_impl.increment(_rb_tree_impl._end))->first << "\n";
-				// _rb_tree_impl._nil_left->_parent = _rb_tree_impl._begin;
-				// _rb_tree_impl._begin->_left = _rb_tree_impl._nil_left;
-				// _rb_tree_impl._begin->_right = _rb_tree_impl._nil_left;
-				_rb_tree_impl._nil_right->_parent = _rb_tree_impl._end;
-				_rb_tree_impl._end->_left = _rb_tree_impl._nil_right;
-				_rb_tree_impl._end->_right = _rb_tree_impl._nil_right;
+				//_rb_tree_impl._begin->_left = _rb_tree_impl._nil_left;
+				//_rb_tree_impl._begin->_right = _rb_tree_impl._nil_left;
+				//_rb_tree_impl._nil_left->_parent = _rb_tree_impl._begin;
+//				_rb_tree_impl._end->_left = _rb_tree_impl._nil_right;
+//				_rb_tree_impl._end->_right = _rb_tree_impl._nil_right;
 				//std::cout << "endleft: " << (_rb_tree_impl._end->_left == _rb_tree_impl._nil_left) << "\n";
 				//std::cout << "endright: " << (_rb_tree_impl._end->_right == _rb_tree_impl._nil_left) << "\n";
+//				_rb_tree_impl._nil_right->_parent = _rb_tree_impl._end;
 //				base_ptr p = _rb_tree_impl.increment(_rb_tree_impl._end);
 //				std::cout << "end: " << (p == _rb_tree_impl._nil_right) << "\n";
 				

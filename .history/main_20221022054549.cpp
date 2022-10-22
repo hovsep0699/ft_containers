@@ -113,8 +113,8 @@ int main(int argc, char *argv[])
 	//auto it1 = tree.end();
 	//--it1;
 	//std::cout << "here: " << it1->first << "\n";
-	auto it = tree.end();
-	--it;
+	auto it = tree.begin();
+	// ++it;
 	std::cout << it->first << ": " << it->second << "\n";
 	// for (auto it = tree.rbegin(); it != tree.rend(); ++it)
 	// {

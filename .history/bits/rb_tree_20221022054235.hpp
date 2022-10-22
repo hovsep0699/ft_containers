@@ -556,9 +556,9 @@ namespace ft
 				if ( _value_comp(s_value(_rb_tree_impl._end), s_value(p_insert.first.base()) ))
 					_rb_tree_impl._end = p_insert.first.base();
 				//std::cout << "end: " << iterator(_rb_tree_impl.increment(_rb_tree_impl._end))->first << "\n";
-				// _rb_tree_impl._nil_left->_parent = _rb_tree_impl._begin;
-				// _rb_tree_impl._begin->_left = _rb_tree_impl._nil_left;
-				// _rb_tree_impl._begin->_right = _rb_tree_impl._nil_left;
+				_rb_tree_impl._nil_left->_parent = _rb_tree_impl._begin;
+				_rb_tree_impl._begin->_left = _rb_tree_impl._nil_left;
+				_rb_tree_impl._begin->_right = _rb_tree_impl._nil_left;
 				_rb_tree_impl._nil_right->_parent = _rb_tree_impl._end;
 				_rb_tree_impl._end->_left = _rb_tree_impl._nil_right;
 				_rb_tree_impl._end->_right = _rb_tree_impl._nil_right;

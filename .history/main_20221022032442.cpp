@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 	tree.insert(ft::make_pair(1.8,5));
 	tree.insert(ft::make_pair(2.2,6));
 	tree.insert(ft::make_pair(-3.5,7));
-	// tree.insert(ft::make_pair(-7.2,8));
+	//tree.insert(ft::make_pair(-7.2,8));
 	
 	//ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree1(tree);
 	//tree_type::iterator it = tree.begin();
@@ -113,14 +113,11 @@ int main(int argc, char *argv[])
 	//auto it1 = tree.end();
 	//--it1;
 	//std::cout << "here: " << it1->first << "\n";
-	auto it = tree.end();
-	--it;
-	std::cout << it->first << ": " << it->second << "\n";
-	// for (auto it = tree.rbegin(); it != tree.rend(); ++it)
-	// {
-	// 	std::cout << it->first << ": " << it->second << "\n";
+	for (auto it = tree.begin(); it != tree.end(); ++it)
+	{
+		std::cout << it->first << ": " << it->second << "\n";
 		
-	// }
+	}
 	//std::cout << tree.empty();
 	//createNode(ft::make_pair("hello", A(5)));
 	//ft::map<std::string, A> f;
