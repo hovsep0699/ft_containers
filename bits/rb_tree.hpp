@@ -49,7 +49,7 @@ namespace ft
 			typedef const value_type* const_pointer;
 			typedef typename _Allocator::difference_type difference_type;
 			typedef typename _Allocator::size_type size_type;
-		protected:
+
 			class value_compare : public ft::binary_function<value_type, value_type, bool>
 			{
 				protected:
@@ -96,7 +96,7 @@ namespace ft
      				++first;
      			}
      		}
-			~rb_tree()
+			virtual ~rb_tree()
 			{
 				clear();
 			}
@@ -119,7 +119,7 @@ namespace ft
 			iterator lower_bound(const key_type& key)
 			{
 				base_ptr node_begin = _rb_tree_impl._begin;
-				base_ptr node = _rb_tree_impl._nil_left;
+				base_ptr node = _rb_tree_impl._nil;
 				while (!node_begin->_is_nil)
 				{
 					if ( !_comp(s_key(node_begin), key) )
@@ -135,7 +135,7 @@ namespace ft
 			iterator upper_bound(const key_type& key)
 			{
 				base_ptr node_begin = _rb_tree_impl._begin;
-				base_ptr node = _rb_tree_impl._nil_left;
+				base_ptr node = _rb_tree_impl._nil;
 				while (!node_begin->_is_nil)
 				{
 					if ( _comp(s_key(node_begin), key) )
@@ -188,9 +188,9 @@ namespace ft
 					erase(s_key(node));
 					node = root();
 				}
-				_rb_tree_impl._root = _rb_tree_impl._nil_left;
-				_rb_tree_impl._begin = _rb_tree_impl._nil_left;
-				_rb_tree_impl._end = _rb_tree_impl._nil_left;
+				_rb_tree_impl._root = _rb_tree_impl._nil;
+				_rb_tree_impl._begin = _rb_tree_impl._nil;
+				_rb_tree_impl._end = _rb_tree_impl._nil;
 			}
 			iterator  begin()
 			{
@@ -214,7 +214,11 @@ namespace ft
 			}
 			const_reverse_iterator crbegin() const
 			{
-				return const_reverse_iterator(_rb_tree_impl._begin);
+				return const_reverse_iterator(end());
+			}
+			const_reverse_iterator crend() const
+			{
+				return const_reverse_iterator(begin());
 			}
 			reverse_iterator rend()
 			{
@@ -231,19 +235,15 @@ namespace ft
 			}
 			iterator end()
 			{
-				// base_ptr p = _rb_tree_impl.increment(_rb_tree_impl._end);
-				// std::cout << "end: " << (p->_left == 0) << "\n";
-				//  _rb_tree_impl.decrement(p);
-				// std::cout << "end_right: " << (p == _rb_tree_impl._nil_right) << "\n";
 				return iterator(_rb_tree_impl.increment(_rb_tree_impl._end));
 			}
 			const_iterator end() const
 			{
-				return const_iterator(_rb_tree_impl._end);
+				return const_iterator(_rb_tree_impl.increment(_rb_tree_impl._end));
 			}
 			const_iterator  cend() const
 			{
-				return const_iterator(_rb_tree_impl._end);
+				return const_iterator(_rb_tree_impl.increment(_rb_tree_impl._end));
 			}
 
 			ft::pair<iterator, bool> insert(base_ptr& root, const_reference _value)
@@ -251,7 +251,7 @@ namespace ft
 				base_ptr ptr = find(_key_of_value(_value) ).base();
 				if (!ptr->_is_nil)
 					return ft::make_pair(iterator(ptr), false);
-				base_ptr y = ((!root->_is_nil && _value_comp(s_value(_rb_tree_impl._root), s_value(root))) || root == _rb_tree_impl._root) ? _rb_tree_impl._nil_right : _rb_tree_impl._nil_left;
+				base_ptr y = _rb_tree_impl._nil;
 				base_ptr x = root;
 				while (!x->_is_nil)
 				{
@@ -354,15 +354,32 @@ namespace ft
 				x->_parent = y;
 
 			}
-
-			void erase(const key_type& key)
+			iterator erase( iterator pos )
+			{
+				key_type key = pos->first;
+				erase(key);
+				return(upper_bound(key));
+			}
+			iterator erase( iterator first, iterator last )
+			{
+				key_type key = first->first;
+				while (first != last)
+				{
+					erase(first);
+					++first;
+				}
+				return upper_bound(first);
+			}
+			size_type erase(const key_type& key)
 			{
 				base_ptr ptr = find(key).base();
 				if (ptr->_is_nil)
-					return ;
+					return 0;
 				base_ptr z = ptr;
 				if ( !_value_comp(s_value(_rb_tree_impl._begin), s_value(z)) && !_value_comp(s_value(z), s_value(_rb_tree_impl._begin)))
 					_rb_tree_impl._begin = z->_parent;
+				if ( !_value_comp(s_value(_rb_tree_impl._end), s_value(z)) && !_value_comp(s_value(z), s_value(_rb_tree_impl._end)))
+					_rb_tree_impl._end = z->_parent;
 				base_ptr y = z;
 				base_ptr x;
 				rb_tree_color orig_color = y->_color;
@@ -397,6 +414,7 @@ namespace ft
 				if (orig_color == rb_black)
 					erase_fixup(x);
 				--_rb_tree_impl._size;
+				return 1;
 			}
 			void erase_fixup(base_ptr x)
 			{
@@ -541,13 +559,7 @@ namespace ft
 					_rb_tree_impl._size = 1;
 					_rb_tree_impl._begin = _rb_tree_impl._root;
 					_rb_tree_impl._end = _rb_tree_impl._root;
-					_rb_tree_impl._nil_left->_parent = _rb_tree_impl._root;
-					_rb_tree_impl._nil_right->_parent = _rb_tree_impl._root;
-					_rb_tree_impl._root->_right = _rb_tree_impl._nil_right;
-					_rb_tree_impl._root->_left = _rb_tree_impl._nil_left;
-					
-//					base_ptr p = _rb_tree_impl.increment(_rb_tree_impl._end);
-//					std::cout << "end: " << (p == _rb_tree_impl._nil_right) << "\n";
+					_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
 					return ft::make_pair(iterator(_rb_tree_impl._begin), true);
 				}
 				ft::pair<iterator, bool> p_insert = insert(_rb_tree_impl._root, _value);
@@ -555,18 +567,7 @@ namespace ft
 					_rb_tree_impl._begin = p_insert.first.base();
 				if ( _value_comp(s_value(_rb_tree_impl._end), s_value(p_insert.first.base()) ))
 					_rb_tree_impl._end = p_insert.first.base();
-				//std::cout << "end: " << iterator(_rb_tree_impl.increment(_rb_tree_impl._end))->first << "\n";
-				// _rb_tree_impl._nil_left->_parent = _rb_tree_impl._begin;
-				// _rb_tree_impl._begin->_left = _rb_tree_impl._nil_left;
-				// _rb_tree_impl._begin->_right = _rb_tree_impl._nil_left;
-				_rb_tree_impl._nil_right->_parent = _rb_tree_impl._end;
-				_rb_tree_impl._end->_left = _rb_tree_impl._nil_right;
-				_rb_tree_impl._end->_right = _rb_tree_impl._nil_right;
-				//std::cout << "endleft: " << (_rb_tree_impl._end->_left == _rb_tree_impl._nil_left) << "\n";
-				//std::cout << "endright: " << (_rb_tree_impl._end->_right == _rb_tree_impl._nil_left) << "\n";
-//				base_ptr p = _rb_tree_impl.increment(_rb_tree_impl._end);
-//				std::cout << "end: " << (p == _rb_tree_impl._nil_right) << "\n";
-				
+				_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
 				return p_insert;
 			}
 			

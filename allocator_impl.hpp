@@ -3,6 +3,7 @@
 #include "allocator.hpp"
 #include <limits>
 #include <new>
+#include <memory>
 
 namespace ft
 {

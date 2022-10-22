@@ -28,6 +28,13 @@ namespace ft
 	template<typename T>
 	class rb_tree_node;
 
+	/* ====================================== */
+	/*     red-black tree helper structure    */
+	/* ====================================== */
+
+	template<typename T, typename _Allocator>
+	class rb_tree_impl;
+
 	/* ======================= */
 	/*      red-black tree     */
 	/* ======================= */

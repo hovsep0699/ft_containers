@@ -82,12 +82,17 @@ struct A
 #include <map>
 int main(int argc, char *argv[])
 {
+	
 	typedef ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree_type;
 	tree_type tree;
 	tree.insert(ft::make_pair(1.8,5));
 	tree.insert(ft::make_pair(2.2,6));
 	tree.insert(ft::make_pair(-3.5,7));
-	// tree.insert(ft::make_pair(-7.2,8));
+	tree.insert(ft::make_pair(-7.2,8));
+	tree.insert(ft::make_pair(1.9,14));
+	tree.insert(ft::make_pair(2.5,3));
+	tree.insert(ft::make_pair(-3.10,22));
+	 tree.insert(ft::make_pair(-7.8,0));
 	
 	//ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree1(tree);
 	//tree_type::iterator it = tree.begin();
@@ -113,14 +118,36 @@ int main(int argc, char *argv[])
 	//auto it1 = tree.end();
 	//--it1;
 	//std::cout << "here: " << it1->first << "\n";
-	auto it = tree.end();
-	--it;
-	std::cout << it->first << ": " << it->second << "\n";
-	// for (auto it = tree.rbegin(); it != tree.rend(); ++it)
-	// {
-	// 	std::cout << it->first << ": " << it->second << "\n";
-		
-	// }
+	//auto it = tree.rbegin();
+	//++it;
+	//++it;
+	//std::cout << it->first << ": " << it->second << "\n";
+	tree_type m;
+    m.insert(ft::make_pair(1.8,5));
+    m.insert(ft::make_pair(2.2,6));
+    m.insert(ft::make_pair(-3.5,7));
+    m.insert(ft::make_pair(-7.2,8));
+
+    for (auto i : m) {
+       std::cout << i.first << ": " << i.second << "\n";
+    }
+	std::cout << "#################\n";
+    auto it = m.end();
+    m.erase(it);
+    for (auto i : m) {
+       std::cout << i.first << ": " << i.second << "\n";
+    }
+	 //for (auto it = tree.begin(); it != tree.end(); ++it)
+	 //{
+	 //	std::cout << it->first << ": " << it->second << "\n";	
+	 //}
+	 //tree.erase(-7.8);
+	 //tree.erase(2.5);
+	 //std::cout << "####################\n";
+	 //for (auto it = tree.begin(); it != tree.end(); ++it)
+	 //{
+	 //	std::cout << it->first << ": " << it->second << "\n";	
+	 //}
 	//std::cout << tree.empty();
 	//createNode(ft::make_pair("hello", A(5)));
 	//ft::map<std::string, A> f;

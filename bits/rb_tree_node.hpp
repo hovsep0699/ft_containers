@@ -7,11 +7,12 @@
 #include "../utility.hpp"
 namespace ft
 {
+	/* ============================ */
+	/*	    base node structure		*/
+	/* ============================ */
+
 	class rb_tree_node_base
 	{
-		//
-		// NIL node of tree
-		// 
 		public:
 			typedef rb_tree_node_base* 			base_ptr;
 			typedef const rb_tree_node_base*	const_base_ptr;			
@@ -37,8 +38,11 @@ namespace ft
 
 
 	};
-	//rb_tree_node_base rb_tree_node_base::_nil_node = rb_tree_node_base(rb_black);
-	//rb_tree_node_base* rb_tree_node_base::nil = &rb_tree_node_base::_nil_node;
+
+	/* ============================ */
+	/*	      node structure		*/
+	/* ============================ */
+
 	template<typename T>
 	class rb_tree_node : public rb_tree_node_base
 	{
@@ -52,17 +56,12 @@ namespace ft
 	template<typename T, typename _Allocator>
 	class rb_tree_impl
 	{
-		void initialize()
-		{
-			_left_sentinel = base_type();
-			_right_sentinel = base_type();
-			_nil_left = &_left_sentinel;
-			_nil_right = &_right_sentinel;
-			_root = _nil_left;
-			_begin = _nil_left;
-			_end = _nil_left;
-		}
 		public:
+
+			/* ========================= */
+			/*	      member types		 */
+			/* ========================= */
+			
 			typedef T										value_type;
 			typedef rb_tree_node_base						base_type;
 			typedef rb_tree_node_base*						base_ptr;
@@ -73,13 +72,14 @@ namespace ft
 			typedef typename _Allocator::size_type			size_type;
 			typedef typename _Allocator::const_reference	const_reference;
 
+			/* ============== */
+			/*	   members    */
+			/* ============== */
+
 			allocator_type		_alloc;
 			base_ptr			_root;
 			base_ptr			_begin;
-			base_ptr			_nil_left;
-			base_ptr			_nil_right;
-			base_type			_left_sentinel;
-			base_type			_right_sentinel;
+			base_ptr			_nil;
 			base_ptr			_end;
 			size_type			_size;
 		
@@ -101,9 +101,9 @@ namespace ft
 				try
 				{
 					_alloc.construct(node, _value);
-					node->_parent = _nil_left;
-					node->_left = _nil_left;
-					node->_right = _nil_left;
+					node->_parent = _nil;
+					node->_left = _nil;
+					node->_right = _nil;
 					node->_is_nil = false;
 				}
 				catch (...)
@@ -130,7 +130,15 @@ namespace ft
 			static base_ptr increment(base_ptr node)
 			{
 				base_ptr _base = node;
-				if (_base->_right && !_base->_right->_is_nil)
+				/*
+				 * get max element for nil node  
+				*/
+				if (_base->_is_nil)
+				{
+					_base = _base->_parent;
+					_base = max(_base);
+				}
+				else if (_base->_right && !_base->_right->_is_nil)
 					_base = min(_base->_right);
 				else
 				{
@@ -162,8 +170,16 @@ namespace ft
 			static base_ptr decrement(base_ptr node)
 			{
 				base_ptr _base = node;
-
-				if (_base->_left && !_base->_left->_is_nil)
+				
+				/*
+				 * get max element for nil node  
+				*/
+				if (_base->_is_nil)
+				{
+					_base = _base->_parent;
+					_base = max(_base);
+				}
+				else if (_base->_left && !_base->_left->_is_nil)
 					_base = max(_base->_left);
 				else
 				{
@@ -230,10 +246,8 @@ namespace ft
 			_begin = _rb_impl._begin;
 			_end = _rb_impl._end;
 			_root = _rb_impl._root;
-			_left_sentinel = _rb_impl._left_sentinel;
-			_right_sentinel = _rb_impl._right_sentinel;
-			_nil_left = _rb_impl._nil_left;
-			_nil_right = _rb_impl._nil_right;
+			_sentinel = _rb_impl._sentinel;
+			_nil = _rb_impl._nil;
 
 		}
 		rb_tree_impl& operator=(const rb_tree_impl& _rb_impl)
@@ -245,12 +259,26 @@ namespace ft
 				_begin = _rb_impl._begin;
 				_end = _rb_impl._end;
 				_root = _rb_impl._root;
-				_left_sentinel = _rb_impl._left_sentinel;
-				_right_sentinel = _rb_impl._right_sentinel;
-				_nil_left = _rb_impl._nil_left;
-				_nil_right = _rb_impl._nil_right;
+				_sentinel = _rb_impl._sentinel;
+				_nil = _rb_impl._nil;
 			}
 			return *this;
 		}
+		private:
+			/*
+			 * sentinel node of red-black tree 
+			*/
+			base_type			_sentinel;
+
+		
+		void initialize()
+		{
+			_sentinel = base_type();
+			_nil = &_sentinel;
+			_root = _nil;
+			_begin = _nil;
+			_end = _nil;
+		}
+		
 	};
 }
