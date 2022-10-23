@@ -1,9 +1,6 @@
 #pragma once
 
-#include "iterator_traits.hpp"
-#include "type_traits.hpp"
-#include "rb_tree_node.hpp"
-#include "rb_tree_iterator.hpp"
+#include "../iterator.hpp"
 #include "../utility.hpp"
 #include "../functional.hpp"
 
@@ -54,12 +51,13 @@ namespace ft
 			{
 				protected:
 					key_compare comp;
-				public:
 					value_compare(key_compare comp) : comp(comp) {}
+				public:
 					bool operator()( const value_type& lhs, const value_type& rhs ) const
 					{
 						return comp(lhs.first, rhs.first);
 					}
+					friend class rb_tree<key_type, value_type, key_of_value_type, key_compare, allocator_type>;
 			};
 		private:
 			/* ========================= */
@@ -225,6 +223,13 @@ namespace ft
 				return reverse_iterator(begin());
 
 			}
+			reference operator[](const_reference _value)
+			{
+				iterator it = find(_key_of_value(_value));
+				if (it == end())
+					return *insert(_value).first;
+				return *it;
+			}
 			rb_tree_impl<value_type, node_allocator> get_impl() const
 			{
 				return _rb_tree_impl;
@@ -356,13 +361,13 @@ namespace ft
 			}
 			iterator erase( iterator pos )
 			{
-				key_type key = pos->first;
+				key_type key = _key_of_value(*pos);
 				erase(key);
 				return(upper_bound(key));
 			}
 			iterator erase( iterator first, iterator last )
 			{
-				key_type key = first->first;
+				key_type key = _key_of_value(*first);
 				while (first != last)
 				{
 					erase(first);
@@ -527,8 +532,7 @@ namespace ft
 					_rb_tree_impl._root->_color = rb_black;
 					_rb_tree_impl._size = 1;
 					_rb_tree_impl._begin = _rb_tree_impl._root;
-					_rb_tree_impl._nil_left->_parent = _rb_tree_impl._root;
-					_rb_tree_impl._nil_right->_parent = _rb_tree_impl._root;
+					_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
 					_rb_tree_impl._end = _rb_tree_impl._root;
 					return iterator(_rb_tree_impl._begin);
 				}
@@ -548,6 +552,9 @@ namespace ft
 				ft::pair<iterator, bool> p_insert = insert(head, _value);
 				if ( _value_comp(s_value(p_insert.first.base()), s_value(_rb_tree_impl._begin) ))
 					_rb_tree_impl._begin = p_insert.first.base();
+				if ( _value_comp(s_value(_rb_tree_impl._end), s_value(p_insert.first.base()) ))
+					_rb_tree_impl._end = p_insert.first.base();
+				_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
 				return p_insert.first;
 			}
 			ft::pair<iterator, bool> insert(const_reference _value)

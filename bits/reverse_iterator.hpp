@@ -1,6 +1,7 @@
 #pragma once
 
 #include "iterator_traits.hpp"
+#include "reverse_iterator_def.hpp"
 
 namespace ft
 {

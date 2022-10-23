@@ -156,7 +156,7 @@ namespace ft
 					y = z->right->min();
 					orig_color = y->color;
 					x = y->right;
-					if (y->parent == z)
+					if (y->parent == z
 						x->parent = y;
 					else
 					{
@@ -172,6 +172,8 @@ namespace ft
 				if (orig_color == rb_black)
 					erase_fixup(x);
 			}
+		protected:
+			typedef tree_type::value_compare value_compare
 			void erase_fixup(rb_node_base* x)
 			{
 				rb_node_base* w;

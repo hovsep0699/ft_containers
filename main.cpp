@@ -132,8 +132,9 @@ int main(int argc, char *argv[])
        std::cout << i.first << ": " << i.second << "\n";
     }
 	std::cout << "#################\n";
-    auto it = m.end();
-    m.erase(it);
+	m[ft::make_pair(1.6, 3)] = ft::make_pair(1.6, 3);
+    //auto it = m.end();
+    //m.erase(it);
     for (auto i : m) {
        std::cout << i.first << ": " << i.second << "\n";
     }

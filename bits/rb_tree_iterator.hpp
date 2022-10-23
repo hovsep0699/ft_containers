@@ -2,6 +2,7 @@
 
 #include "iterator_traits.hpp"
 #include "type_traits.hpp"
+#include "rb_tree_def.hpp"
 #include "rb_tree_node.hpp"
 
 namespace ft
