@@ -1,0 +1,1003 @@
+#pragma once
+
+#include "../iterator.hpp"
+#include "../utility.hpp"
+#include "../functional.hpp"
+#include "rb_tree.hpp"
+
+namespace ft
+{
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree()
+		:  _comp(key_compare()), _value_comp(_comp), _rb_tree_impl(), _alloc(allocator_type())
+	{}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree( const key_compare& comp,
+            			const allocator_type& alloc )
+    	: _comp(comp), _alloc(alloc), _value_comp(_comp), _rb_tree_impl()
+	{}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree( const allocator_type& alloc )
+		: _comp(key_compare()), _value_comp(_comp), _alloc(alloc), _rb_tree_impl()
+	{}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree(const_self_reference tree) : _alloc(tree._alloc), _comp(tree._comp), _value_comp(tree._value_comp), _rb_tree_impl(tree._rb_tree_impl)
+	{
+		for (const_iterator it = tree.begin(); it != tree.end(); ++it)
+			insert(*it);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	template< typename InputIt >
+	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree( InputIt first, InputIt last,
+     			const key_compare& comp,
+     			const allocator_type& alloc) : _comp(comp), _value_comp(_comp), _alloc(alloc), _rb_tree_impl()
+    {
+     	while (first != last)
+     	{
+     		insert(*first);
+     		++first;
+     	}
+    }
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::~rb_tree()
+	{
+		clear();
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::base_ptr rb_tree<_K, _V, _KOV, _Compare, _Allocator>::root()
+	{
+		return _rb_tree_impl._root;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_base_ptr rb_tree<_K, _V, _KOV, _Compare, _Allocator>::root() const
+	{
+		return _rb_tree_impl._root;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::size_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::size() const
+	{
+		return _rb_tree_impl._size;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::allocator_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::get_allocator() const
+	{
+		return _alloc;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::size_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::count(const key_type& key) const
+	{
+        return (find(key) != end()) ? 1 : 0;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::lower_bound(const key_type& key)
+	{
+		base_ptr node_begin = _rb_tree_impl._begin;
+		base_ptr node = _rb_tree_impl._nil;
+		while (!node_begin->_is_nil)
+		{
+			if ( !_comp(s_key(node_begin), key) )
+			{
+				node = node_begin;
+				node_begin = s_left(node_begin);
+			}
+			else
+				node_begin = s_right(node_begin);
+		}
+		return iterator(node);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::lower_bound(const key_type& key) const
+	{
+		base_ptr node_begin = _rb_tree_impl._begin;
+		base_ptr node = _rb_tree_impl._nil;
+		while (!node_begin->_is_nil)
+		{
+			if ( !_comp(s_key(node_begin), key) )
+			{
+				node = node_begin;
+				node_begin = s_left(node_begin);
+			}
+			else
+				node_begin = s_right(node_begin);
+		}
+		return const_iterator(node);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::upper_bound(const key_type& key) const
+	{
+		base_ptr node_begin = _rb_tree_impl._begin;
+		base_ptr node = _rb_tree_impl._nil;
+		while (!node_begin->_is_nil)
+		{
+			if ( _comp(s_key(node_begin), key) )
+			{
+				node = node_begin;
+				node_begin = s_left(node_begin);
+			}
+			else
+				node_begin = s_right(node_begin);
+		}
+		return const_iterator(node);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::upper_bound(const key_type& key)
+	{
+		base_ptr node_begin = _rb_tree_impl._begin;
+		base_ptr node = _rb_tree_impl._nil;
+		while (!node_begin->_is_nil)
+		{
+			if ( _comp(s_key(node_begin), key) )
+			{
+				node = node_begin;
+				node_begin = s_left(node_begin);
+			}
+			else
+				node_begin = s_right(node_begin);
+		}
+		return iterator(node);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	ft::pair<typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator, typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator> rb_tree<_K, _V, _KOV, _Compare, _Allocator>::equal_range(const key_type& key)
+	{
+		return ft::make_pair(lower_bound(key), upper_bound(key));
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	ft::pair<typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator, typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator> rb_tree<_K, _V, _KOV, _Compare, _Allocator>::equal_range(const key_type& key) const
+	{
+		return ft::make_pair(lower_bound(key), upper_bound(key));
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::key_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::s_key(const_link_type link)
+	{
+		return key_of_value_type()(link->_value);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::key_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::s_key(const_base_ptr ptr)
+	{
+		return key_of_value_type()(static_cast<const_link_type>(ptr)->_value);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_reference rb_tree<_K, _V, _KOV, _Compare, _Allocator>::s_value(const_link_type link)
+	{
+		return link->_value;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_reference rb_tree<_K, _V, _KOV, _Compare, _Allocator>::s_value(const_base_ptr ptr)
+	{
+		return static_cast<const_link_type>(ptr)->_value;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::link_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::s_left(const_base_ptr ptr)
+	{
+		return static_cast<link_type>(ptr->_left);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::link_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::s_right(const_base_ptr ptr)
+	{
+		return static_cast<link_type>(ptr->_right);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::clear()
+	{
+		base_ptr node = root();
+		while (node->_is_nil)
+		{
+			erase(s_key(node));
+			node = root();
+		}
+		_rb_tree_impl._root = _rb_tree_impl._nil;
+		_rb_tree_impl._begin = _rb_tree_impl._nil;
+		_rb_tree_impl._end = _rb_tree_impl._nil;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::begin()
+	{
+		return iterator(_rb_tree_impl._begin);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::begin() const
+	{
+		return const_iterator(_rb_tree_impl._begin);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::cbegin() const
+	{
+		return const_iterator(_rb_tree_impl._begin);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::end()
+	{
+		return iterator(_rb_tree_impl.increment(_rb_tree_impl._end));
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::end() const
+	{
+		return const_iterator(_rb_tree_impl.increment(_rb_tree_impl._end));
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::cend() const
+	{
+		return const_iterator(_rb_tree_impl.increment(_rb_tree_impl._end));
+	}
+	
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::reverse_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rbegin()
+	{
+		return reverse_iterator(end());
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_reverse_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rbegin() const
+	{
+		return const_reverse_iterator(end());
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_reverse_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::crbegin() const
+	{
+		return const_reverse_iterator(end());
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::reverse_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rend()
+	{
+		return reverse_iterator(begin());
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_reverse_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rend() const
+	{
+		return const_reverse_iterator(begin());
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_reverse_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::crend() const
+	{
+		return const_reverse_iterator(begin());
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::mapped_type& rb_tree<_K, _V, _KOV, _Compare, _Allocator>::operator[](const key_type& _key)
+	{
+		iterator it = find(_key);
+		if (it == end())
+		{
+			value_type _value = ft::make_pair(_key, mapped_type());
+			return insert(_value).first->second;
+		}
+		return it->second;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_rb_tree_impl_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::get_impl() const
+	{
+		return _rb_tree_impl;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree_impl_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::get_impl()
+	{
+		return _rb_tree_impl;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	pair<typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator, bool> rb_tree<_K, _V, _KOV, _Compare, _Allocator>::insert(base_ptr& root, const_reference _value)
+	{
+		base_ptr ptr = find(_key_of_value(_value) ).base();
+		if (!ptr->_is_nil)
+			return ft::make_pair(iterator(ptr), false);
+		base_ptr y = _rb_tree_impl._nil;
+		base_ptr x = root;
+		while (!x->_is_nil)
+		{
+			y = x;
+			if (_value_comp(_value, s_value(x)))	
+				x = x->_left;
+			else
+				x = x->_right;
+		}
+		base_ptr z = _rb_tree_impl.create_node(_value);
+		z->_parent = y;
+		if (y->_is_nil)
+			root = z;
+		else if (_value_comp(_value, s_value(y)))
+			y->_left = z;
+		else
+			y->_right = z;
+		insert_fixup(z);
+		++_rb_tree_impl._size;
+		return ft::make_pair(iterator(z), true);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::insert_fixup(base_ptr z)
+	{
+		while (z->_parent->_color == rb_red)
+		{
+			if (z->_parent->_parent->_left == z->_parent)
+				recolor(z, z->_parent->_parent->_right, rb_right);
+			else
+				recolor(z, z->_parent->_parent->_left, rb_left);
+		}
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::insert(iterator pos, const_reference _value)
+	{
+		if (_rb_tree_impl._root->_is_nil)
+		{
+			_rb_tree_impl._root = _rb_tree_impl.create_node(_value);
+			_rb_tree_impl._root->_color = rb_black;
+			_rb_tree_impl._size = 1;
+			_rb_tree_impl._begin = _rb_tree_impl._root;
+			_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
+			_rb_tree_impl._end = _rb_tree_impl._root;
+			return iterator(_rb_tree_impl._begin);
+		}
+		base_ptr head = pos.base();
+		while (!head->_is_nil)
+		{
+			if (!head->_is_nil &&
+				head->_parent->_left == head &&
+				_value_comp(_value, s_value(head->_parent)))
+				break ;
+			if (!head->_is_nil &&
+				head->_parent->_right == head &&
+				_value_comp(_value, s_value(head->_parent)))
+				break ;
+			head = head->_parent;
+		}
+		ft::pair<iterator, bool> p_insert = insert(head, _value);
+		if ( _value_comp(s_value(p_insert.first.base()), s_value(_rb_tree_impl._begin) ))
+			_rb_tree_impl._begin = p_insert.first.base();
+		if ( _value_comp(s_value(_rb_tree_impl._end), s_value(p_insert.first.base()) ))
+			_rb_tree_impl._end = p_insert.first.base();
+		_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
+		return p_insert.first;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	pair<typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator, bool> rb_tree<_K, _V, _KOV, _Compare, _Allocator>::insert(const_reference _value)
+	{
+		if (_rb_tree_impl._root->_is_nil)
+		{
+			_rb_tree_impl._root = _rb_tree_impl.create_node(_value);
+			_rb_tree_impl._root->_color = rb_black;
+			_rb_tree_impl._size = 1;
+			_rb_tree_impl._begin = _rb_tree_impl._root;
+			_rb_tree_impl._end = _rb_tree_impl._root;
+			_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
+			return ft::make_pair(iterator(_rb_tree_impl._begin), true);
+		}
+		ft::pair<iterator, bool> p_insert = insert(_rb_tree_impl._root, _value);
+		if ( _value_comp(s_value(p_insert.first.base()), s_value(_rb_tree_impl._begin) ))
+			_rb_tree_impl._begin = p_insert.first.base();
+		if ( _value_comp(s_value(_rb_tree_impl._end), s_value(p_insert.first.base()) ))
+			_rb_tree_impl._end = p_insert.first.base();
+		_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
+		return p_insert;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::recolor(base_ptr z, base_ptr y, rb_tree_recolor side)
+	{
+		if (y->_color == rb_red)
+		{
+			z->_parent->_color = rb_black;
+			y->_color = rb_black;
+			z->_parent->_parent->_color = rb_red;
+			z = z->_parent->_parent;
+		}
+		else 
+		{
+			if (side)
+			{
+				if (z == z->_parent->_right)
+				{
+					z = z->_parent;
+					left_rotate(z);
+				}
+				z->_parent->_color = rb_black;
+				z->_parent->_parent->_color = rb_red;
+				right_rotate(z->_parent->_parent);
+			}
+			else
+			{
+				if (z == z->_parent->_left)
+				{
+					z = z->_parent;
+					right_rotate(z);
+				}
+				z->_parent->_color = rb_black;
+				z->_parent->_parent->_color = rb_red;
+				left_rotate(z->_parent->_parent);
+			}
+		}
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::left_rotate(base_ptr x)
+	{
+		base_ptr y = x->_right;
+		x->_right = y->_left;
+		if (!y->_left->_is_nil)
+			y->_left->_parent = x;
+		y->_parent = x->_parent;
+		if (x->_parent->_is_nil)
+			_rb_tree_impl._root = y;
+		else if (x == x->_parent->_left)
+			x->_parent->_left = y;
+		else
+			x->_parent->_right = y;
+		y->_left = x;
+		x->_parent = y;
+		
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::right_rotate(base_ptr x)
+	{
+		base_ptr y = x->_left;
+		x->_left = y->_right;
+		if (!y->_right->_is_nil)
+			y->_right->_parent = x;
+		y->_parent = x->_parent;
+		if (x->_parent->_is_nil)
+			_rb_tree_impl._root = y;
+		else if (x == x->_parent->_right)
+			x->_parent->_right = y;
+		else
+			x->_parent->_left = y;
+		y->_right = x;
+		x->_parent = y;
+
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::size_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::erase( const key_type& key )
+	{
+		base_ptr ptr = find(key).base();
+		if (ptr->_is_nil)
+			return 0;
+		base_ptr z = ptr;
+		if ( !_value_comp(s_value(_rb_tree_impl._begin), s_value(z)) && !_value_comp(s_value(z), s_value(_rb_tree_impl._begin)))
+			_rb_tree_impl._begin = z->_parent;
+		if ( !_value_comp(s_value(_rb_tree_impl._end), s_value(z)) && !_value_comp(s_value(z), s_value(_rb_tree_impl._end)))
+			_rb_tree_impl._end = z->_parent;
+		base_ptr y = z;
+		base_ptr x;
+		rb_tree_color orig_color = y->_color;
+		if (z->_left->_is_nil)
+		{
+			x = z->_right;
+			transplant(z, z->_right);
+		}
+		else if (z->_right->_is_nil)
+		{
+			x = z->_left;
+			transplant(z, z->_left);
+		}
+		else
+		{
+			y = _rb_tree_impl.min(z->_right);
+			orig_color = y->_color;
+			x = y->_right;
+			if (y->_parent == z)
+				x->_parent = y;
+			else
+			{
+				transplant(y, y->_right);
+				y->_right = z->_right;
+				y->_right->_parent = y;
+			}
+			transplant(z, y);
+			y->_left = z->_left;
+			y->_left->_parent = y;
+			y->_color = z->_color;
+		}
+		if (orig_color == rb_black)
+			erase_fixup(x);
+		--_rb_tree_impl._size;
+		return 1;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::erase( iterator pos)
+	{
+		key_type key = _key_of_value(*pos);
+		erase(key);
+		return(upper_bound(key));
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::erase( iterator first, iterator last)
+	{
+		key_type key = _key_of_value(*first);
+		while (first != last)
+		{
+			erase(first);
+			++first;
+		}
+		return upper_bound(first);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::erase_fixup(base_ptr x)
+	{
+		base_ptr w;
+		while (x != _rb_tree_impl._root && x->_color != rb_black)
+		{
+			if (x == x->_parent->_left)
+			{
+				w = x->_parent->_right;
+				if (w->_color == rb_red)
+				{
+					w->_color = rb_black;
+					x->_parent->_color = rb_black;
+					left_rotate(x->_parent);
+					w = x->_parent->_right;
+				}
+				if (w->_left->_color == rb_black && w->_right->_color == rb_black)
+				{
+					w->_color = rb_red;
+					x = x->_parent;
+				}
+				else
+				{
+					if (w->_right->_color == rb_black)
+					{
+						w->_left->_color = rb_black;
+						w->_color = rb_red;
+						right_rotate(w);
+						w = x->_parent->_right;
+					}
+					w->_color = x->_parent->_color;
+					x->_parent->_color = rb_black;
+					w->_right->_color = rb_black;
+					left_rotate(x->_parent);
+					x = _rb_tree_impl._root;
+				}
+			}
+			else
+			{
+				w = x->_parent->_left;
+				if (w->_color == rb_red)
+				{
+					w->_color = rb_black;
+					x->_parent->_color = rb_black;
+					right_rotate(x->_parent);
+					w = x->_parent->_left;
+				}
+				if (w->_right->_color == rb_black && w->_left->_color == rb_black)
+				{
+					w->_color = rb_red;
+					x = x->_parent;
+				}
+				else
+				{
+					if (w->_left->_color == rb_black)
+					{
+						w->_right->_color = rb_black;
+						w->_color = rb_red;
+						left_rotate(w);
+						w = x->_parent->_left;
+					}
+					w->_color = x->_parent->_color;
+					x->_parent->_color = rb_black;
+					w->_left->_color = rb_black;
+					right_rotate(x->_parent);
+					x = _rb_tree_impl._root;
+				}
+
+			}
+		}
+		x->_color = rb_black;
+	}
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::transplant(base_ptr u, base_ptr v)
+	{
+		if (u->_parent->_is_nil)
+		{
+			_rb_tree_impl._root = v;
+			_rb_tree_impl._begin = _rb_tree_impl.min(_rb_tree_impl._root);	
+		}
+		else if (u == u->_parent->_left)
+			u->_parent->_left = v;
+		else
+			u->_parent->_right = v;
+		v->_parent = u->_parent;
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::find(const key_type& key)
+	{
+		base_ptr node = _rb_tree_impl._root;
+		while (!node->_is_nil)
+		{
+			if (!_comp(key, s_key(node)) && !_comp(s_key(node), key))
+				break;
+			if (_comp(key, s_key(node)))
+				node = node->_left;
+			else
+				node = node->_right;
+		}
+		return iterator(node);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::find(const key_type& key) const
+	{
+		base_ptr node = _rb_tree_impl._root;
+		while (!node->_is_nil)
+		{
+			if (!_comp(key, s_key(node)) && !_comp(s_key(node), key))
+				break;
+			if (_comp(key, s_key(node)))
+				node = node->_left;
+			else
+				node = node->_right;
+		}
+		return const_iterator(node);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	bool rb_tree<_K, _V, _KOV, _Compare, _Allocator>::empty() const
+	{
+		return begin() == end();
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::value_compare::value_compare(key_compare comp)
+		: comp(comp)
+	{}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	bool rb_tree<_K, _V, _KOV, _Compare, _Allocator>::value_compare::operator()(const_reference lhs, const_reference rhs) const
+	{
+		return comp(lhs.first, rhs.first);
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::self_reference rb_tree<_K, _V, _KOV, _Compare, _Allocator>::operator=(const_self_reference other)
+	{
+		if (this != &other)
+		{
+			clear();
+			_rb_tree_impl = other._rb_tree_impl;
+			_alloc = other._alloc;
+			_comp = other._comp;
+			_key_of_value = other._key_of_value;
+			_value_comp = other._value_comp;
+			for (iterator it = other.begin(); it != other.end(); ++it)
+				insert(*it);	
+		}
+	}
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::key_compare rb_tree<_K, _V, _KOV, _Compare, _Allocator>::key_comp() const
+	{
+		return _comp;
+	}
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::value_compare rb_tree<_K, _V, _KOV, _Compare, _Allocator>::value_comp() const
+	{
+		return _value_comp;
+	}
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::size_type rb_tree<_K, _V, _KOV, _Compare, _Allocator>::max_size() const
+	{
+		return _alloc.max_size() / 5;
+	}
+
+	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
+	bool operator==( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	{
+		return equal(lhs.begin(), lhs.end(), rhs.begin());
+	}
+
+	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
+	bool operator!=( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	{
+		return !(lhs == rhs);
+	}
+
+	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
+	bool operator<( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	{
+		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	}
+
+	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
+	bool operator<=( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	{
+		return (lhs < rhs || lhs == rhs);
+	}
+
+	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
+	bool operator>( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	{
+		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end(), greater<typename rb_tree<_K, _V, _KOV, _Compare, _Alloc>::value_type>());
+	}
+
+	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
+	bool operator>=( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	{
+		return (lhs > rhs || lhs == rhs);
+	}
+}
+

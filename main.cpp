@@ -83,7 +83,7 @@ struct A
 int main(int argc, char *argv[])
 {
 	
-	typedef ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree_type;
+	typedef ft::rb_tree<float, int, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree_type;
 	tree_type tree;
 	tree.insert(ft::make_pair(1.8,5));
 	tree.insert(ft::make_pair(2.2,6));
@@ -123,21 +123,38 @@ int main(int argc, char *argv[])
 	//++it;
 	//std::cout << it->first << ": " << it->second << "\n";
 	tree_type m;
+	tree_type m1;
     m.insert(ft::make_pair(1.8,5));
     m.insert(ft::make_pair(2.2,6));
     m.insert(ft::make_pair(-3.5,7));
     m.insert(ft::make_pair(-7.2,8));
 
+    m1.insert(ft::make_pair(-7.2,8));
+    m1.insert(ft::make_pair(1.8,5));
+    m1.insert(ft::make_pair(2.1,6));
+    m1.insert(ft::make_pair(-3.5,7));
+	std::cout << "########  M  #########\n";
     for (auto i : m) {
        std::cout << i.first << ": " << i.second << "\n";
     }
-	std::cout << "#################\n";
-	m[ft::make_pair(1.6, 3)] = ft::make_pair(1.6, 3);
+	std::cout << "########  M1  #########\n";
+    for (auto i : m1) {
+       std::cout << i.first << ": " << i.second << "\n";
+    }
+    m1 = m;
+	std::cout << "########  M1  #########\n";
+    for (auto i : m1) {
+       std::cout << i.first << ": " << i.second << "\n";
+    }
+	std::cout << "###########  M1 == M  ################\n";
+	std::cout << "(m == m1) : " << (m <= m1) << "\n";
+//	m[1.6] = 3;
+//	m[2.2] = 9;
     //auto it = m.end();
     //m.erase(it);
-    for (auto i : m) {
-       std::cout << i.first << ": " << i.second << "\n";
-    }
+    //for (auto i : m) {
+    //   std::cout << i.first << ": " << i.second << "\n";
+    //}
 	 //for (auto it = tree.begin(); it != tree.end(); ++it)
 	 //{
 	 //	std::cout << it->first << ": " << it->second << "\n";	
