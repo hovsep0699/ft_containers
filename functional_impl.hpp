@@ -205,4 +205,16 @@ namespace ft
 	{
 		return p.second;
 	}
+
+	template<typename _V>
+	_V& identity<_V>::operator()(_V& v) const
+	{
+		return v;
+	}
+
+	template<typename _V>
+	const _V& identity<_V>::operator()(const _V& v) const
+	{
+		return v;
+	}
 }	

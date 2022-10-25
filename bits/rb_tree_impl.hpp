@@ -41,7 +41,7 @@ namespace ft
 			typename _KOV, 
 			typename _Compare, 
 			typename _Allocator>
-	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree(const_self_reference tree) : _alloc(tree._alloc), _comp(tree._comp), _value_comp(tree._value_comp), _rb_tree_impl(tree._rb_tree_impl)
+	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree(const rb_tree& tree) : _alloc(tree._alloc), _comp(tree._comp), _value_comp(tree._value_comp), _rb_tree_impl()
 	{
 		for (const_iterator it = tree.begin(); it != tree.end(); ++it)
 			insert(*it);
@@ -300,7 +300,7 @@ namespace ft
 	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::clear()
 	{
 		base_ptr node = root();
-		while (node->_is_nil)
+		while (node && !node->_is_nil)
 		{
 			erase(s_key(node));
 			node = root();
@@ -430,21 +430,21 @@ namespace ft
 		return const_reverse_iterator(begin());
 	}
 
-	template<typename _K, 
-			typename _V,
-			typename _KOV, 
-			typename _Compare, 
-			typename _Allocator>
-	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::mapped_type& rb_tree<_K, _V, _KOV, _Compare, _Allocator>::operator[](const key_type& _key)
-	{
-		iterator it = find(_key);
-		if (it == end())
-		{
-			value_type _value = ft::make_pair(_key, mapped_type());
-			return insert(_value).first->second;
-		}
-		return it->second;
-	}
+	//template<typename _K, 
+	//		typename _V,
+	//		typename _KOV, 
+	//		typename _Compare, 
+	//		typename _Allocator>
+	//typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::mapped_type& rb_tree<_K, _V, _KOV, _Compare, _Allocator>::operator[](const key_type& _key)
+	//{
+	//	iterator it = find(_key);
+	//	if (it == end())
+	//	{
+	//		value_type _value = ft::make_pair(_key, mapped_type());
+	//		return insert(_value).first->second;
+	//	}
+	//	return it->second;
+	//}
 
 	template<typename _K, 
 			typename _V,
@@ -572,14 +572,28 @@ namespace ft
 			return ft::make_pair(iterator(_rb_tree_impl._begin), true);
 		}
 		ft::pair<iterator, bool> p_insert = insert(_rb_tree_impl._root, _value);
-		if ( _value_comp(s_value(p_insert.first.base()), s_value(_rb_tree_impl._begin) ))
+		if ( p_insert.second &&_value_comp(s_value(p_insert.first.base()), s_value(_rb_tree_impl._begin) ))
 			_rb_tree_impl._begin = p_insert.first.base();
-		if ( _value_comp(s_value(_rb_tree_impl._end), s_value(p_insert.first.base()) ))
+		if ( p_insert.second && _value_comp(s_value(_rb_tree_impl._end), s_value(p_insert.first.base()) ))
 			_rb_tree_impl._end = p_insert.first.base();
 		_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
 		return p_insert;
 	}
 
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
+	template<typename InputIt>
+	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::insert(InputIt first, InputIt last)
+	{
+		while (first != last)
+		{
+			insert(*first);
+			++first;
+		}
+	}
 	template<typename _K, 
 			typename _V,
 			typename _KOV, 
@@ -908,7 +922,8 @@ namespace ft
 			typename _Allocator>
 	bool rb_tree<_K, _V, _KOV, _Compare, _Allocator>::value_compare::operator()(const_reference lhs, const_reference rhs) const
 	{
-		return comp(lhs.first, rhs.first);
+		_KOV key_of_value;
+		return comp(key_of_value(lhs), key_of_value(rhs));
 	}
 
 	template<typename _K, 
@@ -916,19 +931,19 @@ namespace ft
 			typename _KOV, 
 			typename _Compare, 
 			typename _Allocator>
-	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::self_reference rb_tree<_K, _V, _KOV, _Compare, _Allocator>::operator=(const_self_reference other)
+	rb_tree<_K, _V, _KOV, _Compare, _Allocator>& rb_tree<_K, _V, _KOV, _Compare, _Allocator>::operator=(const rb_tree& other)
 	{
 		if (this != &other)
 		{
 			clear();
-			_rb_tree_impl = other._rb_tree_impl;
 			_alloc = other._alloc;
 			_comp = other._comp;
 			_key_of_value = other._key_of_value;
 			_value_comp = other._value_comp;
-			for (iterator it = other.begin(); it != other.end(); ++it)
+			for (const_iterator it = other.begin(); it != other.end(); ++it)
 				insert(*it);	
 		}
+		return *this;
 	}
 	template<typename _K, 
 			typename _V,
@@ -958,46 +973,120 @@ namespace ft
 		return _alloc.max_size() / 5;
 	}
 
-	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
-	bool operator==( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
-                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	template< typename _K, 
+			typename _V, 
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator >
+	bool operator==( const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& rhs )
 	{
 		return equal(lhs.begin(), lhs.end(), rhs.begin());
 	}
 
-	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
-	bool operator!=( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
-                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	template< typename _K,
+			typename _V,
+			typename _KOV,
+			typename _Compare,
+			typename _Allocator >
+	bool operator!=( const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& rhs )
 	{
 		return !(lhs == rhs);
 	}
 
-	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
-	bool operator<( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
-                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	template< typename _K, 
+			typename _V, 
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator >
+	bool operator<( const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& rhs )
 	{
 		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
 
-	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
-	bool operator<=( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
-                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	template< typename _K, 
+			typename _V, 
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator >
+	bool operator<=( const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& rhs )
 	{
 		return (lhs < rhs || lhs == rhs);
 	}
 
-	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
-	bool operator>( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
-                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	template< typename _K, 
+			typename _V, 
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator >
+	bool operator>( const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& rhs )
 	{
-		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end(), greater<typename rb_tree<_K, _V, _KOV, _Compare, _Alloc>::value_type>());
+		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end(), greater<typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::value_type>());
 	}
 
-	template< typename _K, typename _V, typename _KOV, typename _Compare, typename _Alloc >
-	bool operator>=( const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& lhs,
-                 const rb_tree<_K, _V, _KOV, _Compare, _Alloc>& rhs )
+	template< typename _K, 
+			typename _V, 
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator >
+	bool operator>=( const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& lhs,
+                 const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& rhs )
 	{
 		return (lhs > rhs || lhs == rhs);
+	}
+
+	template< typename _K, 
+			typename _V, 
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator >
+	void swap( rb_tree<_K, _V, _KOV, _Compare, _Allocator>& lhs,
+                 rb_tree<_K, _V, _KOV, _Compare, _Allocator>& rhs )
+	{
+		lhs.swap(rhs);
+	}
+
+	//template< typename _K, 
+	//		typename _V, 
+	//		typename _KOV, 
+	//		typename _Compare, 
+	//		typename _Allocator >
+	//typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::mapped_type& rb_tree<_K, _V, _KOV, _Compare, _Allocator>::at( const key_type& key )
+	//{
+	//	iterator it = find(key);
+	//	if (it == end())
+	//		throw std::out_of_range("rb_tree: no such key");
+	//	return it->second;
+	//}
+
+	//template< typename _K, 
+	//		typename _V, 
+	//		typename _KOV, 
+	//		typename _Compare, 
+	//		typename _Allocator >
+	//const typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::mapped_type& rb_tree<_K, _V, _KOV, _Compare, _Allocator>::at( const key_type& key ) const
+	//{
+	//	iterator it = find(key);
+	//	if (it == end())
+	//		throw std::out_of_range("rb_tree: no such key");
+	//	return it->second;
+	//}
+	template< typename _K, 
+			typename _V, 
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator >
+	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::swap(rb_tree& other)
+	{
+		ft::swap(_rb_tree_impl, other._rb_tree_impl);
+		ft::swap(_alloc, other._alloc);
+		ft::swap(_comp, other._comp);
+		ft::swap(_value_comp, other._value_comp);
+		ft::swap(_key_of_value, other._key_of_value);
 	}
 }
 

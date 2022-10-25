@@ -195,5 +195,12 @@ namespace ft
 		const typename _Pair::second_type& operator()(const _Pair& p) const;
 		
 	};
+
+	template<typename _V>
+	struct identity : unary_function<_V, _V>
+	{
+		_V& operator()(_V& v) const;
+		const _V& operator()(const _V& v) const;
+	};
 }
 #include "functional_impl.hpp"

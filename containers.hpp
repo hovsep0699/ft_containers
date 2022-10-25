@@ -12,7 +12,7 @@ namespace ft
     template<typename T>
     struct allocator;
 
-	template<typename T, typename Allocator = allocator<T> >
+	template<typename T, typename Allocator = std::allocator<T> >
 	class vector;
 
 	template<typename T, typename Container = vector<T> >
@@ -21,10 +21,15 @@ namespace ft
 	template<typename T, typename Container = vector<T> >
 	class stack;
 
-	template<typename Key,
-		typename T,
-		typename Compare = less<Key>,
-		typename Allocator = allocator<pair<const Key, T> > >
+	template<typename _K,
+		typename _V,
+		typename _Compare = less<_K>,
+		typename _Allocator = std::allocator<ft::pair<const _K, _V> > >
 	class map;
+
+	template< typename _K,
+			typename _Compare = less<_K>,
+			typename _Allocator = std::allocator<_K> >
+	class set;
 };
 

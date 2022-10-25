@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <map>
-#include "bits/rb_tree.hpp"
+#include "map.hpp"
 struct A
 {
 	int x;
@@ -80,104 +80,68 @@ struct A
 	}
 
 #include <map>
+#include "set.hpp"
 int main(int argc, char *argv[])
 {
 	
-	typedef ft::rb_tree<float, int, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree_type;
-	tree_type tree;
-	tree.insert(ft::make_pair(1.8,5));
-	tree.insert(ft::make_pair(2.2,6));
-	tree.insert(ft::make_pair(-3.5,7));
-	tree.insert(ft::make_pair(-7.2,8));
-	tree.insert(ft::make_pair(1.9,14));
-	tree.insert(ft::make_pair(2.5,3));
-	tree.insert(ft::make_pair(-3.10,22));
-	 tree.insert(ft::make_pair(-7.8,0));
-	
-	//ft::rb_tree<float, ft::pair<float, int>, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree1(tree);
-	//tree_type::iterator it = tree.begin();
-	
+	//typedef ft::rb_tree<float, int, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree_type;
+	//typedef ft::map<float, int> tree_type;
+	typedef ft::map<int, int> set_type;
+	set_type s;
+	s.insert(ft::make_pair(17, 8));
+	s.insert(ft::make_pair(8,88));
+	s.insert(ft::make_pair(9,22));
+	s.insert(ft::make_pair(14,33));
+	s.insert(ft::make_pair(11,11));
+	s.insert(ft::make_pair(16,44));
+	s.insert(ft::make_pair(13,3));
+	s.insert(ft::make_pair(15,4));
+	s.insert(ft::make_pair(10,0));
+	s.insert(ft::make_pair(12,6));
+	s.insert(ft::make_pair(18,7));
+	std::cout << "##################  set #####################\n";
+   // for (set_type::iterator it = s.begin(); it != s.end(); ++it) {
+   //    	std::cout << it->first << "\n";
+   // }
+	//tree_type tree;
+	//tree.insert(ft::make_pair(1.8,5));
+	//tree.insert(ft::make_pair(2.2,6));
+	//tree.insert(ft::make_pair(-3.5,7));
+	//tree.insert(ft::make_pair(-7.2,8));
+	//tree.insert(ft::make_pair(1.9,14));
+	//tree.insert(ft::make_pair(2.5,3));
+	//tree.insert(ft::make_pair(-3.10,22));
+	// tree.insert(ft::make_pair(-7.8,0));
 	//
-	//for (; it != tree.end() ; ++it) {
-	//	std::cout << it->first << ": " << it->second << "\n";
-	//}
-	
-	//std::cout << (it.get_impl()._begin == tree.get_impl()._nil) << " : " << (it.get_impl()._begin == it.get_impl()._nil) << " : " << (it.get_impl()._nil == tree.get_impl()._nil)  << " : " << (it.base() == it.get_impl()._nil) << " : " <<  (tree.get_impl()._root == tree.get_impl()._nil)<< "\n";
-	////--it;
-	//std::cout << it->second;
-//	auto it = tree.end();
-	
-//	std::map<float, int> m;
-//	
-//	m.insert(std::make_pair(1.8,5));
-//	m.insert(std::make_pair(2.2,6));
-//	m.insert(std::make_pair(-3.5,7));
-//	m.insert(std::make_pair(-7.2,8));
-//	std::cout << it1->first;
-	//typename ft::rb_tree<int, ft::pair<int, int>, ft::select1st<ft::pair<int, int> >, ft::less<int> >::iterator it = tree.begin();
-	//auto it1 = tree.end();
-	//--it1;
-	//std::cout << "here: " << it1->first << "\n";
-	//auto it = tree.rbegin();
-	//++it;
-	//++it;
-	//std::cout << it->first << ": " << it->second << "\n";
-	tree_type m;
-	tree_type m1;
-    m.insert(ft::make_pair(1.8,5));
-    m.insert(ft::make_pair(2.2,6));
-    m.insert(ft::make_pair(-3.5,7));
-    m.insert(ft::make_pair(-7.2,8));
+	//tree_type m, m1;
+    //m.insert(ft::make_pair(1.8,5));
+    //m.insert(ft::make_pair(2.2,6));
+    //m.insert(ft::make_pair(-3.5,7));
+    //m.insert(ft::make_pair(-7.2,8));
 
-    m1.insert(ft::make_pair(-7.2,8));
-    m1.insert(ft::make_pair(1.8,5));
-    m1.insert(ft::make_pair(2.1,6));
-    m1.insert(ft::make_pair(-3.5,7));
-	std::cout << "########  M  #########\n";
-    for (auto i : m) {
-       std::cout << i.first << ": " << i.second << "\n";
-    }
-	std::cout << "########  M1  #########\n";
-    for (auto i : m1) {
-       std::cout << i.first << ": " << i.second << "\n";
-    }
-    m1 = m;
-	std::cout << "########  M1  #########\n";
-    for (auto i : m1) {
-       std::cout << i.first << ": " << i.second << "\n";
-    }
-	std::cout << "###########  M1 == M  ################\n";
-	std::cout << "(m == m1) : " << (m <= m1) << "\n";
-//	m[1.6] = 3;
-//	m[2.2] = 9;
-    //auto it = m.end();
-    //m.erase(it);
-    //for (auto i : m) {
+	//std::cout << "########  M  #########\n";
+    //for (tree_type::iterator it = m.begin(); it != m.end(); ++it) {
+    //   	std::cout << it->first << ": " << it->second << "\n";
+    //}
+    //m1.insert(ft::make_pair(-7.2,8));
+    //m1.insert(ft::make_pair(1.8,5));
+    //m1.insert(ft::make_pair(2.1,6));
+    //m1.insert(ft::make_pair(-3.5,7));
+	//std::cout << "########  M1  #########\n";
+    //for (auto i : m1) {
     //   std::cout << i.first << ": " << i.second << "\n";
     //}
-	 //for (auto it = tree.begin(); it != tree.end(); ++it)
-	 //{
-	 //	std::cout << it->first << ": " << it->second << "\n";	
-	 //}
-	 //tree.erase(-7.8);
-	 //tree.erase(2.5);
-	 //std::cout << "####################\n";
-	 //for (auto it = tree.begin(); it != tree.end(); ++it)
-	 //{
-	 //	std::cout << it->first << ": " << it->second << "\n";	
-	 //}
-	//std::cout << tree.empty();
-	//createNode(ft::make_pair("hello", A(5)));
-	//ft::map<std::string, A> f;
-	//f.insert(ft::make_pair("hello", A(5)));
-	//f.insert(ft::make_pair("he", A(6)));
-	//f.insert(ft::make_pair("a", A(9)));
-	//f.insert(ft::make_pair("hel", A(8)));
-	//ft::map<std::string, A>::iterator it = f.begin();
-	//while (it != f.end())
-	//{
-	//	std::cout << it->first << std::endl;;
-	//	++it;
-	//}
+
+   	//m1 = m;
+	//std::cout << "M1_size: "<< m1.size() << std::endl;
+	////m1 = m;
+    //m1.clear();
+	//std::cout << "M1_size: "<< m1.size() << std::endl;
+//std::cout << "########  M1  #########\n";
+//  for (auto i : m1) {
+//     std::cout << i.first << ": " << i.second << "\n";
+//  }
+//std::cout << "###########  M1 == M  ################\n";
+//std::cout << "(m == m1) : " << (m <= m1) << "\n";
 	return 0;
 }

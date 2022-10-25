@@ -100,5 +100,8 @@ namespace ft
 
 	template<typename _Pair>
 	struct select2nd;
+
+	template<typename _V>
+	struct identity;
 }
 

@@ -28,7 +28,8 @@ namespace ft
 			return value;
 		}
 	};
-
+	typedef integral_constant<bool, true> true_type;
+	typedef integral_constant<bool, false> false_type;
 
 	template<typename T, typename U>
 	struct is_same
@@ -57,49 +58,49 @@ namespace ft
 	//   
 	//
 	template<typename T>
-	struct is_integral : integral_constant<bool, false> {};
+	struct is_integral : false_type {};
 
 	template<>
-	struct is_integral<char> : integral_constant<bool, true> {};
+	struct is_integral<char> : true_type {};
 
 	template<>
-	struct is_integral<signed char> : integral_constant<bool, true> {};
+	struct is_integral<signed char> : true_type {};
 
 	template<>
-	struct is_integral<unsigned char> : integral_constant<bool, true> {};
+	struct is_integral<unsigned char> : true_type {};
 
 	template<>
-	struct is_integral<wchar_t> : integral_constant<bool, true> {};
+	struct is_integral<wchar_t> : true_type {};
 
 	template<>
-	struct is_integral<char16_t> : integral_constant<bool, true> {};
+	struct is_integral<char16_t> : true_type {};
 
 	template<>
-	struct is_integral<char32_t> : integral_constant<bool, true> {};
+	struct is_integral<char32_t> : true_type {};
 
 	template<>
-	struct is_integral<short int> : integral_constant<bool, true> {};
+	struct is_integral<short int> : true_type {};
 
 	template<>
-	struct is_integral<unsigned short> : integral_constant<bool, true> {};
+	struct is_integral<unsigned short> : true_type {};
 
 	template<>
-	struct is_integral<int> : integral_constant<bool, true> {};
+	struct is_integral<int> : true_type {};
 
 	template<>
-	struct is_integral<long> : integral_constant<bool, true> {};
+	struct is_integral<long> : true_type {};
 
 	template<>
-	struct is_integral<unsigned long> : integral_constant<bool, true> {};
+	struct is_integral<unsigned long> : true_type {};
 
 	template<>
-	struct is_integral<long long> : integral_constant<bool, true> {};
+	struct is_integral<long long> : true_type {};
 
 	template<>
-	struct is_integral<unsigned long long> : integral_constant<bool, true> {};
+	struct is_integral<unsigned long long> : true_type {};
 
 	template<>
-	struct is_integral<bool> : integral_constant<bool, true> {};
+	struct is_integral<bool> : true_type {};
 
 	template<bool B, typename T, typename F>
 	struct conditional
