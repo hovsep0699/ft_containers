@@ -2,9 +2,9 @@
 
 #include "iterator_traits.hpp"
 #include "type_traits.hpp"
-#include <iostream>
 #include "rb_tree_def.hpp"
-#include "../utility.hpp"
+#include "utility.hpp"
+
 namespace ft
 {
 	/* ============================ */
@@ -273,7 +273,7 @@ namespace ft
 		
 		void initialize()
 		{
-			_sentinel = base_type();
+			_sentinel = base_type(rb_black);
 			_nil = &_sentinel;
 			_root = _nil;
 			_begin = _nil;

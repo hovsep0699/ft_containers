@@ -1,29 +1,31 @@
 #pragma once
 
 #include "containers.hpp"
-#include "bits/rb_tree.hpp"
-#include "utility.hpp"
+#include "../bits/rb_tree.hpp"
+#include "../bits/utility.hpp"
 
 namespace ft
 {
 	template< typename _K,
-			typename _Compare,
-			typename _Allocator >
-	class set
+		typename _V,
+		typename _Compare,
+		typename _Allocator >
+	class map
 	{
-		typedef rb_tree<_K, _K, ft::identity<_K>, _Compare, _Allocator> tree_type; 
+		typedef rb_tree<_K, ft::pair<_K, _V>, ft::select1st<ft::pair<_K, _V> >, _Compare, _Allocator> tree_type; 
 
 		tree_type _tree;
 		public:
 			typedef typename tree_type::key_type				key_type;
 			typedef typename tree_type::value_type				value_type;
+			typedef _V											mapped_type;
 			typedef typename tree_type::size_type				size_type;
 			typedef typename tree_type::difference_type			difference_type;
 			typedef typename tree_type::key_compare				key_compare;
-			typedef typename tree_type::key_compare				value_compare;
+			typedef typename tree_type::value_compare			value_compare;
 			typedef typename tree_type::allocator_type			allocator_type;
 			typedef typename tree_type::reference				reference;
-			typedef typename tree_type::const_reference			const_reference;
+			typedef typename tree_type::const_reference 		const_reference;
 			typedef typename tree_type::pointer					pointer;
 			typedef typename tree_type::const_pointer			const_pointer;
 			typedef typename tree_type::iterator				iterator;
@@ -32,25 +34,25 @@ namespace ft
 			typedef typename tree_type::const_reverse_iterator	const_reverse_iterator;
 			
 
-			set();
+			map();
 
-			explicit set( const key_compare& comp,
+			explicit map( const key_compare& comp,
             			const allocator_type& alloc = allocator_type() );
 
-            explicit set( const allocator_type& alloc );
+            explicit map( const allocator_type& alloc );
 
             template< typename InputIt >
-			set( InputIt first, InputIt last,
+			map( InputIt first, InputIt last,
      	 	 	 const key_compare& comp = key_compare(),
      	 	 	 const allocator_type& alloc = allocator_type() );
 
-			set( const set& other );
+			map( const map& other );
 
 
-			virtual ~set();
-			set& operator=( const set& other );
+			virtual ~map();
+			map& operator=( const map& other );
 			allocator_type get_allocator() const;
-			value_type& operator[]( const key_type& key );
+			mapped_type& operator[]( const key_type& key );
 			iterator begin();
 			const_iterator begin() const;
 			const_iterator cbegin() const;
@@ -74,7 +76,7 @@ namespace ft
 			iterator erase( iterator pos );
 			iterator erase( iterator first, iterator last );
 			size_type erase( const key_type& key );
-			void swap( set& other );
+			void swap( map& other );
 			size_type count( const key_type& key ) const;
 			iterator find( const key_type& key );
 			const_iterator find( const key_type& key ) const;
@@ -84,56 +86,62 @@ namespace ft
 			const_iterator lower_bound( const key_type& key ) const;
 			iterator upper_bound( const key_type& key );
 			const_iterator upper_bound( const key_type& key ) const;
-			value_type& at( const key_type& key );
-			const value_type& at( const key_type& key ) const;
+			mapped_type& at( const key_type& key );
+			const mapped_type& at( const key_type& key ) const;
 			key_compare key_comp() const;
 			value_compare value_comp() const;
-
 
 	};
 
 	template< typename _K,
+			typename _V, 
 			typename _Compare, 
 			typename _Allocator >
-	bool operator==( const set<_K, _Compare, _Allocator>& lhs,
-                 	 const set<_K, _Compare, _Allocator>& rhs );
+	bool operator==( const map<_K, _V, _Compare, _Allocator>& lhs,
+                 	 const map<_K, _V, _Compare, _Allocator>& rhs );
 
 	template< typename _K, 
+			typename _V,
 			typename _Compare, 
 			typename _Allocator >
-	bool operator!=( const set<_K, _Compare, _Allocator>& lhs,
-                 	 const set<_K, _Compare, _Allocator>& rhs );
+	bool operator!=( const map<_K, _V, _Compare, _Allocator>& lhs,
+                 	 const map<_K, _V, _Compare, _Allocator>& rhs );
 
 	template< typename _K, 
+			typename _V, 
 			typename _Compare, 
 			typename _Allocator >
-	bool operator>( const set<_K, _Compare, _Allocator>& lhs,
-                 	 const set<_K, _Compare, _Allocator>& rhs );
+	bool operator>( const map<_K, _V, _Compare, _Allocator>& lhs,
+                 	 const map<_K, _V, _Compare, _Allocator>& rhs );
 
 	template< typename _K, 
+			typename _V, 
 			typename _Compare,
 			typename _Allocator >
-	bool operator<( const set<_K, _Compare, _Allocator>& lhs,
-                 	 const set<_K, _Compare, _Allocator>& rhs );
+	bool operator<( const map<_K, _V, _Compare, _Allocator>& lhs,
+                 	 const map<_K, _V, _Compare, _Allocator>& rhs );
 
 	template< typename _K, 
+			typename _V, 
 			typename _Compare, 
 			typename _Allocator >
-	bool operator>=( const set<_K, _Compare, _Allocator>& lhs,
-                 	 const set<_K, _Compare, _Allocator>& rhs );
+	bool operator>=( const map<_K, _V, _Compare, _Allocator>& lhs,
+                 	 const map<_K, _V, _Compare, _Allocator>& rhs );
 
 	template< typename _K, 
+			typename _V,
 			typename _Compare, 
 			typename _Allocator >
-	bool operator<=( const set<_K, _Compare, _Allocator>& lhs,
-                 	 const set<_K, _Compare, _Allocator>& rhs );
+	bool operator<=( const map<_K, _V, _Compare, _Allocator>& lhs,
+                 	 const map<_K, _V, _Compare, _Allocator>& rhs );
 
 	template< typename _K, 
+			typename _V, 
 			typename _Compare, 
 			typename _Allocator >
-	void swap( set<_K, _Compare, _Allocator>& lhs, 
-           		set<_K, _Compare, _Allocator>& rhs );
+	void swap( map<_K, _V, _Compare, _Allocator>& lhs, 
+           		map<_K, _V, _Compare, _Allocator>& rhs );
 }
 
-#include "set_impl.hpp"
+#include "map_impl.hpp"
 

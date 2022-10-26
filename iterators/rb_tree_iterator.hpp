@@ -1,9 +1,9 @@
 #pragma once
 
-#include "iterator_traits.hpp"
-#include "type_traits.hpp"
-#include "rb_tree_def.hpp"
-#include "rb_tree_node.hpp"
+#include "../bits/iterator_traits.hpp"
+#include "../bits/type_traits.hpp"
+#include "../bits/rb_tree_def.hpp"
+#include "../bits/rb_tree_node.hpp"
 
 namespace ft
 {
@@ -13,21 +13,22 @@ namespace ft
 		typedef std::allocator<T> allocator_type;
 		typedef std::allocator<rb_tree_node<T> > node_allocator_type;
 		allocator_type _alloc;
+		friend class rb_tree_const_iterator<T>;
 		public:
 
            /* ============================= */
            /*         member types          */
            /* ============================= */ 
 
-			typedef typename ft::iterator<bidirectional_iterator_tag, T>::value_type value_type;
-			typedef typename ft::iterator<bidirectional_iterator_tag, T>::reference reference;
-			typedef typename ft::iterator<bidirectional_iterator_tag, T>::pointer pointer;
-			typedef rb_tree_node_base* base_ptr;
-			typedef const rb_tree_node_base* const_base_ptr;
-			typedef rb_tree_node<value_type>* link_type;
-			typedef const rb_tree_node<value_type>* const_link_type;
-			typedef bidirectional_iterator_tag iterator_category;
-			typedef typename ft::iterator<bidirectional_iterator_tag, T>::difference_type difference_type;
+			typedef typename ft::iterator<bidirectional_iterator_tag, T>::value_type		value_type;
+			typedef typename ft::iterator<bidirectional_iterator_tag, T>::reference			reference;
+			typedef typename ft::iterator<bidirectional_iterator_tag, T>::pointer			pointer;
+			typedef rb_tree_node_base*														base_ptr;
+			typedef const rb_tree_node_base*												const_base_ptr;
+			typedef rb_tree_node<value_type>*												link_type;
+			typedef const rb_tree_node<value_type>*											const_link_type;
+			typedef bidirectional_iterator_tag												iterator_category;
+			typedef typename ft::iterator<bidirectional_iterator_tag, T>::difference_type	difference_type;
 
            /* ============================= */
            /*         Orthodox form         */
@@ -39,7 +40,8 @@ namespace ft
 //			template<typename Iter>
 //			rb_tree_iterator(const rb_tree_iterator<Iter>& it);
 
-			operator rb_tree_iterator<const value_type>();
+		//	operator const_iterator() const;
+			//operator rb_tree_iterator<value_type>();
 			rb_tree_iterator& operator=(rb_tree_iterator const& it);
 			virtual ~rb_tree_iterator();
 

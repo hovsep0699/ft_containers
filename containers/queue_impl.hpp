@@ -1,8 +1,7 @@
 #pragma once
 
-#include <deque>
 #include "queue.hpp"
-#include <iostream>
+
 namespace ft
 {
     

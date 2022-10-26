@@ -1,8 +1,6 @@
 #pragma once
 
-#include "../iterator.hpp"
-#include "../utility.hpp"
-#include "../functional.hpp"
+#include "rb_tree_def.hpp"
 
 namespace ft
 {
@@ -20,26 +18,25 @@ namespace ft
 			/*        member types       */
 			/* ========================= */
 
-			typedef _K										key_type;
-//			typedef _V										mapped_type;
-			typedef _V										value_type;
-			typedef _KOV									key_of_value_type;
-			typedef _Compare								key_compare;
-			typedef rb_tree_iterator<value_type>			iterator;
-			typedef rb_tree_iterator<const value_type>		const_iterator;
-			typedef reverse_iterator<iterator>				reverse_iterator;
-			typedef rb_tree_iterator<const_iterator>		const_reverse_iterator;
-			typedef _Allocator								allocator_type;
-			typedef rb_tree_node_base*						base_ptr;
-			typedef const rb_tree_node_base*				const_base_ptr;
-			typedef rb_tree_node<value_type>*				link_type;
-			typedef const rb_tree_node<value_type>*			const_link_type;
-			typedef typename _Allocator::pointer			pointer;
-			typedef typename _Allocator::const_pointer		const_pointer;
-			typedef value_type&								reference;
-			typedef const value_type&						const_reference;
-			typedef typename _Allocator::difference_type	difference_type;
-			typedef typename _Allocator::size_type			size_type;
+			typedef _K											key_type;
+			typedef _V											value_type;
+			typedef _KOV										key_of_value_type;
+			typedef _Compare									key_compare;
+			typedef ft::rb_tree_iterator<value_type>			iterator;
+			typedef ft::rb_tree_const_iterator<value_type>		const_iterator;
+			typedef ft::reverse_iterator<iterator>				reverse_iterator;
+			typedef ft::rb_tree_iterator<const_iterator>		const_reverse_iterator;
+			typedef _Allocator									allocator_type;
+			typedef ft::rb_tree_node_base*						base_ptr;
+			typedef const ft::rb_tree_node_base*				const_base_ptr;
+			typedef ft::rb_tree_node<value_type>*				link_type;
+			typedef const ft::rb_tree_node<value_type>*			const_link_type;
+			typedef typename _Allocator::pointer				pointer;
+			typedef typename _Allocator::const_pointer			const_pointer;
+			typedef value_type&									reference;
+			typedef const value_type&							const_reference;
+			typedef typename _Allocator::difference_type		difference_type;
+			typedef typename _Allocator::size_type				size_type;
 
 		private:
 			enum rb_tree_recolor

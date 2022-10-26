@@ -249,7 +249,7 @@ namespace ft
         {
             std::stringstream ss("ft::vector::at: __n (which is ");
             ss << _n << ") >= this->size() (which is " << this->_size << ")";
-            std::out_of_range(ss.str());
+            throw std::out_of_range(ss.str());
         }
         return _data[_n];
     }
@@ -260,7 +260,7 @@ namespace ft
         {
             std::stringstream ss("ft::vector::at: __n (which is ");
             ss << _n << ") >= this->size() (which is " << this->_size << ")";
-            std::out_of_range(ss.str());
+            throw std::out_of_range(ss.str());
         }
         return _data[_n];
     }

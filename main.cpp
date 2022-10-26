@@ -1,8 +1,7 @@
 
 
 #include <iostream>
-#include <map>
-#include "map.hpp"
+#include "containers/vector.hpp"
 struct A
 {
 	int x;
@@ -79,30 +78,69 @@ struct A
 		return a.x == b.x;
 	}
 
-#include <map>
-#include "set.hpp"
+#include "containers/set.hpp"
+#include "containers/map.hpp"
 int main(int argc, char *argv[])
 {
-	
+	//typedef ft::vector<int> vector_type;
+	//vector_type v;
+	//v.push_back(6);
+	//v.push_back(7);
+	//v.push_back(8);
+	//v.push_back(9);
+	//v.push_back(10);
+	//v.push_back(11);
+	//v.push_back(12);
+	//v.push_back(13);
+	//v.push_back(14);
+	//v.push_back(15);
+	//v.push_back(16);
+	//vector_type::iterator it = v.begin();
+	//for (int i = 0; i < v.size(); ++i) {
+	//	std::cout << v[i] << " ";
+	//}
+	//std::cout << "\n";
+	//try
+	//{
+	//	v.at(50);
+	//}
+	//catch(...)
+	//{
+	//	std::cout << "vector_except\n";
+	//}
 	//typedef ft::rb_tree<float, int, ft::select1st<ft::pair<float, int> >, ft::less<float> > tree_type;
-	//typedef ft::map<float, int> tree_type;
-	typedef ft::map<int, int> set_type;
+	typedef ft::set<float> set_type;
+	//typedef ft::map<int, int> map_type;
+	//map_type m;
 	set_type s;
-	s.insert(ft::make_pair(17, 8));
-	s.insert(ft::make_pair(8,88));
-	s.insert(ft::make_pair(9,22));
-	s.insert(ft::make_pair(14,33));
-	s.insert(ft::make_pair(11,11));
-	s.insert(ft::make_pair(16,44));
-	s.insert(ft::make_pair(13,3));
-	s.insert(ft::make_pair(15,4));
-	s.insert(ft::make_pair(10,0));
-	s.insert(ft::make_pair(12,6));
-	s.insert(ft::make_pair(18,7));
-	std::cout << "##################  set #####################\n";
-   // for (set_type::iterator it = s.begin(); it != s.end(); ++it) {
-   //    	std::cout << it->first << "\n";
-   // }
+	float arr[] = {1.2, 8.6, 39.2, 17.2, 147.2};
+	int size = sizeof(arr)/sizeof(arr[0]);
+	s.insert(arr, arr + size);
+	set_type::const_iterator it = s.cbegin();
+	//std::cout << (it == s.begin()) << "\n";
+	//m.insert(ft::make_pair(17, 8));
+	//m.insert(ft::make_pair(8,88));
+	//m.insert(ft::make_pair(9,22));
+	//m.insert(ft::make_pair(14,33));
+	//m.insert(ft::make_pair(11,11));
+	//m.insert(ft::make_pair(16,44));
+	//m.insert(ft::make_pair(13,3));
+	//m.insert(ft::make_pair(15,4));
+	//m.insert(ft::make_pair(10,0));
+	//m.insert(ft::make_pair(12,6));
+	//m.insert(ft::make_pair(18,7));
+	//map_type::const_iterator it = m.cbegin();
+//	std::cout << "##################  map #####################\n";
+//    for (map_type::iterator it = m.begin(); it != m.end(); ++it) {
+//       	std::cout << it->first << " : "  << it->second <<  "\n";
+//    }
+//
+//	set_type::iterator iter = s.cbegin();
+	//std::cout << "##################  set #####################\n";
+	//for (set_type::reverse_iterator it = s.rbegin(); it != s.crend(); ++it) {
+    //	std::cout << *it <<  "\n";
+	//}
+
 	//tree_type tree;
 	//tree.insert(ft::make_pair(1.8,5));
 	//tree.insert(ft::make_pair(2.2,6));

@@ -331,7 +331,10 @@ namespace ft
 			typename _Allocator >
 	typename set<_K, _Compare, _Allocator>::value_type& set<_K, _Compare, _Allocator>::operator[]( const key_type& key )
 	{
-		return _tree[key];
+		iterator it = find(key);
+		if (it == end())
+			return *insert(value_type()).first;
+		return *it;
 	}
 
 	template< typename _K,

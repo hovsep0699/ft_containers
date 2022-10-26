@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../functional.hpp"
+#include "../iterators/iterator.hpp"
+#include "utility.hpp"
+#include "functional.hpp"
 #include <memory>
 
 namespace ft
@@ -52,6 +54,9 @@ namespace ft
 
 	template<typename T>
 	class rb_tree_iterator;
+
+	template<typename T>
+	class rb_tree_const_iterator;
 
 }
 

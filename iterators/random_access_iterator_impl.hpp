@@ -210,14 +210,9 @@ namespace ft
 		{
 			return lhs.base() >= rhs.base();
 		}
-		template<typename T>
-		template<typename Iter>
-		random_access_iterator<T>::random_access_iterator(const random_access_iterator<Iter>& it)
-			: _ptr(it.base()) 
-		{}
 
 		template<typename T>
-		random_access_iterator<T>::operator random_access_iterator<const value_type>()
+		random_access_iterator<T>::operator random_access_iterator<const value_type>() const
 		{
 			return random_access_iterator<const value_type>(*this);
 		}

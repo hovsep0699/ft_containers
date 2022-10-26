@@ -1,7 +1,7 @@
 #pragma once
 
-#include "iterator_traits.hpp"
-#include "type_traits.hpp"
+#include "../bits/iterator_traits.hpp"
+#include "../bits/type_traits.hpp"
 #include "random_access_iterator_def.hpp"
 
 
@@ -25,10 +25,7 @@ namespace ft
 			random_access_iterator(pointer ptr);
 			random_access_iterator(const random_access_iterator& it);
 
-			template<typename Iter>
-			random_access_iterator(const random_access_iterator<Iter>& it);
-
-			operator random_access_iterator<const value_type>();
+			operator random_access_iterator<const value_type>() const;
 
 			random_access_iterator& operator=(const random_access_iterator& it);
 			//
