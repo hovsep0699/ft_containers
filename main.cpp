@@ -80,24 +80,28 @@ struct A
 
 #include "set.hpp"
 #include "map.hpp"
-int main(int argc, char *argv[])
-{
-	typedef ft::vector<int> vector_type;
-	vector_type v;
-	v.push_back(6);
-	v.push_back(7);
-	v.push_back(8);
-	v.push_back(9);
-	v.push_back(10);
-	v.push_back(11);
-	v.push_back(12);
-	v.push_back(13);
-	v.push_back(14);
-	v.push_back(15);
-	v.push_back(16);
-	vector_type::reverse_iterator it = v.crbegin();
+#include <list>
+//int main(int argc, char *argv[])
+//{
+//	std::list<int> lst;
+//	for (int i = 1; i < 5; ++i)
+//		lst.push_back(i * 3);
+//	typedef ft::vector<int> vector_type;
+//	vector_type v(lst.begin(), lst.end());
+	//v.push_back(6);
+	//v.push_back(7);
+	//v.push_back(8);
+	//v.push_back(9);
+	//v.push_back(10);
+	//v.push_back(11);
+	//v.push_back(12);
+	//v.push_back(13);
+	//v.push_back(14);
+	//v.push_back(15);
+	//v.push_back(16);
+	//vector_type::reverse_iterator it = v.crbegin();
 	//std::cout << "it: " << *it;
-	vector_type::const_reverse_iterator it1 = it;
+	//vector_type::const_reverse_iterator it1 = it;
 	//vector_type::iterator it = v.begin();
 	//for (int i = 0; i < v.size(); ++i) {
 	//	std::cout << v[i] << " ";
@@ -184,5 +188,34 @@ int main(int argc, char *argv[])
 //  }
 //std::cout << "###########  M1 == M  ################\n";
 //std::cout << "(m == m1) : " << (m <= m1) << "\n";
-	return 0;
+//	return 0;
+//}
+
+#include "vector"
+#include <list>
+
+#define TESTED_TYPE int
+#define TESTED_NAMESPACE ft
+
+int		main(void)
+{
+	ft::vector<TESTED_TYPE> lst;
+	ft::vector<TESTED_TYPE>::iterator lst_it;
+	for (int i = 1; i < 5; ++i)
+		lst.push_back(i * 3);
+	//std::iterator_traits<std::vector<TESTED_TYPE>::iterator>::difference_type d;
+	//size_t size = std::distance(lst.begin(), lst.end());
+
+//	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(lst.begin(), lst.end());
+//	printSize(vct);
+//
+//	lst_it = lst.begin();
+//	for (int i = 1; lst_it != lst.end(); ++i)
+//		*lst_it++ = i * 5;
+//	vct.assign(lst.begin(), lst.end());
+//	printSize(vct);
+//
+//	vct.insert(vct.end(), lst.rbegin(), lst.rend());
+//	printSize(vct);
+	return (0);
 }

@@ -428,7 +428,14 @@ namespace ft
     {
         size_type position = distance(cbegin(), pos);
         size_type old_size = _size;
-        resize(_size + distance(first, last));
+		size_type add_size = 0;
+		InputIt it(first);
+		while (it != last)
+		{
+			++add_size;
+			++it;
+		}
+        resize(_size + add_size);
         size_type i = _size;
         while ( i >= position && i)
         {

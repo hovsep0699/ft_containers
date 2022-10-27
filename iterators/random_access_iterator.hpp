@@ -14,6 +14,7 @@ namespace ft
 			//
 			// member types
 			//
+			//
 			typedef typename ft::iterator<random_access_iterator_tag, T>::value_type value_type;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::reference reference;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::pointer pointer;
