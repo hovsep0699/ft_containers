@@ -1,6 +1,6 @@
 #pragma once
 
-#include "algorithm.hpp"
+#include "bits/algorithm.hpp"
 
 namespace ft
 {

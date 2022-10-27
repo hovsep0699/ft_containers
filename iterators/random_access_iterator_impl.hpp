@@ -1,6 +1,6 @@
 #pragma once
 
-#include "random_access_iterator.hpp"
+#include "iterators/random_access_iterator.hpp"
 
 
 namespace ft
@@ -21,7 +21,7 @@ namespace ft
 	random_access_iterator<T>& random_access_iterator<T>::operator=(const random_access_iterator<T>& it)
 	{
 		if (&it != this)
-			_ptr = it.ptr;
+			_ptr = it._ptr;
 		return *this;
 	}
 	//
@@ -214,7 +214,7 @@ namespace ft
 		template<typename T>
 		random_access_iterator<T>::operator random_access_iterator<const value_type>() const
 		{
-			return random_access_iterator<const value_type>(*this);
+			return random_access_iterator<const value_type>(base());
 		}
 
 		template<typename LIter, typename RIter>

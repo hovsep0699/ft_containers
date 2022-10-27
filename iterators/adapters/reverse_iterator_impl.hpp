@@ -1,6 +1,6 @@
 #pragma once
 
-#include "reverse_iterator.hpp"
+#include "iterators/adapters/reverse_iterator.hpp"
 
 namespace ft
 {
@@ -8,7 +8,7 @@ namespace ft
 	// reverse_iterator base constructur
 	//
 	template<typename Iter>
-	reverse_iterator<Iter>::reverse_iterator(Iter base) : current(base)
+	reverse_iterator<Iter>::reverse_iterator(iterator_type base) : current(base)
 	{}
 	template<typename Iter>
 	reverse_iterator<Iter>::reverse_iterator() : current()
@@ -17,27 +17,25 @@ namespace ft
 	// reverse_iterator copy constructor
 	//
 	template<typename Iter>
-	reverse_iterator<Iter>::reverse_iterator(const reverse_iterator& rev) : current(rev.current) {}
+	template<typename U>
+	reverse_iterator<Iter>::reverse_iterator(const reverse_iterator<U>& rev) : current(rev.base()) {}
 	//
 	// reverse_iterator assign
 	//
 	template<typename Iter>
-	reverse_iterator<Iter>& reverse_iterator<Iter>::operator=(const reverse_iterator& rev)
+	template<typename U>
+	reverse_iterator<Iter>& reverse_iterator<Iter>::operator=(const reverse_iterator<U>& rev)
 	{
+		std::cout << "operator=()\n";
 		if (this != &rev)
-			current = rev.current;
+			current = rev.base();
 		return *this;
 	}
-	//
-	//	destructor
-	//
-	template<typename Iter>
-	reverse_iterator<Iter>::~reverse_iterator() {}
 	//
 	// get base iterator
 	//
 	template<typename Iter>
-	Iter reverse_iterator<Iter>::base() const
+	typename reverse_iterator<Iter>::iterator_type reverse_iterator<Iter>::base() const
 	{
 		return current;
 	}

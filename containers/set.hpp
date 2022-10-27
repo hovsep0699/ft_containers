@@ -1,8 +1,8 @@
 #pragma once
 
-#include "containers.hpp"
-#include "../bits/rb_tree.hpp"
-#include "../bits/utility.hpp"
+#include "containers/containers.hpp"
+#include "bits/rb_tree.hpp"
+#include "bits/utility.hpp"
 
 namespace ft
 {

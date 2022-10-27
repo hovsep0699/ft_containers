@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../bits/iterator_traits.hpp"
-#include "../bits/type_traits.hpp"
-#include "../bits/rb_tree_def.hpp"
-#include "../bits/rb_tree_node.hpp"
+#include "bits/iterator_traits.hpp"
+#include "bits/type_traits.hpp"
+#include "bits/rb_tree_def.hpp"
+#include "bits/rb_tree_node.hpp"
 
 namespace ft
 {

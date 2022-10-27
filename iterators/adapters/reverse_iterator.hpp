@@ -1,7 +1,7 @@
 #pragma once
 
-#include "iterator_traits.hpp"
-#include "reverse_iterator_def.hpp"
+#include "bits/iterator_traits.hpp"
+#include "iterators/adapters/reverse_iterator_def.hpp"
 
 namespace ft
 {
@@ -9,11 +9,11 @@ namespace ft
 	template<typename Iter>
 	class reverse_iterator
 	{
-		Iter current;
+		protected:
+			Iter current;
 		//
 		// default constructor illegal
 		//
-		reverse_iterator();
 		public:
 			//
 			// member types
@@ -27,17 +27,16 @@ namespace ft
 			//
 			// constructurs
 			//
-			reverse_iterator(Iter base);
-			reverse_iterator(const reverse_iterator& rev);
-			reverse_iterator& operator=(const reverse_iterator& rev);
-			//
-			//	destructor
-			//
-			~reverse_iterator();
+			reverse_iterator();
+			reverse_iterator(iterator_type base);
+			template<typename U>
+			reverse_iterator(const reverse_iterator<U>& rev);
+			template<typename U>
+			reverse_iterator& operator=(const reverse_iterator<U>& rev);
 			//
 			// get base iterator
 			//
-			Iter base() const;
+			iterator_type base() const;
 			//
 			// dereference operators
 			//

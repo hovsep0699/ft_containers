@@ -1,8 +1,8 @@
 #pragma once
 
-#include "algorithm.hpp"
-#include "utility.hpp"
-#include "vector.hpp"
+#include "bits/algorithm.hpp"
+#include "bits/utility.hpp"
+#include "containers/vector.hpp"
 
 namespace ft
 {

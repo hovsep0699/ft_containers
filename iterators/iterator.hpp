@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../bits/iterator_traits.hpp"
-#include "random_access_iterator.hpp"
-#include "rb_tree_iterator.hpp"
-#include "rb_tree_const_iterator.hpp"
-#include "insert_iterator.hpp"
-#include "reverse_iterator.hpp"
-#include "back_insert_iterator.hpp"
-#include "bits/front_insert_iterator.hpp"
+#include "bits/iterator_traits.hpp"
+#include "iterators/random_access_iterator.hpp"
+#include "iterators/rb_tree_iterator.hpp"
+#include "iterators/rb_tree_const_iterator.hpp"
+#include "iterators/adapters/insert_iterator.hpp"
+#include "iterators/adapters/reverse_iterator.hpp"
+#include "iterators/adapters/back_insert_iterator.hpp"
+#include "iterators/adapters/front_insert_iterator.hpp"

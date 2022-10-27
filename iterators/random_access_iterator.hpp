@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../bits/iterator_traits.hpp"
-#include "../bits/type_traits.hpp"
-#include "random_access_iterator_def.hpp"
+#include "bits/iterator_traits.hpp"
+#include "bits/type_traits.hpp"
+#include "iterators/random_access_iterator_def.hpp"
 
 
 namespace ft

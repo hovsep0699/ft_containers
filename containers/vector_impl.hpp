@@ -1,39 +1,39 @@
 #pragma once
 
-#include "utility.hpp"
-#include "vector.hpp"
+#include "bits/utility.hpp"
+#include "containers/vector.hpp"
 #include <assert.h>
 #include <sstream>
-// #include <stdexcept>
+
 namespace ft
 {
 
     template<typename T, typename Alloc>
     vector<T, Alloc>::vector(const allocator_type& alloc)
-        :	_data(ft_nullptr),
+    	:	_allocator(alloc),
+			_data(ft_nullptr),
             _size(0),
-            _allocator(alloc),
-            _max_size(alloc.max_size()),
-			_capacity(0)
+			_capacity(0),
+            _max_size(alloc.max_size())
     {}
     template<typename T, typename Alloc>
     vector<T, Alloc>::vector(size_type n, const_reference val, const allocator_type& alloc)
-        :	_data(ft_nullptr),
+        :	_allocator(alloc),
+            _data(ft_nullptr),
             _size(0), 
-            _allocator(alloc),
-            _max_size(alloc.max_size()),
-			_capacity(0)
+			_capacity(0),
+           _max_size(alloc.max_size())
     {
         resize(n, val);
     }
 
     template<typename T, typename Alloc>
     vector<T, Alloc>::vector(vector<T, Alloc>& other)
-        :	_data(ft_nullptr),
-            _size(0), 
+    	:	_allocator(other._allocator),
+        	_data(ft_nullptr),
+            _size(0),
             _capacity(0),
-            _allocator(other._allocator),
-            _max_size(other._allocator.max_size())
+       	   _max_size(other._allocator.max_size())
     {
         for (size_type i = 0; i < other._size; ++i)
            push_back(other._data[i]);
@@ -43,11 +43,11 @@ namespace ft
     vector<T, Alloc>::vector (InputIterator first, InputIterator last, 
                             const allocator_type& alloc,
                             typename enable_if<!is_integral<InputIterator>::value, bool>::type)
-		:	_data(ft_nullptr),
+		:	_allocator(alloc),
+			_data(ft_nullptr),
 			_size(0),
-			_allocator(alloc),
-			_max_size(alloc.max_size()),
-			_capacity(0)
+			_capacity(0),
+			_max_size(alloc.max_size())
     {
         size_type i = 0;
         for (InputIterator it = first; it != last; ++it, ++i)

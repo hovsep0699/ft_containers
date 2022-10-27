@@ -1,7 +1,7 @@
 #pragma once
 
-#include "containers.hpp"
-#include "algorithm.hpp"
+#include "containers/containers.hpp"
+#include "bits/algorithm.hpp"
 
 namespace ft
 {

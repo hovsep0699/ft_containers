@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
 	v.push_back(16);
 	vector_type::reverse_iterator it = v.crbegin();
 	//std::cout << "it: " << *it;
-	vector_type::const_reverse_iterator it1 = it;
+	vector_type::iterator it1 = it;
 	//vector_type::iterator it = v.begin();
 	//for (int i = 0; i < v.size(); ++i) {
 	//	std::cout << v[i] << " ";

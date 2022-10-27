@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../iterators/iterator.hpp"
-#include "utility.hpp"
-#include "functional.hpp"
+#include "iterators/iterator.hpp"
+#include "bits/utility.hpp"
+#include "bits/functional.hpp"
 #include <memory>
 
 namespace ft

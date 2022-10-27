@@ -1,4 +1,6 @@
-#include "set.hpp"
+#pragma once
+
+#include "containers/set.hpp"
 
 namespace ft
 {

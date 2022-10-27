@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../iterators/iterator.hpp"
-#include "../bits/utility.hpp"
+#include "iterators/iterator.hpp"
+#include "bits/utility.hpp"
 
 namespace ft
 {
