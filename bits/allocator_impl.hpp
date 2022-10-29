@@ -1,6 +1,7 @@
 #pragma once
 
 #include "bits/allocator.hpp"
+#include "bits/utility.hpp"
 #include <limits>
 #include <new>
 #include <memory>
@@ -27,14 +28,14 @@ namespace ft
 	template<typename T>
 	typename allocator<T>::pointer allocator<T>::address( reference x ) const
 	{
-		return &x;
+		return ft::addressof(x);
 	}
 
-	//template<typename T>
-	//typename allocator<T>::const_pointer allocator<T>::address( const_reference x ) const
-	//{
-	//	return &x;
-	//}
+	template<typename T>
+	typename allocator<T>::const_pointer allocator<T>::address( const_reference x ) const
+	{
+		return ft::addressof(x);
+	}
 
 	template<typename T>
 	typename allocator<T>::pointer allocator<T>::allocate( size_type _n )

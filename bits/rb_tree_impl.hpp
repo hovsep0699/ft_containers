@@ -11,7 +11,10 @@ namespace ft
 			typename _Compare, 
 			typename _Allocator>
 	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree()
-		:  _comp(key_compare()), _value_comp(_comp), _rb_tree_impl(), _alloc(allocator_type())
+		:	_comp(key_compare()),
+			_value_comp(_comp),
+			_rb_tree_impl(),
+			_alloc(allocator_type())
 	{}
 
 	template<typename _K, 
@@ -21,7 +24,10 @@ namespace ft
 			typename _Allocator>
 	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree( const key_compare& comp,
             			const allocator_type& alloc )
-    	: _comp(comp), _alloc(alloc), _value_comp(_comp), _rb_tree_impl()
+    	:	_comp(comp),
+    		_alloc(alloc),
+    		_value_comp(_comp),
+    		_rb_tree_impl()
 	{}
 
 	template<typename _K, 
@@ -30,7 +36,10 @@ namespace ft
 			typename _Compare, 
 			typename _Allocator>
 	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree( const allocator_type& alloc )
-		: _comp(key_compare()), _value_comp(_comp), _alloc(alloc), _rb_tree_impl()
+		:	_comp(key_compare()),
+			_value_comp(_comp),
+			_alloc(alloc),
+			_rb_tree_impl()
 	{}
 
 	template<typename _K, 
@@ -38,7 +47,11 @@ namespace ft
 			typename _KOV, 
 			typename _Compare, 
 			typename _Allocator>
-	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree(const rb_tree& tree) : _alloc(tree._alloc), _comp(tree._comp), _value_comp(tree._value_comp), _rb_tree_impl()
+	rb_tree<_K, _V, _KOV, _Compare, _Allocator>::rb_tree(const rb_tree& tree)
+		:	_alloc(tree._alloc),
+			_comp(tree._comp),
+			_value_comp(tree._value_comp),
+			_rb_tree_impl()
 	{
 		for (const_iterator it = tree.begin(); it != tree.end(); ++it)
 			insert(*it);
@@ -938,7 +951,7 @@ namespace ft
 			_key_of_value = other._key_of_value;
 			_value_comp = other._value_comp;
 			for (const_iterator it = other.begin(); it != other.end(); ++it)
-				insert(*it);	
+				insert(*it);
 		}
 		return *this;
 	}

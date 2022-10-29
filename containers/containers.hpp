@@ -12,7 +12,7 @@ namespace ft
     template<typename T>
     struct allocator;
 
-	template<typename T, typename Allocator = std::allocator<T> >
+	template<typename T, typename Allocator = allocator<T> >
 	class vector;
 
 	template<typename T, typename Container = vector<T> >

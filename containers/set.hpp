@@ -26,7 +26,7 @@ namespace ft
 			typedef typename tree_type::const_reference			const_reference;
 			typedef typename tree_type::pointer					pointer;
 			typedef typename tree_type::const_pointer			const_pointer;
-			typedef const typename tree_type::iterator			iterator;
+			typedef typename tree_type::const_iterator			iterator;
 			typedef typename tree_type::const_iterator			const_iterator;
 			typedef typename tree_type::reverse_iterator		reverse_iterator;
 			typedef typename tree_type::const_reverse_iterator	const_reverse_iterator;
@@ -47,10 +47,10 @@ namespace ft
 			set( const set& other );
 
 
+			// set is read only and cannot have operator[] and at method
 			virtual ~set();
 			set& operator=( const set& other );
 			allocator_type get_allocator() const;
-			value_type& operator[]( const key_type& key );
 			iterator begin();
 			const_iterator begin() const;
 			const_iterator cbegin() const;
@@ -84,8 +84,6 @@ namespace ft
 			const_iterator lower_bound( const key_type& key ) const;
 			iterator upper_bound( const key_type& key );
 			const_iterator upper_bound( const key_type& key ) const;
-			value_type& at( const key_type& key );
-			const value_type& at( const key_type& key ) const;
 			key_compare key_comp() const;
 			value_compare value_comp() const;
 

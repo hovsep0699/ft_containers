@@ -1,9 +1,7 @@
 #pragma once
 
-#include "iterators/iterator.hpp"
-#include "bits/utility.hpp"
 #include "bits/functional.hpp"
-#include <memory>
+#include "bits/allocator.hpp"
 
 namespace ft
 {
@@ -44,8 +42,8 @@ namespace ft
 	template<typename _K, 
 			typename _V, 
 			typename _KOV, 
-			typename _Compare = ft::less<_K>, 
-			typename _Allocator = std::allocator<_K> >
+			typename _Compare = less<_K>, 
+			typename _Allocator = allocator<_K> >
 	class rb_tree;
 
 	/* ==================================== */
@@ -55,9 +53,14 @@ namespace ft
 	template<typename T>
 	class rb_tree_iterator;
 
+	/* ========================================= */
+	/*      const_iterator for red-black tree	 */
+	/* ========================================= */
+
 	template<typename T>
 	class rb_tree_const_iterator;
 
 }
 
+#include "rb_tree_node.hpp"
 

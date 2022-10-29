@@ -60,5 +60,8 @@ namespace ft
 	template< typename T1, typename T2 >
 	void swap(pair<T1, T2>& lhs, pair<T1, T2>& rhs );
 
+	template<typename T>
+	inline T* addressof(T& arg);
+
 }
 #include "utility_impl.hpp"

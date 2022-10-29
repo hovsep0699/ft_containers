@@ -6,20 +6,20 @@ namespace ft
 {
 		template<typename T>	
 		rb_tree_const_iterator<T>::rb_tree_const_iterator()
-			: _base(_rb_tree_impl._nil), _rb_tree_impl()
+			: _nil(rb_black), _base(&_nil)
 		{}
 		template<typename T>	
 		rb_tree_const_iterator<T>::rb_tree_const_iterator(base_ptr _base)
-			: _base(_base)
+			: _nil(rb_black), _base(_base)
 		{}
 		template<typename T>	
 		rb_tree_const_iterator<T>::rb_tree_const_iterator(rb_tree_const_iterator<T> const& it)
-			: _base(it._base)
+			: _nil(rb_black), _base(it._base)
 		{}
 
 		template<typename T>	
 		rb_tree_const_iterator<T>::rb_tree_const_iterator(iterator const& it)
-			: _base(it._base)
+			: _nil(rb_black), _base(it._base)
 		{}
 		template<typename T>	
 		rb_tree_const_iterator<T>& rb_tree_const_iterator<T>::operator=(rb_tree_const_iterator<T> const& it)
@@ -51,7 +51,7 @@ namespace ft
 		template<typename T>	
 		typename rb_tree_const_iterator<T>::pointer rb_tree_const_iterator<T>::operator->() const
 		{
-			return  _alloc.address(static_cast<link_type>(_base)->_value);
+			return  ft::addressof(static_cast<link_type>(_base)->_value);
 		}
 
 	   /* ============================= */
@@ -61,14 +61,14 @@ namespace ft
 		template<typename T>	
 		rb_tree_const_iterator<T>& rb_tree_const_iterator<T>::operator++()
 		{
-			_base = _rb_tree_impl.increment(_base);
+			_base = rb_tree_impl_type::increment(_base);
 			return *this;
 		}
 		template<typename T>	
 		rb_tree_const_iterator<T> rb_tree_const_iterator<T>::operator++(int)
 		{
 			rb_tree_const_iterator<T> tmp(*this);
-			_base = _rb_tree_impl.increment(_base);
+			_base = rb_tree_impl_type::increment(_base);
 			return tmp;
 		}
 
@@ -79,7 +79,7 @@ namespace ft
 		template<typename T>	
 		rb_tree_const_iterator<T>& rb_tree_const_iterator<T>::operator--()
 		{
-			_base = _rb_tree_impl.decrement(_base);
+			_base = rb_tree_impl_type::decrement(_base);
 			return *this;
 		}
 
@@ -87,7 +87,7 @@ namespace ft
 		rb_tree_const_iterator<T> rb_tree_const_iterator<T>::operator--(int)
 		{
 			rb_tree_const_iterator<T> tmp(*this);
-			_base = _rb_tree_impl.decrement(_base);
+			_base = rb_tree_impl_type::decrement(_base);
 			return tmp;
 		}
 		

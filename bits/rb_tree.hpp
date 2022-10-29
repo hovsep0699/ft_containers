@@ -1,6 +1,9 @@
 #pragma once
 
 #include "bits/rb_tree_def.hpp"
+#include "iterators/adapters/reverse_iterator.hpp"
+#include "iterators/rb_tree_iterator.hpp"
+#include "iterators/rb_tree_const_iterator.hpp"
 
 namespace ft
 {
@@ -62,7 +65,7 @@ namespace ft
 			/*           members         */
 			/* ========================= */
 
-			rb_tree_impl_type _rb_tree_impl;
+			rb_tree_impl_type	_rb_tree_impl;
 			allocator_type		_alloc;
 			key_compare			_comp;
 			value_compare		_value_comp;
@@ -109,8 +112,8 @@ namespace ft
 			static link_type s_left(const_base_ptr ptr);
 			static link_type s_right(const_base_ptr ptr);
 
+			// clear
 			void clear();
-
 			/* ========================= */
 			/*    access  iterators      */
 			/* ========================= */

@@ -75,7 +75,7 @@ namespace ft
 			typename _Allocator >
 	typename set<_K, _Compare, _Allocator>::const_iterator set<_K, _Compare, _Allocator>::cbegin() const
 	{
-		return _tree.begin();
+		return _tree.cbegin();
 	}
 
 	template< typename _K,
@@ -312,6 +312,8 @@ namespace ft
 			_tree.swap(other);
 	}
 
+	// set is read only and cannot have operator[] and at method
+/*
 	template< typename _K,
 			typename _Compare,
 			typename _Allocator >
@@ -338,7 +340,7 @@ namespace ft
 			return *insert(value_type()).first;
 		return *it;
 	}
-
+*/
 	template< typename _K,
 			typename _Compare,
 			typename _Allocator >

@@ -26,7 +26,6 @@ namespace ft
 	template<typename U>
 	reverse_iterator<Iter>& reverse_iterator<Iter>::operator=(const reverse_iterator<U>& rev)
 	{
-		std::cout << "operator=()\n";
 		if (this != &rev)
 			current = rev.base();
 		return *this;
