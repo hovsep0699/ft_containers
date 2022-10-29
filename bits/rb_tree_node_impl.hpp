@@ -62,10 +62,30 @@ namespace ft
 	/* ============================ */
 
 	template<typename T, typename _Allocator>
-	rb_tree_impl<T, _Allocator>::rb_tree_impl(const allocator_type alloc)
+	rb_tree_impl<T, _Allocator>::rb_tree_impl(bool multivalues, const allocator_type alloc )
 		:	_alloc(alloc),
-			_size(0)
+			_size(0),
+			_multivalues(multivalues)
 	{
+		initialize();
+	}
+	template<typename T, typename _Allocator>
+	rb_tree_impl<T, _Allocator>::rb_tree_impl(const rb_tree_impl& impl )
+		:	_alloc(impl._alloc),
+			_size(impl._size),
+			_multivalues(impl._multivalues)
+	{
+		initialize();
+	}
+	template<typename T, typename _Allocator>
+	rb_tree_impl<T, _Allocator>& rb_tree_impl<T, _Allocator>::operator=(const rb_tree_impl& impl )
+	{
+		_alloc = impl._alloc;
+		_size = impl._size;
+		_multivalues = impl._multivalues;
+		//if (_nil)
+		//	delete _nil;
+		//_nil = ft_nullptr;
 		initialize();
 	}
 	
@@ -75,8 +95,17 @@ namespace ft
 		_sentinel = base_type(rb_black);
 		_nil = &_sentinel;
 		_root = _nil;
+		_nil->_parent = _root;
 		_begin = _nil;
 		_end = _nil;
+	}
+
+	template<typename T, typename _Allocator>
+	rb_tree_impl<T, _Allocator>::~rb_tree_impl()
+	{
+		//if (_nil)
+		//	delete _nil;
+		//_nil = ft_nullptr;
 	}
 
 	/*!

@@ -99,12 +99,16 @@ namespace ft
 			base_ptr			_nil;
 			base_ptr			_end;
 			size_type			_size;
+			bool				_multivalues;
 		
 			/* ========================= */
 			/*	      constructor		 */
 			/* ========================= */
 
-			rb_tree_impl(const allocator_type alloc = allocator_type() );
+			rb_tree_impl(bool multivalues = false, const allocator_type alloc = allocator_type() );
+			rb_tree_impl(const rb_tree_impl& );
+			rb_tree_impl& operator=(const rb_tree_impl&);
+			virtual ~rb_tree_impl();
 
 			/*!
 			 * @function	create_node

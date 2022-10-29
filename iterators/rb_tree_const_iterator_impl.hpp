@@ -13,7 +13,7 @@ namespace ft
 			: _nil(rb_black), _base(_base)
 		{}
 		template<typename T>	
-		rb_tree_const_iterator<T>::rb_tree_const_iterator(rb_tree_const_iterator<T> const& it)
+		rb_tree_const_iterator<T>::rb_tree_const_iterator(rb_tree_const_iterator const& it)
 			: _nil(rb_black), _base(it._base)
 		{}
 
@@ -22,7 +22,7 @@ namespace ft
 			: _nil(rb_black), _base(it._base)
 		{}
 		template<typename T>	
-		rb_tree_const_iterator<T>& rb_tree_const_iterator<T>::operator=(rb_tree_const_iterator<T> const& it)
+		rb_tree_const_iterator<T>& rb_tree_const_iterator<T>::operator=(rb_tree_const_iterator const& it)
 		{
 			if (this != &it)
 				_base = it._base;

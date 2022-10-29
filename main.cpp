@@ -1,23 +1,59 @@
 #include <iostream>
 #include <list>
 #include <set>
-#include "set.hpp"
+#include "multiset.hpp"
 
 #define TESTED_TYPE int
 #define ORIGINAL_NAMESPACE std
 #define TESTED_NAMESPACE ft
-#define TEST_SET_T(T) TESTED_NAMESPACE::set<T>
+#define TEST_SET_T(T) TESTED_NAMESPACE::multiset<T>
+
+template<typename T>
+void print(T container)
+{
+	std::cout << "#######################################################\n";
+	typename T::const_iterator it = container.begin();
+	while (it != container.end() )
+	{
+		std::cout << *it << " " << " color: " << ((it.base()->_color == ft::rb_red) ? "red" : "black") << "\n";
+		++it;
+	}
+	std::cout << "#######################################################\n";
+}
 
 bool test_set()
 {
 	TEST_SET_T(int) s;
-	int arr[] = {1,4,8,6,9,3,7,2};
+	int arr[] = {1,4,8,6,9,3,6,7,2, 5,9};
 	size_t size = sizeof(arr) / sizeof(arr[0]);
 	for (int i = 0; i < size; ++i)
 		s.insert(arr[i]);
-	for (TEST_SET_T(int)::iterator it = s.begin(); it != s.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << "\n";
+//	s.insert(arr, arr + size);
+	//while (it != s.end() )
+	//{
+	//	std::cout << *it << " " << " color: " << ((it.base()->_color == ft::rb_red) ? "red" : "black") << "\n";
+	//	++it;
+	//}
+	//std::cout << "#######################################################\n";
+	//print(s);
+//	s.erase(2);
+	//TEST_SET_T(int)::iterator it1 = s.end();
+//	--it1;
+//	std::cout << *it1 << "\n";
+	print(s);
+	s.clear();
+	s.insert(arr, arr + size);
+	print(s);
+	//TEST_SET_T(int) s1(s);
+	//TEST_SET_T(int) s2(s);
+	//print(s);
+	//TEST_SET_T(int)::const_iterator it = s.begin();
+	//while (it != s.end() )
+	//{
+	//	std::cout << *it << " " << " color: " << ((it.base()->_color == ft::rb_red) ? "red" : "black") << "\n";
+	//	++it;
+	//}
+	//print(s);
 	return true;
 }
 

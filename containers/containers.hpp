@@ -24,12 +24,23 @@ namespace ft
 	template<typename _K,
 		typename _V,
 		typename _Compare = less<_K>,
-		typename _Allocator = std::allocator<ft::pair<const _K, _V> > >
+		typename _Allocator = allocator<ft::pair<const _K, _V> > >
 	class map;
 
 	template< typename _K,
 			typename _Compare = less<_K>,
-			typename _Allocator = std::allocator<_K> >
+			typename _Allocator = allocator<_K> >
 	class set;
+
+	template< typename _K,
+			typename _Compare = less<_K>,
+			typename _Allocator = allocator<_K> >
+	class multiset;
+
+	template<typename _K,
+		typename _V,
+		typename _Compare = less<_K>,
+		typename _Allocator = allocator<ft::pair<const _K, _V> > >
+	class multimap;
 };
 

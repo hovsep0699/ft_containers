@@ -85,7 +85,7 @@ namespace ft
 	{
 		return false;
 	}
-
+	
 	template<typename T>
 	template< class U >
 	struct allocator<T>::rebind

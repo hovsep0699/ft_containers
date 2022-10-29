@@ -25,7 +25,7 @@ namespace ft
 			explicit vector(const allocator_type& alloc = allocator_type());
 			explicit vector(size_type n, const_reference val = value_type(), const allocator_type& alloc = allocator_type());
 			vector(vector& vec);
-			template <class InputIterator>
+			template <typename InputIterator>
 			vector (InputIterator first, InputIterator last, 
 					const allocator_type& alloc = allocator_type(),
 					typename enable_if<!is_integral<InputIterator>::value, bool>::type = true);

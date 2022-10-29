@@ -76,18 +76,19 @@ namespace ft
 			/*        constructors       */
 			/* ========================= */
 
-			rb_tree();
+			rb_tree(bool multivalues = false);
 			explicit rb_tree( const key_compare& comp,
-            			const allocator_type& alloc = allocator_type() );
-            explicit rb_tree( const allocator_type& alloc );
+            			const allocator_type& alloc = allocator_type(), bool multivalues = false );
+            explicit rb_tree( const allocator_type& alloc, bool multivalues = false );
             rb_tree(const rb_tree& tree);
 			
 			template< typename InputIt >
 			rb_tree( InputIt first, InputIt last,
      			const key_compare& comp = key_compare(),
-     			const allocator_type& alloc = allocator_type() );
+     			const allocator_type& alloc = allocator_type(), bool multivalues = false );
 
 			virtual ~rb_tree();
+			void clear_tree(base_ptr node);
 			rb_tree& operator=(const rb_tree& other ); 
 			size_type size() const;
 			allocator_type get_allocator() const;
@@ -111,6 +112,7 @@ namespace ft
 			static const_reference s_value(const_link_type link);
 			static link_type s_left(const_base_ptr ptr);
 			static link_type s_right(const_base_ptr ptr);
+			static link_type s_current(base_ptr ptr);
 
 			// clear
 			void clear();
@@ -128,11 +130,8 @@ namespace ft
 			const_reverse_iterator rbegin() const;
 			const_reverse_iterator crbegin() const;
 			reverse_iterator rend();
-			//mapped_type& at( const key_type& key );
-			//const mapped_type& at( const key_type& key ) const;
 			const_reverse_iterator rend() const;
 			const_reverse_iterator crend() const;
-			//mapped_type& operator[](const key_type& _key);
 			const_rb_tree_impl_type get_impl() const;
 			rb_tree_impl_type get_impl();
 
