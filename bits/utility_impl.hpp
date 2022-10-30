@@ -116,6 +116,6 @@ namespace ft
 	{
     	return reinterpret_cast<T*>(
     			&const_cast<char&>(
-    			reinterpret_cast<const volatile char&>(arg)));
+    				reinterpret_cast<const volatile char&>(arg)));
 	}
 }

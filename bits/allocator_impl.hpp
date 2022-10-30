@@ -65,7 +65,7 @@ namespace ft
 	template<typename T>
 	void allocator<T>::construct( pointer p, const_reference val )
 	{
-		new( ( void* )p ) value_type(val);
+		::new( ( void* )p ) value_type(val);
 	}
 
 	template<typename T>

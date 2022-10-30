@@ -581,6 +581,7 @@ namespace ft
 			_rb_tree_impl._size = 1;
 			_rb_tree_impl._begin = _rb_tree_impl._root;
 			_rb_tree_impl._end = _rb_tree_impl._root;
+			_rb_tree_impl._nil->_parent = _root;
 			return iterator(_rb_tree_impl._begin);
 		}
 		if (!_rb_tree_impl._multivalues)

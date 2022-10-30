@@ -38,7 +38,7 @@ namespace ft
         void destroy(pointer p);
 
 		template< class U >
-			struct rebind;
+		struct rebind;
     };
     template< typename T1, typename T2 >
     bool operator==( const allocator<T1>& lhs, const allocator<T2>& rhs );

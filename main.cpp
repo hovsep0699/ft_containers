@@ -8,6 +8,16 @@
 #define TESTED_NAMESPACE ft
 #define TEST_SET_T(T) TESTED_NAMESPACE::multiset<T>
 
+
+class A
+{
+	public:
+		void f()
+		{
+		};
+};
+
+
 template<typename T>
 void print(T container)
 {
@@ -20,9 +30,10 @@ void print(T container)
 	}
 	std::cout << "#######################################################\n";
 }
-
+typedef void (A::*func)();
 bool test_set()
 {
+	func f = (func)ft::ft_nullptr;
 	TEST_SET_T(int) s;
 	int arr[] = {1,4,8,6,9,3,6,7,2, 5,9};
 	size_t size = sizeof(arr) / sizeof(arr[0]);

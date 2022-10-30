@@ -83,9 +83,6 @@ namespace ft
 		_alloc = impl._alloc;
 		_size = impl._size;
 		_multivalues = impl._multivalues;
-		//if (_nil)
-		//	delete _nil;
-		//_nil = ft_nullptr;
 		initialize();
 	}
 	
@@ -100,13 +97,6 @@ namespace ft
 		_end = _nil;
 	}
 
-	template<typename T, typename _Allocator>
-	rb_tree_impl<T, _Allocator>::~rb_tree_impl()
-	{
-		//if (_nil)
-		//	delete _nil;
-		//_nil = ft_nullptr;
-	}
 
 	/*!
 	 * @function	create_node
