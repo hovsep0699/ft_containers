@@ -184,18 +184,18 @@ namespace ft
 		return ft::reverse_iterator<Iter>(it);
 	}
 	template<typename Iter>
-	typename reverse_iterator<Iter>::difference_type operator-(reverse_iterator<Iter> rhs, reverse_iterator<Iter> lhs)
+	typename reverse_iterator<Iter>::difference_type operator-(const reverse_iterator<Iter>& rhs, const reverse_iterator<Iter>& lhs)
 	{
-		return rhs.base() - lhs.base();
+		return lhs.base() - rhs.base();
 	}
 	template<typename LIter, typename RIter>
-	typename reverse_iterator<LIter>::difference_type operator-(reverse_iterator<LIter> rhs, reverse_iterator<RIter> lhs)
+	typename reverse_iterator<LIter>::difference_type operator-(const reverse_iterator<LIter>& rhs, const  reverse_iterator<RIter>& lhs)
 	{
-		return rhs.base() - lhs.base();
+		return lhs.base() - rhs.base();
 	}
-	template<typename LIter, typename RIter>
-	typename reverse_iterator<LIter>::difference_type operator+(reverse_iterator<LIter> rhs,  typename reverse_iterator<LIter>::size_type lhs)
+	template<typename Iter>
+	reverse_iterator<Iter> operator+( typename reverse_iterator<Iter>::size_type rhs, const reverse_iterator<Iter>& lhs)
 	{
-		return rhs.base()  + lhs;
+		return reverse_iterator<Iter>(rhs.base() + lhs);
 	}
 }

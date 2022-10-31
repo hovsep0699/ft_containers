@@ -111,8 +111,9 @@ namespace ft
             // assert(_data == ft_nullptr);
     }
     template<typename T, typename Alloc>
-    void vector<T, Alloc>::resize( typename vector<T, Alloc>::size_type count, value_type value )
+    void vector<T, Alloc>::resize( size_type count, value_type value )
     {
+    	if (count < 0) return;
         if (count > _max_size)
             throw std::length_error("ft::vector::resize");
         if (count == _size) return ;
@@ -164,22 +165,22 @@ namespace ft
     template<typename T, typename Alloc>
     typename vector<T, Alloc>::reverse_iterator vector<T, Alloc>::rbegin()
     {
-        return reverse_iterator(_data + _size);
+        return reverse_iterator(end());
     }
     template<typename T, typename Alloc>
     typename vector<T, Alloc>::const_reverse_iterator vector<T, Alloc>::rbegin() const
     {
-        return const_reverse_iterator(_data + _size);
+        return const_reverse_iterator(end());
     }
     template<typename T, typename Alloc>
     typename vector<T, Alloc>::reverse_iterator vector<T, Alloc>::rend()
     {
-        return reverse_iterator(_data);
+        return reverse_iterator(begin());
     }
     template<typename T, typename Alloc>
     typename vector<T, Alloc>::const_reverse_iterator vector<T, Alloc>::rend() const
     {
-        return const_reverse_iterator(_data);
+        return const_reverse_iterator(begin());
     }
     template<typename T, typename Alloc>
     typename vector<T, Alloc>::const_iterator vector<T, Alloc>::cbegin() const
@@ -194,12 +195,12 @@ namespace ft
     template<typename T, typename Alloc>
     typename vector<T, Alloc>::const_reverse_iterator vector<T, Alloc>::crbegin() const
     {
-        return const_reverse_iterator(_data + _size);
+        return const_reverse_iterator(cend());
     }
     template<typename T, typename Alloc>
     typename vector<T, Alloc>::const_reverse_iterator vector<T, Alloc>::crend() const
     {
-        return const_reverse_iterator(_data);
+        return const_reverse_iterator(cbegin());
     }
     template<typename T, typename Alloc>
     typename vector<T, Alloc>::size_type vector<T, Alloc>::size() const
@@ -424,25 +425,26 @@ namespace ft
 
     template<typename T, typename Alloc>
     template<typename InputIt>
-	typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( const_iterator pos, InputIt first, InputIt last )
+	typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( const_iterator pos, InputIt first, InputIt last,
+			typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type*)
     {
-        size_type position = distance(cbegin(), pos);
-        size_type old_size = _size;
 		size_type count = distance(first, last);
+		size_type position = distance(cbegin(), pos);
+		size_type old_size = _size;
         resize(_size + count);
-        size_type i = _size;
-        while ( i >= position && i)
+        size_type i = position;
+        while ( i < _size)
         {
             *(_data + i) = *(_data + old_size);
-            --old_size;
-            --i;
+            ++old_size;
+            ++i;
         }
-        i = position;
+        pointer ptr = _data + position;
         InputIt iter(first);
         while ( iter != last )
         {
-            *(_data + i) = *iter;
-            ++i;
+            *ptr = *iter;
+           	++ptr; 
             ++iter;
         }
         return iterator(begin() + position);
@@ -457,8 +459,9 @@ namespace ft
         for (size_type i = position; i < _size - 1; ++i)
             *(_data + i) = *(_data + i + 1);
         *(_data + _size - 1) = tmp;
-        resize(_size - 1);
-        return iterator(begin() + position);
+        --_size;
+        _allocator.destroy(_data + _size);
+        return iterator(pos);
     }
     //template<typename T, typename Alloc>
     //typename vector<T, Alloc>::iterator vector<T, Alloc>::erase( const_iterator pos )
@@ -477,18 +480,17 @@ namespace ft
     {
         bool isEnd = (last == end());
         size_type position = distance(first, last);
+        size_type pos = distance(begin(), first);
 
-        if (position <= 0) return last;
-
-        size_type len = position;
-        while (len)
+        if (first == last) return last;
+        while (first != last)
         {
-            erase(first);
-            --len;
+        	for (size_type i = distance(begin(), first); i < _size - position; ++i)
+            	*(_data + i) = *(_data + i + position);
+            ++first;
         }
         resize(_size - position);
-        if (isEnd) return end(); 
-        return iterator(begin() + distance(begin(), last));
+        return isEnd ? end() : begin() + pos;
 
     }
     //template<typename T, typename Alloc>

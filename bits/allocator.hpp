@@ -27,7 +27,7 @@ namespace ft
 
         const_pointer address( const_reference x ) const;
 
-        pointer allocate( size_type _n );
+        pointer allocate( size_type _n, const void* = 0 );
 
         size_type max_size () const throw();
 
@@ -41,10 +41,16 @@ namespace ft
 		struct rebind;
     };
     template< typename T1, typename T2 >
-    bool operator==( const allocator<T1>& lhs, const allocator<T2>& rhs );
+    inline bool operator==( const allocator<T1>&, const allocator<T2>& );
 
     template< typename T1, typename T2 >
-    bool operator!=( const allocator<T1>& lhs, const allocator<T2>& rhs );
+    inline bool operator!=( const allocator<T1>& , const allocator<T2>& );
+
+    template< typename T>
+    inline bool operator==( const allocator<T>&, const allocator<T>& );
+
+    template< typename T>
+    inline bool operator!=( const allocator<T>&, const allocator<T>& );
 }
 
 #include "allocator_impl.hpp"

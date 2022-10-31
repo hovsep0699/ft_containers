@@ -38,27 +38,23 @@ namespace ft
 	}
 
 	template<typename T>
-	typename allocator<T>::pointer allocator<T>::allocate( size_type _n )
+	typename allocator<T>::pointer allocator<T>::allocate( size_type _n, const void* )
 	{
 		pointer allocate_ptr;
-		size_type size = _n * sizeof(value_type);
-		if ( std::numeric_limits<size_type>::max() / sizeof(value_type) < _n)
-			throw std::bad_array_new_length();
 		if (_n > max_size())
 			throw std::bad_alloc();
-		allocate_ptr = reinterpret_cast<pointer>(::operator new(size));
+		allocate_ptr = static_cast<pointer>(::operator new(_n * sizeof(value_type) ) );
 		return allocate_ptr;
 	}
 	template<typename T>
 	typename allocator<T>::size_type allocator<T>::max_size () const throw()
 	{
-		return std::numeric_limits<difference_type>::max() / sizeof(value_type);
+		return size_t(-1) / sizeof(value_type);
 	}
 
 	template<typename T>
-	void allocator<T>::deallocate( pointer p, std::size_t n )
+	void allocator<T>::deallocate( pointer p, std::size_t )
 	{
-		(void)n;
 		::operator delete( ( void* )p );
 	}
 
@@ -75,13 +71,25 @@ namespace ft
 	}
 
 	template< typename T1, typename T2 >
-	bool operator==( const allocator<T1>& lhs, const allocator<T2>& rhs )
+	bool operator==( const allocator<T1>& , const allocator<T2>&  )
 	{
 		return true;
 	}
 
 	template< typename T1, typename T2 >
-	bool operator!=( const allocator<T1>& lhs, const allocator<T2>& rhs )
+	bool operator!=( const allocator<T1>& , const allocator<T2>& )
+	{
+		return false;
+	}
+
+	template< typename T>
+	bool operator==( const allocator<T>& , const allocator<T>& )
+	{
+		return true;
+	}
+
+	template< typename T>
+	bool operator!=( const allocator<T>&, const allocator<T>& )
 	{
 		return false;
 	}

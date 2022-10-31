@@ -112,7 +112,8 @@ namespace ft
 			void insert( iterator pos, size_type count, const_reference value );
 
 			template<typename InputIt>
-			iterator insert( const_iterator pos, InputIt first, InputIt last );
+			iterator insert( const_iterator pos, InputIt first, InputIt last, 
+					typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = 0);
 
 			iterator erase( iterator pos );
 			//iterator erase( const_iterator pos );
