@@ -435,7 +435,7 @@ namespace ft
         size_type i = position;
         while ( i < _size)
         {
-            *(_data + i) = *(_data + old_size);
+            *(_data + old_size) = *(_data + i);
             ++old_size;
             ++i;
         }
