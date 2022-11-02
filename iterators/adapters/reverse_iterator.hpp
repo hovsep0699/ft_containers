@@ -11,9 +11,6 @@ namespace ft
 	{
 		protected:
 			Iter current;
-		//
-		// default constructor illegal
-		//
 		public:
 			//
 			// member types
@@ -28,9 +25,12 @@ namespace ft
 			// constructurs
 			//
 			reverse_iterator();
+
 			reverse_iterator(iterator_type base);
+
 			template<typename U>
 			reverse_iterator(const reverse_iterator<U>& rev);
+
 			template<typename U>
 			reverse_iterator& operator=(const reverse_iterator<U>& rev);
 			//

@@ -11,16 +11,22 @@ namespace ft
 	class random_access_iterator : public ft::iterator<random_access_iterator_tag, T>
 	{
 		public:
-			//
-			// member types
-			//
-			//
+
+			/* ================== */
+			/*    member types    */
+			/* ================== */
+
 			typedef typename ft::iterator<random_access_iterator_tag, T>::value_type value_type;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::reference reference;
+			typedef const reference const_reference;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::pointer pointer;
 			typedef const pointer const_pointer;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::iterator_category iterator_category;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::difference_type difference_type;
+
+			/* ================== */
+			/*    constructors    */
+			/* ================== */
 
 			random_access_iterator();
 			random_access_iterator(pointer ptr);
@@ -29,15 +35,23 @@ namespace ft
 			operator random_access_iterator<const value_type>() const;
 
 			random_access_iterator& operator=(const random_access_iterator& it);
-			//
-			// dereference operators
-			//
+
+			/* ======================= */
+			/*    access  operators    */
+			/* ======================= */
+
 			reference operator*() const;
 
 			pointer operator->() const;
-			//
-			// other operations
-			//
+
+			reference operator[](difference_type n);
+
+			const_reference operator[](difference_type n) const;
+
+			/* =========================== */
+			/*    arithmetic  operators    */
+			/* =========================== */
+
 			random_access_iterator& operator++();
 
 			random_access_iterator operator++(int);
@@ -50,36 +64,34 @@ namespace ft
 
 			random_access_iterator& operator-=(difference_type offset);
 
-			random_access_iterator operator+(difference_type offset);
+			random_access_iterator operator+(difference_type offset) const;
 
-			random_access_iterator operator-(difference_type offset);
+			random_access_iterator operator-(difference_type offset) const;
 
-			value_type operator[](difference_type n);
-			//
-			// compare operations
-			//
-			bool operator<(const random_access_iterator& it);
+			/* ======================== */
+			/*    compare  operators    */
+			/* ======================== */
 
-			bool operator>(const random_access_iterator& it);
+			bool operator<(const random_access_iterator& it) const;
 
-			bool operator<=(const random_access_iterator& it);
+			bool operator>(const random_access_iterator& it) const;
 
-			bool operator>=(const random_access_iterator& it);
+			bool operator<=(const random_access_iterator& it) const;
 
-			bool operator==(const random_access_iterator& it);
+			bool operator>=(const random_access_iterator& it) const;
 
-			bool operator!=(const random_access_iterator& it);
+			bool operator==(const random_access_iterator& it) const;
+
+			bool operator!=(const random_access_iterator& it) const;
+
+			/* ================ */
+			/*    base access   */
+			/* ================ */
 
 			pointer base();
+
 			const_pointer base() const;
 
-			template<typename IType>
-			friend typename random_access_iterator<IType>::difference_type operator-(random_access_iterator<IType> rhs, 
-							random_access_iterator<IType> lhs);
-
-			template<typename LIter, typename RIter>
-			friend typename random_access_iterator<LIter>::difference_type operator-(random_access_iterator<LIter> rhs, 
-							random_access_iterator<RIter> lhs);
 
 		protected:
 			pointer _ptr;

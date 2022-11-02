@@ -375,7 +375,7 @@ namespace ft
             --i;
         }
         *(_data + position) = value;
-        return iterator(begin() + position - 1);
+        return iterator(begin() + position);
     }
     //template<typename T, typename Alloc>
     //typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( const_iterator pos, size_type count, const_reference value )
@@ -432,12 +432,12 @@ namespace ft
 		size_type position = distance(cbegin(), pos);
 		size_type old_size = _size;
         resize(_size + count);
-        size_type i = position;
-        while ( i < _size)
+        size_type i = _size;
+        while ( i >= position && i)
         {
-            *(_data + old_size) = *(_data + i);
-            ++old_size;
-            ++i;
+            *(_data + i) = *(_data + old_size);
+            --old_size;
+            --i;
         }
         pointer ptr = _data + position;
         InputIt iter(first);
