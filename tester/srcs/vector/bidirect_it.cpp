@@ -5,7 +5,7 @@
 
 int		main(void)
 {
-	TESTED_NAMESPACE::set<TESTED_TYPE> lst;
+	std::set<TESTED_TYPE> lst;
 	TESTED_NAMESPACE::set<TESTED_TYPE>::iterator lst_it;
 	for (int i = 1; i < 5; ++i)
 		lst.insert(i * 3);

@@ -22,7 +22,6 @@ int		main(void)
 	cmp(vct, vct2); // 1
 
 	vct2.resize(10);
-
 	cmp(vct, vct2); // 2
 	cmp(vct2, vct); // 3
 
