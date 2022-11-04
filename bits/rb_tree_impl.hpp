@@ -816,12 +816,16 @@ namespace ft
 		if (ptr->_is_nil)
 			return 0;
 		base_ptr z = ptr;
-		if ( !_value_comp(s_value(_rb_tree_impl._begin), s_value(z) ) 
-				&& !_value_comp(s_value(z), s_value(_rb_tree_impl._begin) ) )
-			_rb_tree_impl._begin = z->_parent;
-		if ( !_value_comp(s_value(_rb_tree_impl._end), s_value(z) ) 
-				&& !_value_comp(s_value(z), s_value(_rb_tree_impl._end) ) )
-			_rb_tree_impl._end = z->_parent;
+		//if ( _rb_tree_impl._begin == _rb_tree_impl._root )
+		//	_rb_tree_impl._begin = _rb_tree_impl.increment(_rb_tree_impl._begin);
+		//else if ( !_value_comp(s_value(_rb_tree_impl._begin), s_value(z) ) 
+		//		&& !_value_comp(s_value(z), s_value(_rb_tree_impl._begin) ) )
+		//	_rb_tree_impl._begin = z->_parent;
+		//if ( _rb_tree_impl._end == _rb_tree_impl._root )
+		//	_rb_tree_impl._end = _rb_tree_impl.decrement(_rb_tree_impl._end);
+		//else if ( !_value_comp(s_value(_rb_tree_impl._end), s_value(z) ) 
+		//		&& !_value_comp(s_value(z), s_value(_rb_tree_impl._end) ) )
+		//	_rb_tree_impl._end = z->_parent;
 		base_ptr y = z;
 		base_ptr x;
 		rb_tree_color orig_color = y->_color;
@@ -853,9 +857,12 @@ namespace ft
 			y->_left->_parent = y;
 			y->_color = z->_color;
 		}
+		//std::cout << s_value(_rb_tree_impl._begin).first << " : " << s_value(_rb_tree_impl._begin).second << "\n";
 		//std::cout << (x->_is_nil) << "\n";
 		if (orig_color == rb_black)
 			erase_fixup(x);
+		_rb_tree_impl._begin = _rb_tree_impl.min(_rb_tree_impl._root);
+		_rb_tree_impl._end = _rb_tree_impl.max(_rb_tree_impl._root);
 		_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
 		_rb_tree_impl._root->_color = rb_black;
 		--_rb_tree_impl._size;
@@ -870,7 +877,7 @@ namespace ft
 	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::erase( iterator pos)
 	{
 		key_type key = _key_of_value(*pos);
-		erase(key);
+		erase(_key_of_value(*pos));
 		return(upper_bound(key));
 	}
 
@@ -881,13 +888,22 @@ namespace ft
 			typename _Allocator>
 	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::erase( iterator first, iterator last)
 	{
-		iterator it = first;
-		while (first != last)
-		{
-			erase(_key_of_value(*first));
+		(void)last;
+		value_type value = *first;
+		std::cout << value.first << " : " << value.second << "\n";
+		//while (first != last)
+		//{
+			iterator tmp = first;
 			++first;
-		}
-		return upper_bound(_key_of_value(*it));
+	  		erase(_key_of_value(*tmp));
+	  		tmp = first;
+	  		++first;
+	  		erase(_key_of_value(*tmp));
+	  		//tmp = first;
+	  		//++first;
+	  		//erase(_key_of_value(*tmp));
+		//}
+		return upper_bound(_key_of_value(value));
 	}
 
 	template<typename _K, 
@@ -975,10 +991,7 @@ namespace ft
 	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::transplant(base_ptr u, base_ptr v)
 	{
 		if (u->_parent->_is_nil)
-		{
 			_rb_tree_impl._root = v;
-			_rb_tree_impl._begin = _rb_tree_impl.min(_rb_tree_impl._root);	
-		}
 		else if (u == u->_parent->_left)
 			u->_parent->_left = v;
 		else

@@ -48,4 +48,42 @@ Content is:
 - key: 7 | value: HHH
 - key: 8 | value: II
 ###############################################
+size: 7
+
+Content is:
+- key: 3 | value: DDDDDDD
+- key: 4 | value: EEEEEE
+- key: 5 | value: FFFFF
+- key: 6 | value: GGGG
+- key: 7 | value: HHH
+- key: 8 | value: II
+###############################################
 	-- [3] --
+size: 5
+
+Content is:
+- key: 4 | value: EEEEEE
+- key: 6 | value: GGGG
+- key: 7 | value: HHH
+- key: 8 | value: II
+###############################################
+	-- [4] --
+size: 3
+
+Content is:
+- key: 4 | value: EEEEEE
+- key: 8 | value: II
+###############################################
+size: 5
+
+Content is:
+- key: 4 | value: EEEEEE
+- key: 8 | value: II
+- key: 10 | value: Hello
+- key: 11 | value: Hi there
+###############################################
+	-- [5] --
+size: 1
+
+Content is:
+###############################################

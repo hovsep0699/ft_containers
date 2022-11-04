@@ -9,6 +9,11 @@ namespace ft
 	class vector
 	{
 		public:
+
+			/* =================== */
+			/*    member types     */
+			/* =================== */
+
 			typedef T															value_type;
 			typedef Allocator													allocator_type;
 			typedef typename allocator_type::pointer							pointer;
@@ -21,6 +26,10 @@ namespace ft
 			typedef ft::reverse_iterator<iterator>								reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 			typedef typename ft::iterator_traits<iterator>::difference_type		difference_type;
+
+			/* =================== */
+			/*    constructors     */
+			/* =================== */
 
 			explicit vector(const allocator_type& alloc = allocator_type());
 			explicit vector(size_type n, const_reference val = value_type(), const allocator_type& alloc = allocator_type());
@@ -126,6 +135,11 @@ namespace ft
 			void swap( vector& other );
 
 		protected:
+
+			/* =================== */
+			/*    member objects   */
+			/* =================== */
+
 			allocator_type	_allocator;
 			pointer			_data;
 			size_type		_size;
