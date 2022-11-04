@@ -24,7 +24,7 @@ namespace ft
 	template<typename _K,
 		typename _V,
 		typename _Compare = less<_K>,
-		typename _Allocator = allocator<ft::pair<const _K, _V> > >
+		typename _Allocator = allocator<pair<const _K, _V> > >
 	class map;
 
 	template< typename _K,
@@ -40,7 +40,43 @@ namespace ft
 	template<typename _K,
 		typename _V,
 		typename _Compare = less<_K>,
-		typename _Allocator = allocator<ft::pair<const _K, _V> > >
+		typename _Allocator = allocator<pair<const _K, _V> > >
 	class multimap;
+
+
+	template< typename T, typename _Alloc >
+	bool operator==(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+	template< typename T, typename _Alloc >
+	bool operator!=(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+	template< typename T, typename _Alloc >
+	bool operator>(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+	template< typename T, typename _Alloc >
+	bool operator>=(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+	template< typename T, typename _Alloc >
+	bool operator<(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+	template< typename T, typename _Alloc >
+	bool operator<=(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+    template<typename T, typename _Alloc>
+    void swap(vector<T, _Alloc>& lhs, 
+    		vector<T, _Alloc>& rhs);
+
 };
 

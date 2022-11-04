@@ -2,7 +2,6 @@
 
 #include "bits/utility.hpp"
 #include "containers/vector.hpp"
-#include <assert.h>
 #include <sstream>
 
 namespace ft
@@ -79,6 +78,12 @@ namespace ft
     void vector<T, Alloc>::push_back(vector<T, Alloc>::const_reference val )
     {
        resize(_size + 1, val);
+    }
+
+    template<typename T, typename Alloc>
+    void vector<T, Alloc>::pop_back()
+    {
+       resize(_size - 1);
     }
     template<typename T, typename Alloc>
     void vector<T, Alloc>::reserve(vector<T, Alloc>::size_type new_capacity)
@@ -428,28 +433,19 @@ namespace ft
 	typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( const_iterator pos, InputIt first, InputIt last,
 			typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type*)
     {
-		size_type count = distance(first, last);
 		size_type position = distance(cbegin(), pos);
-		size_type old_size = _size;
-        resize(_size + count);
-        size_type i = _size;
-        while ( i >= position && i)
-        {
-            *(_data + i) = *(_data + old_size);
-            --old_size;
-            --i;
-        }
-        pointer ptr = _data + position;
-        InputIt iter(first);
-        while ( iter != last )
-        {
-            *ptr = *iter;
-           	++ptr; 
-            ++iter;
-        }
+		size_type i = 0;
+		while (first != last)
+		{
+			iterator it = begin() + position + i;
+			insert(it, *first);
+			++i;
+			++first;
+		}
+
         return iterator(begin() + position);
-        
     }
+
     template<typename T, typename Alloc>
     typename vector<T, Alloc>::iterator vector<T, Alloc>::erase( iterator pos )
     {
@@ -515,7 +511,68 @@ namespace ft
     template<typename T, typename Alloc>
     void vector<T, Alloc>::swap( vector& other )
     {
-        swap(_data, other._data);
+		ft::swap(_allocator, other._allocator);
+		ft::swap(_data, other._data);
+		ft::swap(_size, other._size);
+		ft::swap(_capacity, other._capacity);
+		ft::swap(_max_size, other._max_size);
+    }
+
+	template< typename T, typename _Alloc >
+	bool operator==(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs )
+    {
+    	if (lhs.size() != rhs.size())
+    		return false;
+		return equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+    }
+
+	template< typename T, typename _Alloc >
+	bool operator!=(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs )
+    {
+    	return !(lhs == rhs);
+    }
+
+	template< typename T, typename _Alloc >
+	bool operator>(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs )
+    {
+    	return !(lhs <= rhs); 
+    }
+
+	template< typename T, typename _Alloc >
+	bool operator>=(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs )
+    {
+    	return !(lhs < rhs);
+    }
+
+	template< typename T, typename _Alloc >
+	bool operator<(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs )
+    {
+    	return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+    }
+
+	template< typename T, typename _Alloc >
+	bool operator<=(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs )
+    {
+    	return !(rhs < lhs);
+    }
+
+    template< typename T, typename _Alloc >
+	void swap( vector<T, _Alloc>& lhs, 
+           vector<T, _Alloc>& rhs )
+    {
+    	lhs.swap(rhs);
     }
 }
 

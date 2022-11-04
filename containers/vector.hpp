@@ -48,6 +48,8 @@ namespace ft
 
 			void push_back(const_reference val );
 
+			void pop_back();
+
 			void reserve(size_type new_capacity);
 
 			// void resize(size_type new_capacity);
@@ -122,7 +124,6 @@ namespace ft
 			//iterator erase( const_iterator first, const_iterator last );
 
 			void swap( vector& other );
-
 
 		protected:
 			allocator_type	_allocator;

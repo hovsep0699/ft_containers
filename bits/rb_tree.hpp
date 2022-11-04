@@ -61,6 +61,7 @@ namespace ft
 					friend class rb_tree<key_type, value_type, key_of_value_type, key_compare, allocator_type>;
 			};
 		private:
+
 			/* ========================= */
 			/*           members         */
 			/* ========================= */
@@ -92,6 +93,8 @@ namespace ft
 			rb_tree& operator=(const rb_tree& other ); 
 			size_type size() const;
 			allocator_type get_allocator() const;
+			node_allocator& get_node_allocator() const;
+			node_allocator& get_node_allocator();
 			size_type count(const key_type& key) const;
 			const_iterator lower_bound(const key_type& key) const;
 			iterator lower_bound(const key_type& key);

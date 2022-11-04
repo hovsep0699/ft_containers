@@ -54,8 +54,9 @@ namespace ft
 			const random_access_iterator<LIter>& rhs,
 			const random_access_iterator<RIter>& lhs);
 
-	template<typename LIter, typename RIter>
-	typename random_access_iterator<LIter>::difference_type operator+(
-			const random_access_iterator<LIter>& rhs,
-			typename random_access_iterator<LIter>::size_type lhs);
+	template<typename T>
+	random_access_iterator<T> operator+(
+			typename random_access_iterator<T>::difference_type lhs,
+			const random_access_iterator<T>& rhs);
+
 }

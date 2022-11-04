@@ -72,7 +72,7 @@ namespace ft
 	template<typename T, typename _Allocator>
 	rb_tree_impl<T, _Allocator>::rb_tree_impl(const rb_tree_impl& impl )
 		:	_alloc(impl._alloc),
-			_size(impl._size),
+			_size(0),
 			_multivalues(impl._multivalues)
 	{
 		initialize();
@@ -80,10 +80,14 @@ namespace ft
 	template<typename T, typename _Allocator>
 	rb_tree_impl<T, _Allocator>& rb_tree_impl<T, _Allocator>::operator=(const rb_tree_impl& impl )
 	{
-		_alloc = impl._alloc;
-		_size = impl._size;
-		_multivalues = impl._multivalues;
-		initialize();
+		if (this != &impl)
+		{
+			_alloc = impl._alloc;
+			_size = 0;
+			_multivalues = impl._multivalues;
+			initialize();
+		}
+		return *this;
 	}
 	
 	template<typename T, typename _Allocator>

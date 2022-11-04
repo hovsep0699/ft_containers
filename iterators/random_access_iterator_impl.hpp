@@ -161,19 +161,6 @@ namespace ft
 		return _ptr;
 	}
 
-	template<typename T>
-	typename random_access_iterator<T>::difference_type operator-(random_access_iterator<T> rhs,
-			random_access_iterator<T> lhs)
-	{
-		return rhs._ptr - lhs._ptr;
-	}
-	template<typename LIter, typename RIter>
-	typename random_access_iterator<LIter>::difference_type operator-(random_access_iterator<LIter> rhs,
-			random_access_iterator<RIter> lhs)
-	{
-		return rhs._ptr - lhs._ptr;
-	}
-
 	// compare operations
 	//
 	template<typename T>
@@ -254,13 +241,14 @@ namespace ft
 		return random_access_iterator<const value_type>(base());
 	}
 
-	template<typename LIter, typename RIter>
-	typename random_access_iterator<LIter>::difference_type operator+(
-			const random_access_iterator<LIter>& rhs,
-			typename random_access_iterator<LIter>::size_type lhs)
+	template<typename T>
+	random_access_iterator<T>  operator+(
+			typename random_access_iterator<T>::difference_type rhs,
+			const random_access_iterator<T>& lhs)
 	{
-		return rhs.base() + lhs;
+		return lhs.base() + rhs;
 	}
+
 
 	template<typename IType>
 	typename random_access_iterator<IType>::difference_type operator-(
