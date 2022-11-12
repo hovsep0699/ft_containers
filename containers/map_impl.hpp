@@ -348,7 +348,7 @@ namespace ft
 	void map<_K, _V, _Compare, _Allocator>::swap(map& other)
 	{
 		if (this != &other)
-			_tree.swap(other);
+			_tree.swap(other._tree);
 	}
 
 	template< typename _K,
@@ -415,6 +415,8 @@ namespace ft
 	bool operator==( const map<_K, _V, _Compare, _Allocator>& lhs,
                  	 const map<_K, _V, _Compare, _Allocator>& rhs )
     {
+    	if (lhs.size() != rhs.size())
+    		return false;
 		return equal(lhs.begin(), lhs.end(), rhs.begin());
     }
 
@@ -435,7 +437,7 @@ namespace ft
 	bool operator>( const map<_K, _V, _Compare, _Allocator>& lhs,
                  	 const map<_K, _V, _Compare, _Allocator>& rhs )
 	{
-		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end(), greater<typename map<_K, _V, _Compare, _Allocator>::value_type>());
+		return !(lhs <= rhs);
 	}
 
 	template< typename _K, 
@@ -455,7 +457,7 @@ namespace ft
 	bool operator>=( const map<_K, _V, _Compare, _Allocator>& lhs,
                  	 const map<_K, _V, _Compare, _Allocator>& rhs )
 	{
-		return (lhs > rhs || lhs == rhs);
+		return !(lhs < rhs);
 	}
 	template< typename _K, 
 			typename _V,
@@ -464,7 +466,7 @@ namespace ft
 	bool operator<=( const map<_K, _V, _Compare, _Allocator>& lhs,
                  	 const map<_K, _V, _Compare, _Allocator>& rhs )
 	{
-		return (lhs < rhs || lhs == rhs);
+		return !(rhs < lhs);
 	}
 
 	template< typename _K, 

@@ -5,7 +5,8 @@
 
 namespace ft
 {
-	template<typename T, typename Allocator>
+	template<typename T,
+			typename Allocator>
 	class vector
 	{
 		public:
@@ -27,112 +28,88 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 			typedef typename ft::iterator_traits<iterator>::difference_type		difference_type;
 
-			/* =================== */
-			/*    constructors     */
-			/* =================== */
 
-			explicit vector(const allocator_type& alloc = allocator_type());
-			explicit vector(size_type n, const_reference val = value_type(), const allocator_type& alloc = allocator_type());
-			vector(vector& vec);
+			/* ========================= */
+			/*      member functions     */
+			/* ========================= */
+
 			template <typename InputIterator>
-			vector (InputIterator first, InputIterator last, 
-					const allocator_type& alloc = allocator_type(),
-					typename enable_if<!is_integral<InputIterator>::value, bool>::type = true);
-
-			vector& operator= (const vector& x);
-
-			void assign( size_type count, const_reference value );
-
+							vector (InputIterator first, InputIterator last, 
+									const allocator_type& alloc = allocator_type(),
+									typename enable_if< !is_integral<InputIterator>::value, bool >::type = true);
+			explicit		vector(const allocator_type& alloc = allocator_type());
+			explicit		vector(size_type n, 
+									const_reference val = value_type(), 
+									const allocator_type& alloc = allocator_type());
+							vector(const vector& vec);
+							vector& operator= (const vector& x);
+			virtual			~vector();
+			void			assign( size_type count, const_reference value );
 			template< class InputIt >
-			void assign( InputIt first, InputIt last,
-						typename enable_if<!is_integral<InputIt>::value, bool>::type = true);
+			void			assign( InputIt first, InputIt last,
+								typename enable_if<!is_integral<InputIt>::value, bool>::type = true);
+			allocator_type	get_allocator() const;
 
-			virtual ~vector();
+			/* ========================= */
+			/*       element access      */
+			/* ========================= */
 
-			allocator_type get_allocator() const;
+			reference			at (size_type _n);
+			const_reference		at (size_type _n) const;
+			reference			operator[] (size_type n);
+			const_reference		operator[] (size_type n) const;
+			reference			back();
+			const_reference		back() const;
+			reference			front();
+			const_reference		front() const;
+			pointer				data();
+			const_pointer		data() const;
 
-			size_type max_size() const;
+			/* ========================= */
+			/*         iterators         */
+			/* ========================= */
 
-			bool empty() const;
+			iterator				begin();
+			const_iterator			begin() const;
+			const_iterator			cbegin() const;
+			iterator				end();
+			const_iterator			end() const;
+			const_iterator			cend() const;
+			reverse_iterator		rbegin();
+			const_reverse_iterator	rbegin() const;
+			const_reverse_iterator	crbegin() const;
+			reverse_iterator		rend();
+			const_reverse_iterator	rend() const;
+			const_reverse_iterator	crend() const;
 
-			void push_back(const_reference val );
+			/* ========================= */
+			/*          capacity         */
+			/* ========================= */
 
-			void pop_back();
+			size_type	size() const;
+			size_type	max_size() const;
+			size_type	capacity() const;
+			bool		empty() const;
+			void		reserve(size_type new_capacity);
+			void		shrink_to_fit();
 
-			void reserve(size_type new_capacity);
+			/* ========================= */
+			/*         modifiers         */
+			/* ========================= */
 
-			// void resize(size_type new_capacity);
-			void resize( size_type count, value_type value = value_type() );
-			// void resize( size_type count, const value_type& value = value_type() );
-
-			iterator begin();
-
-			const_iterator begin() const;
-
-			iterator end();
-
-			const_iterator end() const;
-
-			reverse_iterator rbegin();
-
-			const_reverse_iterator rbegin() const;
-
-			reverse_iterator rend();
-
-			const_reverse_iterator rend() const;
-
-			const_iterator cbegin() const;
-
-			const_iterator cend() const;
-
-			const_reverse_iterator crbegin() const;
-
-			const_reverse_iterator crend() const;
-
-			size_type size() const;
-
-			size_type capacity() const;
-
-			reference operator[] (size_type n);
-
-			const_reference operator[] (size_type n) const;
-
-			reference at (size_type _n);
-
-			void clear();
-
-			const_reference at (size_type _n) const;
-
-			pointer data();
-
-			const_pointer data() const;
-
-			reference back();
-			const_reference back() const;
-
-			reference front();
-			const_reference front() const;
-
-			void shrink_to_fit();
-
-			//iterator insert( const_iterator pos, const_reference value );
-			iterator insert( iterator pos, const_reference value );
-
-			//iterator insert( const_iterator pos, size_type count, const_reference value );
-
-			void insert( iterator pos, size_type count, const_reference value );
-
+			void		clear();
+			iterator	insert( iterator pos, const_reference value );
+			void		insert( iterator pos, size_type count, const_reference value );
 			template<typename InputIt>
-			iterator insert( const_iterator pos, InputIt first, InputIt last, 
-					typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = 0);
+			iterator	insert( const_iterator pos, InputIt first, InputIt last, 
+								typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt>::type* = ft_nullptr);
+			iterator	erase( iterator pos );
 
-			iterator erase( iterator pos );
-			//iterator erase( const_iterator pos );
-
-			iterator erase( iterator first, iterator last );
-			//iterator erase( const_iterator first, const_iterator last );
-
-			void swap( vector& other );
+			iterator	erase( iterator first, iterator last );
+			void		push_back(const_reference val );
+			void		pop_back();
+			void		resize( size_type count, value_type value = value_type() );
+			void		swap( vector& other );
 
 		protected:
 
@@ -148,7 +125,42 @@ namespace ft
 
 	};
 
+	/* ========================= */
+	/*    non-member functions   */
+	/* ========================= */
+
+	template< typename T, typename _Alloc >
+	bool operator==(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+	template< typename T, typename _Alloc >
+	bool operator!=(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+	template< typename T, typename _Alloc >
+	bool operator>(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+	template< typename T, typename _Alloc >
+	bool operator>=(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+	template< typename T, typename _Alloc >
+	bool operator<(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
+	template< typename T, typename _Alloc >
+	bool operator<=(
+			const vector<T, _Alloc>& lhs,
+            const vector<T, _Alloc>& rhs );
+
 }
+
 
 #include "vector_impl.hpp"
 

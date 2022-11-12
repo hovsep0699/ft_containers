@@ -15,21 +15,21 @@ namespace ft
 
 		tree_type _tree;
 		public:
-			typedef typename tree_type::key_type				key_type;
-			typedef typename tree_type::value_type				value_type;
-			typedef typename tree_type::size_type				size_type;
-			typedef typename tree_type::difference_type			difference_type;
-			typedef typename tree_type::key_compare				key_compare;
-			typedef typename tree_type::key_compare				value_compare;
-			typedef typename tree_type::allocator_type			allocator_type;
-			typedef typename tree_type::reference				reference;
-			typedef typename tree_type::const_reference			const_reference;
-			typedef typename tree_type::pointer					pointer;
-			typedef typename tree_type::const_pointer			const_pointer;
-			typedef typename tree_type::const_iterator			iterator;
-			typedef typename tree_type::const_iterator			const_iterator;
-			typedef typename tree_type::reverse_iterator		reverse_iterator;
-			typedef typename tree_type::const_reverse_iterator	const_reverse_iterator;
+			typedef typename tree_type::key_type					key_type;
+			typedef typename tree_type::value_type					value_type;
+			typedef typename tree_type::size_type					size_type;
+			typedef typename tree_type::difference_type				difference_type;
+			typedef typename tree_type::key_compare					key_compare;
+			typedef typename tree_type::key_compare					value_compare;
+			typedef typename tree_type::allocator_type				allocator_type;
+			typedef typename tree_type::reference					reference;
+			typedef typename tree_type::const_reference				const_reference;
+			typedef typename tree_type::pointer						pointer;
+			typedef typename tree_type::const_pointer				const_pointer;
+			typedef typename tree_type::const_iterator				iterator;
+			typedef typename tree_type::const_iterator				const_iterator;
+			typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
+			typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 			
 
 			multiset();
@@ -67,7 +67,7 @@ namespace ft
 			size_type size() const;
 			size_type max_size() const;
 			void clear();
-			ft::pair<iterator, bool> insert( const value_type& value );
+			iterator insert( const value_type& value );
 			iterator insert( iterator pos, const value_type& value );
 			template< typename InputIt >
 			void insert( InputIt first, InputIt last );
@@ -126,11 +126,6 @@ namespace ft
 	bool operator<=( const multiset<_K, _Compare, _Allocator>& lhs,
                  	 const multiset<_K, _Compare, _Allocator>& rhs );
 
-	template< typename _K, 
-			typename _Compare, 
-			typename _Allocator >
-	void swap( multiset<_K, _Compare, _Allocator>& lhs, 
-           		multiset<_K, _Compare, _Allocator>& rhs );
 }
 
 #include "multiset_impl.hpp"

@@ -5,6 +5,9 @@
 
 namespace ft
 {
+	/* ==================== */
+	/*      containers      */
+	/* ==================== */
 
 	template<typename T1, typename T2>
 	struct pair;
@@ -43,40 +46,55 @@ namespace ft
 		typename _Allocator = allocator<pair<const _K, _V> > >
 	class multimap;
 
+	/* ================================================ */
+	/*      swap specialization for each container      */
+	/* ================================================ */
+	
+    template<typename T,
+    		typename U>
+    void swap(pair<T, U>& lhs, 
+    		pair<T, U>& rhs);
 
-	template< typename T, typename _Alloc >
-	bool operator==(
-			const vector<T, _Alloc>& lhs,
-            const vector<T, _Alloc>& rhs );
-
-	template< typename T, typename _Alloc >
-	bool operator!=(
-			const vector<T, _Alloc>& lhs,
-            const vector<T, _Alloc>& rhs );
-
-	template< typename T, typename _Alloc >
-	bool operator>(
-			const vector<T, _Alloc>& lhs,
-            const vector<T, _Alloc>& rhs );
-
-	template< typename T, typename _Alloc >
-	bool operator>=(
-			const vector<T, _Alloc>& lhs,
-            const vector<T, _Alloc>& rhs );
-
-	template< typename T, typename _Alloc >
-	bool operator<(
-			const vector<T, _Alloc>& lhs,
-            const vector<T, _Alloc>& rhs );
-
-	template< typename T, typename _Alloc >
-	bool operator<=(
-			const vector<T, _Alloc>& lhs,
-            const vector<T, _Alloc>& rhs );
-
-    template<typename T, typename _Alloc>
+    template<typename T,
+    		typename _Alloc>
     void swap(vector<T, _Alloc>& lhs, 
     		vector<T, _Alloc>& rhs);
+
+    template<typename T,
+    		typename _Container>
+    void swap(queue<T, _Container>& lhs, 
+    		queue<T, _Container>& rhs);
+
+    template<typename T,
+    		typename _Container>
+    void swap(stack<T, _Container>& lhs, 
+    		stack<T, _Container>& rhs);
+
+	template< typename _K, 
+			typename _V, 
+			typename _Compare, 
+			typename _Allocator >
+	void swap( map<_K, _V, _Compare, _Allocator>& lhs, 
+           		map<_K, _V, _Compare, _Allocator>& rhs );
+
+	template< typename _K, 
+			typename _Compare, 
+			typename _Allocator >
+	void swap( set<_K, _Compare, _Allocator>& lhs, 
+           		set<_K, _Compare, _Allocator>& rhs );
+
+	template< typename _K, 
+			typename _V, 
+			typename _Compare, 
+			typename _Allocator >
+	void swap( multimap<_K, _V, _Compare, _Allocator>& lhs, 
+           		multimap<_K, _V, _Compare, _Allocator>& rhs );
+
+	template< typename _K, 
+			typename _Compare, 
+			typename _Allocator >
+	void swap( multiset<_K, _Compare, _Allocator>& lhs, 
+           		multiset<_K, _Compare, _Allocator>& rhs );
 
 };
 

@@ -15,21 +15,21 @@ namespace ft
 
 		tree_type _tree;
 		public:
-			typedef typename tree_type::key_type				key_type;
-			typedef typename tree_type::value_type				value_type;
-			typedef typename tree_type::size_type				size_type;
-			typedef typename tree_type::difference_type			difference_type;
-			typedef typename tree_type::key_compare				key_compare;
-			typedef typename tree_type::key_compare				value_compare;
-			typedef typename tree_type::allocator_type			allocator_type;
-			typedef typename tree_type::reference				reference;
-			typedef typename tree_type::const_reference			const_reference;
-			typedef typename tree_type::pointer					pointer;
-			typedef typename tree_type::const_pointer			const_pointer;
-			typedef typename tree_type::const_iterator			iterator;
-			typedef typename tree_type::const_iterator			const_iterator;
-			typedef typename tree_type::reverse_iterator		reverse_iterator;
-			typedef typename tree_type::const_reverse_iterator	const_reverse_iterator;
+			typedef typename tree_type::key_type					key_type;
+			typedef typename tree_type::value_type					value_type;
+			typedef typename tree_type::size_type					size_type;
+			typedef typename tree_type::difference_type				difference_type;
+			typedef typename tree_type::key_compare					key_compare;
+			typedef typename tree_type::key_compare					value_compare;
+			typedef typename tree_type::allocator_type				allocator_type;
+			typedef typename tree_type::reference					reference;
+			typedef typename tree_type::const_reference				const_reference;
+			typedef typename tree_type::pointer						pointer;
+			typedef typename tree_type::const_pointer				const_pointer;
+			typedef typename tree_type::const_iterator				iterator;
+			typedef typename tree_type::const_iterator				const_iterator;
+			typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
+			typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 			
 
 			set();
@@ -46,10 +46,12 @@ namespace ft
 
 			set( const set& other );
 
-
-			// set is read only and cannot have operator[] and at method
 			virtual ~set();
+
 			set& operator=( const set& other );
+			//
+			// set is read only and cannot have operator[] and at method
+			//
 			allocator_type get_allocator() const;
 			iterator begin();
 			const_iterator begin() const;
@@ -126,11 +128,6 @@ namespace ft
 	bool operator<=( const set<_K, _Compare, _Allocator>& lhs,
                  	 const set<_K, _Compare, _Allocator>& rhs );
 
-	template< typename _K, 
-			typename _Compare, 
-			typename _Allocator >
-	void swap( set<_K, _Compare, _Allocator>& lhs, 
-           		set<_K, _Compare, _Allocator>& rhs );
 }
 
 #include "set_impl.hpp"

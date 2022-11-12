@@ -162,6 +162,17 @@ namespace ft
 			typename _KOV, 
 			typename _Compare, 
 			typename _Allocator>
+	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::s_const_cast(const_iterator it)
+	{
+		return iterator(static_cast<link_type>(
+						const_cast<base_ptr>(it.base())));
+	}
+
+	template<typename _K, 
+			typename _V,
+			typename _KOV, 
+			typename _Compare, 
+			typename _Allocator>
 	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::lower_bound(const key_type& key)
 	{
 		iterator it = begin();
@@ -173,19 +184,6 @@ namespace ft
 			++it;
 		}
 		return it;
-		//base_ptr node_begin = _rb_tree_impl._begin;
-		//base_ptr node = _rb_tree_impl._nil;
-		//while (!node_begin->_is_nil)
-		//{
-		//	if ( !_comp(s_key(node_begin), key) )
-		//	{
-		//		node = node_begin;
-		//		node_begin = s_left(node_begin);
-		//	}
-		//	else
-		//		node_begin = s_right(node_begin);
-		//}
-		//return iterator(node);
 	}
 
 	template<typename _K, 
@@ -204,19 +202,6 @@ namespace ft
 			++it;
 		}
 		return it;
-		//base_ptr node_begin = _rb_tree_impl._begin;
-		//base_ptr node = _rb_tree_impl._nil;
-		//while (!node_begin->_is_nil)
-		//{
-		//	if ( !_comp(s_key(node_begin), key) )
-		//	{
-		//		node = node_begin;
-		//		node_begin = s_left(node_begin);
-		//	}
-		//	else
-		//		node_begin = s_right(node_begin);
-		//}
-		//return const_iterator(node);
 	}
 
 	template<typename _K, 
@@ -600,7 +585,7 @@ namespace ft
 		else if ( !_value_comp(s_value(it.base() ), s_value(_rb_tree_impl._end) ) 
 				&& !_value_comp(s_value(_rb_tree_impl._end), s_value(it.base() ) ) )
 			_rb_tree_impl._end = _rb_tree_impl.max(_rb_tree_impl._end);
-			_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
+		_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
 		++_rb_tree_impl._size;
 		return ft::make_pair(it, true);
 	}
@@ -648,16 +633,19 @@ namespace ft
 		base_ptr head = pos.base();
 		while (!head->_is_nil)
 		{
+			value_type val = s_value(head->_parent);
 			if (!head->_is_nil &&
 				head->_parent->_left == head &&
-				_value_comp(_value, s_value(head->_parent)))
+				_value_comp(_value, val))
 				break ;
 			if (!head->_is_nil &&
 				head->_parent->_right == head &&
-				_value_comp(_value, s_value(head->_parent)))
+				_value_comp(_value, val))
 				break ;
 			head = head->_parent;
 		}
+		if (head->_is_nil)
+			head = _rb_tree_impl._root;
 		ft::pair<iterator, bool> p_insert = insert(head, _value);
 		return p_insert.first;
 	}
@@ -1052,6 +1040,7 @@ namespace ft
 			_comp = other._comp;
 			_key_of_value = other._key_of_value;
 			_value_comp = other._value_comp;
+			_rb_tree_impl = other._rb_tree_impl;
 			for (const_iterator it = other.begin(); it != other.end(); ++it)
 				insert(*it);
 		}
@@ -1162,31 +1151,6 @@ namespace ft
 		lhs.swap(rhs);
 	}
 
-	//template< typename _K, 
-	//		typename _V, 
-	//		typename _KOV, 
-	//		typename _Compare, 
-	//		typename _Allocator >
-	//typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::mapped_type& rb_tree<_K, _V, _KOV, _Compare, _Allocator>::at( const key_type& key )
-	//{
-	//	iterator it = find(key);
-	//	if (it == end())
-	//		throw std::out_of_range("rb_tree: no such key");
-	//	return it->second;
-	//}
-
-	//template< typename _K, 
-	//		typename _V, 
-	//		typename _KOV, 
-	//		typename _Compare, 
-	//		typename _Allocator >
-	//const typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::mapped_type& rb_tree<_K, _V, _KOV, _Compare, _Allocator>::at( const key_type& key ) const
-	//{
-	//	iterator it = find(key);
-	//	if (it == end())
-	//		throw std::out_of_range("rb_tree: no such key");
-	//	return it->second;
-	//}
 	template< typename _K, 
 			typename _V, 
 			typename _KOV, 
@@ -1194,7 +1158,7 @@ namespace ft
 			typename _Allocator >
 	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::swap(rb_tree& other)
 	{
-		ft::swap(_rb_tree_impl, other._rb_tree_impl);
+		_rb_tree_impl.swap(other._rb_tree_impl);
 		ft::swap(_alloc, other._alloc);
 		ft::swap(_comp, other._comp);
 		ft::swap(_value_comp, other._value_comp);

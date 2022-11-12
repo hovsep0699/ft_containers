@@ -27,7 +27,7 @@ namespace ft
     }
 
     template<typename T, typename Alloc>
-    vector<T, Alloc>::vector(vector<T, Alloc>& other)
+    vector<T, Alloc>::vector(const vector<T, Alloc>& other)
     	:	_allocator(other._allocator),
         	_data(ft_nullptr),
             _size(0),

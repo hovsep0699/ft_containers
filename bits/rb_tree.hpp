@@ -17,8 +17,8 @@ namespace ft
 	{
 		public:
 
-			/*        member types       */
 			/* ========================= */
+			/*        member types       */
 			/* ========================= */
 
 			typedef _K											key_type;
@@ -28,7 +28,7 @@ namespace ft
 			typedef ft::rb_tree_iterator<value_type>			iterator;
 			typedef ft::rb_tree_const_iterator<value_type>		const_iterator;
 			typedef ft::reverse_iterator<iterator>				reverse_iterator;
-			typedef ft::rb_tree_iterator<const_iterator>		const_reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 			typedef _Allocator									allocator_type;
 			typedef ft::rb_tree_node_base*						base_ptr;
 			typedef const ft::rb_tree_node_base*				const_base_ptr;
@@ -63,7 +63,7 @@ namespace ft
 		private:
 
 			/* ========================= */
-			/*           members         */
+			/*          members          */
 			/* ========================= */
 
 			rb_tree_impl_type	_rb_tree_impl;
@@ -116,6 +116,7 @@ namespace ft
 			static link_type s_left(const_base_ptr ptr);
 			static link_type s_right(const_base_ptr ptr);
 			static link_type s_current(base_ptr ptr);
+			static iterator s_const_cast(const_iterator it);
 
 			// clear
 			void clear();

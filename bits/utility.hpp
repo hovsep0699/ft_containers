@@ -8,60 +8,107 @@ namespace ft
 	template<typename T1,typename T2>
 	struct pair
 	{
-		//
-		// type of pair elements
-		//
-		typedef T1 first_type;
-		typedef T2 second_type;
-		T1 first;
-		T2 second;
-		pair();
-		pair(const first_type& first, const second_type& second);
+		/* =================== */
+		/*    member types     */
+		/* =================== */
+
+		typedef T1	first_type;
+		typedef T2	second_type;
+
+		/* ========================= */
+		/*      member functions     */
+		/* ========================= */
+
 		template<typename K, typename V>
-		pair(const pair<K,V>& p);
-		pair(const pair& p);
-		pair& operator=(const pair& p);
-		// 
-		// swap pair contents
-		//
-		void swap(pair& p);
+				pair(const pair<K,V>& p);
+				pair();
+				pair(const first_type& first,
+				const second_type& second);
+				pair(const pair& p);
+		pair&	operator=(const pair& p);
+		void	swap(pair& p);
+
+		/* ========================= */
+		/*      member objects       */
+		/* ========================= */
+
+		T1	first;
+		T2	second;
 
 	};
-	//
-	// compare operations
-	//
-	template< typename T1, typename T2 >
-	bool operator==( const pair<T1,T2>& p1, const pair<T1,T2>& p2 );
 
-	template< typename T1, typename T2 >
-	bool operator!=( const pair<T1,T2>& p1, const pair<T1,T2>& p2 );
+	/* ========================= */
+	/*    non-member functions   */
+	/* ========================= */
 
-	template< typename T1, typename T2 >
-	bool operator>( const pair<T1,T2>& p1, const pair<T1,T2>& p2 );
+	template< typename T,
+			typename U >
+	bool operator==( const pair<T, U>& p1,
+					const pair<T, U>& p2 );
 
-	template< typename T1, typename T2 >
-	bool operator>=( const pair<T1,T2>& p1, const pair<T1,T2>& p2 );
+	template< typename T,
+			typename U >
+	bool operator!=( const pair<T, U>& p1,
+					const pair<T, U>& p2 );
 
-	template< typename T1, typename T2 >
-	bool operator<( const pair<T1,T2>& p1, const pair<T1,T2>& p2 );
+	template< typename T,
+			typename U >
+	bool operator>( const pair<T, U>& p1,
+					const pair<T, U>& p2 );
 
-	template< typename T1, typename T2 >
-	bool operator<=( const pair<T1,T2>& p1, const pair<T1,T2>& p2 );
-	//
-	// creates a pair object of type, defined by the argument types.
-	//
-	template< typename T1, typename T2 >
-	pair<T1,T2> make_pair( T1 t, T2 u );
+	template< typename T,
+			typename U >
+	bool operator>=( const pair<T, U>& p1,
+					const pair<T, U>& p2 );
+
+	template< typename T,
+			typename U >
+	bool operator<( const pair<T, U>& p1,
+					const pair<T, U>& p2 );
+
+	template< typename T,
+			typename U >
+	bool operator<=( const pair<T, U>& p1,
+					const pair<T, U>& p2 );
+
+	/*
+	 * @function		make_pair
+	 *
+	 * @abstract		creates a pair object from params
+	 *
+	 * @discuss			function creates a pair object, deducing 
+	 * 					the target type from the types of arguments
+	 *
+	 * @tparam	T		any type
+	 * @tparam	U		any type
+	 *
+	 * @param	t 		object of type T		
+	 * @param	u 		object of type U		
+	 *
+	 * @result			pair object from t and u params
+	 *
+	*/
+	template< typename T,
+			typename U >
+	pair<T, U>	make_pair( T t, U u );
 
 
-	template< typename T, typename Alloc >
-	void swap( vector<T,Alloc>& lhs, vector<T,Alloc>& rhs );
-
-	template< typename T1, typename T2 >
-	void swap(pair<T1, T2>& lhs, pair<T1, T2>& rhs );
-
+	/*
+	 * @function		addressof
+	 *
+	 * @abstact			returns actual address of param
+	 * 
+	 * @discuss			function gets object of any type and returns
+	 * 					actual address of param
+	 *
+	 * @tparam	T		any type
+	 *
+	 * @param	arg		object of T type
+	 *
+	 * @result			actual address of arg
+	*/
 	template<typename T>
-	inline T* addressof(T& arg);
+	inline T*	addressof(T& arg);
 
 }
 #include "utility_impl.hpp"

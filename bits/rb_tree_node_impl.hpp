@@ -1,6 +1,7 @@
 #pragma once
 
 #include "bits/rb_tree_node.hpp"
+
 namespace ft
 {
 	/* ============================ */
@@ -101,6 +102,22 @@ namespace ft
 		_end = _nil;
 	}
 
+	template<typename T, typename _Allocator>
+	void rb_tree_impl<T, _Allocator>::swap(rb_tree_impl& other)
+	{
+		if (this != &other)
+		{
+			ft::swap(_size, other._size);
+			ft::swap(_alloc, other._alloc);
+			ft::swap(_multivalues, other._multivalues);
+			ft::swap(_sentinel, other._sentinel);
+			ft::swap(_nil, other._nil);
+			ft::swap(_root, other._root);
+			ft::swap(_begin, other._begin);
+			ft::swap(_end, other._end);
+		}
+
+	}
 
 	/*!
 	 * @function	create_node

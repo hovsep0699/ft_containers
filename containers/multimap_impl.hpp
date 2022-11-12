@@ -30,7 +30,7 @@ namespace ft
 	multimap<_K, _V, _Compare, _Allocator>::multimap( InputIt first, InputIt last,
      	 	 	 const key_compare& comp,
      	 	 	 const allocator_type& alloc )
-		: _tree(first, last, comp, alloc, true)
+		:	_tree(first, last, comp, alloc, true)
 	{}
 
 	template< typename _K,
@@ -38,7 +38,7 @@ namespace ft
 		typename _Compare,
 		typename _Allocator >
 	multimap<_K, _V, _Compare, _Allocator>::multimap( const multimap& other )
-		: _tree(other._tree)
+		:	_tree(other._tree)
 	{}
 
 	template< typename _K,
@@ -209,9 +209,9 @@ namespace ft
 		typename _V,
 		typename _Compare,
 		typename _Allocator >
-	ft::pair<typename multimap<_K, _V, _Compare, _Allocator>::iterator, bool> multimap<_K, _V, _Compare, _Allocator>::insert(const value_type& value)
+	typename multimap<_K, _V, _Compare, _Allocator>::iterator multimap<_K, _V, _Compare, _Allocator>::insert(const value_type& value)
 	{
-		return _tree.insert(value);
+		return _tree.insert(value).first;
 	}
 
 	template< typename _K,
@@ -348,7 +348,7 @@ namespace ft
 	void multimap<_K, _V, _Compare, _Allocator>::swap(multimap& other)
 	{
 		if (this != &other)
-			_tree.swap(other);
+			_tree.swap(other._tree);
 	}
 
 	template< typename _K,
@@ -376,6 +376,8 @@ namespace ft
 	bool operator==( const multimap<_K, _V, _Compare, _Allocator>& lhs,
                  	 const multimap<_K, _V, _Compare, _Allocator>& rhs )
     {
+    	if (lhs.size() != rhs.size())
+    		return false;
 		return equal(lhs.begin(), lhs.end(), rhs.begin());
     }
 
@@ -396,7 +398,7 @@ namespace ft
 	bool operator>( const multimap<_K, _V, _Compare, _Allocator>& lhs,
                  	 const multimap<_K, _V, _Compare, _Allocator>& rhs )
 	{
-		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end(), greater<typename multimap<_K, _V, _Compare, _Allocator>::value_type>());
+		return !(lhs <= rhs);
 	}
 
 	template< typename _K, 
@@ -416,7 +418,7 @@ namespace ft
 	bool operator>=( const multimap<_K, _V, _Compare, _Allocator>& lhs,
                  	 const multimap<_K, _V, _Compare, _Allocator>& rhs )
 	{
-		return (lhs > rhs || lhs == rhs);
+		return !(lhs < rhs);
 	}
 	template< typename _K, 
 			typename _V,
@@ -425,7 +427,7 @@ namespace ft
 	bool operator<=( const multimap<_K, _V, _Compare, _Allocator>& lhs,
                  	 const multimap<_K, _V, _Compare, _Allocator>& rhs )
 	{
-		return (lhs < rhs || lhs == rhs);
+		return !(rhs < lhs);
 	}
 
 	template< typename _K, 

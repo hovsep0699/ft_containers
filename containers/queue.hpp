@@ -6,36 +6,116 @@
 namespace ft
 {
     
-    template<typename T, typename Container>
+    template<typename T, typename _Container>
     class queue
     {
-    public:
-        typedef T value_type;
-        typedef Container container_type;
-        typedef typename Container::size_type size_type;
+    	public:
 
-        explicit queue (const container_type& ctnr = container_type());
-        virtual ~queue();
+			/* =================== */
+			/*    member types     */
+			/* =================== */
 
-        bool empty() const;
-        size_type size() const;
-        value_type& front();
-        const value_type& front() const;
-        value_type& back();
-        const value_type& back() const;
-        void push (const value_type& val);
-        void pop();
-        void swap (queue& x);
-       
-        friend bool operator== (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-        friend bool operator!= (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-        friend bool operator<  (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-        friend bool operator<= (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-        friend bool operator>  (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-        friend bool operator>= (const queue<T,Container>& lhs, const queue<T,Container>& rhs);
-    protected:
-        Container c;
-    }; // class queue
+        	typedef _Container								container_type;
+        	typedef typename _Container::value_type			value_type;
+        	typedef typename _Container::size_type			size_type;
+        	typedef typename _Container::reference			reference;
+        	typedef typename _Container::const_reference	const_reference;
+
+			/* ========================= */
+			/*      member functions     */
+			/* ========================= */
+
+        	explicit	queue (const container_type& cont = container_type());
+						queue( const queue& other );
+			queue&		operator=(const queue& other);
+
+			/* ========================= */
+			/*       element access      */
+			/* ========================= */
+
+        	reference			front();
+        	const_reference		front() const;
+        	reference			back();
+        	const_reference		back() const;
+
+			/* ========================= */
+			/*          capacity         */
+			/* ========================= */
+
+        	bool			empty() const;
+        	size_type		size() const;
+
+			/* ========================= */
+			/*         modifiers         */
+			/* ========================= */
+
+        	void		push (const_reference val);
+        	void		pop();
+        	void		swap (queue& x);
+       	   
+			/* ========================= */
+			/*    non-member functions   */
+			/* ========================= */
+
+			template<typename _V, typename _Cont>
+        	friend bool operator== (const queue<_V, _Cont>& lhs, 
+        							const queue<_V, _Cont>& rhs);
+
+			template<typename _V, typename _Cont>
+        	friend bool operator!= (const queue<_V, _Cont>& lhs, 
+        							const queue<_V, _Cont>& rhs);
+
+			template<typename _V, typename _Cont>
+        	friend bool operator> (const queue<_V, _Cont>& lhs, 
+        							const queue<_V, _Cont>& rhs);
+
+			template<typename _V, typename _Cont>
+        	friend bool operator>= (const queue<_V, _Cont>& lhs, 
+        							const queue<_V, _Cont>& rhs);
+
+			template<typename _V, typename _Cont>
+        	friend bool operator< (const queue<_V, _Cont>& lhs, 
+        							const queue<_V, _Cont>& rhs);
+
+			template<typename _V, typename _Cont>
+        	friend bool operator<= (const queue<_V, _Cont>& lhs, 
+        							const queue<_V, _Cont>& rhs);
+    	protected:
+
+			/* =================== */
+			/*    member objects   */
+			/* =================== */
+
+        	Container c;
+    }; 
+
+	/* ========================= */
+	/*    non-member functions   */
+	/* ========================= */
+
+	template<typename _V, typename _Cont>
+    bool operator== (const queue<_V, _Cont>& lhs, 
+        			const queue<_V, _Cont>& rhs);
+
+	template<typename _V, typename _Cont>
+    bool operator!= (const queue<_V, _Cont>& lhs, 
+        			const queue<_V, _Cont>& rhs);
+
+	template<typename _V, typename _Cont>
+    bool operator> (const queue<_V, _Cont>& lhs, 
+        			const queue<_V, _Cont>& rhs);
+
+	template<typename _V, typename _Cont>
+    bool operator>= (const queue<_V, _Cont>& lhs, 
+        			const queue<_V, _Cont>& rhs);
+
+	template<typename _V, typename _Cont>
+    bool operator< (const queue<_V, _Cont>& lhs, 
+        			const queue<_V, _Cont>& rhs);
+
+	template<typename _V, typename _Cont>
+    bool operator<= (const queue<_V, _Cont>& lhs, 
+        			const queue<_V, _Cont>& rhs);
 }
 
 #include "queue_impl.hpp"

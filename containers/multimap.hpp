@@ -68,7 +68,7 @@ namespace ft
 			size_type size() const;
 			size_type max_size() const;
 			void clear();
-			ft::pair<iterator, bool> insert( const value_type& value );
+			iterator insert( const value_type& value );
 			iterator insert( iterator pos, const value_type& value );
 			template< typename InputIt >
 			void insert( InputIt first, InputIt last );
@@ -132,12 +132,6 @@ namespace ft
 	bool operator<=( const multimap<_K, _V, _Compare, _Allocator>& lhs,
                  	 const multimap<_K, _V, _Compare, _Allocator>& rhs );
 
-	template< typename _K, 
-			typename _V, 
-			typename _Compare, 
-			typename _Allocator >
-	void swap( multimap<_K, _V, _Compare, _Allocator>& lhs, 
-           		multimap<_K, _V, _Compare, _Allocator>& rhs );
 }
 
 #include "multimap_impl.hpp"

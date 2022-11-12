@@ -6,62 +6,126 @@
 
 namespace ft
 {
+    template<typename T,
+    		typename _Container>
+	class stack
+	{
+		public:
 
-    template<typename T, typename Container>
-		class stack
-		{
-			public:
-				typedef Container container_type;
-				typedef typename Container::value_type value_type;
-				typedef typename Container::size_type size_type;
-				typedef typename Container::reference reference;
-				typedef typename Container::const_reference const_reference;
+			/* =================== */
+			/*    member types     */
+			/* =================== */
+
+			typedef _Container								container_type;
+			typedef typename _Container::value_type			value_type;
+			typedef typename _Container::size_type			size_type;
+			typedef typename _Container::reference			reference;
+			typedef typename _Container::const_reference	const_reference;
 
 
-			explicit stack( const Container& cont = Container() );
-			stack( const stack& other );
-			stack& operator=( const stack& other );
-			reference top();
-			const_reference top() const;
-			void push( const value_type& value );
-			bool empty() const;
-			size_type size() const;
-			void pop();
-			void swap( stack& other );
-			template< typename Elem_Type, typename Base_Container >
-				friend bool operator==( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
-			template< typename Elem_Type, typename Base_Container >
-				friend bool operator!=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
-			template< typename Elem_Type, typename Base_Container >
-				friend bool operator>( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
-			template< typename Elem_Type, typename Base_Container >
-				friend bool operator<( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
-			template< typename Elem_Type, typename Base_Container >
-				friend bool operator>=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
-			template< typename Elem_Type, typename Base_Container >
-				friend bool operator<=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
-			protected:
-				container_type c;
+		/* ========================= */
+		/*      member functions     */
+		/* ========================= */
 
-		};
+		explicit	stack( const container_type& cont = container_type() );
+					stack( const stack& other );
+		stack&		operator=( const stack& other );
+
+		/* ========================= */
+		/*       element access      */
+		/* ========================= */
+
+		reference			top();
+		const_reference		top() const;
+
+		/* ========================= */
+		/*          capacity         */
+		/* ========================= */
+
+		bool		empty() const;
+		size_type	size() const;
+
+		
+		/* ========================= */
+		/*         modifiers         */
+		/* ========================= */
+
+		void	push( const value_type& value );
+		void	pop();
+		void	swap( stack& other );
+
+		/* ========================= */
+		/*    non-member functions   */
+		/* ========================= */
+
+		template< typename _V,
+				typename _Cont>
+		friend bool operator==( const stack<_V, _Cont>& s1,
+								const stack<_V, _Cont>& s2 );
+
+		template< typename _V,
+				typename _Cont>
+		friend bool operator!=( const stack<_V, _Cont>& s1,
+								const stack<_V, _Cont>& s2 );
+		template< typename _V,
+				typename _Cont>
+		friend bool operator>( const stack<_V, _Cont>& s1,
+								const stack<_V, _Cont>& s2 );
+		template< typename _V,
+				typename _Cont>
+		friend bool operator>=( const stack<_V, _Cont>& s1,
+								const stack<_V, _Cont>& s2 );
+		template< typename _V,
+				typename _Cont>
+		friend bool operator<( const stack<_V, _Cont>& s1,
+								const stack<_V, _Cont>& s2 );
+		template< typename _V,
+				typename _Cont>
+		friend bool operator<=( const stack<_V, _Cont>& s1,
+								const stack<_V, _Cont>& s2 );
+		protected:
+
+			/* =================== */
+			/*    member objects   */
+			/* =================== */
+
+			container_type c;
+
+	};
     
-	template< typename Elem_Type, typename Base_Container >
-	bool operator==( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+	/* ========================= */
+	/*    non-member functions   */
+	/* ========================= */
 
-	template< typename Elem_Type, typename Base_Container >
-	bool operator!=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+	template< typename _T,
+			typename _Container>
+	bool operator==( const stack<_T, _Container>& s1,
+					const stack<_T, _Container>& s2 );
 
-	template< typename Elem_Type, typename Base_Container >
-	bool operator>( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+	template< typename _T,
+			typename _Container>
+	bool operator!=( const stack<_T, _Container>& s1,
+					const stack<_T, _Container>& s2 );
 
-	template< typename Elem_Type, typename Base_Container >
-	bool operator<( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+	template< typename _T,
+			typename _Container>
+	bool operator>( const stack<_T, _Container>& s1,
+					const stack<_T, _Container>& s2 );
 
-	template< typename Elem_Type, typename Base_Container >
-	bool operator>=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+	template< typename _T,
+			typename _Container>
+	bool operator>=( const stack<_T, _Container>& s1,
+					const stack<_T, _Container>& s2 );
 
-	template< typename Elem_Type, typename Base_Container >
-	bool operator<=( const ft::stack<Elem_Type, Base_Container>& s1, const ft::stack<Elem_Type,Base_Container>& s2 );
+	template< typename _T,
+			typename _Container>
+	bool operator<( const stack<_T, _Container>& s1,
+					const stack<_T, _Container>& s2 );
+
+	template< typename _T,
+			typename _Container>
+	bool operator<=( const stack<_T, _Container>& s1,
+					const stack<_T, _Container>& s2 );
 };
 
 #include "stack_impl.hpp"

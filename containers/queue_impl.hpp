@@ -5,90 +5,127 @@
 namespace ft
 {
     
-    template<typename T, typename Container>
-    queue<T, Container>::queue (const Container& container) : c(container)
+    template<typename T,
+    		typename _Container>
+    queue<T, _Container>::queue (const _Container& container)
+    	:	c(container)
     {}
-    template<typename T, typename Container>
-    queue<T, Container>::~queue ()
-    {}
-    template<typename T, typename Container>
-    typename queue<T, Container>::size_type queue<T, Container>::size() const
+
+    template<typename T,
+    		typename _Container>
+    typename queue<T, _Container>::size_type queue<T, _Container>::size() const
     {
         return c.size();
     }
-    template<typename T, typename Container>
-    bool queue<T, Container>::empty() const
+
+    template<typename T, 
+    		typename _Container>
+    bool queue<T, _Container>::empty() const
     {
         return c.empty();
     }
-    template<typename T, typename Container>
-    typename queue<T, Container>::value_type& queue<T, Container>::front()
+
+    template<typename T, 
+    		typename _Container>
+    typename queue<T, _Container>::reference queue<T, _Container>::front()
     {
         return c.front();
     }
-    template<typename T, typename Container>
-    const typename queue<T, Container>::value_type& queue<T, Container>::front() const
+
+    template<typename T, 
+    		typename _Container>
+    typename queue<T, _Container>::const_reference queue<T, _Container>::front() const
     {
         return c.front();
     }
-    template<typename T, typename Container>
-    typename queue<T, Container>::value_type& queue<T, Container>::back()
+
+    template<typename T,
+    		typename _Container>
+    typename queue<T, _Container>::value_type& queue<T, _Container>::back()
     {
         return c.back();
     }
-    template<typename T, typename Container>
-    const typename queue<T, Container>::value_type& queue<T, Container>::back() const
+
+    template<typename T,
+    		typename _Container>
+    typename queue<T, _Container>::const_reference queue<T, _Container>::back() const
     {
         return c.back();
     }
-    template<typename T, typename Container>
-    void queue<T, Container>::push (const typename queue<T, Container>::value_type& val)
+
+    template<typename T,
+    		typename _Container>
+    void queue<T, _Container>::push (const_reference val)
     {
         c.push_back(val);
     }
-    template<typename T, typename Container>
-    void queue<T, Container>::pop()
+
+    template<typename T,
+    		typename _Container>
+    void queue<T, _Container>::pop()
     {
         c.pop_front();
     }
-    template<typename T, typename Container>
-    void queue<T, Container>::swap (queue<T, Container>& x)
+
+    template<typename T, 
+    		typename _Container>
+    void queue<T, _Container>::swap (queue& x)
     {
         swap(c, x.c);
     }
 
-    template <class T, class Container>
-    bool operator== (const queue<T,Container>& lhs, const queue<T,Container>& rhs)
+    template <typename T, 
+    		 typename _Container>
+    bool operator== (const queue<T, _Container>& lhs,
+    				const queue<T,Container>& rhs)
     {
         return lhs.c == rhs.c;
     }
-    template <class T, class Container>
-    bool operator!= (const queue<T,Container>& lhs, const queue<T,Container>& rhs)
+
+    template <typename T,
+    		 typename _Container>
+    bool operator!= (const queue<T, _Container>& lhs, 
+    				const queue<T, _Container>& rhs)
     {
         return lhs.c != rhs.c;
     }
-    template <class T, class Container>
-    bool operator<  (const queue<T,Container>& lhs, const queue<T,Container>& rhs)
+
+    template <typename T, 
+    		 typename _Container>
+    bool operator<  (const queue<T, _Container>& lhs, 
+    				const queue<T, _Container>& rhs)
     {
         return lhs.c < rhs.c;
     }
-    template <class T, class Container>
-    bool operator<= (const queue<T,Container>& lhs, const queue<T,Container>& rhs)
+
+    template <typename T, 
+    		 typename _Container>
+    bool operator<= (const queue<T, _Container>& lhs, 
+    				const queue<T, _Container>& rhs)
     {
         return lhs.c <= rhs.c;
     }
-    template <class T, class Container>
-    bool operator>  (const queue<T,Container>& lhs, const queue<T,Container>& rhs)
+
+    template <typename T,
+    		 typename _Container>
+    bool operator>  (const queue<T, _Container>& lhs, 
+    				const queue<T, _Container>& rhs)
     {
         return lhs.c > rhs.c;
     }
-    template <class T, class Container>
-    bool operator>= (const queue<T,Container>& lhs, const queue<T,Container>& rhs)
+
+    template <typename T, 
+    		 typename _Container>
+    bool operator>= (const queue<T, _Container>& lhs, 
+    				const queue<T, _Container>& rhs)
     {
         return lhs.c >= rhs.c;
     }
-    template< class T, class Container >
-    void swap( queue<T,Container>& lhs, queue<T,Container>& rhs )
+
+    template< typename T, 
+    		typename _Container >
+    void swap( queue<T, _Container>& lhs,
+    			queue<T, _Container>& rhs )
     {
         lhs.swap(rhs);
     }

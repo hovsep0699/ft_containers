@@ -108,6 +108,7 @@ namespace ft
 			rb_tree_impl(bool multivalues = false, const allocator_type alloc = allocator_type() );
 			rb_tree_impl(const rb_tree_impl& );
 			rb_tree_impl& operator=(const rb_tree_impl&);
+			void swap(rb_tree_impl& impl);
 
 			/*!
 			 * @function	create_node
