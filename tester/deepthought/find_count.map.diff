@@ -1,8 +1,0 @@
-22c22
-< map::count(90)	returned [1]
----
-> map::count(90)	returned [0]
-35c35
-< const map.count(80): [1]
----
-> const map.count(80): [0]

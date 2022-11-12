@@ -17,8 +17,8 @@ namespace ft
 	{
 		public:
 
-			/* ========================= */
 			/*        member types       */
+			/* ========================= */
 			/* ========================= */
 
 			typedef _K											key_type;
@@ -142,7 +142,8 @@ namespace ft
 
 			void insert_fixup(base_ptr z);
 
-			void recolor(base_ptr z, base_ptr y, rb_tree_recolor side);
+			void insert_recolor(base_ptr& z, base_ptr y, rb_tree_recolor side);
+			void erase_recolor(base_ptr& x, base_ptr w, rb_tree_recolor side);
 			void left_rotate(base_ptr x);
 			void right_rotate(base_ptr x);
 			iterator find(const key_type& key);
