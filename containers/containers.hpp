@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "bits/functional.hpp"
+#include <deque>
 
 namespace ft
 {
@@ -18,7 +19,7 @@ namespace ft
 	template<typename T, typename Allocator = allocator<T> >
 	class vector;
 
-	template<typename T, typename Container = vector<T> >
+	template<typename T, typename Container = std::deque<T> >
 	class queue;
 
 	template<typename T, typename Container = vector<T> >

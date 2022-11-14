@@ -41,7 +41,7 @@ namespace ft
 
     template<typename T,
     		typename _Container>
-    typename queue<T, _Container>::value_type& queue<T, _Container>::back()
+    typename queue<T, _Container>::reference queue<T, _Container>::back()
     {
         return c.back();
     }
@@ -77,7 +77,7 @@ namespace ft
     template <typename T, 
     		 typename _Container>
     bool operator== (const queue<T, _Container>& lhs,
-    				const queue<T,Container>& rhs)
+    				const queue<T, _Container>& rhs)
     {
         return lhs.c == rhs.c;
     }

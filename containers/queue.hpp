@@ -86,7 +86,7 @@ namespace ft
 			/*    member objects   */
 			/* =================== */
 
-        	Container c;
+        	_Container c;
     }; 
 
 	/* ========================= */
