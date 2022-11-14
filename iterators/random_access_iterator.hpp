@@ -16,13 +16,13 @@ namespace ft
 			/*    member types    */
 			/* ================== */
 
-			typedef typename ft::iterator<random_access_iterator_tag, T>::value_type value_type;
-			typedef typename ft::iterator<random_access_iterator_tag, T>::reference reference;
-			typedef const reference const_reference;
-			typedef typename ft::iterator<random_access_iterator_tag, T>::pointer pointer;
-			typedef const pointer const_pointer;
-			typedef typename ft::iterator<random_access_iterator_tag, T>::iterator_category iterator_category;
-			typedef typename ft::iterator<random_access_iterator_tag, T>::difference_type difference_type;
+			typedef typename ft::iterator<random_access_iterator_tag, T>::value_type			value_type;
+			typedef typename ft::iterator<random_access_iterator_tag, T>::reference				reference;
+			typedef const reference																const_reference;
+			typedef typename ft::iterator<random_access_iterator_tag, T>::pointer				pointer;
+			typedef const pointer																const_pointer;
+			typedef typename ft::iterator<random_access_iterator_tag, T>::iterator_category		iterator_category;
+			typedef typename ft::iterator<random_access_iterator_tag, T>::difference_type		difference_type;
 
 			/* ================== */
 			/*    constructors    */
