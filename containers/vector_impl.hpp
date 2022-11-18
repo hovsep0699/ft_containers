@@ -109,8 +109,8 @@ namespace ft
 
     template<typename T,
     		typename Alloc>
-	template<typename InputIterator>
-	void vector<T, Alloc>::range_assign(InputIterator n, InputIterator value, ft::true_type)
+	template<typename IntegralType>
+	void vector<T, Alloc>::range_assign(IntegralType n, IntegralType value, ft::true_type)
 	{
         resize(n, value);
 	}
@@ -478,8 +478,8 @@ namespace ft
 
 	template<typename T,
 			typename _Alloc>
-	template<typename InputIterator>
-	typename vector<T, _Alloc>::iterator vector<T, _Alloc>::range_insert(const_iterator pos, InputIterator count, InputIterator value, ft::true_type)
+	template<typename IntegralType>
+	typename vector<T, _Alloc>::iterator vector<T, _Alloc>::range_insert(const_iterator pos, IntegralType count, IntegralType value, ft::true_type)
 	{
         size_type position = distance(cbegin(), pos);
         size_type old_size = _size;

@@ -61,3 +61,6 @@ namespace ft
 	template <typename BDRIter>
 	BDRIter next (BDRIter it, typename iterator_traits<BDRIter>::difference_type n = 1);
 }
+
+
+#include "iterators/adapters/iterator_impl.hpp"

@@ -121,14 +121,14 @@ namespace ft
 			size_type		_max_size;
 		private:
 
-			template<typename InputIterator>
-			void range_assign(InputIterator count, InputIterator value, ft::true_type);
+			template<typename IntegralType>
+			void range_assign(IntegralType count, IntegralType value, ft::true_type);
 
 			template<typename InputIterator>
 			void range_assign(InputIterator first, InputIterator last, ft::false_type);
 
-			template<typename InputIterator>
-			iterator range_insert(const_iterator pos, InputIterator count, InputIterator value, ft::true_type);
+			template<typename IntegralType>
+			iterator range_insert(const_iterator pos, IntegralType count, IntegralType value, ft::true_type);
 
 			template<typename InputIterator>
 			iterator range_insert(const_iterator pos, InputIterator first, InputIterator last, ft::false_type);
@@ -178,6 +178,6 @@ namespace ft
 }
 
 
-#include "vector_impl.hpp"
+#include "containers/vector_impl.hpp"
 
 
