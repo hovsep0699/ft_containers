@@ -11,8 +11,8 @@ namespace ft
 	
 
 	template<typename T,
-			typename _Ref,
-			typename _Ptr,
+			typename _Ref = iterator<random_access_iterator_tag, T>::reference,
+			typename _Ptr = iterator<random_access_iterator_tag, T>::pointer,
 			typename _DT = iterator<random_access_iterator_tag, T>::difference_type,
 			_DT _BS = deque_block_size<T, _DT>::value>
 	class deque_terator;

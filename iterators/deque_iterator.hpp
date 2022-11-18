@@ -17,7 +17,9 @@ namespace ft
 
 	template<typename T,
 			typename _Ref,
-			typename _Ptr>
+			typename _Ptr,
+			typename _DT = iterator<random_access_iterator_tag, T>::difference_type,
+			_DT _BS = deque_block_size<T, _DT>::value>
 	class deque_iterator : public ft::iterator<random_access_iterator_tag, T>
 	{
 		public:
@@ -26,16 +28,17 @@ namespace ft
 			/*    member types    */
 			/* ================== */
 			
+			typedef deque_iterator<T, _Ref, _Ptr>												iterator;
 			typedef deque_iterator<T, const _Ref, const _Ptr>									const_iterator;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::value_type			value_type;
-			typedef typename ft::iterator<random_access_iterator_tag, T>::reference				reference;
+			typedef _Ref																		reference;
 			typedef const reference																const_reference;
-			typedef typename ft::iterator<random_access_iterator_tag, T>::pointer				pointer;
+			typedef _Ptr																		pointer;
 			typedef pointer*																	map_pointer;
 			typedef const pointer*																map_pointer;
 			typedef const pointer																const_pointer;
 			typedef typename ft::iterator<random_access_iterator_tag, T>::iterator_category		iterator_category;
-			typedef typename ft::iterator<random_access_iterator_tag, T>::difference_type		difference_type;
+			typedef _DT																			difference_type;
 
 			/* ================== */
 			/*    constructors    */
@@ -45,7 +48,7 @@ namespace ft
 			deque_iterator(pointer ptr, map_pointer mp);
 			deque_iterator(const deque_iterator& it);
 
-			operator deque_iterator<const value_type>() const;
+			operator const_iterator() const;
 
 			deque_iterator& operator=(const deque_iterator& it);
 
@@ -101,12 +104,12 @@ namespace ft
 			/*    base access   */
 			/* ================ */
 
-			pointer			begin();
-			const_pointer	begin() const;
-			pointer			end();
-			const_pointer	end() const;
-			pointer			current();
-			const_pointer	current() const;
+			pointer				begin();
+			const_pointer		begin() const;
+			pointer				end();
+			const_pointer		end() const;
+			pointer				current();
+			const_pointer		current() const;
 			map_pointer			node();
 			const_map_pointer	node() const;
 

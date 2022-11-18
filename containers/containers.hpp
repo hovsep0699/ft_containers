@@ -16,13 +16,20 @@ namespace ft
     template<typename T>
     struct allocator;
 
-	template<typename T, typename Allocator = allocator<T> >
+    template<typename T,
+    		typename _Allocator = allocator<T> >
+    class deque;
+
+	template<typename T,
+			typename _Allocator = allocator<T> >
 	class vector;
 
-	template<typename T, typename Container = std::deque<T> >
+	template<typename T,
+			typename _Container = std::deque<T> >
 	class queue;
 
-	template<typename T, typename Container = vector<T> >
+	template<typename T,
+			typename _Container = vector<T> >
 	class stack;
 
 	template<typename _K,
@@ -83,6 +90,11 @@ namespace ft
 			typename _Allocator >
 	void swap( set<_K, _Compare, _Allocator>& lhs, 
            		set<_K, _Compare, _Allocator>& rhs );
+
+	template< typename T, 
+			typename _Allocator >
+	void swap( deque<T, _Allocator>& lhs, 
+           		deque<T, _Allocator>& rhs );
 
 	template< typename _K, 
 			typename _V, 

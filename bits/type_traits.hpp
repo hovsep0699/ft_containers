@@ -39,7 +39,7 @@ namespace ft
 	};
 
 	template<typename T>
-	struct is_same<T,T>  //specialization
+	struct is_same<T, T>  //specialization
 	{
 	   static const bool value = true;
 	};

@@ -317,48 +317,60 @@ namespace ft
 	//
 	template<typename T,
 			typename _Ref,
-			typename _Ptr>
-	bool operator==(const deque_iterator<T, _Ref, _Ptr>& lhs, const deque_iterator<T, _Ref, _Ptr>& rhs)
+			typename _Ptr,
+			typename _DT,
+			_DT _BS>
+	bool operator==(const deque_iterator<T, _Ref, _Ptr, DT, _BS>& lhs, const deque_iterator<T, _Ref, _Ptr, _DT, _BS>& rhs)
 	{
 		return lhs.current() == rhs.current();
 	}
 
 	template<typename T,
 			typename _Ref,
-			typename _Ptr>
-	bool operator!=(const deque_iterator<T, _Ref, _Ptr>& lhs, const <T>deque_iterator<T, _Ref, _Ptr>& rhs)
+			typename _Ptr,
+			typename _DT,
+			_DT _BS>
+	bool operator!=(const deque_iterator<T, _Ref, _Ptr, DT, _BS>& lhs, const deque_iterator<T, _Ref, _Ptr, _DT, _BS>& rhs)
 	{
 		return !(lhs == rhs);
 	}
 
 	template<typename T,
 			typename _Ref,
-			typename _Ptr>
-	bool operator<(const deque_iterator<T, _Ref, _Ptr>& lhs, const <T>deque_iterator<T, _Ref, _Ptr>& rhs)
+			typename _Ptr,
+			typename _DT,
+			_DT _BS>
+	bool operator<(const deque_iterator<T, _Ref, _Ptr, DT, _BS>& lhs, const deque_iterator<T, _Ref, _Ptr, _DT, _BS>& rhs)
 	{
 		return ( ( lhs.node() == rhs.node() ) ? lhs.current() < rhs.current() : lhs.node() < rhs.node() );
 	}
 
 	template<typename T,
 			typename _Ref,
-			typename _Ptr>
-	bool operator<=(const deque_iterator<T, _Ref, _Ptr>& lhs, const <T>deque_iterator<T, _Ref, _Ptr>& rhs)
+			typename _Ptr,
+			typename _DT,
+			_DT _BS>
+	bool operator<=(const deque_iterator<T, _Ref, _Ptr, DT, _BS>& lhs, const deque_iterator<T, _Ref, _Ptr, _DT, _BS>& rhs)
 	{
 		return !(rhs < lhs);
 	}
 
 	template<typename T,
 			typename _Ref,
-			typename _Ptr>
-	bool operator>(const deque_iterator<T, _Ref, _Ptr>& lhs, const <T>deque_iterator<T, _Ref, _Ptr>& rhs)
+			typename _Ptr,
+			typename _DT,
+			_DT _BS>
+	bool operator>(const deque_iterator<T, _Ref, _Ptr, DT, _BS>& lhs, const deque_iterator<T, _Ref, _Ptr, _DT, _BS>& rhs)
 	{
 		return rhs < lhs;
 	}
 
 	template<typename T,
 			typename _Ref,
-			typename _Ptr>
-	bool operator>=(const deque_iterator<T, _Ref, _Ptr>& lhs, const <T>deque_iterator<T, _Ref, _Ptr>& rhs)
+			typename _Ptr,
+			typename _DT,
+			_DT _BS>
+	bool operator>=(const deque_iterator<T, _Ref, _Ptr, DT, _BS>& lhs, const deque_iterator<T, _Ref, _Ptr, _DT, _BS>& rhs)
 	{
 		return !(lhs < rhs);
 	}
@@ -367,8 +379,10 @@ namespace ft
 			typename _RefL,
 			typename _PtrL,
 			typename _RefR,
-			typename _PtrR>
-	bool operator==(const deque_iterator<T, _RefL, _PtrL>& lhs, const deque_iterator<T, _RefR, _PtrR>& rhs)
+			typename _PtrR,
+			typename _DT,
+			_DT _BS>
+	bool operator==(const deque_iterator<T, _RefL, _PtrL, _DT, _BS>& lhs, const deque_iterator<T, _RefR, _PtrR, _DT, _BS>& rhs)
 	{
 		return lhs.current() == rhs.current();
 	}
@@ -377,8 +391,10 @@ namespace ft
 			typename _RefL,
 			typename _PtrL,
 			typename _RefR,
-			typename _PtrR>
-	bool operator!=(const deque_iterator<T, _RefL, _PtrL>& lhs, const deque_iterator<T, _RefR, _PtrR>& rhs)
+			typename _PtrR,
+			typename _DT,
+			_DT _BS>
+	bool operator!=(const deque_iterator<T, _RefL, _PtrL, _DT, _BS>& lhs, const deque_iterator<T, _RefR, _PtrR, _DT, _BS>& rhs)
 	{
 		return !(lhs == rhs);
 	}
@@ -387,8 +403,10 @@ namespace ft
 			typename _RefL,
 			typename _PtrL,
 			typename _RefR,
-			typename _PtrR>
-	bool operator>(const deque_iterator<T, _RefL, _PtrL>& lhs, const deque_iterator<T, _RefR, _PtrR>& rhs)
+			typename _PtrR,
+			typename _DT,
+			_DT _BS>
+	bool operator>(const deque_iterator<T, _RefL, _PtrL, _DT, _BS>& lhs, const deque_iterator<T, _RefR, _PtrR, _DT, _BS>& rhs)
 	{
 		return rhs < lhs;
 	}
@@ -397,8 +415,10 @@ namespace ft
 			typename _RefL,
 			typename _PtrL,
 			typename _RefR,
-			typename _PtrR>
-	bool operator>=(const deque_iterator<T, _RefL, _PtrL>& lhs, const deque_iterator<T, _RefR, _PtrR>& rhs)
+			typename _PtrR,
+			typename _DT,
+			_DT _BS>
+	bool operator>=(const deque_iterator<T, _RefL, _PtrL, _DT, _BS>& lhs, const deque_iterator<T, _RefR, _PtrR, _DT, _BS>& rhs)
 	{
 		return !(lhs < rhs);
 	}
@@ -407,8 +427,10 @@ namespace ft
 			typename _RefL,
 			typename _PtrL,
 			typename _RefR,
-			typename _PtrR>
-	bool operator<(const deque_iterator<T, _RefL, _PtrL>& lhs, const deque_iterator<T, _RefR, _PtrR>& rhs)
+			typename _PtrR,
+			typename _DT,
+			_DT _BS>
+	bool operator<(const deque_iterator<T, _RefL, _PtrL, _DT, _BS>& lhs, const deque_iterator<T, _RefR, _PtrR, _DT, _BS>& rhs)
 	{
 		return ( ( lhs.node() == rhs.node() ) ? lhs.current() < rhs.current() : lhs.node() < rhs.node() );
 	}
@@ -417,8 +439,10 @@ namespace ft
 			typename _RefL,
 			typename _PtrL,
 			typename _RefR,
-			typename _PtrR>
-	bool operator<=(const deque_iterator<T, _RefL, _PtrL>& lhs, const deque_iterator<T, _RefR, _PtrR>& rhs)
+			typename _PtrR,
+			typename _DT,
+			_DT _BS>
+	bool operator<=(const deque_iterator<T, _RefL, _PtrL, _DT, _BS>& lhs, const deque_iterator<T, _RefR, _PtrR, _DT, _BS>& rhs)
 	{
 		return !(rhs < lhs);
 	}
@@ -426,34 +450,44 @@ namespace ft
 
 	template<typename T,
 			typename _Ref,
-			typename _Ptr>
-	deque_iterator<T, _Ref, _Ptr>  operator+(
-			typename deque_iterator<T, _Ref, _Ptr>::difference_type rhs,
-			const deque_iterator<T, _Ref, _Ptr>& lhs)
+			typename _Ptr,
+			typename _DT,
+			_DT _BS>
+	deque_iterator<T, _Ref, _Ptr, _DT, _BS>  operator+(
+			typename deque_iterator<T, _Ref, _Ptr, _DT, _BS>::difference_type rhs,
+			const deque_iterator<T, _Ref, _Ptr, _DT, _BS>& lhs)
 	{
-		return lhs.base() + rhs;
+		return lhs + rhs;
 	}
 
 
 	template<typename T,
 			typename _Ref,
-			typename _Ptr>
-	typename deque_iterator<T, _Ref, _Ptr>::difference_type operator-(
-			const deque_iterator<T, _Ref, _Ptr>& rhs,
-			const deque_iterator<T, _Ref, _Ptr>& lhs)
+			typename _Ptr,
+			typename _DT,
+			_DT _BS>
+	typename deque_iterator<T, _Ref, _Ptr, _DT, _BS>::difference_type operator-(
+			const deque_iterator<T, _Ref, _Ptr, _DT, _BS>& rhs,
+			const deque_iterator<T, _Ref, _Ptr, _DT, _BS>& lhs)
 	{
-		return rhs.base() - lhs.base();
+		return _BS * (rhs.node() - lhs.node() - 1)
+				+ ( rhs.current() - rhs.begin() )
+				+ ( lhs.end() - lhs.current() );
 	}
 
 	template<typename T,
 			typename _RefL,
 			typename _PtrL,
 			typename _RefR,
-			typename _PtrR>
-	typename deque_iterator<T, _RefL, _PtrL>::difference_type operator-(
-			const deque_iterator<T, _RefL, _PtrL>& rhs, 
-			const deque_iterator<T, _RefR, _PtrR>& lhs)
+			typename _PtrR,
+			typename _DT,
+			_DT _BS>
+	typename deque_iterator<T, _RefL, _PtrL, _DT, _BS>::difference_type operator-(
+			const deque_iterator<T, _RefL, _PtrL, _DT, _BS>& rhs, 
+			const deque_iterator<T, _RefR, _PtrR, _DT, _BS>& lhs)
 	{
-		return rhs.base() - lhs.base();
+		return _BS * (rhs.node() - lhs.node() - 1)
+				+ ( rhs.current() - rhs.begin() )
+				+ ( lhs.end() - lhs.current() );
 	}
 }

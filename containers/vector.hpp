@@ -35,8 +35,7 @@ namespace ft
 
 			template <typename InputIterator>
 							vector (InputIterator first, InputIterator last, 
-									const allocator_type& alloc = allocator_type(),
-									typename enable_if< !is_integral<InputIterator>::value, bool >::type = true);
+									const allocator_type& alloc = allocator_type() );
 			explicit		vector(const allocator_type& alloc = allocator_type());
 			explicit		vector(size_type n, 
 									const_reference val = value_type(), 
@@ -45,9 +44,8 @@ namespace ft
 							vector& operator= (const vector& x);
 			virtual			~vector();
 			void			assign( size_type count, const_reference value );
-			template< class InputIt >
-			void			assign( InputIt first, InputIt last,
-								typename enable_if<!is_integral<InputIt>::value, bool>::type = true);
+			template< typename InputIt >
+			void			assign( InputIt first, InputIt last);
 			allocator_type	get_allocator() const;
 
 			/* ========================= */
@@ -98,11 +96,10 @@ namespace ft
 			/* ========================= */
 
 			void		clear();
-			iterator	insert( iterator pos, const_reference value );
-			void		insert( iterator pos, size_type count, const_reference value );
+			iterator	insert( const_iterator pos, const_reference value );
+			iterator	insert( const_iterator pos, size_type count, const_reference value );
 			template<typename InputIt>
-			iterator	insert( const_iterator pos, InputIt first, InputIt last, 
-								typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt>::type* = ft_nullptr);
+			iterator	insert( const_iterator pos, InputIt first, InputIt last);
 			iterator	erase( iterator pos );
 
 			iterator	erase( iterator first, iterator last );
@@ -122,6 +119,19 @@ namespace ft
 			size_type		_size;
 			size_type		_capacity;
 			size_type		_max_size;
+		private:
+
+			template<typename InputIterator>
+			void range_assign(InputIterator count, InputIterator value, ft::true_type);
+
+			template<typename InputIterator>
+			void range_assign(InputIterator first, InputIterator last, ft::false_type);
+
+			template<typename InputIterator>
+			iterator range_insert(const_iterator pos, InputIterator count, InputIterator value, ft::true_type);
+
+			template<typename InputIterator>
+			iterator range_insert(const_iterator pos, InputIterator first, InputIterator last, ft::false_type);
 
 	};
 
@@ -129,32 +139,38 @@ namespace ft
 	/*    non-member functions   */
 	/* ========================= */
 
-	template< typename T, typename _Alloc >
+	template< typename T,
+			typename _Alloc >
 	bool operator==(
 			const vector<T, _Alloc>& lhs,
             const vector<T, _Alloc>& rhs );
 
-	template< typename T, typename _Alloc >
+	template< typename T,
+			typename _Alloc >
 	bool operator!=(
 			const vector<T, _Alloc>& lhs,
             const vector<T, _Alloc>& rhs );
 
-	template< typename T, typename _Alloc >
+	template< typename T,
+			typename _Alloc >
 	bool operator>(
 			const vector<T, _Alloc>& lhs,
             const vector<T, _Alloc>& rhs );
 
-	template< typename T, typename _Alloc >
+	template< typename T,
+			typename _Alloc >
 	bool operator>=(
 			const vector<T, _Alloc>& lhs,
             const vector<T, _Alloc>& rhs );
 
-	template< typename T, typename _Alloc >
+	template< typename T,
+			typename _Alloc >
 	bool operator<(
 			const vector<T, _Alloc>& lhs,
             const vector<T, _Alloc>& rhs );
 
-	template< typename T, typename _Alloc >
+	template< typename T,
+			typename _Alloc >
 	bool operator<=(
 			const vector<T, _Alloc>& lhs,
             const vector<T, _Alloc>& rhs );

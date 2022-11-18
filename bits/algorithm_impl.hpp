@@ -85,6 +85,60 @@ namespace ft
 		}
 		return true;
 	}
+
+	template<typename ForwardIt,
+			typename T>
+	void fill( 	ForwardIt first,
+				ForwardIt last,
+				const T& value)
+	{
+		for (; first != last; ++first)
+        	*first = value;
+	}
+
+	template<typename InputIt,
+			typename OutputIt>
+	OutputIt copy( 	InputIt first,
+					InputIt last,
+					OutputIt out)
+	{
+		for (; first != last; ++first, ++out) 
+        	*out = *first;
+    	return out;
+	}
+
+	template<typename ForwardIt,
+			typename _Allocator>
+	void destroy( 	ForwardIt first,
+					ForwardIt last,
+					_Allocator _alloc)
+	{
+		for (; first != last; ++first)
+    		_alloc.destroy(_alloc.address(*first));
+	}
+
+	template< typename InputIt,
+			typename NoThrowForwardIt,
+			typename _Allocator>
+	NoThrowForwardIt uninitialized_copy(InputIt first,
+										InputIt last,
+										NoThrowForwardIt out,
+										_Allocator _alloc)
+    {
+    	NoThrowForwardIt current = out;
+    	try
+    	{
+        	for (; first != last; ++first, ++current)
+        		_alloc.construct(_alloc.address(*current), *first );
+        	return current;
+    	}
+    	catch (...)
+    	{
+			ft::destroy(out, current, _alloc);
+        	throw;
+    	}
+    }
+
 	/*
 	* swap two objects
 	*/

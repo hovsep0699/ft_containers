@@ -12,9 +12,9 @@ int		main(void)
 		*it = (ite - it);
 
 	it = vct.begin();
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_range(it, --(--ite));
-	for (int i = 0; it != ite; ++it)
-		*it = ++i * 5;
+	//TESTED_NAMESPACE::vector<TESTED_TYPE> vct_range(it, --(--ite));
+	//for (int i = 0; it != ite; ++it)
+	//	*it = ++i * 5;
 
 	it = vct.begin();
 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_copy(vct);
@@ -28,6 +28,7 @@ int		main(void)
 	printSize(vct_range);
 	printSize(vct_copy);
 
+	printSize(vct_copy);
 	vct = vct_copy;
 	vct_copy = vct_range;
 	vct_range.clear();
