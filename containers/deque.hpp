@@ -10,6 +10,8 @@ namespace ft
     		typename _Allocator> 
 	class deque
 	{
+		typedef T**	map_pointer;
+		typedef typename _Allocator::template rebind<T*>::other map_alloc;
 		public:
 			typedef T value_type;
 			typedef _Allocator allocator_type;
@@ -24,7 +26,46 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 			typedef typename ft::iterator_traits<iterator>::difference_type		difference_type;
 
+		private:
+			typedef deque_block_size<T, difference_type> block_type;
+
+			map_pointer 	_map;
+			size_type		_map_size;
+			iterator		_begin;
+			iterator		_end;
+			map_alloc		_map_alloc;
+			allocator_type	_alloc;
+			difference_type	_block_size;	
 			
+			deque()
+				:	_map(ft_nullptr),
+					_map_size(0),
+					_begin(),
+					_end(),
+					_map_alloc(),
+					_alloc(),
+					_block_size(block_type::value)
+			{}
+
+			pointer allocate_node()
+			{
+				return _alloc.allocate(_block_size);
+			}
+
+			void deallocate_node(pointer p)
+			{
+				_alloc.deallocate(p, _block_size);
+			}
+
+			map_pointer allocate_map(size_type n)
+			{
+				return _map_alloc.allocate(n);
+			}
+
+			void deallocate_map(map_pointer p, size_type n)
+			{
+				_map_alloc.deallocate(p, n);
+			}
 			
 
 	};
