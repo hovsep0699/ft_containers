@@ -26,63 +26,57 @@ namespace ft
 			typedef bidirectional_iterator_tag												iterator_category;
 			typedef typename ft::iterator<bidirectional_iterator_tag, T>::difference_type	difference_type;
 
-           /* ============================= */
-           /*         Orthodox form         */
-           /* ============================= */ 
 
-			rb_tree_iterator();
-			rb_tree_iterator(base_ptr _base);
-			rb_tree_iterator(rb_tree_iterator const& it);
-			rb_tree_iterator& operator=(rb_tree_iterator const& it);
-			virtual ~rb_tree_iterator();
+			/* ========================= */
+			/*      member functions     */
+			/* ========================= */
 
+								rb_tree_iterator();
+								rb_tree_iterator(base_ptr _base);
+								rb_tree_iterator(rb_tree_iterator const& it);
+			virtual				~rb_tree_iterator();
+			rb_tree_iterator&	operator=(rb_tree_iterator const& it);
 
-           /* ============================= */
-           /*     dereference operators     */
-           /* ============================= */ 
+			/* ========================= */
+			/*       element access      */
+			/* ========================= */
 
-			reference operator*() const;
-			
-			pointer operator->() const;
+			base_ptr			base();
+			const_base_ptr		base() const;
+			reference			operator*() const;
+			pointer				operator->() const;
 
-           /* ============================= */
-           /*            increment          */
-           /* ============================= */ 
+			/* =========================== */
+			/*    arithmetic  functions    */
+			/* =========================== */
 
-			rb_tree_iterator& operator++();
-			rb_tree_iterator operator++(int);
+			rb_tree_iterator&	operator++();
+			rb_tree_iterator	operator++(int);
+			rb_tree_iterator&	operator--();
+			rb_tree_iterator	operator--(int);
 
-           /* ============================= */
-           /*            decrement          */
-           /* ============================= */ 
-			
-			rb_tree_iterator& operator--();
+			/* =========================== */
+			/*      compare  functions     */
+			/* =========================== */
 
-			rb_tree_iterator operator--(int);
-			
-
-           /* ============================= */
-           /*       	   base             */
-           /* ============================= */ 
-			
-
-			base_ptr base();
-
-			const_base_ptr base() const;
+			bool				operator==(rb_tree_iterator const& it);
+			bool				operator!=(rb_tree_iterator const& it);
 
 
-           /* ============================= */
-           /*       compare operators       */
-           /* ============================= */ 
-			
-			bool operator==(rb_tree_iterator const& it);
-
-			bool operator!=(rb_tree_iterator const& it);
 
 		protected:
+
+			/* =================== */
+			/*    member objects   */
+			/* =================== */
+
 			base_type	_nil;
 			base_ptr	_base;
 		private:
+
+			/*
+			 * red black tree implementation trait type
+			*/
 			typedef rb_tree_impl<T, allocator<link_type> > rb_tree_impl_type;
 	};
 }

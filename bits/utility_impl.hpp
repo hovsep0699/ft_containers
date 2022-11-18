@@ -111,6 +111,7 @@ namespace ft
 	{
 		lhs.swap(rhs);
 	}
+
 	template<typename T>
 	inline T* addressof(T& arg)
 	{

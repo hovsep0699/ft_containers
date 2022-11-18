@@ -10,7 +10,8 @@ namespace ft
 	/*      containers      */
 	/* ==================== */
 
-	template<typename T1, typename T2>
+	template<typename T1,
+			typename T2>
 	struct pair;
 
     template<typename T>
@@ -33,9 +34,9 @@ namespace ft
 	class stack;
 
 	template<typename _K,
-		typename _V,
-		typename _Compare = less<_K>,
-		typename _Allocator = allocator<pair<const _K, _V> > >
+			typename _V,
+			typename _Compare = less<_K>,
+			typename _Allocator = allocator<pair<const _K, _V> > >
 	class map;
 
 	template< typename _K,
@@ -109,5 +110,5 @@ namespace ft
 	void swap( multiset<_K, _Compare, _Allocator>& lhs, 
            		multiset<_K, _Compare, _Allocator>& rhs );
 
-};
+}
 

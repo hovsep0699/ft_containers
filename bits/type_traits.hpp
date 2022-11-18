@@ -4,9 +4,9 @@
 
 namespace ft
 {
-	//
-	// Wrapper structure for enable or disable template
-	//
+	/*
+	 * Wrapper structure for enable or disable template
+	*/
 	template<bool B, typename T>
 	struct enable_if {};
 
@@ -15,9 +15,10 @@ namespace ft
 	{
 		typedef T type;
 	};
-	//
-	// Wrapper structure for integral types
-	// 
+
+	/*
+	 * Wrapper structure for integral types
+	*/ 
 	template<typename T, T v>
 	struct integral_constant
 	{
@@ -29,17 +30,22 @@ namespace ft
 			return value;
 		}
 	};
+
 	typedef integral_constant<bool, true> true_type;
 	typedef integral_constant<bool, false> false_type;
 
-	template<typename T, typename U>
+	template<typename T,
+			typename U>
 	struct is_same
 	{
 		static const bool value = false;
 	};
-
+	
+	/*
+	 * specialization for check if type is same
+	*/
 	template<typename T>
-	struct is_same<T, T>  //specialization
+	struct is_same<T, T>  
 	{
 	   static const bool value = true;
 	};
@@ -55,9 +61,10 @@ namespace ft
 	{
 		typedef T type;
 	};
-	//
-	//   
-	//
+
+	/*
+	 * trait structure for check if type is integral   
+	*/
 	template<typename T>
 	struct is_integral : false_type {};
 
@@ -103,13 +110,16 @@ namespace ft
 	template<>
 	struct is_integral<bool> : true_type {};
 
-	template<bool B, typename T, typename F>
+	template<bool B,
+			typename T,
+			typename F>
 	struct conditional
 	{
 		typedef T type;
 	};
 
-	template<typename T, typename F>
+	template<typename T,
+			typename F>
 	struct conditional<false, T, F>
 	{
 		typedef F type;

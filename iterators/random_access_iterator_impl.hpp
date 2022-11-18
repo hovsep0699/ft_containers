@@ -111,44 +111,7 @@ namespace ft
 	{
 		return _ptr[n];
 	}
-	//
-	// compare operations
-	//
-	template<typename T>
-	bool random_access_iterator<T>::operator<(const random_access_iterator<T>& it) const
-	{
-		return _ptr < it._ptr;
-	}
 
-	template<typename T>
-	bool random_access_iterator<T>::operator>(const random_access_iterator<T>& it) const
-	{
-		return _ptr > it._ptr;
-	}
-
-	template<typename T>
-	bool random_access_iterator<T>::operator<=(const random_access_iterator<T>& it) const
-	{
-		return _ptr <= it._ptr;
-	}
-
-	template<typename T>
-	bool random_access_iterator<T>::operator>=(const random_access_iterator<T>& it) const
-	{
-		return _ptr >= it._ptr;
-	}
-
-	template<typename T>
-	bool random_access_iterator<T>::operator==(const random_access_iterator<T>& it) const
-	{
-		return _ptr == it._ptr;
-	}
-
-	template<typename T>
-	bool random_access_iterator<T>::operator!=(const random_access_iterator<T>& it) const
-	{
-		return _ptr != it._ptr;
-	}
 	template<typename T>
 	typename random_access_iterator<T>::pointer random_access_iterator<T>::base()
 	{

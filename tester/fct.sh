@@ -166,7 +166,7 @@ do_test () {
 function main () {
 	pheader
 	#containers=(set map vector stack queue multimap multiset)
-    containers=(vector)
+    containers=(map)
 	# containers=(vector list map stack queue deque multimap set multiset)
 	if [ $# -ne 0 ]; then
 		containers=($@);

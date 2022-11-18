@@ -19,11 +19,12 @@ namespace ft
 		/*      member functions     */
 		/* ========================= */
 
-		template<typename K, typename V>
-				pair(const pair<K,V>& p);
+		template<typename K,
+				typename V>
+				pair(const pair<K, V>& p);
 				pair();
 				pair(const first_type& first,
-				const second_type& second);
+					const second_type& second);
 				pair(const pair& p);
 		pair&	operator=(const pair& p);
 		void	swap(pair& p);

@@ -9,8 +9,6 @@ namespace ft
 	template<typename Iter>
 	class reverse_iterator
 	{
-		protected:
-			Iter current;
 		public:
 
 			/* ================= */
@@ -24,48 +22,47 @@ namespace ft
 			typedef typename ft::iterator_traits<Iter>::pointer pointer;
 			typedef typename ft::iterator_traits<Iter>::reference reference;
 
-			/* ================= */
-			/*    constructors   */
-			/* ================= */
-
-			reverse_iterator();
-
-			reverse_iterator(iterator_type base);
-
-			template<typename U>
-			reverse_iterator(const reverse_iterator<U>& rev);
-
-			template<typename U>
-			reverse_iterator& operator=(const reverse_iterator<U>& rev);
-
-			/* ======================== */
-			/*   base iterator getter   */
-			/* ======================== */
-			
-			iterator_type base() const;
-
-			/* ======================== */
-			/*     access operators     */
-			/* ======================== */
-			
-			reference operator*() const;
-
-			pointer operator->() const;
-
-			reference operator[](difference_type n) const;
 
 			/* ========================= */
-			/*    arithmetic operators   */
+			/*      member functions     */
 			/* ========================= */
 
-			reverse_iterator<Iter>& operator++();
-			reverse_iterator<Iter> operator++(int);
-			reverse_iterator<Iter>& operator--();
-			reverse_iterator<Iter> operator--(int);
-			reverse_iterator<Iter>& operator+=(difference_type offset);
-			reverse_iterator<Iter>& operator-=(difference_type offset);
-			reverse_iterator operator+( difference_type offset ) const;
-			reverse_iterator operator-( difference_type offset ) const;
+								reverse_iterator();
+								reverse_iterator(iterator_type base);
+			template<typename U>
+								reverse_iterator(const reverse_iterator<U>& rev);
+			template<typename U>
+			reverse_iterator&	operator=(const reverse_iterator<U>& rev);
+			
+			/* ========================= */
+			/*       element access      */
+			/* ========================= */
+
+			iterator_type	base() const;
+			reference		operator*() const;
+			pointer			operator->() const;
+			reference		operator[](difference_type n) const;
+
+			/* ========================= */
+			/*    arithmetic functions   */
+			/* ========================= */
+
+			reverse_iterator<Iter>&	operator++();
+			reverse_iterator<Iter>	operator++(int);
+			reverse_iterator<Iter>&	operator--();
+			reverse_iterator<Iter>	operator--(int);
+			reverse_iterator<Iter>&	operator+=(difference_type offset);
+			reverse_iterator<Iter>&	operator-=(difference_type offset);
+			reverse_iterator		operator+( difference_type offset ) const;
+			reverse_iterator		operator-( difference_type offset ) const;
+
+		protected:
+
+			/* =================== */
+			/*    member objects   */
+			/* =================== */
+
+			Iter current;
 
 		}; // class reverse_iterator
 } // namespace ft

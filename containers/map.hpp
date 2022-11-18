@@ -12,14 +12,18 @@ namespace ft
 		typename _Allocator >
 	class map
 	{
+		private:
 
-		/*
-		 * adapter tree object for map
-		*/
+			/*
+		 	 * adapter tree type
+			*/
+			typedef rb_tree<_K, ft::pair<_K, _V>, ft::select1st<ft::pair<_K, _V> >, _Compare, _Allocator> tree_type; 
 
-		typedef rb_tree<_K, ft::pair<_K, _V>, ft::select1st<ft::pair<_K, _V> >, _Compare, _Allocator> tree_type; 
+			/* =================== */
+			/*    member objects   */
+			/* =================== */
 
-		tree_type _tree;
+			tree_type _tree;
 
 		public:
 
