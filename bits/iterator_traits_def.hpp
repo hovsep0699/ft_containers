@@ -37,13 +37,17 @@ namespace ft
 	// Optimization for random access iterator
 	//
 	template<typename RAIter>
-	typename iterator_traits<RAIter>::difference_type distance(RAIter first, RAIter last, random_access_iterator_tag);
+	typename iterator_traits<RAIter>::difference_type distance(RAIter first,
+															RAIter last,
+															ft::random_access_iterator_tag);
 
 	//
 	// Get distance between 2 input Iterators
 	//
 	template<typename Iter>
-	typename iterator_traits<Iter>::difference_type distance(Iter first, Iter last, input_iterator_tag);
+	typename iterator_traits<Iter>::difference_type distance(Iter first,
+															Iter last,
+															ft::input_iterator_tag);
 
 	//
 	// Get distance between 2 input Iterators
@@ -55,17 +59,20 @@ namespace ft
 	// Optimization for random access iterator
 	//
 	template<typename RAIter, typename Distance>
-	void advance(RAIter& it, Distance distance, random_access_iterator_tag);
+	void advance(RAIter& it, Distance distance, ft::random_access_iterator_tag);
 
+	template<typename InputIter, typename Distance>
+	void advance(InputIter& it, Distance distance, ft::bidirectional_iterator_tag);
 	//
 	// Advance iterator by distance
 	//
 	template<typename InputIter, typename Distance>
-	void advance(InputIter& it, Distance distance, input_iterator_tag);
+	void advance(InputIter& it, Distance distance, ft::input_iterator_tag);
 
 	//
 	// Advance iterator by distance
 	//
-	template<typename Iter, typename Distance>
+	template<typename Iter,
+			typename Distance>
 	void advance(Iter& it, Distance distance);
 }

@@ -121,14 +121,16 @@ namespace ft
 			size_type		_max_size;
 		private:
 
+			
+			size_type update_size(size_type _new_capacity);
+
 			template<typename IntegralType>
 			void range_assign(IntegralType count, IntegralType value, ft::true_type);
 
 			template<typename InputIterator>
 			void range_assign(InputIterator first, InputIterator last, ft::false_type);
 
-			template<typename IntegralType>
-			iterator range_insert(const_iterator pos, IntegralType count, IntegralType value, ft::true_type);
+			iterator range_insert(const_iterator pos, size_type count, const_reference value, ft::true_type);
 
 			template<typename InputIterator>
 			iterator range_insert(const_iterator pos, InputIterator first, InputIterator last, ft::false_type);

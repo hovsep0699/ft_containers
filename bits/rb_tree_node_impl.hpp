@@ -86,6 +86,8 @@ namespace ft
 			_alloc = impl._alloc;
 			_size = 0;
 			_multivalues = impl._multivalues;
+			_base_alloc.destroy(_nil);
+			_base_alloc.deallocate(_nil, 1);
 			initialize();
 		}
 		return *this;
@@ -94,12 +96,27 @@ namespace ft
 	template<typename T, typename _Allocator>
 	void rb_tree_impl<T, _Allocator>::initialize()
 	{
-		_sentinel = base_type(rb_black);
-		_nil = &_sentinel;
+		_nil = _base_alloc.allocate(1);
+		try
+		{
+			_base_alloc.construct(_nil, base_type(rb_black));
+		}
+		catch(...)
+		{
+			_base_alloc.destroy(_nil);
+			_base_alloc.deallocate(_nil, 1);
+		}
 		_root = _nil;
 		_nil->_parent = _root;
 		_begin = _nil;
 		_end = _nil;
+	}
+
+	template<typename T, typename _Allocator>
+	rb_tree_impl<T, _Allocator>::~rb_tree_impl()
+	{
+		_base_alloc.destroy(_nil);
+		_base_alloc.deallocate(_nil, 1);
 	}
 
 	template<typename T, typename _Allocator>
@@ -110,13 +127,11 @@ namespace ft
 			ft::swap(_size, other._size);
 			ft::swap(_alloc, other._alloc);
 			ft::swap(_multivalues, other._multivalues);
-			ft::swap(_sentinel, other._sentinel);
 			ft::swap(_nil, other._nil);
 			ft::swap(_root, other._root);
 			ft::swap(_begin, other._begin);
 			ft::swap(_end, other._end);
 		}
-
 	}
 
 	/*!

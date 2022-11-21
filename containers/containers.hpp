@@ -18,11 +18,11 @@ namespace ft
     struct allocator;
 
     template<typename T,
-    		typename _Allocator = allocator<T> >
+    		typename _Allocator = ft::allocator<T> >
     class deque;
 
 	template<typename T,
-			typename _Allocator = allocator<T> >
+			typename _Allocator = ft::allocator<T> >
 	class vector;
 
 	template<typename T,
@@ -30,29 +30,29 @@ namespace ft
 	class queue;
 
 	template<typename T,
-			typename _Container = vector<T> >
+			typename _Container = ft::vector<T> >
 	class stack;
 
 	template<typename _K,
 			typename _V,
-			typename _Compare = less<_K>,
-			typename _Allocator = allocator<pair<const _K, _V> > >
+			typename _Compare = ft::less<_K>,
+			typename _Allocator = ft::allocator<ft::pair<const _K, _V> > >
 	class map;
 
 	template< typename _K,
-			typename _Compare = less<_K>,
-			typename _Allocator = allocator<_K> >
+			typename _Compare = ft::less<_K>,
+			typename _Allocator = ft::allocator<_K> >
 	class set;
 
 	template< typename _K,
-			typename _Compare = less<_K>,
-			typename _Allocator = allocator<_K> >
+			typename _Compare = ft::less<_K>,
+			typename _Allocator = ft::allocator<_K> >
 	class multiset;
 
 	template<typename _K,
 		typename _V,
-		typename _Compare = less<_K>,
-		typename _Allocator = allocator<pair<const _K, _V> > >
+		typename _Compare = ft::less<_K>,
+		typename _Allocator = ft::allocator<ft::pair<const _K, _V> > >
 	class multimap;
 
 	/* ================================================ */

@@ -6,7 +6,7 @@
 namespace ft
 {
 	template<typename T>
-	class rb_tree_iterator : public iterator<bidirectional_iterator_tag, T>
+	class rb_tree_iterator : public ft::iterator<bidirectional_iterator_tag, T>
 	{
 		friend class rb_tree_const_iterator<T>;
 		public:
@@ -18,11 +18,11 @@ namespace ft
 			typedef typename ft::iterator<bidirectional_iterator_tag, T>::value_type		value_type;
 			typedef typename ft::iterator<bidirectional_iterator_tag, T>::reference			reference;
 			typedef typename ft::iterator<bidirectional_iterator_tag, T>::pointer			pointer;
-			typedef rb_tree_node_base*														base_ptr;
-			typedef rb_tree_node_base														base_type;
-			typedef const rb_tree_node_base*												const_base_ptr;
-			typedef rb_tree_node<value_type>*												link_type;
-			typedef const rb_tree_node<value_type>*											const_link_type;
+			typedef ft::rb_tree_node_base*													base_ptr;
+			typedef ft::rb_tree_node_base													base_type;
+			typedef const ft::rb_tree_node_base*											const_base_ptr;
+			typedef ft::rb_tree_node<value_type>*											link_type;
+			typedef const ft::rb_tree_node<value_type>*										const_link_type;
 			typedef bidirectional_iterator_tag												iterator_category;
 			typedef typename ft::iterator<bidirectional_iterator_tag, T>::difference_type	difference_type;
 
@@ -77,7 +77,7 @@ namespace ft
 			/*
 			 * red black tree implementation trait type
 			*/
-			typedef rb_tree_impl<T, allocator<link_type> > rb_tree_impl_type;
+			typedef ft::rb_tree_impl<T, ft::allocator<link_type> > rb_tree_impl_type;
 	};
 }
 #include "iterators/rb_tree_iterator_impl.hpp"

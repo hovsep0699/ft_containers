@@ -38,6 +38,144 @@ namespace ft
 	struct is_integral<char>;
 
 	template<>
+	struct is_integral<const int>;
+
+	template<>
+	struct is_integral<const long int>;
+
+	template<>
+	struct is_integral<const unsigned char>;
+
+	template<>
+	struct is_integral<const unsigned short int>;
+
+	template<>
+	struct is_integral<signed char>;
+
+	template<>
+	struct is_integral<unsigned char>;
+
+	template<>
+	struct is_integral<wchar_t>;
+
+	template<>
+	struct is_integral<char16_t>;				
+
+	template<>
+	struct is_integral<char32_t>;						
+
+	template<>
+	struct is_integral<short int>;
+
+	template<>
+	struct is_integral<unsigned int>;
+
+	template<>
+	struct is_integral<const bool>;
+	
+	template<>
+	struct is_integral<const char>;
+	
+	template<>
+	struct is_integral<const signed char>;
+	
+	template<>
+	struct is_integral<const short int>;
+	
+	template<>
+	struct is_integral<const unsigned int>;
+	
+	template<>
+	struct is_integral<const unsigned long int>;
+	
+	template<>
+	struct is_integral<volatile char>;
+	
+	template<>
+	struct is_integral<volatile bool>;
+
+	template<>
+	struct is_integral<volatile signed char>;
+
+	template<>
+	struct is_integral<volatile short int>;
+
+	template<>
+	struct is_integral<volatile int>;
+
+	template<>
+	struct is_integral<volatile long int>;
+
+	template<>
+	struct is_integral<volatile unsigned char>;
+
+	template<>
+	struct is_integral<volatile unsigned short int>;
+
+	template<>
+	struct is_integral<volatile unsigned int>;
+
+	template<>
+	struct is_integral<volatile unsigned long int>;
+
+	template<>
+	struct is_integral<const volatile char>;
+
+	template<>
+	struct is_integral<const volatile bool>;
+
+	template<>
+	struct is_integral<const volatile signed char>;
+
+	template<>
+	struct is_integral<const volatile short int>;
+
+	template<>
+	struct is_integral<const volatile int>;
+
+	template<>
+	struct is_integral<const volatile long int>;
+
+	template<>
+	struct is_integral<const volatile unsigned char>;
+
+	template<>
+	struct is_integral<const volatile unsigned short int>;
+
+	template<>
+	struct is_integral<const volatile unsigned int>;
+
+	template<>
+	struct is_integral<const volatile unsigned long int>;
+
+	template<>
+	struct is_integral<unsigned short>;
+
+	template<>
+	struct is_integral<int>;
+
+	template<>
+	struct is_integral<long>;
+
+	template<>
+	struct is_integral<unsigned long>;
+
+	template<>
+	struct is_integral<long long>;
+
+	template<>
+	struct is_integral<unsigned long long>;
+
+	template<>
+	struct is_integral<bool>;
+
+	template<typename T>
+	struct is_integral;
+
+	template<>
+	struct is_integral<char>;
+
+	template<>
 	struct is_integral<signed char>;
 
 	template<>

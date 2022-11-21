@@ -66,49 +66,142 @@ namespace ft
 	 * trait structure for check if type is integral   
 	*/
 	template<typename T>
-	struct is_integral : false_type {};
+	struct is_integral : 									false_type {};
 
 	template<>
-	struct is_integral<char> : true_type {};
+	struct is_integral<const int> :							true_type {};
 
 	template<>
-	struct is_integral<signed char> : true_type {};
+	struct is_integral<const long int> :					true_type {};
 
 	template<>
-	struct is_integral<unsigned char> : true_type {};
+	struct is_integral<const unsigned char> :				true_type {};
 
 	template<>
-	struct is_integral<wchar_t> : true_type {};
+	struct is_integral<const unsigned short int> :			true_type {};
 
 	template<>
-	struct is_integral<char16_t> : true_type {};
+	struct is_integral<char> : 								true_type {};
 
 	template<>
-	struct is_integral<char32_t> : true_type {};
+	struct is_integral<signed char> : 						true_type {};
 
 	template<>
-	struct is_integral<short int> : true_type {};
+	struct is_integral<unsigned char> : 					true_type {};
 
 	template<>
-	struct is_integral<unsigned short> : true_type {};
+	struct is_integral<wchar_t> : 							true_type {};
 
 	template<>
-	struct is_integral<int> : true_type {};
+	struct is_integral<char16_t> : 							true_type {};
 
 	template<>
-	struct is_integral<long> : true_type {};
+	struct is_integral<char32_t> : 							true_type {};
 
 	template<>
-	struct is_integral<unsigned long> : true_type {};
+	struct is_integral<short int> : 						true_type {};
 
 	template<>
-	struct is_integral<long long> : true_type {};
+	struct is_integral<unsigned int> : 						true_type {};
 
 	template<>
-	struct is_integral<unsigned long long> : true_type {};
+	struct is_integral<const bool> : 						true_type {};
+	
+	template<>
+	struct is_integral<const char> : 						true_type {};
+	
+	template<>
+	struct is_integral<const signed char> : 				true_type {};
+	
+	template<>
+	struct is_integral<const short int> : 					true_type {};
+	
+	template<>
+	struct is_integral<const unsigned int> : 				true_type {};
+	
+	template<>
+	struct is_integral<const unsigned long int> : 			true_type {};
+	
+	template<>
+	struct is_integral<volatile char> : 					true_type {};
+	
+	template<>
+	struct is_integral<volatile bool> : 					true_type {};
 
 	template<>
-	struct is_integral<bool> : true_type {};
+	struct is_integral<volatile signed char> : 				true_type {};
+
+	template<>
+	struct is_integral<volatile short int> : 				true_type {};
+
+	template<>
+	struct is_integral<volatile int> : 						true_type {};
+
+	template<>
+	struct is_integral<volatile long int> : 				true_type {};
+
+	template<>
+	struct is_integral<volatile unsigned char> : 			true_type {};
+
+	template<>
+	struct is_integral<volatile unsigned short int> : 		true_type {};
+
+	template<>
+	struct is_integral<volatile unsigned int> : 			true_type {};
+
+	template<>
+	struct is_integral<volatile unsigned long int> : 		true_type {};
+
+	template<>
+	struct is_integral<const volatile char> : 				true_type {};
+
+	template<>
+	struct is_integral<const volatile bool> : 				true_type {};
+
+	template<>
+	struct is_integral<const volatile signed char> : 		true_type {};
+
+	template<>
+	struct is_integral<const volatile short int> : 			true_type {};
+
+	template<>
+	struct is_integral<const volatile int> : 				true_type {};
+
+	template<>
+	struct is_integral<const volatile long int> : 			true_type {};
+
+	template<>
+	struct is_integral<const volatile unsigned char> : 		true_type {};
+
+	template<>
+	struct is_integral<const volatile unsigned short int> :	true_type {};
+
+	template<>
+	struct is_integral<const volatile unsigned int> : 		true_type {};
+
+	template<>
+	struct is_integral<const volatile unsigned long int> :	true_type {};
+
+	template<>
+	struct is_integral<unsigned short> : 					true_type {};
+
+	template<>
+	struct is_integral<int> : 								true_type {};
+
+	template<>
+	struct is_integral<long> : 								true_type {};
+
+	template<>
+	struct is_integral<unsigned long> : 					true_type {};
+
+	template<>
+	struct is_integral<long long> : 						true_type {};
+
+	template<>
+	struct is_integral<unsigned long long> : 				true_type {};
+
+	template<>
+	struct is_integral<bool> : 								true_type {};
 
 	template<bool B,
 			typename T,

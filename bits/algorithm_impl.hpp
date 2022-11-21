@@ -7,7 +7,8 @@ namespace ft
 	//
 	// Checks if the first range [first1, last1) is lexicographically less than the second range [first2, last2).
 	//
-	template<typename InputIt1, typename InputIt2>
+	template<typename InputIt1,
+			typename InputIt2>
 	bool lexicographical_compare(	InputIt1 first1, 
 									InputIt1 last1,
 									InputIt2 first2, 
@@ -40,7 +41,8 @@ namespace ft
 	//
 	// Returns true if the range [first1, last1) is equal to the range [first2, first2 + (last1 - first1)), and false otherwise.
 	//
-	template<typename InputIt1, typename InputIt2>
+	template<typename InputIt1,
+			typename InputIt2>
 	bool equal( InputIt1 first1, 
 				InputIt1 last1,
 				InputIt2 first2 )
@@ -53,7 +55,8 @@ namespace ft
 		return true;
 	}
 
-	template< typename InputIt1, typename InputIt2 >
+	template< typename InputIt1,
+			typename InputIt2 >
 	bool equal( InputIt1 first1,
 				InputIt1 last1, 
             	InputIt2 first2, 
@@ -107,6 +110,17 @@ namespace ft
     	return out;
 	}
 
+	template< typename BidirIt1,
+			typename BidirIt2 >
+	BidirIt2 copy_backward( BidirIt1 first,
+							BidirIt1 last,
+							BidirIt2 out )
+	{
+		while ( first != last ) 
+        	*(--out) = *(--last);
+    	return out;
+	}
+
 	template<typename ForwardIt,
 			typename _Allocator>
 	void destroy( 	ForwardIt first,
@@ -139,6 +153,7 @@ namespace ft
     	}
     }
 
+
 	/*
 	* swap two objects
 	*/
@@ -148,5 +163,21 @@ namespace ft
 		T c = a;
 		a = b;
 		b = c;
+	}
+
+	template< typename BidirIt >
+	void reverse( BidirIt first,
+				BidirIt last )
+	{
+		while (first != last && first != --last)
+            ft::iter_swap(first++, last);
+	}
+
+	template< typename ForwardIt1,
+			typename ForwardIt2 >
+	void iter_swap( ForwardIt1 a,
+					ForwardIt2 b )
+	{
+		ft::swap(*a, *b);
 	}
 }

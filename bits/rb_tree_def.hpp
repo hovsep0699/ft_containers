@@ -60,6 +60,14 @@ namespace ft
 	template<typename T>
 	class rb_tree_const_iterator;
 
+	template<typename T>
+	inline bool operator==(const rb_tree_iterator<T>& lhs,
+						const rb_tree_const_iterator<T>& rhs);
+
+	template<typename T>
+	inline bool operator!=(const rb_tree_iterator<T>& lhs,
+						const rb_tree_const_iterator<T>& rhs);
+
 }
 
 #include "rb_tree_node.hpp"

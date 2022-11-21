@@ -26,6 +26,15 @@ namespace ft
 		typename _V,
 		typename _Compare,
 		typename _Allocator >
+	multimap<_K, _V, _Compare, _Allocator>::multimap(const key_compare& comp,
+													const allocator_type& alloc)
+	:	_tree(comp, alloc, true)
+	{}
+
+	template< typename _K,
+		typename _V,
+		typename _Compare,
+		typename _Allocator >
 	template<typename InputIt>
 	multimap<_K, _V, _Compare, _Allocator>::multimap( InputIt first, InputIt last,
      	 	 	 const key_compare& comp,
@@ -40,6 +49,15 @@ namespace ft
 	multimap<_K, _V, _Compare, _Allocator>::multimap( const multimap& other )
 		:	_tree(other._tree)
 	{}
+
+	template< typename _K,
+		typename _V,
+		typename _Compare,
+		typename _Allocator >
+	typename multimap<_K, _V, _Compare, _Allocator>::allocator_type multimap<_K, _V, _Compare, _Allocator>::get_allocator() const
+	{
+		return _tree.get_allocator();
+	}
 
 	template< typename _K,
 		typename _V,
@@ -378,7 +396,7 @@ namespace ft
     {
     	if (lhs.size() != rhs.size())
     		return false;
-		return equal(lhs.begin(), lhs.end(), rhs.begin());
+		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
     }
 
 	template< typename _K, 
@@ -408,7 +426,7 @@ namespace ft
 	bool operator<( const multimap<_K, _V, _Compare, _Allocator>& lhs,
                  	 const multimap<_K, _V, _Compare, _Allocator>& rhs )
 	{
-		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
 
 	template< typename _K, 

@@ -95,6 +95,12 @@ namespace ft
 					InputIt last,
 					OutputIt out );
 
+	template< typename BidirIt1,
+			typename BidirIt2 >
+	BidirIt2 copy_backward( BidirIt1 first,
+							BidirIt1 last,
+							BidirIt2 d_last );
+
 	/*
 	 * @function			destroy
 	 *
@@ -131,7 +137,22 @@ namespace ft
 	*/
 	template<typename T>
 	void swap(T& a, T& b);
+
+	/*
+	 * reverse the order of iterators
+	*/
+	template< typename BidirIt >
+	void reverse( BidirIt first,
+				BidirIt last );
 	
+
+	/*
+	 * swap iterators
+	*/
+	template< typename ForwardIt1,
+			typename ForwardIt2 >
+	void iter_swap( ForwardIt1 a,
+					ForwardIt2 b );
 }
 
 

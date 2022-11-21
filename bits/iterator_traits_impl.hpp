@@ -64,7 +64,9 @@ namespace ft
 	// Optimization for random access iterator
 	//
 	template<typename RAIter>
-	typename iterator_traits<RAIter>::difference_type distance(RAIter first, RAIter last, random_access_iterator_tag)
+	typename iterator_traits<RAIter>::difference_type distance(RAIter first,
+															RAIter last,
+															ft::random_access_iterator_tag)
 	{
 		return last - first;
 	}
@@ -72,7 +74,9 @@ namespace ft
 	// Get distance between 2 input Iterators
 	//
 	template<typename Iter>
-	typename iterator_traits<Iter>::difference_type distance(Iter first, Iter last, input_iterator_tag)
+	typename iterator_traits<Iter>::difference_type distance(Iter first,
+															Iter last, 
+															ft::input_iterator_tag)
 	{
 		typename iterator_traits<Iter>::difference_type it_distance = 0;
 		while (first != last)
@@ -83,38 +87,57 @@ namespace ft
 		return it_distance;
 	}
 
-	//
-	// Get distance between 2 input Iterators
-	//
+	/*
+	 * Get distance between 2 input Iterators
+	*/
 	template<typename Iter>
 	typename iterator_traits<Iter>::difference_type distance(Iter first, Iter last)
 	{
-		return distance(first, last, typename iterator_traits<Iter>::iterator_category());
+		return ft::distance(first, last, typename ft::iterator_traits<Iter>::iterator_category());
 	}
-	//
-	// Optimization for random access iterator
-	//
+	/*
+	 * Optimization for random access iterator
+	*/
 	template<typename RAIter, typename Distance>
-	void advance(RAIter& it, Distance distance, random_access_iterator_tag)
+	void advance(RAIter& it, Distance distance, ft::random_access_iterator_tag)
 	{
 		it += distance;
 	}
-	//
-	// Advance iterator by distance
-	//
+	/*
+	 * Advance iterator by distance
+	*/
 	template<typename InputIter, typename Distance>
-	void advance(InputIter& it, Distance distance, input_iterator_tag)
+	void advance(InputIter& it, Distance distance, ft::input_iterator_tag)
 	{
-		for (std::ptrdiff_t i = 0; i < distance; ++i)
+		while (distance > 0)
+		{
+			--distance;
 			++it;
+		}
 	}
-	//
-	// Advance iterator by distance
-	//
+
+
+	template<typename InputIter, typename Distance>
+	void advance(InputIter& it, Distance distance, ft::bidirectional_iterator_tag)
+	{
+		while (distance > 0)
+		{
+			--distance;
+			++it;
+		}
+		while (distance < 0)
+		{
+			++distance;
+			--it;
+		}
+	}
+	/*
+	 * Advance iterator by distance
+	*/
 	template<typename Iter, typename Distance>
 	void advance(Iter& it, Distance distance)
 	{
-		advance(it, distance, typename iterator_traits<Iter>::iterator_category());
+		ft::advance(it, distance, typename ft::iterator_traits<Iter>::iterator_category());
 	}
 
 }

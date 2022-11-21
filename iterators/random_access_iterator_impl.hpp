@@ -24,9 +24,9 @@ namespace ft
 			_ptr = it._ptr;
 		return *this;
 	}
-	//
-	// dereference operators
-	//
+	/*
+	 * dereference operators
+	*/
 	template<typename T>
 	typename random_access_iterator<T>::reference random_access_iterator<T>::operator*() const
 	{
@@ -38,9 +38,9 @@ namespace ft
 	{
 		return _ptr;
 	}
-	//
-	// other operations
-	//
+	/*
+	 * other operations
+	*/
 	template<typename T>
 	random_access_iterator<T>& random_access_iterator<T>::operator++()
 	{
@@ -123,9 +123,9 @@ namespace ft
 	{
 		return _ptr;
 	}
-
-	// compare operations
-	//
+	/*
+	 * compare operations
+	*/
 	template<typename T>
 	bool operator==(const random_access_iterator<T>& lhs, const random_access_iterator<T>& rhs)
 	{

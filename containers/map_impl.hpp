@@ -11,7 +11,7 @@ namespace ft
 		typename _Compare,
 		typename _Allocator >
 	map<_K, _V, _Compare, _Allocator>::map()
-		: _tree()
+		:	_tree()
 	{}
 
 	template< typename _K,
@@ -19,7 +19,16 @@ namespace ft
 		typename _Compare,
 		typename _Allocator >
 	map<_K, _V, _Compare, _Allocator>::map(const allocator_type& alloc )
-		: _tree(alloc)
+		:	_tree(alloc)
+	{}
+
+	template< typename _K,
+		typename _V,
+		typename _Compare,
+		typename _Allocator >
+	map<_K, _V, _Compare, _Allocator>::map(const key_compare& _comp,
+										const allocator_type& _alloc )
+		:	_tree(_comp, _alloc)
 	{}
 
 	template< typename _K,
@@ -30,7 +39,7 @@ namespace ft
 	map<_K, _V, _Compare, _Allocator>::map( InputIt first, InputIt last,
      	 	 	 const key_compare& comp,
      	 	 	 const allocator_type& alloc )
-		: _tree(first, last, comp, alloc)
+		:	_tree(first, last, comp, alloc)
 	{}
 
 	template< typename _K,
@@ -38,7 +47,7 @@ namespace ft
 		typename _Compare,
 		typename _Allocator >
 	map<_K, _V, _Compare, _Allocator>::map( const map& other )
-		: _tree(other._tree)
+		:	_tree(other._tree)
 	{}
 
 	template< typename _K,
@@ -264,6 +273,15 @@ namespace ft
 		typename _V,
 		typename _Compare,
 		typename _Allocator >
+	typename map<_K, _V, _Compare, _Allocator>::allocator_type	map<_K, _V, _Compare, _Allocator>::get_allocator() const
+	{
+		return _tree.get_allocator();
+	}
+
+	template< typename _K,
+		typename _V,
+		typename _Compare,
+		typename _Allocator >
 	typename map<_K, _V, _Compare, _Allocator>::size_type map<_K, _V, _Compare, _Allocator>::count(const key_type& key) const
 	{
 		return _tree.count(key);
@@ -369,7 +387,7 @@ namespace ft
 		typename _Allocator >
 	const typename map<_K, _V, _Compare, _Allocator>::mapped_type& map<_K, _V, _Compare, _Allocator>::at( const key_type& key ) const
 	{
-		iterator it = find(key);
+		const_iterator it = find(key);
 		if (it == end())
 			throw std::out_of_range("map: no such key");
 		return it->second;
@@ -417,7 +435,7 @@ namespace ft
     {
     	if (lhs.size() != rhs.size())
     		return false;
-		return equal(lhs.begin(), lhs.end(), rhs.begin());
+		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
     }
 
 	template< typename _K, 
@@ -447,7 +465,7 @@ namespace ft
 	bool operator<( const map<_K, _V, _Compare, _Allocator>& lhs,
                  	 const map<_K, _V, _Compare, _Allocator>& rhs )
 	{
-		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
 
 	template< typename _K, 

@@ -15,8 +15,10 @@ void	cmp(const TESTED_NAMESPACE::vector<T, Alloc> &lhs, const TESTED_NAMESPACE::
 
 int		main(void)
 {
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(4);
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct2(4);
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct;
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
+
+	vct2.push_back(5);
 
 	cmp(vct, vct);  // 0
 	cmp(vct, vct2); // 1

@@ -374,20 +374,8 @@ namespace ft
 			typename _Allocator>
 	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::clear()
 	{
-	//	if (_rb_tree_impl._root->_is_nil)
-	//		return ;
-		//base_ptr node = _rb_tree_impl._begin;
-		//link_type current;
-		//while (!node->_is_nil)
-		//{
-		//	current = s_current(node);
-		//	node = _rb_tree_impl.increment(node);
-		//	_rb_tree_impl._alloc.destroy(current);
-		//	_rb_tree_impl._alloc.deallocate(current, 1);
-		//}
 		clear_tree(_rb_tree_impl._root);
 		_rb_tree_impl = rb_tree_impl_type();
-		
 	}
 
 	template<typename _K, 
@@ -400,9 +388,9 @@ namespace ft
 		if (node->_is_nil)
 			return ;
 		clear_tree(node->_left);
-		clear_tree(node->_right);
 		_rb_tree_impl._alloc.destroy(s_current(node));
 		_rb_tree_impl._alloc.deallocate(s_current(node), 1);
+		clear_tree(node->_right);
 	}
 
 	template<typename _K, 
@@ -828,6 +816,8 @@ namespace ft
 			erase_fixup(x);
 		_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
 		_rb_tree_impl._root->_color = rb_black;
+		_rb_tree_impl._alloc.destroy(s_current(z));
+		_rb_tree_impl._alloc.deallocate(s_current(z), 1);
 		--_rb_tree_impl._size;
 		return 1;
 	}
@@ -1104,7 +1094,7 @@ namespace ft
 	bool operator<( const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& lhs,
                  const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& rhs )
 	{
-		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
 
 	template< typename _K, 
@@ -1126,7 +1116,7 @@ namespace ft
 	bool operator>( const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& lhs,
                  const rb_tree<_K, _V, _KOV, _Compare, _Allocator>& rhs )
 	{
-		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end(), greater<typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::value_type>());
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end(), greater<typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::value_type>());
 	}
 
 	template< typename _K, 
@@ -1163,6 +1153,19 @@ namespace ft
 		ft::swap(_comp, other._comp);
 		ft::swap(_value_comp, other._value_comp);
 		ft::swap(_key_of_value, other._key_of_value);
+	}
+	template<typename T>
+	inline bool operator==(const rb_tree_iterator<T>& lhs,
+						const rb_tree_const_iterator<T>& rhs)
+	{
+		return lhs.base() == rhs.base();
+	}
+
+	template<typename T>
+	inline bool operator!=(const rb_tree_iterator<T>& lhs,
+						const rb_tree_const_iterator<T>& rhs)
+	{
+		return !(lhs == rhs);
 	}
 }
 

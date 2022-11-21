@@ -145,6 +145,7 @@ namespace ft
        resize(_size - 1);
     }
 
+
     template<typename T,
     		typename Alloc>
     void vector<T, Alloc>::reserve(vector<T, Alloc>::size_type new_capacity)
@@ -158,13 +159,19 @@ namespace ft
 			{
 				ft::uninitialized_copy(begin(), end(), iterator(_data), _allocator);
 				if (this->_data)
+				{
+					ft::destroy(begin(), end(), _allocator);
 					_allocator.deallocate(this->_data, _capacity);
+				}
 				this->_data = _data;
 			}
 			catch(...)
 			{
 				if (_data)
+				{
+					ft::destroy(begin(), end(), _allocator);
 					_allocator.deallocate(_data, new_capacity);
+				}
 				throw;
 			}
 			_capacity = new_capacity;
@@ -173,15 +180,14 @@ namespace ft
 
     template<typename T,
     		typename Alloc>
-    void vector<T, Alloc>::resize( size_type count, value_type value )
+    typename vector<T, Alloc>::size_type vector<T, Alloc>::update_size(size_type _new_size)
     {
-    	if (count < 0) return;
-        if (count > _max_size)
-            throw std::length_error("ft::vector::resize");
-        if (count == _size) return ;
-        if (count < _size)
-			ft::destroy(begin() + count, end(), _allocator);
-        else if (count > this->_capacity)
+        if (_new_size > _max_size)
+            throw std::length_error("ft::vector::update_size");
+        if (_new_size == _size) return this->_capacity;
+        if (_new_size < _size)
+			ft::destroy(begin() + _new_size, end(), _allocator);
+        else if (_new_size > this->_capacity)
         {
             size_type _capacity;
             if (!this->_capacity) _capacity = 1;
@@ -189,9 +195,18 @@ namespace ft
                 _capacity = this->_capacity * 2;
             else
                 _capacity = _max_size;
-            if (count > _capacity) _capacity = count;
-            reserve(_capacity);
+            if (_new_size > _capacity) _capacity = _new_size;
+			return _capacity;
         }
+        return this->_capacity;
+    }
+
+    template<typename T,
+    		typename Alloc>
+    void vector<T, Alloc>::resize( size_type count, value_type value )
+    {
+    	size_type _new_capacity = update_size(count);
+    	reserve(_new_capacity);
         if (count > _size)
         {
             for (size_type i = _size; i < count; ++i)
@@ -302,6 +317,7 @@ namespace ft
     		typename Alloc>
     typename vector<T, Alloc>::size_type vector<T, Alloc>::max_size() const
     {
+    	//return std::numeric_limits<difference_type>::max();
         return _max_size;
     }
 
@@ -455,18 +471,70 @@ namespace ft
     typename vector<T, Alloc>::iterator vector<T, Alloc>::insert( const_iterator pos, const_reference value )
     {
         size_type position = distance(cbegin(), pos);
-        size_type old_size = _size;
-        resize(_size + 1);
-
-        size_type i = _size;
-        while ( i >= position && i)
-        {
-            *(_data + i) = *(_data + old_size);
-            --old_size;
-            --i;
-        }
-        *(_data + position) = value;
-        return iterator(begin() + position);
+    	if (begin() + capacity() != end() && pos == cend())
+    	{
+    		_allocator.construct(_data + position, value);
+			++_size;
+    		return begin() + position;
+    	}
+    	if (begin() + capacity() != end())
+    	{
+			_allocator.construct(_allocator.address(*end()), back());
+			ft::copy_backward(pos, cend() - 1, end());
+			*(_data + position) = value;
+			++_size;
+    		return begin() + position;
+    	}
+    	size_type _capacity = update_size(_size + 1);
+    	pointer _data = _allocator.allocate(_capacity);
+		if (pos == cend())
+		{
+			try
+			{
+				ft::uninitialized_copy(cbegin(), pos, _data, _allocator);
+				_allocator.construct(_data + position, value);
+				if (this->_data)
+				{
+					ft::destroy(begin(), end(), _allocator);
+					_allocator.deallocate(this->_data, this->_capacity);
+				}
+				this->_data = _data;
+			}
+			catch(...)
+			{
+				if (_data)
+				{
+					_allocator.destroy(_data + position);
+					_allocator.deallocate(_data, _capacity);
+				}
+			}
+			++_size;
+			this->_capacity = _capacity;
+			return begin() + position;
+		}
+		try
+		{
+			ft::uninitialized_copy(cbegin(), pos, _data, _allocator);
+			_allocator.construct(_data + position, value);
+			ft::uninitialized_copy(pos, cend(), _data + position + 1, _allocator);
+			if (this->_data)
+			{
+				ft::destroy(begin(), end(), _allocator);
+				_allocator.deallocate(this->_data, this->_capacity);
+			}
+			this->_data = _data;
+		}
+		catch(...)
+		{
+			if (_data)
+			{
+				_allocator.destroy(_data + position);
+				_allocator.deallocate(_data, _capacity);
+			}
+		}
+		this->_capacity = _capacity;
+		++_size;
+        return begin() + position;
     }
 
     template<typename T,
@@ -478,8 +546,7 @@ namespace ft
 
 	template<typename T,
 			typename _Alloc>
-	template<typename IntegralType>
-	typename vector<T, _Alloc>::iterator vector<T, _Alloc>::range_insert(const_iterator pos, IntegralType count, IntegralType value, ft::true_type)
+	typename vector<T, _Alloc>::iterator vector<T, _Alloc>::range_insert(const_iterator pos, size_type count, const_reference value, ft::true_type)
 	{
         size_type position = distance(cbegin(), pos);
         size_type old_size = _size;
@@ -550,17 +617,16 @@ namespace ft
     typename vector<T, Alloc>::iterator vector<T, Alloc>::erase( iterator first, iterator last )
     {
         bool isEnd = (last == end());
-        size_type position = distance(first, last);
+        size_type range_len = distance(first, last);
         size_type pos = distance(begin(), first);
 
         if (first == last) return last;
-        while (first != last)
+		size_type i = 0;
+        while (i < range_len)
         {
-        	for (size_type i = distance(begin(), first); i < _size - position; ++i)
-            	*(_data + i) = *(_data + i + position);
-            ++first;
+        	first = erase(first);
+        	++i;
         }
-        resize(_size - position);
         return isEnd ? end() : begin() + pos;
 
     }
@@ -620,7 +686,7 @@ namespace ft
 			const vector<T, _Alloc>& lhs,
             const vector<T, _Alloc>& rhs )
     {
-    	return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+    	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
     }
 
 	template< typename T,

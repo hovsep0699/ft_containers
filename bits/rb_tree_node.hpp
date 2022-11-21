@@ -71,12 +71,8 @@ namespace ft
 		   	typedef const rb_tree_node<T>*					const_link_type;
 		   	typedef rb_tree_node<T>*						link_type;
 		private:		
-			/*
-		 	 * sentinel node of red-black tree 
-			*/
-			base_type			_sentinel;
 			
-			void initialize();
+			void	initialize();
 
 		public:
 
@@ -84,15 +80,17 @@ namespace ft
 			/*	      member types		 */
 			/* ========================= */
 			
-			typedef T										value_type;
-			typedef _Allocator								allocator_type;
-			typedef typename _Allocator::size_type			size_type;
-			typedef typename _Allocator::const_reference	const_reference;
+			typedef T														value_type;
+			typedef _Allocator												allocator_type;
+			typedef typename _Allocator::template rebind<base_type>::other	base_allocator_type;
+			typedef typename _Allocator::size_type							size_type;
+			typedef typename _Allocator::const_reference					const_reference;
 
 			/* ============== */
 			/*	   members    */
 			/* ============== */
-
+			
+			base_allocator_type	_base_alloc;
 			allocator_type		_alloc;
 			base_ptr			_root;
 			base_ptr			_begin;
@@ -102,13 +100,15 @@ namespace ft
 			bool				_multivalues;
 		
 			/* ========================= */
-			/*	      constructor		 */
+			/*	    member functions	 */
 			/* ========================= */
 
-			rb_tree_impl(bool multivalues = false, const allocator_type alloc = allocator_type() );
-			rb_tree_impl(const rb_tree_impl& );
-			rb_tree_impl& operator=(const rb_tree_impl&);
-			void swap(rb_tree_impl& impl);
+					rb_tree_impl(bool multivalues = false,
+								const allocator_type alloc = allocator_type() );
+					rb_tree_impl(const rb_tree_impl& );
+					rb_tree_impl& operator=(const rb_tree_impl&);
+					~rb_tree_impl();
+			void	swap(rb_tree_impl& impl);
 
 			/*!
 			 * @function	create_node

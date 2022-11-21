@@ -23,6 +23,14 @@ namespace ft
 	template< typename _K,
 		typename _Compare,
 		typename _Allocator >
+	set<_K, _Compare, _Allocator>::set( const key_compare& comp,
+            					const allocator_type& alloc)
+    :	_tree(comp, alloc)
+	{}
+
+	template< typename _K,
+		typename _Compare,
+		typename _Allocator >
 	template<typename InputIt>
 	set<_K, _Compare, _Allocator>::set( InputIt first, InputIt last,
      	 	 	 const key_compare& comp,
@@ -36,6 +44,15 @@ namespace ft
 	set<_K, _Compare, _Allocator>::set( const set& other )
 		: _tree(other._tree)
 	{}
+
+
+	template< typename _K,
+		typename _Compare,
+		typename _Allocator >
+	typename set<_K, _Compare, _Allocator>::allocator_type set<_K, _Compare, _Allocator>::get_allocator() const
+	{
+		return _tree.get_allocator();
+	}
 
 	template< typename _K,
 		typename _Compare,
@@ -337,7 +354,7 @@ namespace ft
     {
     	if (lhs.size() != rhs.size())
     		return false;
-		return equal(lhs.begin(), lhs.end(), rhs.begin());
+		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
     }
 
 	template< typename _K, 
@@ -364,7 +381,7 @@ namespace ft
 	bool operator<( const set<_K, _Compare, _Allocator>& lhs,
                  	 const set<_K, _Compare, _Allocator>& rhs )
 	{
-		return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
 
 	template< typename _K, 
