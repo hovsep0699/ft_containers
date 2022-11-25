@@ -9,6 +9,11 @@ namespace ft
 			typename Allocator>
 	class vector
 	{
+
+		/*
+		 * avoid allocators that is not given for T type
+		*/
+		typedef Allocator::template rebind<T>::other							current_allocator_type;
 		public:
 
 			/* =================== */
@@ -114,21 +119,52 @@ namespace ft
 			/*    member objects   */
 			/* =================== */
 
-			allocator_type	_allocator;
-			pointer			_data;
-			size_type		_size;
-			size_type		_capacity;
-			size_type		_max_size;
+			allocator_type			_given_alloc;
+			current_allocator_type	_alloc;
+			pointer					_data;
+			size_type				_size;
+			size_type				_capacity;
+			size_type				_max_size;
 		private:
 
 			
 			size_type update_size(size_type _new_capacity);
 
-			template<typename IntegralType>
-			void range_assign(IntegralType count, IntegralType value, ft::true_type);
+			
+			void range_construct(size_type count, const_reference value, ft::true_type);
+
+			template<typename InputIterator>
+			void range_construct(InputIterator first, InputIterator last, ft::false_type);
+
+			template<typename InputIterator>
+			void range_construct_select(InputIterator first, InputIterator last, ft::input_iterator_tag);
+
+			template<typename InputIterator>
+			void range_construct_select(InputIterator first, InputIterator last, ft::forward_iterator_tag);
+
+			template<typename InputIterator>
+			void range_construct_select(InputIterator first, InputIterator last, std::input_iterator_tag);
+
+			template<typename InputIterator>
+			void range_construct_select(InputIterator first, InputIterator last, std::forward_iterator_tag);
+
+
+			void range_assign(size_type count, const_reference value, ft::true_type);
 
 			template<typename InputIterator>
 			void range_assign(InputIterator first, InputIterator last, ft::false_type);
+
+			template<typename InputIterator>
+			void range_assign_select(InputIterator first, InputIterator last, ft::input_iterator_tag);
+
+			template<typename ForwardIterator>
+			void range_assign_select(ForwardIterator first, ForwardIterator last, ft::forward_iterator_tag);
+
+			template<typename InputIterator>
+			void range_assign_select(InputIterator first, InputIterator last, std::input_iterator_tag);
+
+			template<typename ForwardIterator>
+			void range_assign_select(ForwardIterator first, ForwardIterator last, std::forward_iterator_tag);
 
 			iterator range_insert(const_iterator pos, size_type count, const_reference value, ft::true_type);
 

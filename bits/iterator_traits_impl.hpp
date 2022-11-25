@@ -87,6 +87,27 @@ namespace ft
 		return it_distance;
 	}
 
+	//
+	// Optimization for random access iterator
+	//
+	template<typename RAIter>
+	typename iterator_traits<RAIter>::difference_type distance(RAIter first,
+															RAIter last,
+															std::random_access_iterator_tag)
+	{
+		return distance(first, last, ft::random_access_iterator_tag());
+	}
+	//
+	// Get distance between 2 input Iterators
+	//
+	template<typename Iter>
+	typename iterator_traits<Iter>::difference_type distance(Iter first,
+															Iter last, 
+															std::input_iterator_tag)
+	{
+		return distance(first, last, ft::input_iterator_tag());
+	}
+
 	/*
 	 * Get distance between 2 input Iterators
 	*/
@@ -130,6 +151,30 @@ namespace ft
 			++distance;
 			--it;
 		}
+	}
+
+	/*
+	 * Optimization for random access iterator
+	*/
+	template<typename RAIter, typename Distance>
+	void advance(RAIter& it, Distance distance, std::random_access_iterator_tag)
+	{
+		advance(it, distance, ft::random_access_iterator_tag());
+	}
+	/*
+	 * Advance iterator by distance
+	*/
+	template<typename InputIter, typename Distance>
+	void advance(InputIter& it, Distance distance, std::input_iterator_tag)
+	{
+		advance(it, distance, ft::input_iterator_tag());
+	}
+
+
+	template<typename InputIter, typename Distance>
+	void advance(InputIter& it, Distance distance, std::bidirectional_iterator_tag)
+	{
+		advance(it, distance, ft::bidirectional_iterator_tag());
 	}
 	/*
 	 * Advance iterator by distance

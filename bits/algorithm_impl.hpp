@@ -99,6 +99,18 @@ namespace ft
         	*first = value;
 	}
 
+	template< typename ForwardIt,
+			typename Size,
+			typename T >
+	ForwardIt fill(	ForwardIt first,
+				Size count,
+				const T& value )
+	{
+		for ( ; count > 0; --count; ++first)
+			*first = value;
+		return first;
+	}
+
 	template<typename InputIt,
 			typename OutputIt>
 	OutputIt copy( 	InputIt first,
@@ -143,6 +155,51 @@ namespace ft
     	try
     	{
         	for (; first != last; ++first, ++current)
+        		_alloc.construct(_alloc.address(*current), *first );
+        	return current;
+    	}
+    	catch (...)
+    	{
+			ft::destroy(out, current, _alloc);
+        	throw;
+    	}
+    }
+
+	template< typename ForwardIt,
+			typename Size,
+			typename T,
+			typename _Allocator>
+	void uninitialized_fill_n(	ForwardIt first,
+								Size count,
+								const T& value,
+								_Allocator _alloc)
+    {
+    	ForwardIt current = first;
+    	try
+    	{
+        	for ( ; count > 0; ++first, ++current, --count)
+        		_alloc.construct(_alloc.address(*current), value );
+        	return current;
+    	}
+    	catch (...)
+    	{
+			ft::destroy(out, current, _alloc);
+        	throw;
+    	}
+    }
+
+	template< typename ForwardIt,
+			typename T,
+			typename _Allocator>
+	void uninitialized_fill(	ForwardIt first,
+								ForwardIt last,
+								const T& value,
+								_Allocator _alloc)
+    {
+    	ForwardIt current = first;
+    	try
+    	{
+        	for ( ; first != last; ++current, ++first)
         		_alloc.construct(_alloc.address(*current), *first );
         	return current;
     	}

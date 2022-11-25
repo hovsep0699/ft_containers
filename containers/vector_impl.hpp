@@ -7,10 +7,86 @@
 namespace ft
 {
 
+	template<typename T,
+			typename Alloc>
+	void vector<T, Alloc>::range_construct(size_type count, const_reference value, ft::true_type)
+	{
+		size_type _capacity = update_size(count);
+		pointer _data = _alloc.allocate(_capacity);
+		try
+		{
+			ft::uninitialized_fill_n(_data, count, value, _alloc);
+		}
+		catch (...)
+		{
+			_alloc.deallocate(_data);
+			throw ;
+		}
+		this->_data = _data;
+		this->_size = count;
+		this->_capacity = _capacity;
+	}
+
+	template<typename T,
+			typename Alloc>
+	template<typename InputIterator>
+	void vector<T, Alloc>::range_construct(InputIterator first, InputIterator last, ft::false_type)
+	{
+		typedef typename ft::iterator<InputIterator>::iterator_category category;
+		range_construct_select(first, last, category());
+	}
+
+	template<typename T,
+			typename Alloc>
+	template<typename InputIterator>
+	void vector<T, Alloc>::range_construct_select(InputIterator first, InputIterator last, ft::input_iterator_tag)
+	{
+		for ( ; first != last; ++first )
+			push_back(*first);
+	}
+
+	template<typename T,
+			typename Alloc>
+	template<typename InputIterator>
+	void vector<T, Alloc>::range_construct_select(InputIterator first, InputIterator last, std::input_iterator_tag)
+	{
+		range_construct_select(first, last, ft::input_iterator_tag());
+	}
+
+	template<typename T,
+			typename Alloc>
+	template<typename ForwardIterator>
+	void vector<T, Alloc>::range_construct_select(ForwardIterator first, ForwardIterator last, ft::forward_iterator_tag)
+	{
+		size_type range_len = ft::distance(first, last);
+		pointer _data = _alloc.allocate(range_len);
+		pointer _end = _data;
+		try
+		{
+			_end = ft::uninitialized_copy(first, last, _data, _alloc);
+		}
+		catch (...)
+		{
+			_alloc.deallocate(_data);
+			throw ;
+		}
+		_capacity = range_len;
+		_size = range_len;
+	}
+
+	template<typename T,
+			typename Alloc>
+	template<typename ForwardIterator>
+	void vector<T, Alloc>::range_construct_select(ForwardIterator first, ForwardIterator last, std::forward_iterator_tag)
+	{
+		range_construct_select(first, last, ft::forward_iterator_tag());
+	}
+
     template<typename T,
     		typename Alloc>
     vector<T, Alloc>::vector(const allocator_type& alloc)
-    	:	_allocator(alloc),
+    	:	_given_alloc(alloc),
+    		_alloc(),
 			_data(ft_nullptr),
             _size(0),
 			_capacity(0),
@@ -19,42 +95,45 @@ namespace ft
     
     template<typename T,
     		typename Alloc>
-    vector<T, Alloc>::vector(size_type n, const_reference val, const allocator_type& alloc)
-        :	_allocator(alloc),
+    vector<T, Alloc>::vector(size_type count, const_reference value, const allocator_type& alloc)
+        :	_given_alloc(alloc),
+        	_alloc(),
             _data(ft_nullptr),
             _size(0), 
 			_capacity(0),
            _max_size(alloc.max_size())
     {
-        resize(n, val);
+    	range_construct(count, value, ft::true_type());
     }
 
     template<typename T,
     		typename Alloc>
     vector<T, Alloc>::vector(const vector<T, Alloc>& other)
-    	:	_allocator(other._allocator),
+    	:	_given_alloc(other._alloc),
+    		_alloc(other._alloc),
         	_data(ft_nullptr),
             _size(0),
             _capacity(0),
-       	   _max_size(other._allocator.max_size())
+       	   _max_size(other._alloc.max_size())
     {
-        for (size_type i = 0; i < other._size; ++i)
-           push_back(other._data[i]);
+    	range_construct(other.begin(), other.end(), ft::false_type());
     }
+
 
     template<typename T, 
     		typename Alloc>
     template <typename InputIterator>
     vector<T, Alloc>::vector (InputIterator first, InputIterator last, 
                             const allocator_type& alloc)
-		:	_allocator(alloc),
+		:	_given_alloc(alloc),
+			_alloc(),
 			_data(ft_nullptr),
 			_size(0),
 			_capacity(0),
 			_max_size(alloc.max_size())
     {
 		typedef typename is_integral<InputIterator>::type integral;
-		range_assign(first, last, integral() );
+		range_construct(first, last, integral() );
     }
 
     template<typename T,
@@ -66,19 +145,19 @@ namespace ft
         	size_type other_size = other.size();
         	if (other_size > capacity())
 			{
-				pointer _data = _allocator.allocate(other_size);
+				pointer _data = _alloc.allocate(other_size);
 				try
 				{
-					ft::uninitialized_copy(other.begin(), other.end(), iterator(_data), _allocator);
-					ft::destroy(begin(), end(), _allocator);
+					ft::uninitialized_copy(other.begin(), other.end(), iterator(_data), _alloc);
+					ft::destroy(begin(), end(), _alloc);
 					if (this->_data)
-						_allocator.deallocate(this->_data, _capacity);
+						_alloc.deallocate(this->_data, _capacity);
 					this->_data = _data;
 				}
 				catch(...)
 				{
 					if (_data)
-						_allocator.deallocate(_data, other_size);
+						_alloc.deallocate(_data, other_size);
 					throw ;
 				}
 
@@ -87,42 +166,57 @@ namespace ft
 			else if (size() >= other_size)
 			{
 				iterator it = ft::copy(other.begin(), other.end(), begin());
-				ft::destroy(it, end(), _allocator);
+				ft::destroy(it, end(), _alloc);
 			}
 			else
 			{
 				ft::copy(other.begin(), other.end(), begin());
-				ft::uninitialized_copy(other.end(), other.end(), end(), _allocator);
+				ft::uninitialized_copy(other.end(), other.end(), end(), _alloc);
 			}
 			_size = other_size;
 
         }
         return *this;
     }
-    
+   	 
+    template<typename T,
+    		typename Alloc>
+	void vector<T, Alloc>::range_assign(size_type count, const_reference value, ft::true_type)
+	{
+		if (count > _capacity)
+		{
+			vector tmp(count, value);
+			tmp.swap(*this);
+		}
+		else if (count > _size)
+		{
+			ft::fill(begin(), end(), value);
+			ft::uninitialized_fill_n(end(), count - _size, value, _alloc);
+			_size = count;
+		}
+		else
+		{
+			iterator _end = ft::fill_n(begin(), count, value);
+			ft::destroy(_end, end(), _alloc);
+			_size = ft::distance(begin(), _end);
+		}
+	}
+
+    template<typename T,
+    		typename Alloc>
+    template<InputIterator>
+	void vector<T, Alloc>::range_assign(InputIterator first, InputIterator last, ft::false_type)
+	{
+		typedef typename ft::iterator<InputIterator>::iterator_category category;
+		range_assign_select(first, last, category());
+	}
+
     template<typename T,
     		typename Alloc>
     typename vector<T, Alloc>::allocator_type vector<T, Alloc>::get_allocator() const
     {
-        return _allocator;
+        return _given_alloc;
     }
-
-    template<typename T,
-    		typename Alloc>
-	template<typename IntegralType>
-	void vector<T, Alloc>::range_assign(IntegralType n, IntegralType value, ft::true_type)
-	{
-        resize(n, value);
-	}
-
-    template<typename T,
-    		typename Alloc>
-	template<typename InputIterator>
-	void vector<T, Alloc>::range_assign(InputIterator first, InputIterator last, ft::false_type)
-	{
-        for (InputIterator it = first; it != last; ++it)
-            push_back(*it);
-	}
 
     template<typename T,
     		typename Alloc>
@@ -133,16 +227,17 @@ namespace ft
     
     template<typename T,
     		typename Alloc>
-    void vector<T, Alloc>::push_back(vector<T, Alloc>::const_reference val )
+    void vector<T, Alloc>::push_back(const_reference value)
     {
-       resize(_size + 1, val);
+       insert(end(), value);
     }
 
     template<typename T,
     		typename Alloc>
     void vector<T, Alloc>::pop_back()
     {
-       resize(_size - 1);
+    	_alloc.destroy(_data + _size - 1);
+    	--_size;
     }
 
 
@@ -154,14 +249,14 @@ namespace ft
             throw std::length_error("ft::vector::reserve");
         if (new_capacity > _capacity)
 		{
-			pointer _data = _allocator.allocate(new_capacity);
+			pointer _data = _alloc.allocate(new_capacity);
 			try
 			{
-				ft::uninitialized_copy(begin(), end(), iterator(_data), _allocator);
+				ft::uninitialized_copy(begin(), end(), iterator(_data), _alloc);
 				if (this->_data)
 				{
-					ft::destroy(begin(), end(), _allocator);
-					_allocator.deallocate(this->_data, _capacity);
+					ft::destroy(begin(), end(), _alloc);
+					_alloc.deallocate(this->_data, _capacity);
 				}
 				this->_data = _data;
 			}
@@ -169,8 +264,8 @@ namespace ft
 			{
 				if (_data)
 				{
-					ft::destroy(begin(), end(), _allocator);
-					_allocator.deallocate(_data, new_capacity);
+					ft::destroy(begin(), end(), _alloc);
+					_alloc.deallocate(_data, new_capacity);
 				}
 				throw;
 			}
@@ -186,7 +281,7 @@ namespace ft
             throw std::length_error("ft::vector::update_size");
         if (_new_size == _size) return this->_capacity;
         if (_new_size < _size)
-			ft::destroy(begin() + _new_size, end(), _allocator);
+			ft::destroy(begin() + _new_size, end(), _alloc);
         else if (_new_size > this->_capacity)
         {
             size_type _capacity;
@@ -210,7 +305,7 @@ namespace ft
         if (count > _size)
         {
             for (size_type i = _size; i < count; ++i)
-                _allocator.construct(_data + i, value);
+                _alloc.construct(_data + i, value);
         }
         _size = count;
     }
@@ -327,7 +422,7 @@ namespace ft
     {
         clear();
         if (_data)
-        	_allocator.deallocate(_data, _capacity);
+        	_alloc.deallocate(_data, _capacity);
         _data = ft_nullptr;
     }
 
@@ -335,7 +430,7 @@ namespace ft
     		typename Alloc>
     void vector<T, Alloc>::clear()
     {
-		ft::destroy(begin(), end(), _allocator);
+		ft::destroy(begin(), end(), _alloc);
         _size = 0;
     }
 
@@ -446,22 +541,22 @@ namespace ft
 		size_type except_size;
 		try
 		{
-			_data = _allocator.allocate(_size);
+			_data = _alloc.allocate(_size);
 			for (except_size = 0; except_size < this->_size; ++except_size)
-				_allocator.construct(_data + except_size, this->_data[except_size]);
+				_alloc.construct(_data + except_size, this->_data[except_size]);
 			clear();
 			this->_size = _size;
 			if (this->_data)
-				_allocator.deallocate(this->_data, _capacity);
+				_alloc.deallocate(this->_data, _capacity);
 			this->_data = _data;
 			_capacity = _size;
 		}
 		catch(...)
 		{
 			for (size_type i = 0; i < except_size; ++i)
-				_allocator.destroy(_data + i);
+				_alloc.destroy(_data + i);
 			if (_data)
-				_allocator.deallocate(_data, _size);
+				_alloc.deallocate(_data, _size);
 			throw ;
 		}
     }
@@ -473,30 +568,30 @@ namespace ft
         size_type position = distance(cbegin(), pos);
     	if (begin() + capacity() != end() && pos == cend())
     	{
-    		_allocator.construct(_data + position, value);
+    		_alloc.construct(_data + position, value);
 			++_size;
     		return begin() + position;
     	}
     	if (begin() + capacity() != end())
     	{
-			_allocator.construct(_allocator.address(*end()), back());
+			_alloc.construct(_alloc.address(*end()), back());
 			ft::copy_backward(pos, cend() - 1, end());
 			*(_data + position) = value;
 			++_size;
     		return begin() + position;
     	}
     	size_type _capacity = update_size(_size + 1);
-    	pointer _data = _allocator.allocate(_capacity);
+    	pointer _data = _alloc.allocate(_capacity);
 		if (pos == cend())
 		{
 			try
 			{
-				ft::uninitialized_copy(cbegin(), pos, _data, _allocator);
-				_allocator.construct(_data + position, value);
+				ft::uninitialized_copy(cbegin(), pos, _data, _alloc);
+				_alloc.construct(_data + position, value);
 				if (this->_data)
 				{
-					ft::destroy(begin(), end(), _allocator);
-					_allocator.deallocate(this->_data, this->_capacity);
+					ft::destroy(begin(), end(), _alloc);
+					_alloc.deallocate(this->_data, this->_capacity);
 				}
 				this->_data = _data;
 			}
@@ -504,8 +599,8 @@ namespace ft
 			{
 				if (_data)
 				{
-					_allocator.destroy(_data + position);
-					_allocator.deallocate(_data, _capacity);
+					_alloc.destroy(_data + position);
+					_alloc.deallocate(_data, _capacity);
 				}
 			}
 			++_size;
@@ -514,13 +609,13 @@ namespace ft
 		}
 		try
 		{
-			ft::uninitialized_copy(cbegin(), pos, _data, _allocator);
-			_allocator.construct(_data + position, value);
-			ft::uninitialized_copy(pos, cend(), _data + position + 1, _allocator);
+			ft::uninitialized_copy(cbegin(), pos, _data, _alloc);
+			_alloc.construct(_data + position, value);
+			ft::uninitialized_copy(pos, cend(), _data + position + 1, _alloc);
 			if (this->_data)
 			{
-				ft::destroy(begin(), end(), _allocator);
-				_allocator.deallocate(this->_data, this->_capacity);
+				ft::destroy(begin(), end(), _alloc);
+				_alloc.deallocate(this->_data, this->_capacity);
 			}
 			this->_data = _data;
 		}
@@ -528,8 +623,8 @@ namespace ft
 		{
 			if (_data)
 			{
-				_allocator.destroy(_data + position);
-				_allocator.deallocate(_data, _capacity);
+				_alloc.destroy(_data + position);
+				_alloc.deallocate(_data, _capacity);
 			}
 		}
 		this->_capacity = _capacity;
@@ -608,7 +703,7 @@ namespace ft
             *(_data + i) = *(_data + i + 1);
         *(_data + _size - 1) = tmp;
         --_size;
-        _allocator.destroy(_data + _size);
+        _alloc.destroy(_data + _size);
         return iterator(pos);
     }
 
@@ -635,7 +730,8 @@ namespace ft
     		typename Alloc>
     void vector<T, Alloc>::swap( vector& other )
     {
-		ft::swap(_allocator, other._allocator);
+		ft::swap(_alloc, other._alloc);
+		ft::swap(_given_alloc, other._given_alloc);
 		ft::swap(_data, other._data);
 		ft::swap(_size, other._size);
 		ft::swap(_capacity, other._capacity);

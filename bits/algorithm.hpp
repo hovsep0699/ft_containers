@@ -69,6 +69,13 @@ namespace ft
 				ForwardIt last,
 				const T& value );
 
+	template< typename ForwardIt,
+			typename Size,
+			typename T >
+	ForwardIt fill(	ForwardIt first,
+				Size count,
+				const T& value );
+
 
 	/*
 	 * @function			copy
@@ -132,6 +139,24 @@ namespace ft
 										InputIt last,
                                      	NoThrowForwardIt out,
                                      	_Allocator _alloc);
+
+
+	template< typename ForwardIt,
+			typename Size,
+			typename T,
+			typename _Allocator>
+	void uninitialized_fill_n(	ForwardIt first,
+								Size count,
+								const T& value,
+								_Allocator _alloc);
+	
+	template< typename ForwardIt,
+			typename T,
+			typename _Allocator>
+	void uninitialized_fill(	ForwardIt first,
+								ForwardIt last,
+								const T& value,
+								_Allocator _alloc);
 	/*
 	 * swap two objects
 	*/
