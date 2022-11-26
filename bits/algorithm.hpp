@@ -72,7 +72,7 @@ namespace ft
 	template< typename ForwardIt,
 			typename Size,
 			typename T >
-	ForwardIt fill(	ForwardIt first,
+	ForwardIt fill_n(	ForwardIt first,
 				Size count,
 				const T& value );
 
@@ -145,7 +145,7 @@ namespace ft
 			typename Size,
 			typename T,
 			typename _Allocator>
-	void uninitialized_fill_n(	ForwardIt first,
+	ForwardIt uninitialized_fill_n(	ForwardIt first,
 								Size count,
 								const T& value,
 								_Allocator _alloc);

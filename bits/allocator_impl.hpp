@@ -26,7 +26,7 @@ namespace ft
 	{}
 
 	template<typename T>
-	typename allocator<T>::pointer allocator<T>::address( reference x ) const
+	typename allocator<T>::pointer allocator<T>::address( reference x )
 	{
 		return ft::addressof(x);
 	}

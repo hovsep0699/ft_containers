@@ -1,0 +1,48 @@
+Capacity Ok (file: tests/vector/assign.cpp, line: 22)
+Size: 0 (file: tests/vector/assign.cpp, line: 22)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/assign.cpp, line: 26)
+Size: 64 (file: tests/vector/assign.cpp, line: 26)
+
+Vector content:
+A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A 
+
+Capacity Ok (file: tests/vector/assign.cpp, line: 30)
+Size: 32 (file: tests/vector/assign.cpp, line: 30)
+
+Vector content:
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 
+
+Capacity Ok (file: tests/vector/assign.cpp, line: 34)
+Size: 49 (file: tests/vector/assign.cpp, line: 34)
+
+Vector content:
+8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 
+
+Capacity Ok (file: tests/vector/assign.cpp, line: 38)
+Size: 77 (file: tests/vector/assign.cpp, line: 38)
+
+Vector content:
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+
+Capacity Ok (file: tests/vector/assign.cpp, line: 46)
+Size: 0 (file: tests/vector/assign.cpp, line: 46)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/assign.cpp, line: 50)
+Size: 64 (file: tests/vector/assign.cpp, line: 50)
+
+Vector content:
+vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string vector-string 
+
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

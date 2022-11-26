@@ -4,9 +4,9 @@
 
 namespace ft
 {
-	//
-	// Checks if the first range [first1, last1) is lexicographically less than the second range [first2, last2).
-	//
+	/*
+	 * Checks if the first range [first1, last1) is lexicographically less than the second range [first2, last2).
+	*/
 	template<typename InputIt1,
 			typename InputIt2>
 	bool lexicographical_compare(	InputIt1 first1, 
@@ -20,9 +20,9 @@ namespace ft
 		}
 		return (first1 == last1) && (first2 != last2);
 	}
-	//
-	// Checks if the first range [first1, last1) is lexicographically less than the second range [first2, last2).
-	//
+	/*
+	 * Checks if the first range [first1, last1) is lexicographically less than the second range [first2, last2).
+	*/
 	template<typename InputIt1,
 			typename InputIt2, 
 			typename Compare>
@@ -38,9 +38,9 @@ namespace ft
 		}
 		return (first1 == last1) && (first2 != last2);
 	}
-	//
-	// Returns true if the range [first1, last1) is equal to the range [first2, first2 + (last1 - first1)), and false otherwise.
-	//
+	/*
+	 * Returns true if the range [first1, last1) is equal to the range [first2, first2 + (last1 - first1)), and false otherwise.
+	*/
 	template<typename InputIt1,
 			typename InputIt2>
 	bool equal( InputIt1 first1, 
@@ -70,9 +70,9 @@ namespace ft
 		return true;
 
     }
-	//
-	// Returns true if the range [first1, last1) is equal to the range [first2, first2 + (last1 - first1)), and false otherwise comapre with Binary Predicate.
-	//
+	/*
+	 * Returns true if the range [first1, last1) is equal to the range [first2, first2 + (last1 - first1)), and false otherwise comapre with Binary Predicate.
+	*/
 	template<typename InputIt1, 
 			typename InputIt2, 
 			typename BinaryPredicate>
@@ -102,11 +102,11 @@ namespace ft
 	template< typename ForwardIt,
 			typename Size,
 			typename T >
-	ForwardIt fill(	ForwardIt first,
+	ForwardIt fill_n(	ForwardIt first,
 				Size count,
 				const T& value )
 	{
-		for ( ; count > 0; --count; ++first)
+		for ( ; count > 0; --count, ++first)
 			*first = value;
 		return first;
 	}
@@ -169,7 +169,7 @@ namespace ft
 			typename Size,
 			typename T,
 			typename _Allocator>
-	void uninitialized_fill_n(	ForwardIt first,
+	ForwardIt uninitialized_fill_n(	ForwardIt first,
 								Size count,
 								const T& value,
 								_Allocator _alloc)
@@ -177,13 +177,13 @@ namespace ft
     	ForwardIt current = first;
     	try
     	{
-        	for ( ; count > 0; ++first, ++current, --count)
+        	for ( ; count > 0; ++current, --count)
         		_alloc.construct(_alloc.address(*current), value );
         	return current;
     	}
     	catch (...)
     	{
-			ft::destroy(out, current, _alloc);
+			ft::destroy(first, current, _alloc);
         	throw;
     	}
     }
@@ -199,13 +199,13 @@ namespace ft
     	ForwardIt current = first;
     	try
     	{
-        	for ( ; first != last; ++current, ++first)
-        		_alloc.construct(_alloc.address(*current), *first );
+        	for ( ; first != last; ++current)
+        		_alloc.construct(_alloc.address(*current), value );
         	return current;
     	}
     	catch (...)
     	{
-			ft::destroy(out, current, _alloc);
+			ft::destroy(first, current, _alloc);
         	throw;
     	}
     }

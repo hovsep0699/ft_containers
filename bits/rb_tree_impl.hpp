@@ -563,15 +563,15 @@ namespace ft
 			y->_right = z;
 		insert_fixup(z);
 		iterator it(z);
-		if ( _value_comp(s_value(it.base() ), s_value(_rb_tree_impl._begin) ) )
+		if ( _value_comp(s_value( it.base() ), s_value(_rb_tree_impl._begin) ) )
 			_rb_tree_impl._begin = it.base();
-		else if ( !_value_comp(s_value(it.base() ), s_value(_rb_tree_impl._begin) ) 
-				&& !_value_comp(s_value(_rb_tree_impl._begin), s_value(it.base() ) ) )
+		else if ( !_value_comp(s_value( it.base() ), s_value(_rb_tree_impl._begin) ) 
+				&& !_value_comp(s_value(_rb_tree_impl._begin), s_value( it.base() ) ) )
 			_rb_tree_impl._begin = _rb_tree_impl.min(_rb_tree_impl._begin);
-		if ( _value_comp(s_value(_rb_tree_impl._end), s_value(it.base() ) ) )
+		if ( _value_comp(s_value(_rb_tree_impl._end), s_value( it.base() ) ) )
 			_rb_tree_impl._end = it.base();
-		else if ( !_value_comp(s_value(it.base() ), s_value(_rb_tree_impl._end) ) 
-				&& !_value_comp(s_value(_rb_tree_impl._end), s_value(it.base() ) ) )
+		else if ( !_value_comp(s_value( it.base() ), s_value(_rb_tree_impl._end) ) 
+				&& !_value_comp(s_value(_rb_tree_impl._end), s_value( it.base() ) ) )
 			_rb_tree_impl._end = _rb_tree_impl.max(_rb_tree_impl._end);
 		_rb_tree_impl._nil->_parent = _rb_tree_impl._root;
 		++_rb_tree_impl._size;
@@ -628,7 +628,7 @@ namespace ft
 				break ;
 			if (!head->_is_nil &&
 				head->_parent->_right == head &&
-				_value_comp(_value, val))
+				_value_comp(val, _value))
 				break ;
 			head = head->_parent;
 		}

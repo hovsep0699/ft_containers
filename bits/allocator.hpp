@@ -32,7 +32,7 @@ namespace ft
         template<typename M>
         				allocator(const allocator<M>& ) throw();
         virtual			~allocator();
-        pointer			address( reference x ) const;
+        pointer			address( reference x );
         const_pointer	address( const_reference x ) const;
         pointer			allocate( size_type _n, const void* = 0 );
         size_type		max_size () const throw();

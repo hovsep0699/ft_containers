@@ -58,9 +58,6 @@ namespace ft
 		return *this;
 	}
 
-	/* ============================ */
-	/*	      node structure		*/
-	/* ============================ */
 
 	template<typename T, typename _Allocator>
 	rb_tree_impl<T, _Allocator>::rb_tree_impl(bool multivalues, const allocator_type alloc )
@@ -190,7 +187,7 @@ namespace ft
 		if (_base->_is_nil)
 		{
 			_base = _base->_parent;
-			_base = max(_base);
+			_base = min(_base);
 		}
 		else if (_base->_right && !_base->_right->_is_nil)
 			_base = min(_base->_right);

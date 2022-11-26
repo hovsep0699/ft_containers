@@ -127,7 +127,7 @@ run_container_tests() {
     rm -rf $LOGS $DIFFS
     mkdir -p $LOGS $DIFFS
 
-    CONTAINERS="extra"
+    CONTAINERS="stack vector map set extra"
 
     if [ $# -ne 0 ]; then
         CONTAINERS=$@;
