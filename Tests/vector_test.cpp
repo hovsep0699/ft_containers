@@ -10,16 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <iomanip>
-#include <stdexcept>
-#ifdef FT_CONTAINER
-#include "vector.hpp"
-#define NAMESPACE ft
-#else
-#include <vector>
-#define NAMESPACE std
-#endif
+#include "predifine.hpp"
 
 static void	example1()
 {
@@ -30,7 +21,7 @@ static void	example1()
 
 	NAMESPACE::vector<int>	vec;
 	std::cout << "Example 1" << std::endl;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	vec.push_back(42);
 	std::cout << ", push_back[42] value[0]: " << vec[0];
@@ -62,7 +53,7 @@ static void	example2()
 	NAMESPACE::vector<double> vec(3, double(58));
 	std::cout << "Example 2" << std::endl;
 	std::cout << std::fixed << std::setprecision(2);
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	std::cout << ", value[2]: " << vec[2] << '.';
 	std::cout << std::endl;
@@ -75,7 +66,7 @@ static void	example3()
 
 	const NAMESPACE::vector<float> vec(10, float(-60));
 	std::cout << "Example 3" << std::endl;
-	std::cout << "std::vector -> at(3): " << vec.at(3);
+	std::cout << "NAMESPACE::vector -> at(3): " << vec.at(3);
 	try
 	{
 		std::cout << ", at(13): " << vec.at(13) << '.';
@@ -95,7 +86,7 @@ static void	example4()
 
 	const NAMESPACE::vector<int> vec(3, int(58));
 	std::cout << "Example 4" << std::endl;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	std::cout << ", value[0]: " << vec[0];
 	std::cout << ", front(): " << vec.front();
@@ -114,7 +105,7 @@ static void	example5()
 
 	NAMESPACE::vector<int> vec(5, int(41));
 	std::cout << "Example 5" << std::endl;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	p = vec.data();
 	std::cout << ", p[0]: " << p[0] << '.';
@@ -131,7 +122,7 @@ static void	example6()
 
 	NAMESPACE::vector<long double> vec(5, (long double)(41));
 	std::cout << "Example 6" << std::endl;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	std::cout << ", max_size: " << vec.max_size();
 
@@ -159,7 +150,7 @@ static void	example7()
 
 	NAMESPACE::vector<int> vec(5, (int)(42));
 	std::cout << "Example 7" << std::endl;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 
 	for (size_t i = 50; i < 55; ++i)
@@ -183,11 +174,10 @@ static void	example8()
 	/* Example 8 */
 	/* Example for iterators */
 
-	std::vector<int> vec;
-	std::vector<int>::iterator	it;
-	std::cout << COLOR_PURPLE_B << "Example 8" << COLOR_END << std::endl;
-	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::vector -> ";
+	NAMESPACE::vector<int> vec;
+	NAMESPACE::vector<int>::iterator	it;
+	std::cout << "Example 8" << std::endl;
+	std::cout << "NAMESPACE::vector -> ";
 
 	for (size_t i = 50; i < 55; ++i)
 		vec.push_back(i);
@@ -209,7 +199,7 @@ static void	example8()
 	it += 1;
 	std::cout << ", it += 1: " << *it;
 	std::cout << ", it[-1]: " << it[-1];
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -218,12 +208,11 @@ static void	example9()
 	/* Example 9 */
 	/* Example for iterators comparison */
 
-	std::vector<int> vec;
-	std::vector<int>::iterator	it1;
-	std::vector<int>::iterator	it2;
-	std::cout << COLOR_PURPLE_B << "Example 9" << COLOR_END << std::endl;
-	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::vector -> ";
+	NAMESPACE::vector<int> vec;
+	NAMESPACE::vector<int>::iterator	it1;
+	NAMESPACE::vector<int>::iterator	it2;
+	std::cout << "Example 9" << std::endl;
+	std::cout << "NAMESPACE::vector -> ";
 
 	for (size_t i = 50; i < 55; ++i)
 		vec.push_back(i);
@@ -244,7 +233,7 @@ static void	example9()
 	std::cout << ", it2 <= it1: " << (it2 <= it1);
 	std::cout << ", it2 == it1: " << (it2 == it1);
 	std::cout << ", it2 != it1: " << (it2 != it1);
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -253,18 +242,17 @@ static void	example10()
 	/* Example 10 */
 	/* Example for const iterators comparison */
 
-	std::vector< int> vec;
-	std::cout << COLOR_PURPLE_B << "Example 10" << COLOR_END << std::endl;
-	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::vector -> ";
+	NAMESPACE::vector< int> vec;
+	std::cout << "Example 10" << std::endl;
+	std::cout << "NAMESPACE::vector -> ";
 
 	for (size_t i = 50; i < 55; ++i)
 		vec.push_back(i);
 	std::cout << "values:";
 	for (size_t i = 0; i < vec.size(); ++i)
 		std::cout << ' ' << vec[i];
-	std::vector<int>::const_iterator	it1 = vec.begin();
-	std::vector<int>::const_iterator	it2 = vec.begin() + 2;
+	NAMESPACE::vector<int>::const_iterator	it1 = vec.begin();
+	NAMESPACE::vector<int>::const_iterator	it2 = vec.begin() + 2;
 	std::cout << ", it2 - it1: " << (it2 - it1);
 	std::cout << ", it2 > it1: " << (it2 > it1);
 	std::cout << ", it2 < it1: " << (it2 < it1);
@@ -272,13 +260,13 @@ static void	example10()
 	std::cout << ", it2 <= it1: " << (it2 <= it1);
 	std::cout << ", it2 == it1: " << (it2 == it1);
 	std::cout << ", it2 != it1: " << (it2 != it1);
-	std::vector<int>::const_iterator	it3 = vec.begin() + 2;
-	std::vector<int>::const_iterator	it4 = vec.begin() + 2;
+	NAMESPACE::vector<int>::const_iterator	it3 = vec.begin() + 2;
+	NAMESPACE::vector<int>::const_iterator	it4 = vec.begin() + 2;
 	std::cout << ", it2 >= it1: " << (it4 >= it3);
 	std::cout << ", it2 <= it1: " << (it4 <= it3);
 	std::cout << ", it2 == it1: " << (it4 == it3);
 	std::cout << ", it2 != it1: " << (it4 != it3);
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -287,18 +275,17 @@ static void	example11()
 	/* Example 11 */
 	/* Example for const and non-const iterators comparison */
 
-	std::vector<int> vec;
-	std::cout << COLOR_PURPLE_B << "Example 11" << COLOR_END << std::endl;
-	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::vector -> ";
+	NAMESPACE::vector<int> vec;
+	std::cout << "Example 11" << std::endl;
+	std::cout << "NAMESPACE::vector -> ";
 
 	for (size_t i = 50; i < 55; ++i)
 		vec.push_back(i);
 	std::cout << "values:";
 	for (size_t i = 0; i < vec.size(); ++i)
 		std::cout << ' ' << vec[i];
-	std::vector<const int>::iterator	it1 = vec.begin();
-	std::vector<int>::iterator	it2 = vec.begin() + 2;
+	NAMESPACE::vector<const int>::iterator	it1 = vec.begin();
+	NAMESPACE::vector<int>::iterator	it2 = vec.begin() + 2;
 	std::cout << ", it2 - it1: " << (it2 - it1);
 	std::cout << ", it2 > it1: " << (it2 > it1);
 	std::cout << ", it2 < it1: " << (it2 < it1);
@@ -306,13 +293,13 @@ static void	example11()
 	std::cout << ", it2 <= it1: " << (it2 <= it1);
 	std::cout << ", it2 == it1: " << (it2 == it1);
 	std::cout << ", it2 != it1: " << (it2 != it1);
-	std::vector<const int>::iterator	it3 = vec.begin() + 2;
-	std::vector<int>::iterator	it4 = vec.begin() + 2;
+	NAMESPACE::vector<const int>::iterator	it3 = vec.begin() + 2;
+	NAMESPACE::vector<int>::iterator	it4 = vec.begin() + 2;
 	std::cout << ", it2 >= it1: " << (it4 >= it3);
 	std::cout << ", it2 <= it1: " << (it4 <= it3);
 	std::cout << ", it2 == it1: " << (it4 == it3);
 	std::cout << ", it2 != it1: " << (it4 != it3);
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -321,10 +308,10 @@ static void	example12()
 	/* Example 12 */
 	/* Example for copy constructors */
 
-	std::vector<double> vec(2, double(58));
-	std::cout << COLOR_PURPLE_B << "Example 12" << COLOR_END << std::endl;
-	std::cout << std::fixed << std::setprecision(2) << COLOR_YELLOW_B;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	NAMESPACE::vector<double> vec(2, double(58));
+	std::cout << "Example 12" << std::endl;
+	std::cout << std::fixed << std::setprecision(2) ;
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	for (size_t i = 50; i < 55; ++i)
 		vec.push_back(i);
@@ -332,7 +319,7 @@ static void	example12()
 	for (size_t i = 0; i < vec.size(); ++i)
 		std::cout << ' ' << vec[i];
 	std::cout << ", copy-constructor:";
-	std::vector<double> vec2(vec);
+	NAMESPACE::vector<double> vec2(vec);
 	for (size_t i = 0; i < vec2.size(); ++i)
 		std::cout << ' ' << vec2[i];
 	vec.push_back(42);
@@ -340,7 +327,7 @@ static void	example12()
 	std::cout << ", copy-assignement:";
 	for (size_t i = 0; i < vec2.size(); ++i)
 		std::cout << ' ' << vec2[i];
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -349,12 +336,11 @@ static void	example13()
 	/* Example 13 */
 	/* Example for insert */
 
-	std::vector<int> vec(5, int(58));
-	std::cout << COLOR_PURPLE_B << "Example 13" << COLOR_END << std::endl;
-	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	NAMESPACE::vector<int> vec(5, int(58));
+	std::cout << "Example 13" << std::endl;
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
-	std::vector<int>::iterator it = vec.begin() + 2;
+	NAMESPACE::vector<int>::iterator it = vec.begin() + 2;
 	vec.insert(it, 3, 50);
 	vec.insert(vec.begin(), 1, 1);
 	vec.insert(vec.begin(), 0, 2);
@@ -375,7 +361,7 @@ static void	example13()
 		std::cout << ' ' << vec[i];
 	std::cout << ", capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -384,12 +370,11 @@ static void	example14()
 	/* Example 14 */
 	/* Example for insert part 2 */
 
-	std::vector<int> vec(5, int(58));
-	std::cout << COLOR_PURPLE_B << "Example 14" << COLOR_END << std::endl;
-	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	NAMESPACE::vector<int> vec(5, int(58));
+	std::cout << "Example 14" << std::endl;
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
-	std::vector<int>::iterator it = vec.begin() + 2;
+	NAMESPACE::vector<int>::iterator it = vec.begin() + 2;
 	vec.insert(it, 1);
 	it = vec.insert(vec.begin(), 1);
 	vec.insert(vec.end(), 1);
@@ -406,7 +391,7 @@ static void	example14()
 		std::cout << ' ' << vec[i];
 	std::cout << ", capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
-	std::vector<int> vec5;
+	NAMESPACE::vector<int> vec5;
 	vec5.insert(vec5.begin(), 9);
 	vec5.insert(vec5.end() - 1, 3, 10);
 	std::cout << ", values:";
@@ -414,7 +399,7 @@ static void	example14()
 		std::cout << ' ' << vec5[i];
 	std::cout << ", capacity: " << vec5.capacity();
 	std::cout << ", size: " << vec5.size();
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -423,12 +408,11 @@ static void	example15()
 	/* Example 15 */
 	/* Example for insert */
 
-	std::vector<int> vec(5, int(58));
-	std::cout << COLOR_PURPLE_B << "Example 15" << COLOR_END << std::endl;
-	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	NAMESPACE::vector<int> vec(5, int(58));
+	std::cout << "Example 15" << std::endl;
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
-	std::vector<int> vec1(2, int(42));
+	NAMESPACE::vector<int> vec1(2, int(42));
 	vec.insert(vec.begin() + 2, vec1.begin(), vec1.end());
 	vec.insert(vec.begin(), vec1.begin(), vec1.end());
 	vec.insert(vec.end(), vec1.begin(), vec1.end());
@@ -438,7 +422,7 @@ static void	example15()
 	std::cout << ", capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	vec.reserve(30);
-	std::vector<int> vec2(2, int(21));
+	NAMESPACE::vector<int> vec2(2, int(21));
 	vec.insert(vec.begin() + 2, vec2.begin(), vec2.end());
 	vec.insert(vec.begin(), vec2.begin(), vec2.end());
 	vec.insert(vec.end(), vec2.begin(), vec2.end());
@@ -447,7 +431,7 @@ static void	example15()
 		std::cout << ' ' << vec[i];
 	std::cout << ", capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -456,17 +440,16 @@ static void	example16()
 	/* Example 16 */
 	/* Example for erase */
 
-	std::vector<int> vec;
-	std::cout << COLOR_PURPLE_B << "Example 16" << COLOR_END << std::endl;
-	std::cout << COLOR_YELLOW_B;
+	NAMESPACE::vector<int> vec;
+	std::cout << "Example 16" << std::endl;
 	for (size_t i = 0; i < 9; ++i)
 		vec.push_back(i);
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	std::cout << ", values:";
 	for (size_t i = 0; i < vec.size(); ++i)
 		std::cout << ' ' << vec[i];
-	std::vector<int>::iterator it;
+	NAMESPACE::vector<int>::iterator it;
 	it = vec.erase(vec.begin() + 1);
 	std::cout << ", it: " << *it;
 	std::cout << ", values:";
@@ -491,12 +474,12 @@ static void	example16()
 	std::cout << ", it: " << *it;
 	it = vec.erase(vec.begin(), vec.end());
 	std::cout << ", it: " << *it;
-	std::cout << ", std::vector -> capacity: " << vec.capacity();
+	std::cout << ", NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	std::cout << ", values:";
 	for (size_t i = 0; i < vec.size(); ++i)
 		std::cout << ' ' << vec[i];
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -505,10 +488,9 @@ static void	example17()
 	/* Example 17 */
 	/* Example for resize */
 
-	std::vector<int> vec(5, int(42));
-	std::cout << COLOR_PURPLE_B << "Example 17" << COLOR_END << std::endl;
-	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	NAMESPACE::vector<int> vec(5, int(42));
+	std::cout << "Example 17" << std::endl;
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	std::cout << ", values:";
 	for (size_t i = 0; i < vec.size(); ++i)
@@ -532,7 +514,7 @@ static void	example17()
 	std::cout << ", values:";
 	for (size_t i = 0; i < vec.size(); ++i)
 		std::cout << ' ' << vec[i];
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -541,10 +523,9 @@ static void	example18()
 	/* Example 18 */
 	/* Example for assign */
 
-	std::vector<int> vec(5, int(42));
-	std::cout << COLOR_PURPLE_B << "Example 18" << COLOR_END << std::endl;
-	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::vector -> capacity: " << vec.capacity();
+	NAMESPACE::vector<int> vec(5, int(42));
+	std::cout << "Example 18" << std::endl;
+	std::cout << "NAMESPACE::vector -> capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
 	std::cout << ", values:";
 	for (size_t i = 0; i < vec.size(); ++i)
@@ -567,7 +548,7 @@ static void	example18()
 	std::cout << ", values:";
 	for (size_t i = 0; i < vec.size(); ++i)
 		std::cout << ' ' << vec[i];
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -583,7 +564,7 @@ static void	example19()
 	std::cout << ", values:";
 	for (size_t i = 0; i < vec.size(); ++i)
 		std::cout << ' ' << vec[i];
-	std::vector<int> vec2(2, int(21));
+	NAMESPACE::vector<int> vec2(2, int(21));
 	vec.assign(vec2.begin(), vec2.end());
 	std::cout << ", capacity: " << vec.capacity();
 	std::cout << ", size: " << vec.size();
@@ -603,7 +584,7 @@ static void	example19()
 	std::cout << ", values:";
 	for (size_t i = 0; i < vec.size(); ++i)
 		std::cout << ' ' << vec[i];
-	std::cout << '.' << COLOR_END << std::endl;
+	std::cout << '.' << std::endl;
 
 }
 
@@ -861,7 +842,7 @@ static void	example26()
 	NAMESPACE::vector<int> vct2;
 	for (unsigned long int i = 0; i < vct.size(); ++i)
 		vct[i] = (vct.size() - i) * 7;
-	std::cout << "std::vector ->";
+	std::cout << "NAMESPACE::vector ->";
 	std::cout << " values:";
 	for (unsigned long int i = 0; i < vct.size(); ++i)
 		std::cout << " " << vct[i];

@@ -10,14 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <iomanip>
-#include <vector>
-#include <list>
-#include <deque>
-#include <stack>
-#include <stdexcept>
-#include "stack.hpp"
+#include "predifine.hpp"
 
 #ifndef	MYCOLORS_HPP
 # define MYCOLORS_HPP
@@ -36,10 +29,10 @@ static void	example1()
 	/* Example for constructor without parametrs */
 	/* Example for size and push_back */
 
-	std::stack<int, std::vector<int> >	st;
+	NAMESPACE::stack<int, std::vector<int> >	st;
 	std::cout << COLOR_PURPLE_B << "Example 1" << COLOR_END << std::endl;
 	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::stack -> size: " << st.size();
+	std::cout << "NAMESPACE::stack -> size: " << st.size();
 	st.push(42);
 	std::cout << ", push[42] top: " << st.top();
 	std::cout << ", size: " << st.size();
@@ -58,26 +51,6 @@ static void	example1()
 	std::cout << ", size: " << st.size() << '.';
 	std::cout << COLOR_END << std::endl;
 
-	ft::stack<int>	ft_st;
-	std::cout << COLOR_GREEN_B;
-	std::cout << "ft::stack  -> size: " << ft_st.size();
-	ft_st.push(42);
-	std::cout << ", push[42] top: " << ft_st.top();
-	std::cout << ", size: " << ft_st.size();
-	ft_st.push(84);
-	std::cout << ", push[84] top: " << ft_st.top();
-	std::cout << ", size: " << ft_st.size();
-	ft_st.push(168);
-	std::cout << ", push[168] top: " << ft_st.top();
-	std::cout << ", size: " << ft_st.size();
-	ft_st.push(336);
-	ft_st.push(672);
-	std::cout << ", push[336],[672] top: " << ft_st.top();
-	ft_st.pop();
-	std::cout << ", pop and top: " << ft_st.top();
-	std::cout << ", empty: " << ft_st.empty();
-	std::cout << ", size: " << ft_st.size() << '.' << std::endl;
-	std::cout << COLOR_END << std::endl;
 }
 
 static void	example2()
@@ -85,10 +58,10 @@ static void	example2()
 	/* Example 2 */
 	/* Example for deque */
 
-	std::stack<int, std::deque<int> >	st;
+	NAMESPACE::stack<int, std::deque<int> >	st;
 	std::cout << COLOR_PURPLE_B << "Example 2" << COLOR_END << std::endl;
 	std::cout << COLOR_YELLOW_B;
-	std::cout << "std::stack -> size: " << st.size();
+	std::cout << "NAMESPACE::stack -> size: " << st.size();
 	st.push(42);
 	std::cout << ", push[42] top: " << st.top();
 	std::cout << ", size: " << st.size();
@@ -104,7 +77,7 @@ static void	example2()
 	st.pop();
 	std::cout << ", pop and top: " << st.top();
 	std::cout << ", empty: " << st.empty();
-	std::stack<int, std::deque<int> >	st2;
+	NAMESPACE::stack<int, std::deque<int> >	st2;
 	std::cout << ", ==: " << (st == st2);
 	std::cout << ", !=: " << (st != st2);
 	std::cout << ", >: " << (st > st2);
@@ -128,47 +101,6 @@ static void	example2()
 	std::cout << ", size: " << st2.size() << '.';
 	std::cout << COLOR_END << std::endl;
 
-	ft::stack<int, std::deque<int> >	ft_st;
-	std::cout << COLOR_GREEN_B;
-	std::cout << "ft::stack  -> size: " << ft_st.size();
-	ft_st.push(42);
-	std::cout << ", push[42] top: " << ft_st.top();
-	std::cout << ", size: " << ft_st.size();
-	ft_st.push(84);
-	std::cout << ", push[84] top: " << ft_st.top();
-	std::cout << ", size: " << ft_st.size();
-	ft_st.push(168);
-	std::cout << ", push[168] top: " << ft_st.top();
-	std::cout << ", size: " << ft_st.size();
-	ft_st.push(336);
-	ft_st.push(672);
-	std::cout << ", push[336],[672] top: " << ft_st.top();
-	ft_st.pop();
-	std::cout << ", pop and top: " << ft_st.top();
-	std::cout << ", empty: " << ft_st.empty();
-	ft::stack<int, std::deque<int> >	ft_st2;
-	std::cout << ", ==: " << (ft_st == ft_st2);
-	std::cout << ", !=: " << (ft_st != ft_st2);
-	std::cout << ", >: " << (ft_st > ft_st2);
-	std::cout << ", >=: " << (ft_st >= ft_st2);
-	std::cout << ", <: " << (ft_st < ft_st2);
-	std::cout << ", <=: " << (ft_st <= ft_st2);
-	ft_st2.push(42);
-	ft_st2.push(84);
-	ft_st2.push(168);
-	ft_st2.push(336);
-	std::cout << ", ==: " << (ft_st == ft_st2);
-	std::cout << ", !=: " << (ft_st != ft_st2);
-	std::cout << ", >: " << (ft_st > ft_st2);
-	std::cout << ", >=: " << (ft_st >= ft_st2);
-	std::cout << ", <: " << (ft_st < ft_st2);
-	std::cout << ", <=: " << (ft_st <= ft_st2);
-	std::cout << ", size: " << ft_st.size();
-	ft_st2.pop();
-	ft_st2 = ft_st;
-	std::cout << ", top: " << ft_st2.top();
-	std::cout << ", size: " << ft_st2.size() << '.';
-	std::cout << COLOR_END << std::endl;
 }
 
 void	stack_test()
