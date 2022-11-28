@@ -1,0 +1,107 @@
+vector test 
+Example 1
+NAMESPACE::vector -> capacity: 0, size: 0, push_back[42] value[0]: 42, capacity: 1, size: 1, push_back[84] value[1]: 84, capacity: 2, size: 2, push_back[168] value[2]: 168, capacity: 4, size: 3, push_back[336],[672] value[3]: 336, capacity: 8, size: 5.
+Example 2
+NAMESPACE::vector -> capacity: 3, size: 3, value[2]: 58.00.
+Example 3
+NAMESPACE::vector -> at(3): -60.00, at(13): vector.
+Example 4
+NAMESPACE::vector -> capacity: 3, size: 3, value[0]: 58, front(): 58, value[2]: 58, back(): 58.
+Example 5
+NAMESPACE::vector -> capacity: 5, size: 5, p[0]: 41.
+Example 6
+NAMESPACE::vector -> capacity: 5, size: 5, max_size: 1152921504606846975, allocated array: 0.00 1.00 2.00.
+Example 7
+NAMESPACE::vector -> capacity: 5, size: 5, is_empty: 0, values: 42 42 42 42 42 50 51 52, after clear capacity: 10, size: 0, is_empty: 1.
+Example 8
+NAMESPACE::vector -> values: 50 51 52 53 54, it_begin: 50, it_begin + 1: 51, it += 1: 52, it++: 52, ++it: 54, it_end - 1: 54, it -= 2: 52, it += 1: 53, it[-1]: 52.
+Example 9
+NAMESPACE::vector -> values: 50 51 52 53 54, it2 - it1: 2, it2 > it1: 1, it2 < it1: 0, it2 >= it1: 1, it2 <= it1: 0, it2 == it1: 0, it2 != it1: 1, it2 >= it1: 1, it2 <= it1: 1, it2 == it1: 1, it2 != it1: 0.
+Example 10
+NAMESPACE::vector -> values: 50 51 52 53 54, it2 - it1: 2, it2 > it1: 1, it2 < it1: 0, it2 >= it1: 1, it2 <= it1: 0, it2 == it1: 0, it2 != it1: 1, it2 >= it1: 1, it2 <= it1: 1, it2 == it1: 1, it2 != it1: 0.
+Example 11
+NAMESPACE::vector -> values: 50 51 52 53 54, it2 - it1: 2, it2 > it1: 1, it2 < it1: 0, it2 >= it1: 1, it2 <= it1: 0, it2 == it1: 0, it2 != it1: 1, it2 >= it1: 1, it2 <= it1: 1, it2 == it1: 1, it2 != it1: 0.
+Example 12
+NAMESPACE::vector -> capacity: 2, size: 2, values: 58.00 58.00 50.00 51.00 52.00 53.00 54.00, copy-constructor: 58.00 58.00 50.00 51.00 52.00 53.00 54.00, copy-assignement: 58.00 58.00 50.00 51.00 52.00 53.00 54.00 42.00.
+Example 13
+NAMESPACE::vector -> capacity: 5, size: 5, values: 1 58 58 50 50 50 58 58 58 2 2 2, capacity: 20, size: 12, values: -1 1 58 -50 -50 -50 58 50 50 50 58 58 58 2 2 2 -2 -2 -2, capacity: 30, size: 19.
+Example 14
+NAMESPACE::vector -> capacity: 5, size: 5, values: 1 58 58 1 58 58 58 1, capacity: 10, size: 8, it: 1, values: 1 58 58 1 58 58 58 1, capacity: 30, size: 8, values: 10 10 10 9, capacity: 4, size: 4.
+Example 15
+NAMESPACE::vector -> capacity: 5, size: 5, values: 42 42 58 58 42 42 58 58 58 42 42, capacity: 20, size: 11, values: 21 21 42 42 21 21 58 58 42 42 58 58 58 42 42 21 21, capacity: 30, size: 17.
+Example 16
+NAMESPACE::vector -> capacity: 16, size: 9, values: 0 1 2 3 4 5 6 7 8, it: 2, values: 0 2 3 4 5 6 7 8, it: 7, values: 0 2 7 8, it: 2, values: 2 7 8, it: 2, values: 2 8, it: 8, it: 2, NAMESPACE::vector -> capacity: 16, size: 0, values:.
+Example 17
+NAMESPACE::vector -> capacity: 5, size: 5, values: 42 42 42 42 42, capacity: 10, size: 7, values: 42 42 42 42 42 0 0, capacity: 20, size: 11, values: 42 42 42 42 42 0 0 21 21 21 21, capacity: 20, size: 6, values: 42 42 42 42 42 0.
+Example 18
+NAMESPACE::vector -> capacity: 5, size: 5, values: 42 42 42 42 42, capacity: 11, size: 11, values: 48 48 48 48 48 48 48 48 48 48 48, capacity: 11, size: 3, values: 21 21 21, capacity: 11, size: 0, values:.
+Example 19
+NAMESPACE::vector -> capacity: 5, size: 5, values: 42 42 42 42 42, capacity: 5, size: 2, values: 21 21, capacity: 11, size: 11, values: 42 42 42 42 42 42 42 42 42 42 42, capacity: 11, size: 0, values:.
+Example 20
+std::vector1 -> capacity: 3, size: 3, values: 42 42 42, vector2 capacity: 9, size: 9, values: 21 21 21 21 21 21 21 21 21, vector1 -> capacity: 9, size: 9, values: 21 21 21 21 21 21 21 21 21, vector2 capacity: 3, size: 3, values: 42 42 42.
+Example 21
+std::vector1 -> capacity: 3, size: 3, values: 42 42 42, vector2 capacity: 9, size: 9, values: 21 21 21 21 21 21 21 21 21, vector1 -> capacity: 9, size: 9, values: 21 21 21 21 21 21 21 21 21, vector2 capacity: 3, size: 3, values: 42 42 42.
+Example 22
+NAMESPACE::vector -> values1: hello, values2: hello, == 1, != 0, < 0, <= 1, > 0, >= 1, == 0, != 1, < 1, <= 1, > 0, >= 0, == 0, != 1, < 0, <= 0, > 1, >= 1, values1: hElloo, values2: helloo, == 0, != 1, < 1, <= 1, > 0, >= 0.
+Example 23
+NAMESPACE::vector -> capacity: 8, size: 5, values: 0 1 2 3 4, it: 4, it: 4, it: 2, it: 2, it: 4, it: 0, it: 1, it: 2, it: 1, it: 1, it: 1, it: 4, it: 2, it: 0, it: 3.
+Example 24
+NAMESPACE::vector -> capacity: 8, size: 5, values: 0 1 2 3 4, it: 4, it: 0, it: 1, it: 0, == 1, != 0, < 0, <= 1, > 0, >= 1, == 0, != 1, < 1, <= 1, > 0, >= 0, + 0, - 3, - -1.
+Example 25
+NAMESPACE::vector -> capacity: 20, size: 5, values:.
+Example 26
+NAMESPACE::vector -> values: 35 28 21 14 7, values: 35 28 21, values: 14 7 35 28 21, values: 14 7 35 28 21 35 28 21, 42, 84, values: 14 7 35 28 21 84 35 28 21 42.
+Example 27
+NAMESPACE::vector -> len: 5, vct_size: 5, vct_range_size: 3, vct_copy_size: 7, vct_values: 5 10 15 2 1 42 21, vct_range_values:, vct_copy_values: 5 4 3, vct_size: 7, vct_range_size: 0, vct_copy_size: 3.
+Example 28
+NAMESPACE::vector -> value: 42001000 42001000.
+map test 
+[1;35mExample 1[0m
+[1;33mNAMESPACE::pair -> first: 0, second: , first: 1, second: Nenie_Iri, first: 2, second: HI, first: 1, second: Nenie_Iri, first: 4, second: 5, ==: 0, ==: 1, ==: 0, !=: 1, !=: 0, !=: 1, <: 1, <: 0, <: 0, <=: 1, <=: 1, <=: 0, >: 0, >: 0, >: 1, >=: 0, >=: 1, >=: 1.[0m
+[1;35mExample 2[0m
+[1;33mNAMESPACE::pair -> size: 0, empty: 1, size: 288230376151711743, size: 1, size: 2, pair -> first: 0, second: A, size: 3, size: 288230376151711743, empty: 0, it: -1, -1, B, -1, 1, A, A, B.[0m
+[1;35mExample 3[0m
+[1;33mNAMESPACE::map -> 1, size: 2, size: 7, it: 0, -3, 3J, 3J, 2C, loop: -3E -2B -1D 0A 1F hello 3J.[0m
+[1;35mExample 4[0m
+[1;33mNAMESPACE::map -> 1, size: 2, size: 7, it: 0, -3, 3J, 3J, 2C, loop: -3E -2B -1D 0A 1F 2C 3J, loop: 3J 2C 1F 0A -1D -2B -3E.[0m
+[1;35mExample 5[0m
+[1;33mNAMESPACE::map -> ==: 0, !=: 1, ==: 1, !=: 0, ==: 0, !=: 1.[0m
+[1;35mExample 6[0m
+[1;33mNAMESPACE::map -> ==: 0, !=: 1, ==: 1, !=: 0, ==: 0, !=: 1.[0m
+[1;35mExample 7[0m
+[1;33mNAMESPACE::map -> ==: 0, !=: 1, ==: 1, !=: 0, ==: 0, !=: 1.[0m
+[1;35mExample 8[0m
+[1;33mNAMESPACE::map -> 1 size: 2, size: 7, it: 0, 3, -3E, -3E, -2B, loop: 3J 2C 1F 0A -1D hello -3E.[0m
+[1;35mExample 9[0m
+[1;33mNAMESPACE::map -> 1 it: 0, 3, -3E, -3E, -2B, loop: 3J 2C 1F 0A -1D hello -3E.[0m
+[1;35mExample 10[0m
+[1;33m[1;33mNAMESPACE::map -> x => 1001 y => 2002 z => 3003 0 1 1 0.[0m
+[1;35mExample 11[0m
+[1;33m.[0m
+[1;35mExample 12[0m
+[1;33mNAMESPACE::map -> find: e a b c d e f j.[0m
+[1;35mExample 13[0m
+[1;33mNAMESPACE::map -> count: 0 1 1 1 1 1 1 0 0 0, size 0.[0m
+[1;35mExample 14[0m
+[1;33mNAMESPACE::map -> bound: c d, bound: a b c d, bound: c d e f g, upper_bound: d e, bound: a b c d e, bound: d e f g, up_low_bound: b c d, size 0.[0m
+[1;35mExample 15[0m
+[1;33mNAMESPACE::map ->  size 6, bool 1, val 3, size 7, bool 0, val 2, size 7, res 3, res 3, res -30, res -30, res -2, res -2, res -8, res -8, res 1000, res 1000, res 1000, -3000 -800 -200 -100 100 200 300 100000, size 8, insert_iters -3000 -800 -200 -100 100 200 300 0 1 2 3 100000, size 12, size 0.[0m
+[1;35mExample 16[0m
+[1;33mNAMESPACE::map -> size: 9, before_erase: -4 -3 -2 -1 0 1 2 3 4, after_erase: -4 -3 -2 1 2 3 4, size: 7, after_erase: -4 -3 1 3 4, size: 5, after_erase: -4 1 3, size: 3, size: 0.[0m
+[1;35mExample 17[0m
+[1;33mNAMESPACE::map -> lower -1, upper 0, lower -4, upper -3, A: -4 -3 -2 -1 0 1 2 3 4, B: -30000 -10000 3000 10000 20000, A_after=: -30000 -10000 3000 10000 20000, A_after=: -2 0, D: -30000 -10000 3000 10000 20000.[0m
+[1;35mExample 18[0m
+[1;33mNAMESPACE::map -> A: -3 -2 -1 0 1 2 3, A_size: 7, B: -30000 -10000 3000 10000 20000, B_size: 5, A_after=: -30000 -10000 3000 10000 20000, A_size: 5, B_after=: -3 -2 -1 0 1 2 3, B_size: 7, iter: 1, 1, A_after=: -3 -2 -1 0 1 2 3, A_size: 7, B_after=: -30000 -10000 3000 10000 20000, B_size: 5.[0m
+[1;35mExample 19[0m
+[1;33mNAMESPACE::map -> ==: 0, ==: 1, ==: 0, !=: 1, !=: 0, !=: 1, <: 0, <: 0, <: 1, <=: 0, <=: 1, <=: 1, >: 1, >: 0, >: 0, >=: 1, >=: 1, >=: 0.[0m
+[1;35mExample 20[0m
+[1;33mNAMESPACE::map -> [a]=A, [b]=B, [c]=B, [d]= , at(a)=a, at(b)=b, at(c)=c map::at:  key not found.[0m
+[1;35mExample 21[0m
+[1;33mNAMESPACE::map -> size: 6, value: 0 1 2 3 4 5, value: 0 1 4 5, value: 1 4, size: 4, value: -1 4 10.[0m
+[1;35mExample 22[0m
+[1;33mNAMESPACE::map -> value: 0 20 30 40 50 60.[0m
+stack test 
+[1;35mExample 1[0m
+[1;33mNAMESPACE::stack -> size: 0, push[42] top: 42, size: 1, push[84] top: 84, size: 2, push[168] top: 168, size: 3, push[336],[672] top: 672, pop and top: 336, empty: 0, size: 4.[0m
+[1;35mExample 2[0m
+[1;33mNAMESPACE::stack -> size: 0, push[42] top: 42, size: 1, push[84] top: 84, size: 2, push[168] top: 168, size: 3, push[336],[672] top: 672, pop and top: 336, empty: 0, ==: 0, !=: 1, >: 1, >=: 1, <: 0, <=: 0, ==: 1, !=: 0, >: 0, >=: 1, <: 0, <=: 1, size: 4, top: 336, size: 4.[0m
