@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:50:53 by mleblanc          #+#    #+#             */
-/*   Updated: 2022/05/23 19:47:17 by mleblanc         ###   ########.fr       */
+/*   Updated: 2022/12/02 00:01:37 by hohayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ int main()
     }
 
     timer t;
-
-    {
+	{
         NAMESPACE::map<int, int> m;
         for (int i = 0; i < 5; ++i) {
             m = data;
         }
-    }
+
+	}
+    
 
     PRINT_TIME(t);
 }

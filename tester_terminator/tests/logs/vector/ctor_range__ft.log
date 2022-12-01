@@ -1,0 +1,42 @@
+Capacity Ok (file: tests/vector/ctor_range.cpp, line: 22)
+Size: 32 (file: tests/vector/ctor_range.cpp, line: 22)
+
+Vector content:
+2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 2.08528e+08 
+
+Capacity Ok (file: tests/vector/ctor_range.cpp, line: 28)
+Size: 32 (file: tests/vector/ctor_range.cpp, line: 28)
+
+Vector content:
+QExoqp0nICr0sXsHqty2 naax9QcpJhvaL7DezsNQ 25ZTtB6wbptfbxM8AvHB tShYNtc0MkdjqLrOatgz 7Z3kf1Qec0NnsLSEpbOt WhkSNrKJC966fvjZ2Or1 8vlxlFRRgW7yYj4GO7dt 5sq1aoT8zP0HaHj3nFOK 61Dv31GYZhkgjKCErpng l0IIcWWHhOcPzoxEamQM bE1RYclskwXlhCm46YFs kXeoi5qz94JYPqSDTs79 TFsQP1dz8VVos9KzUpY0 b3wYQR7An193gjgYuRj3 xSmyNsnSJ47jLqrvbpyr guAIP2Wq43Gf8VhHsyu5 yT6c2loPebHovnq9BQog 3qvU1xcVm2g1DKFDlqh4 L0q8RR9P41VD4sVjdnWl YdjESsIZM4b1oGQPjpBe l1ZVQbWKw7brHUSimJgq xdn0cf4vqRzpfXWtl10G lYnZvpqaV0s8DowMZwzV 8P1cyKrwJNLoJyvLjYqO 4MhOXNbAX23CEijO5cRT tHe3miAwCOVQbuoLaEP2 l6uNLsc8fiLl3eWoG6j6 477xt6l0lph9ALQdr4HX D9UJNe4s8YF02LhrwOdl dLCisBNOdE8yugntu6cj YvY4aQFHgAuagn4dFLO1 eGR6Dtv7LW75qlV5Fkik 
+
+Capacity Ok (file: tests/vector/ctor_range.cpp, line: 32)
+Size: 32 (file: tests/vector/ctor_range.cpp, line: 32)
+
+Vector content:
+QExoqp0nICr0sXsHqty2 naax9QcpJhvaL7DezsNQ 25ZTtB6wbptfbxM8AvHB tShYNtc0MkdjqLrOatgz 7Z3kf1Qec0NnsLSEpbOt WhkSNrKJC966fvjZ2Or1 8vlxlFRRgW7yYj4GO7dt 5sq1aoT8zP0HaHj3nFOK 61Dv31GYZhkgjKCErpng l0IIcWWHhOcPzoxEamQM bE1RYclskwXlhCm46YFs kXeoi5qz94JYPqSDTs79 TFsQP1dz8VVos9KzUpY0 b3wYQR7An193gjgYuRj3 xSmyNsnSJ47jLqrvbpyr guAIP2Wq43Gf8VhHsyu5 yT6c2loPebHovnq9BQog 3qvU1xcVm2g1DKFDlqh4 L0q8RR9P41VD4sVjdnWl YdjESsIZM4b1oGQPjpBe l1ZVQbWKw7brHUSimJgq xdn0cf4vqRzpfXWtl10G lYnZvpqaV0s8DowMZwzV 8P1cyKrwJNLoJyvLjYqO 4MhOXNbAX23CEijO5cRT tHe3miAwCOVQbuoLaEP2 l6uNLsc8fiLl3eWoG6j6 477xt6l0lph9ALQdr4HX D9UJNe4s8YF02LhrwOdl dLCisBNOdE8yugntu6cj YvY4aQFHgAuagn4dFLO1 eGR6Dtv7LW75qlV5Fkik 
+
+Capacity Ok (file: tests/vector/ctor_range.cpp, line: 43)
+Size: 12 (file: tests/vector/ctor_range.cpp, line: 43)
+
+Vector content:
+H e l l o   W o r l d ! 
+
+Capacity Ok (file: tests/vector/ctor_range.cpp, line: 53)
+Size: 0 (file: tests/vector/ctor_range.cpp, line: 53)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/ctor_range.cpp, line: 63)
+Size: 36 (file: tests/vector/ctor_range.cpp, line: 63)
+
+Vector content:
+1 2 3 4 5 6 7 8 9 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

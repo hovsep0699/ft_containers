@@ -1,0 +1,10 @@
+Front: 9 (file: tests/vector/front.cpp, line: 22)
+Front: 543 (file: tests/vector/front.cpp, line: 32)
+Front: 9 (file: tests/vector/front.cpp, line: 42)
+Front: 543 (file: tests/vector/front.cpp, line: 53)
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

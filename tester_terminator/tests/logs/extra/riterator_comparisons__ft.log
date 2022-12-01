@@ -1,0 +1,30 @@
+Equal iterators (file: tests/extra/riterator_comparisons.cpp, line: 38)
+Equal const iterators (file: tests/extra/riterator_comparisons.cpp, line: 41)
+Equal const iterators. (file: tests/extra/riterator_comparisons.cpp, line: 44)
+Not Equal iterators (file: tests/extra/riterator_comparisons.cpp, line: 51)
+Not Equal const iterators (file: tests/extra/riterator_comparisons.cpp, line: 54)
+Not Equal const iterators. (file: tests/extra/riterator_comparisons.cpp, line: 57)
+Less than (file: tests/extra/riterator_comparisons.cpp, line: 61)
+Less than... (file: tests/extra/riterator_comparisons.cpp, line: 70)
+Less than..... (file: tests/extra/riterator_comparisons.cpp, line: 79)
+Less than or equal (file: tests/extra/riterator_comparisons.cpp, line: 86)
+Less than or equal.. (file: tests/extra/riterator_comparisons.cpp, line: 92)
+Less than or equal... (file: tests/extra/riterator_comparisons.cpp, line: 95)
+Less than or equal..... (file: tests/extra/riterator_comparisons.cpp, line: 101)
+Less than or equal...... (file: tests/extra/riterator_comparisons.cpp, line: 104)
+Less than or equal....... (file: tests/extra/riterator_comparisons.cpp, line: 107)
+Greater than. (file: tests/extra/riterator_comparisons.cpp, line: 114)
+Greater than.... (file: tests/extra/riterator_comparisons.cpp, line: 123)
+Greater than..... (file: tests/extra/riterator_comparisons.cpp, line: 129)
+Greater than or equal. (file: tests/extra/riterator_comparisons.cpp, line: 139)
+Greater than or equal.. (file: tests/extra/riterator_comparisons.cpp, line: 142)
+Greater than or equal.... (file: tests/extra/riterator_comparisons.cpp, line: 148)
+Greater than or equal..... (file: tests/extra/riterator_comparisons.cpp, line: 151)
+Greater than or equal....... (file: tests/extra/riterator_comparisons.cpp, line: 157)
+Greater than or equal........ (file: tests/extra/riterator_comparisons.cpp, line: 160)
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

@@ -1,0 +1,67 @@
+Capacity Ok (file: tests/vector/reserve.cpp, line: 24)
+Size: 0 (file: tests/vector/reserve.cpp, line: 24)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/reserve.cpp, line: 28)
+Size: 0 (file: tests/vector/reserve.cpp, line: 28)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/reserve.cpp, line: 32)
+Size: 0 (file: tests/vector/reserve.cpp, line: 32)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/reserve.cpp, line: 36)
+Size: 0 (file: tests/vector/reserve.cpp, line: 36)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/reserve.cpp, line: 40)
+Size: 0 (file: tests/vector/reserve.cpp, line: 40)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/reserve.cpp, line: 44)
+Size: 0 (file: tests/vector/reserve.cpp, line: 44)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/reserve.cpp, line: 52)
+Size: 32 (file: tests/vector/reserve.cpp, line: 52)
+
+Vector content:
+770389616 770389617 770389618 770389619 770389620 770389621 770389622 770389623 770389624 770389625 770389626 770389627 770389628 770389629 770389630 770389631 770389632 770389633 770389634 770389635 770389636 770389637 770389638 770389639 770389640 770389641 770389642 770389643 770389644 770389645 770389646 770389647 
+
+Capacity Ok (file: tests/vector/reserve.cpp, line: 56)
+Size: 32 (file: tests/vector/reserve.cpp, line: 56)
+
+Vector content:
+770389616 770389617 770389618 770389619 770389620 770389621 770389622 770389623 770389624 770389625 770389626 770389627 770389628 770389629 770389630 770389631 770389632 770389633 770389634 770389635 770389636 770389637 770389638 770389639 770389640 770389641 770389642 770389643 770389644 770389645 770389646 770389647 
+
+Capacity Ok (file: tests/vector/reserve.cpp, line: 60)
+Size: 32 (file: tests/vector/reserve.cpp, line: 60)
+
+Vector content:
+770389616 770389617 770389618 770389619 770389620 770389621 770389622 770389623 770389624 770389625 770389626 770389627 770389628 770389629 770389630 770389631 770389632 770389633 770389634 770389635 770389636 770389637 770389638 770389639 770389640 770389641 770389642 770389643 770389644 770389645 770389646 770389647 
+
+Capacity Ok (file: tests/vector/reserve.cpp, line: 64)
+Size: 32 (file: tests/vector/reserve.cpp, line: 64)
+
+Vector content:
+770389616 770389617 770389618 770389619 770389620 770389621 770389622 770389623 770389624 770389625 770389626 770389627 770389628 770389629 770389630 770389631 770389632 770389633 770389634 770389635 770389636 770389637 770389638 770389639 770389640 770389641 770389642 770389643 770389644 770389645 770389646 770389647 
+
+Length exception (file: tests/vector/reserve.cpp, line: 74)
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

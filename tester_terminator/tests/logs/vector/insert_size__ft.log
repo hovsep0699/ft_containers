@@ -1,0 +1,61 @@
+Capacity Ok (file: tests/vector/insert_size.cpp, line: 25)
+Size: 0 (file: tests/vector/insert_size.cpp, line: 25)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/insert_size.cpp, line: 29)
+Size: 0 (file: tests/vector/insert_size.cpp, line: 29)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/insert_size.cpp, line: 33)
+Size: 10 (file: tests/vector/insert_size.cpp, line: 33)
+
+Vector content:
+64 64 64 64 64 64 64 64 64 64 
+
+Capacity Ok (file: tests/vector/insert_size.cpp, line: 37)
+Size: 15 (file: tests/vector/insert_size.cpp, line: 37)
+
+Vector content:
+-1 -1 -1 -1 -1 64 64 64 64 64 64 64 64 64 64 
+
+Capacity Ok (file: tests/vector/insert_size.cpp, line: 41)
+Size: 16 (file: tests/vector/insert_size.cpp, line: 41)
+
+Vector content:
+-1 -9 -1 -1 -1 -1 64 64 64 64 64 64 64 64 64 64 
+
+Capacity Ok (file: tests/vector/insert_size.cpp, line: 45)
+Size: 37 (file: tests/vector/insert_size.cpp, line: 45)
+
+Vector content:
+-1 -9 -1 -1 -1 -1 64 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 64 64 64 64 64 64 64 64 64 
+
+Capacity Ok (file: tests/vector/insert_size.cpp, line: 49)
+Size: 37 (file: tests/vector/insert_size.cpp, line: 49)
+
+Vector content:
+-1 -9 -1 -1 -1 -1 64 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 64 64 64 64 64 64 64 64 64 
+
+Capacity Ok (file: tests/vector/insert_size.cpp, line: 53)
+Size: 37 (file: tests/vector/insert_size.cpp, line: 53)
+
+Vector content:
+-1 -9 -1 -1 -1 -1 64 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 64 64 64 64 64 64 64 64 64 
+
+Capacity Ok (file: tests/vector/insert_size.cpp, line: 57)
+Size: 55 (file: tests/vector/insert_size.cpp, line: 57)
+
+Vector content:
+-1 -9 -1 -1 -1 -1 64 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 64 64 64 64 64 64 64 64 64 420 420 420 420 420 420 420 420 420 420 420 420 420 420 420 420 420 420 
+
+Length exception (file: tests/vector/insert_size.cpp, line: 67)
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

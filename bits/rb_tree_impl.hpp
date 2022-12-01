@@ -175,15 +175,19 @@ namespace ft
 			typename _Allocator>
 	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::lower_bound(const key_type& key)
 	{
-		iterator it = begin();
-		iterator it_end = end();
-		while (it != it_end)
+		base_ptr x = _rb_tree_impl._root;
+		base_ptr y = _rb_tree_impl._nil;
+		while (!x->_is_nil)
 		{
-			if ( !_comp(s_key(it.base()), key) )
-				break;
-			++it;
+			if ( !_comp(s_key(x), key) )
+			{
+				y = x;
+				x = x->_left;
+			}
+			else
+				x = x->_right;
 		}
-		return it;
+		return iterator(y);
 	}
 
 	template<typename _K, 
@@ -193,15 +197,29 @@ namespace ft
 			typename _Allocator>
 	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::lower_bound(const key_type& key) const
 	{
-		const_iterator it = begin();
-		const_iterator it_end = end();
-		while (it != it_end)
+
+		base_ptr x = _rb_tree_impl._root;
+		base_ptr y = _rb_tree_impl._nil;
+		while (!x->_is_nil)
 		{
-			if ( !_comp(s_key(it.base()), key) )
-				break;
-			++it;
+			if ( !_comp(s_key(x), key) )
+			{
+				y = x;
+				x = x->_left;
+			}
+			else
+				x = x->_right;
 		}
-		return it;
+		return const_iterator(y);
+		//const_iterator it = begin();
+		//const_iterator it_end = end();
+		//while (it != it_end)
+		//{
+		//	if ( !_comp(s_key(it.base()), key) )
+		//		break;
+		//	++it;
+		//}
+		//return it;
 	}
 
 	template<typename _K, 
@@ -211,27 +229,19 @@ namespace ft
 			typename _Allocator>
 	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::const_iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::upper_bound(const key_type& key) const
 	{
-		const_iterator it = begin();
-		const_iterator it_end = end();
-		while (it != it_end)
+		base_ptr x = _rb_tree_impl._root;
+		base_ptr y = _rb_tree_impl._nil;
+		while (!x->_is_nil)
 		{
-			if ( _comp( key, s_key(it.base()) ) )
-				break;
-			++it;
+			if ( _comp(key, s_key(x) ) )
+			{
+				y = x;
+				x = x->_left;
+			}
+			else
+				x = x->_right;
 		}
-		//base_ptr node_begin = _rb_tree_impl._begin;
-		//base_ptr node = _rb_tree_impl._nil;
-		//while (!node_begin->_is_nil)
-		//{
-		//	if ( _comp(s_key(node_begin), key) )
-		//	{
-		//		node = node_begin;
-		//		node_begin = s_left(node_begin);
-		//	}
-		//	else
-		//		node_begin = s_right(node_begin);
-		//}
-		return it;
+		return const_iterator(y);
 	}
 
 	template<typename _K, 
@@ -241,40 +251,20 @@ namespace ft
 			typename _Allocator>
 	typename rb_tree<_K, _V, _KOV, _Compare, _Allocator>::iterator rb_tree<_K, _V, _KOV, _Compare, _Allocator>::upper_bound(const key_type& key)
 	{
-		iterator it = begin();
-		iterator it_end = end();
-		while (it != it_end)
+
+		base_ptr x = _rb_tree_impl._root;
+		base_ptr y = _rb_tree_impl._nil;
+		while (!x->_is_nil)
 		{
-			if ( _comp( key, s_key(it.base()) ) )
-				break;
-			++it;
+			if ( _comp(key, s_key(x) ) )
+			{
+				y = x;
+				x = x->_left;
+			}
+			else
+				x = x->_right;
 		}
-		//base_ptr node_begin = _rb_tree_impl._begin;
-		//base_ptr node = _rb_tree_impl._nil;
-		//while (!node_begin->_is_nil)
-		//{
-		//	if ( _comp(s_key(node_begin), key) )
-		//	{
-		//		node = node_begin;
-		//		node_begin = s_left(node_begin);
-		//	}
-		//	else
-		//		node_begin = s_right(node_begin);
-		//}
-		return it;
-		//base_ptr node_begin = _rb_tree_impl._begin;
-		//base_ptr node = _rb_tree_impl._nil;
-		//while (!node_begin->_is_nil)
-		//{
-		//	if ( _comp(s_key(node_begin), key) )
-		//	{
-		//		node = node_begin;
-		//		node_begin = s_left(node_begin);
-		//	}
-		//	else
-		//		node_begin = s_right(node_begin);
-		//}
-		//return iterator(node);
+		return iterator(y);
 	}
 
 	template<typename _K, 
@@ -385,12 +375,13 @@ namespace ft
 			typename _Allocator>
 	void rb_tree<_K, _V, _KOV, _Compare, _Allocator>::clear_tree(base_ptr node)
 	{
-		if (node->_is_nil)
+		if (!node || node->_is_nil)
 			return ;
 		clear_tree(node->_left);
+		base_ptr tmp = node->_right;
 		_rb_tree_impl._alloc.destroy(s_current(node));
 		_rb_tree_impl._alloc.deallocate(s_current(node), 1);
-		clear_tree(node->_right);
+		clear_tree(tmp);
 	}
 
 	template<typename _K, 

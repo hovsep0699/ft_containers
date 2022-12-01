@@ -1,0 +1,10 @@
+Less than or equal (file: tests/vector/comparisons_le.cpp, line: 22)
+Less than or equal.. (file: tests/vector/comparisons_le.cpp, line: 40)
+Less than or equal... (file: tests/vector/comparisons_le.cpp, line: 58)
+Less than or equal..... (file: tests/vector/comparisons_le.cpp, line: 76)
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

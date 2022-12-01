@@ -1,0 +1,12 @@
+At: a (file: tests/vector/at.cpp, line: 26)
+Out of range exception 99 (file: tests/vector/at.cpp, line: 41)
+Out of range exception 0 (file: tests/vector/at.cpp, line: 54)
+At: a (file: tests/vector/at.cpp, line: 65)
+Out of range exception 99 (file: tests/vector/at.cpp, line: 80)
+Out of range exception 0 (file: tests/vector/at.cpp, line: 93)
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

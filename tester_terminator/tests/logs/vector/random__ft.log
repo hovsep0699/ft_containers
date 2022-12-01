@@ -1,0 +1,124 @@
+Capacity Ok (file: tests/vector/random.cpp, line: 25)
+Size: 32 (file: tests/vector/random.cpp, line: 25)
+
+Vector content:
+QExoqp0nICr0sXsHqty2 naax9QcpJhvaL7DezsNQ 25ZTtB6wbptfbxM8AvHB tShYNtc0MkdjqLrOatgz 7Z3kf1Qec0NnsLSEpbOt WhkSNrKJC966fvjZ2Or1 8vlxlFRRgW7yYj4GO7dt 5sq1aoT8zP0HaHj3nFOK 61Dv31GYZhkgjKCErpng l0IIcWWHhOcPzoxEamQM bE1RYclskwXlhCm46YFs kXeoi5qz94JYPqSDTs79 TFsQP1dz8VVos9KzUpY0 b3wYQR7An193gjgYuRj3 xSmyNsnSJ47jLqrvbpyr guAIP2Wq43Gf8VhHsyu5 yT6c2loPebHovnq9BQog 3qvU1xcVm2g1DKFDlqh4 L0q8RR9P41VD4sVjdnWl YdjESsIZM4b1oGQPjpBe l1ZVQbWKw7brHUSimJgq xdn0cf4vqRzpfXWtl10G lYnZvpqaV0s8DowMZwzV 8P1cyKrwJNLoJyvLjYqO 4MhOXNbAX23CEijO5cRT tHe3miAwCOVQbuoLaEP2 l6uNLsc8fiLl3eWoG6j6 477xt6l0lph9ALQdr4HX D9UJNe4s8YF02LhrwOdl dLCisBNOdE8yugntu6cj YvY4aQFHgAuagn4dFLO1 eGR6Dtv7LW75qlV5Fkik 
+
+Capacity Ok (file: tests/vector/random.cpp, line: 29)
+Size: 35 (file: tests/vector/random.cpp, line: 29)
+
+Vector content:
+QExoqp0nICr0sXsHqty2 naax9QcpJhvaL7DezsNQ 25ZTtB6wbptfbxM8AvHB tShYNtc0MkdjqLrOatgz 7Z3kf1Qec0NnsLSEpbOt WhkSNrKJC966fvjZ2Or1 8vlxlFRRgW7yYj4GO7dt z0jXAhiV9keBsaLOY0Xf z0jXAhiV9keBsaLOY0Xf z0jXAhiV9keBsaLOY0Xf 5sq1aoT8zP0HaHj3nFOK 61Dv31GYZhkgjKCErpng l0IIcWWHhOcPzoxEamQM bE1RYclskwXlhCm46YFs kXeoi5qz94JYPqSDTs79 TFsQP1dz8VVos9KzUpY0 b3wYQR7An193gjgYuRj3 xSmyNsnSJ47jLqrvbpyr guAIP2Wq43Gf8VhHsyu5 yT6c2loPebHovnq9BQog 3qvU1xcVm2g1DKFDlqh4 L0q8RR9P41VD4sVjdnWl YdjESsIZM4b1oGQPjpBe l1ZVQbWKw7brHUSimJgq xdn0cf4vqRzpfXWtl10G lYnZvpqaV0s8DowMZwzV 8P1cyKrwJNLoJyvLjYqO 4MhOXNbAX23CEijO5cRT tHe3miAwCOVQbuoLaEP2 l6uNLsc8fiLl3eWoG6j6 477xt6l0lph9ALQdr4HX D9UJNe4s8YF02LhrwOdl dLCisBNOdE8yugntu6cj YvY4aQFHgAuagn4dFLO1 eGR6Dtv7LW75qlV5Fkik 
+
+8vlxlFRRgW7yYj4GO7dt (file: tests/vector/random.cpp, line: 31)
+8vlxlFRRgW7yYj4GO7dt (file: tests/vector/random.cpp, line: 32)
+End (file: tests/vector/random.cpp, line: 37)
+Capacity Ok (file: tests/vector/random.cpp, line: 40)
+Size: 34 (file: tests/vector/random.cpp, line: 40)
+
+Vector content:
+QExoqp0nICr0sXsHqty2 naax9QcpJhvaL7DezsNQ 25ZTtB6wbptfbxM8AvHB tShYNtc0MkdjqLrOatgz 7Z3kf1Qec0NnsLSEpbOt WhkSNrKJC966fvjZ2Or1 8vlxlFRRgW7yYj4GO7dt z0jXAhiV9keBsaLOY0Xf z0jXAhiV9keBsaLOY0Xf z0jXAhiV9keBsaLOY0Xf 5sq1aoT8zP0HaHj3nFOK 61Dv31GYZhkgjKCErpng l0IIcWWHhOcPzoxEamQM bE1RYclskwXlhCm46YFs kXeoi5qz94JYPqSDTs79 TFsQP1dz8VVos9KzUpY0 b3wYQR7An193gjgYuRj3 xSmyNsnSJ47jLqrvbpyr guAIP2Wq43Gf8VhHsyu5 yT6c2loPebHovnq9BQog 3qvU1xcVm2g1DKFDlqh4 L0q8RR9P41VD4sVjdnWl YdjESsIZM4b1oGQPjpBe l1ZVQbWKw7brHUSimJgq xdn0cf4vqRzpfXWtl10G lYnZvpqaV0s8DowMZwzV 8P1cyKrwJNLoJyvLjYqO 4MhOXNbAX23CEijO5cRT tHe3miAwCOVQbuoLaEP2 l6uNLsc8fiLl3eWoG6j6 477xt6l0lph9ALQdr4HX D9UJNe4s8YF02LhrwOdl dLCisBNOdE8yugntu6cj YvY4aQFHgAuagn4dFLO1 
+
+Capacity Ok (file: tests/vector/random.cpp, line: 46)
+Size: 42 (file: tests/vector/random.cpp, line: 46)
+
+Vector content:
+QExoqp0nICr0sXsHqty2 naax9QcpJhvaL7DezsNQ 25ZTtB6wbptfbxM8AvHB tShYNtc0MkdjqLrOatgz 7Z3kf1Qec0NnsLSEpbOt WhkSNrKJC966fvjZ2Or1 8vlxlFRRgW7yYj4GO7dt z0jXAhiV9keBsaLOY0Xf z0jXAhiV9keBsaLOY0Xf z0jXAhiV9keBsaLOY0Xf 5sq1aoT8zP0HaHj3nFOK 61Dv31GYZhkgjKCErpng l0IIcWWHhOcPzoxEamQM bE1RYclskwXlhCm46YFs kXeoi5qz94JYPqSDTs79 TFsQP1dz8VVos9KzUpY0 b3wYQR7An193gjgYuRj3 xSmyNsnSJ47jLqrvbpyr guAIP2Wq43Gf8VhHsyu5 yT6c2loPebHovnq9BQog 3qvU1xcVm2g1DKFDlqh4 L0q8RR9P41VD4sVjdnWl YdjESsIZM4b1oGQPjpBe l1ZVQbWKw7brHUSimJgq xdn0cf4vqRzpfXWtl10G lYnZvpqaV0s8DowMZwzV 8P1cyKrwJNLoJyvLjYqO 4MhOXNbAX23CEijO5cRT tHe3miAwCOVQbuoLaEP2 l6uNLsc8fiLl3eWoG6j6 477xt6l0lph9ALQdr4HX D9UJNe4s8YF02LhrwOdl dLCisBNOdE8yugntu6cj YvY4aQFHgAuagn4dFLO1 uvg6KqtcgduR31n3ajsv wbiAcjgojb9JOagZwyMn ATZKCzaPOqgkhPjwuGlf MOhaJs56yjOw8f6nLPRA 0gyB2Tr42v6awMw2nK7J e6GsiLFUuoDpVFEhJKZ1 z0jXAhiV9keBsaLOY0Xf P68p2ZAosHJdmoZh1C7N 
+
+Max size: 768614336404564650 (file: tests/vector/random.cpp, line: 48)
+Capacity Ok (file: tests/vector/random.cpp, line: 54)
+Size: 39 (file: tests/vector/random.cpp, line: 54)
+
+Vector content:
+QExoqp0nICr0sXsHqty2 naax9QcpJhvaL7DezsNQ 25ZTtB6wbptfbxM8AvHB tShYNtc0MkdjqLrOatgz 7Z3kf1Qec0NnsLSEpbOt WhkSNrKJC966fvjZ2Or1 8vlxlFRRgW7yYj4GO7dt z0jXAhiV9keBsaLOY0Xf z0jXAhiV9keBsaLOY0Xf z0jXAhiV9keBsaLOY0Xf 5sq1aoT8zP0HaHj3nFOK 61Dv31GYZhkgjKCErpng l0IIcWWHhOcPzoxEamQM bE1RYclskwXlhCm46YFs kXeoi5qz94JYPqSDTs79 TFsQP1dz8VVos9KzUpY0 b3wYQR7An193gjgYuRj3 xSmyNsnSJ47jLqrvbpyr guAIP2Wq43Gf8VhHsyu5 yT6c2loPebHovnq9BQog 3qvU1xcVm2g1DKFDlqh4 L0q8RR9P41VD4sVjdnWl YdjESsIZM4b1oGQPjpBe l1ZVQbWKw7brHUSimJgq xdn0cf4vqRzpfXWtl10G lYnZvpqaV0s8DowMZwzV 8P1cyKrwJNLoJyvLjYqO 4MhOXNbAX23CEijO5cRT tHe3miAwCOVQbuoLaEP2 l6uNLsc8fiLl3eWoG6j6 477xt6l0lph9ALQdr4HX D9UJNe4s8YF02LhrwOdl dLCisBNOdE8yugntu6cj YvY4aQFHgAuagn4dFLO1 uvg6KqtcgduR31n3ajsv wbiAcjgojb9JOagZwyMn ATZKCzaPOqgkhPjwuGlf MOhaJs56yjOw8f6nLPRA 0gyB2Tr42v6awMw2nK7J 
+
+0gyB2Tr42v6awMw2nK7J (file: tests/vector/random.cpp, line: 57)
+MOhaJs56yjOw8f6nLPRA (file: tests/vector/random.cpp, line: 57)
+ATZKCzaPOqgkhPjwuGlf (file: tests/vector/random.cpp, line: 57)
+wbiAcjgojb9JOagZwyMn (file: tests/vector/random.cpp, line: 57)
+uvg6KqtcgduR31n3ajsv (file: tests/vector/random.cpp, line: 57)
+YvY4aQFHgAuagn4dFLO1 (file: tests/vector/random.cpp, line: 57)
+dLCisBNOdE8yugntu6cj (file: tests/vector/random.cpp, line: 57)
+D9UJNe4s8YF02LhrwOdl (file: tests/vector/random.cpp, line: 57)
+477xt6l0lph9ALQdr4HX (file: tests/vector/random.cpp, line: 57)
+l6uNLsc8fiLl3eWoG6j6 (file: tests/vector/random.cpp, line: 57)
+tHe3miAwCOVQbuoLaEP2 (file: tests/vector/random.cpp, line: 57)
+4MhOXNbAX23CEijO5cRT (file: tests/vector/random.cpp, line: 57)
+8P1cyKrwJNLoJyvLjYqO (file: tests/vector/random.cpp, line: 57)
+lYnZvpqaV0s8DowMZwzV (file: tests/vector/random.cpp, line: 57)
+xdn0cf4vqRzpfXWtl10G (file: tests/vector/random.cpp, line: 57)
+l1ZVQbWKw7brHUSimJgq (file: tests/vector/random.cpp, line: 57)
+YdjESsIZM4b1oGQPjpBe (file: tests/vector/random.cpp, line: 57)
+L0q8RR9P41VD4sVjdnWl (file: tests/vector/random.cpp, line: 57)
+3qvU1xcVm2g1DKFDlqh4 (file: tests/vector/random.cpp, line: 57)
+yT6c2loPebHovnq9BQog (file: tests/vector/random.cpp, line: 57)
+guAIP2Wq43Gf8VhHsyu5 (file: tests/vector/random.cpp, line: 57)
+xSmyNsnSJ47jLqrvbpyr (file: tests/vector/random.cpp, line: 57)
+b3wYQR7An193gjgYuRj3 (file: tests/vector/random.cpp, line: 57)
+TFsQP1dz8VVos9KzUpY0 (file: tests/vector/random.cpp, line: 57)
+kXeoi5qz94JYPqSDTs79 (file: tests/vector/random.cpp, line: 57)
+bE1RYclskwXlhCm46YFs (file: tests/vector/random.cpp, line: 57)
+l0IIcWWHhOcPzoxEamQM (file: tests/vector/random.cpp, line: 57)
+61Dv31GYZhkgjKCErpng (file: tests/vector/random.cpp, line: 57)
+5sq1aoT8zP0HaHj3nFOK (file: tests/vector/random.cpp, line: 57)
+z0jXAhiV9keBsaLOY0Xf (file: tests/vector/random.cpp, line: 57)
+z0jXAhiV9keBsaLOY0Xf (file: tests/vector/random.cpp, line: 57)
+z0jXAhiV9keBsaLOY0Xf (file: tests/vector/random.cpp, line: 57)
+8vlxlFRRgW7yYj4GO7dt (file: tests/vector/random.cpp, line: 57)
+WhkSNrKJC966fvjZ2Or1 (file: tests/vector/random.cpp, line: 57)
+7Z3kf1Qec0NnsLSEpbOt (file: tests/vector/random.cpp, line: 57)
+tShYNtc0MkdjqLrOatgz (file: tests/vector/random.cpp, line: 57)
+25ZTtB6wbptfbxM8AvHB (file: tests/vector/random.cpp, line: 57)
+naax9QcpJhvaL7DezsNQ (file: tests/vector/random.cpp, line: 57)
+QExoqp0nICr0sXsHqty2 (file: tests/vector/random.cpp, line: 57)
+ABCD (file: tests/vector/random.cpp, line: 62)
+0gyB2Tr42v6awMw2nK7J (file: tests/vector/random.cpp, line: 64)
+ABCD (file: tests/vector/random.cpp, line: 65)
+Empty: false (file: tests/vector/random.cpp, line: 67)
+Empty: true (file: tests/vector/random.cpp, line: 71)
+Capacity Ok (file: tests/vector/random.cpp, line: 73)
+Size: 0 (file: tests/vector/random.cpp, line: 73)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/random.cpp, line: 77)
+Size: 70 (file: tests/vector/random.cpp, line: 77)
+
+Vector content:
+Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string Cool string 
+
+Capacity Ok (file: tests/vector/random.cpp, line: 81)
+Size: 22 (file: tests/vector/random.cpp, line: 81)
+
+Vector content:
+64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 
+
+Capacity Ok (file: tests/vector/random.cpp, line: 85)
+Size: 8 (file: tests/vector/random.cpp, line: 85)
+
+Vector content:
+uvg6KqtcgduR31n3ajsv wbiAcjgojb9JOagZwyMn ATZKCzaPOqgkhPjwuGlf MOhaJs56yjOw8f6nLPRA 0gyB2Tr42v6awMw2nK7J e6GsiLFUuoDpVFEhJKZ1 z0jXAhiV9keBsaLOY0Xf P68p2ZAosHJdmoZh1C7N 
+
+Small (file: tests/vector/random.cpp, line: 90)
+Equal (file: tests/vector/random.cpp, line: 96)
+Le (file: tests/vector/random.cpp, line: 100)
+At: Out of range: 26 (file: tests/vector/random.cpp, line: 108)
+Capacity Ok (file: tests/vector/random.cpp, line: 112)
+Size: 8 (file: tests/vector/random.cpp, line: 112)
+
+Vector content:
+uvg6KqtcgduR31n3ajsv wbiAcjgojb9JOagZwyMn ATZKCzaPOqgkhPjwuGlf MOhaJs56yjOw8f6nLPRA 0gyB2Tr42v6awMw2nK7J e6GsiLFUuoDpVFEhJKZ1 z0jXAhiV9keBsaLOY0Xf P68p2ZAosHJdmoZh1C7N 
+
+Capacity Ok (file: tests/vector/random.cpp, line: 116)
+Size: 4 (file: tests/vector/random.cpp, line: 116)
+
+Vector content:
+uvg6KqtcgduR31n3ajsv wbiAcjgojb9JOagZwyMn ATZKCzaPOqgkhPjwuGlf MOhaJs56yjOw8f6nLPRA 
+
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

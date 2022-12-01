@@ -1,0 +1,135 @@
+It1: 759368349 (file: tests/vector/iterator.cpp, line: 40)
+It2: 759368349 (file: tests/vector/iterator.cpp, line: 41)
+It1: 759368358 (file: tests/vector/iterator.cpp, line: 45)
+It1: 759368412 (file: tests/vector/iterator.cpp, line: 49)
+It2: 759368412 (file: tests/vector/iterator.cpp, line: 53)
+Capacity Ok (file: tests/vector/iterator.cpp, line: 57)
+Size: 64 (file: tests/vector/iterator.cpp, line: 57)
+
+Vector content:
+759368349 759368350 759368351 759368352 759368353 759368354 759368355 759368356 759368357 759368358 759368359 759368360 759368361 759368362 759368363 759368364 759368365 759368366 759368367 759368368 759368369 759368370 759368371 759368372 759368373 759368374 759368375 759368376 759368377 759368378 759368379 759368380 759368381 759368382 759368383 759368384 759368385 759368386 759368387 759368388 759368389 759368390 759368391 759368392 759368393 759368394 759368395 759368396 759368397 759368398 759368399 759368400 759368401 759368402 759368403 759368404 759368405 759368406 759368407 759368408 759368409 759368410 759368411 -1 
+
+It: uvg6KqtcgduR31n3ajsv (file: tests/vector/iterator.cpp, line: 66)
+Cit: UwMTzJPlbnhgwbHpDi6w (file: tests/vector/iterator.cpp, line: 67)
+Cstr: UwMTzJPlbnhgwbHpDi6w (file: tests/vector/iterator.cpp, line: 70)
+Capacity Ok (file: tests/vector/iterator.cpp, line: 72)
+Size: 64 (file: tests/vector/iterator.cpp, line: 72)
+
+Vector content:
+ wbiAcjgojb9JOagZwyMn ATZKCzaPOqgkhPjwuGlf MOhaJs56yjOw8f6nLPRA 0gyB2Tr42v6awMw2nK7J e6GsiLFUuoDpVFEhJKZ1 z0jXAhiV9keBsaLOY0Xf P68p2ZAosHJdmoZh1C7N Pu3EuZVeY0TCO3ojdK0t z7jCHMooHCS73M8GygKB uT4KoK83JrZxZjkul7ty g8gfrZoY5XwfzRusvHvv 7PGmkM0OSRnYREt9mFIP q1od7mBIpPEsCtpF9kdw XQo0LWId5TdZnLnpUNOb U0m1R0kFFhAFyS6hmHHw K0lPKfxJxIOnE8QB90xn cZ5xyQifMJhrKxqBK9A7 cFBiwjfYw7Js6qEGy5Kt 1tW0KWfXxeFO69tByqcE 3Fvq9NxBrhPXHe0IlIVx MSRDjdFRvHAhFGhiMtDe zGm2joMh71jQkYzg5L4V Mq4RRaeLvSAO0z2ibp8Q WnLFYnQKP8TNJkqVVbUg E98UphbbVSzrW5Mzurmg F8HRxeEcaTZDkFPkioij jmUVl4Q8X5BwVNzXN219 n7Xp4w4FwzGKit7AI4SO 4MxXYr6rKOcXLt9UkVd2 4RVTDsADtRyboaai9d29 XaSqsrrtdhAfFoJIc5KK 9Z9jdVCrTT09bg348ceb I6uqLG9dO5mfNdSMwOYm UwMTzJPlbnhgwbHpDi6w DebjMP9afncYE6GhhO00 YGPuscYDiGfAjY1UWST0 K6gbvgGjVZgEFUDlkdSk 8xCBPI0w6TpC0RA62c2W fYMxkNwmKg3moP8KvD9v QpPdhwhEYjIugg3OPcPH qQBXjSn43I3EMP54SyxZ 7qvdKwoW1CQEZTWPvuSC rCT212rdYO0zTGHXesKg dBHvlHsBwcR9MkkenYYG NQiSlergqR8fVbOeivLj xYVqsV147UIe7jVBVwXo tcxayO4DdEJ885TbqUMy 9TGSMTD8U8ksRpHqq0cL TIJ16jCv9BSUiWvhbF9T BM9GL2ig1hePkA6lM6Ck TfJTYB9JQMU6CGcYg20Q Fg6e5YT2FQbpTZNTDqdo LI5q6ml40MeE9H1dPb93 OaxJUSm3nYN9Y8Ela7sS BgBeODAwXz7xJo50Rwqd xdkgKj1dEoJ6zuVhkvvo olIewtUEvXJgs1lB9bCn dTsPDS0x2uXtcgOIJHb8 DYvJ2phLppGNZKboTBrd DjNFMtt9PxkzqvWBHI6j 1Z3YkeTFlPniKnzFhzgu 76XqQg6hqMf5IXxKPOEs gzaapTWW7i9EZjjzLeK6 
+
+It: Pu3EuZVeY0TCO3ojdK0t (file: tests/vector/iterator.cpp, line: 85)
+It: Pu3EuZVeY0TCO3ojdK0t (file: tests/vector/iterator.cpp, line: 86)
+It: z7jCHMooHCS73M8GygKB (file: tests/vector/iterator.cpp, line: 87)
+Cit: YGPuscYDiGfAjY1UWST0 (file: tests/vector/iterator.cpp, line: 89)
+Cit: YGPuscYDiGfAjY1UWST0 (file: tests/vector/iterator.cpp, line: 90)
+Cit: K6gbvgGjVZgEFUDlkdSk (file: tests/vector/iterator.cpp, line: 91)
+It: z0jXAhiV9keBsaLOY0Xf (file: tests/vector/iterator.cpp, line: 100)
+It: z0jXAhiV9keBsaLOY0Xf (file: tests/vector/iterator.cpp, line: 101)
+It: e6GsiLFUuoDpVFEhJKZ1 (file: tests/vector/iterator.cpp, line: 102)
+Cit: UwMTzJPlbnhgwbHpDi6w (file: tests/vector/iterator.cpp, line: 104)
+Cit: UwMTzJPlbnhgwbHpDi6w (file: tests/vector/iterator.cpp, line: 105)
+Cit: I6uqLG9dO5mfNdSMwOYm (file: tests/vector/iterator.cpp, line: 106)
+It: g8gfrZoY5XwfzRusvHvv (file: tests/vector/iterator.cpp, line: 108)
+It: tcxayO4DdEJ885TbqUMy (file: tests/vector/iterator.cpp, line: 109)
+It: dBHvlHsBwcR9MkkenYYG (file: tests/vector/iterator.cpp, line: 110)
+It: dTsPDS0x2uXtcgOIJHb8 (file: tests/vector/iterator.cpp, line: 111)
+Cit: jmUVl4Q8X5BwVNzXN219 (file: tests/vector/iterator.cpp, line: 112)
+Cit: QpPdhwhEYjIugg3OPcPH (file: tests/vector/iterator.cpp, line: 113)
+Size: 64 (file: tests/vector/iterator.cpp, line: 114)
+It: E98UphbbVSzrW5Mzurmg (file: tests/vector/iterator.cpp, line: 119)
+Cit: E98UphbbVSzrW5Mzurmg (file: tests/vector/iterator.cpp, line: 120)
+It: K6gbvgGjVZgEFUDlkdSk (file: tests/vector/iterator.cpp, line: 125)
+Cit: K6gbvgGjVZgEFUDlkdSk (file: tests/vector/iterator.cpp, line: 126)
+It: K6gbvgGjVZgEFUDlkdSk (file: tests/vector/iterator.cpp, line: 131)
+Cit: K6gbvgGjVZgEFUDlkdSk (file: tests/vector/iterator.cpp, line: 132)
+It: qQBXjSn43I3EMP54SyxZ (file: tests/vector/iterator.cpp, line: 137)
+Cit: qQBXjSn43I3EMP54SyxZ (file: tests/vector/iterator.cpp, line: 138)
+It: qQBXjSn43I3EMP54SyxZ (file: tests/vector/iterator.cpp, line: 143)
+Cit: qQBXjSn43I3EMP54SyxZ (file: tests/vector/iterator.cpp, line: 144)
+It: 1tW0KWfXxeFO69tByqcE (file: tests/vector/iterator.cpp, line: 149)
+Cit: 1tW0KWfXxeFO69tByqcE (file: tests/vector/iterator.cpp, line: 150)
+It + 10: 4MxXYr6rKOcXLt9UkVd2 (file: tests/vector/iterator.cpp, line: 151)
+Cit + 10: 4MxXYr6rKOcXLt9UkVd2 (file: tests/vector/iterator.cpp, line: 152)
+Capacity Ok (file: tests/vector/iterator.cpp, line: 162)
+Size: 64 (file: tests/vector/iterator.cpp, line: 162)
+
+Vector content:
+1797093520 1797093522 1797093524 1797093526 1797093528 1797093530 1797093532 1797093534 1797093536 1797093538 1797093540 1797093542 1797093544 1797093546 1797093548 1797093550 1797093552 1797093554 1797093556 1797093558 1797093560 1797093562 1797093564 1797093566 1797093568 1797093570 1797093572 1797093574 1797093576 1797093578 1797093580 1797093582 1797093584 1797093586 1797093588 1797093590 1797093592 1797093594 1797093596 1797093598 1797093600 1797093602 1797093604 1797093606 1797093608 1797093610 1797093612 1797093614 1797093616 1797093618 1797093620 1797093622 1797093624 1797093626 898546814 898546815 898546816 898546817 898546818 898546819 898546820 898546821 898546822 898546823 
+
+Capacity Ok (file: tests/vector/iterator.cpp, line: 166)
+Size: 64 (file: tests/vector/iterator.cpp, line: 166)
+
+Vector content:
+898546823 898546822 898546821 898546820 898546819 898546818 898546817 898546816 898546815 898546814 1797093626 1797093624 1797093622 1797093620 1797093618 1797093616 1797093614 1797093612 1797093610 1797093608 1797093606 1797093604 1797093602 1797093600 1797093598 1797093596 1797093594 1797093592 1797093590 1797093588 1797093586 1797093584 1797093582 1797093580 1797093578 1797093576 1797093574 1797093572 1797093570 1797093568 1797093566 1797093564 1797093562 1797093560 1797093558 1797093556 1797093554 1797093552 1797093550 1797093548 1797093546 1797093544 1797093542 1797093540 1797093538 1797093536 1797093534 1797093532 1797093530 1797093528 1797093526 1797093524 1797093522 1797093520 
+
+898546760
+898546761
+898546762
+898546763
+898546764
+898546765
+898546766
+898546767
+898546768
+898546769
+898546770
+898546771
+898546772
+898546773
+898546774
+898546775
+898546776
+898546777
+898546778
+898546779
+898546780
+898546781
+898546782
+898546783
+898546784
+898546785
+898546786
+898546787
+898546788
+898546789
+898546790
+898546791
+898546792
+898546793
+898546794
+898546795
+898546796
+898546797
+898546798
+898546799
+898546800
+898546801
+898546802
+898546803
+898546804
+898546805
+898546806
+898546807
+898546808
+898546809
+898546810
+898546811
+898546812
+898546813
+898546814
+898546815
+898546816
+898546817
+898546818
+898546819
+898546820
+898546821
+898546822
+898546823
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

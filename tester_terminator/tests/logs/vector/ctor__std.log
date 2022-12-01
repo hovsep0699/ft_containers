@@ -1,0 +1,18 @@
+Capacity Ok (file: tests/vector/ctor.cpp, line: 21)
+Size: 0 (file: tests/vector/ctor.cpp, line: 21)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/ctor.cpp, line: 29)
+Size: 0 (file: tests/vector/ctor.cpp, line: 29)
+
+Vector content:
+
+
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

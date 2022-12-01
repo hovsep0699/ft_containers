@@ -1,0 +1,31 @@
+Capacity Ok (file: tests/vector/ctor_size.cpp, line: 22)
+Size: 64 (file: tests/vector/ctor_size.cpp, line: 22)
+
+Vector content:
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+
+Capacity Ok (file: tests/vector/ctor_size.cpp, line: 28)
+Size: 0 (file: tests/vector/ctor_size.cpp, line: 28)
+
+Vector content:
+
+
+Capacity Ok (file: tests/vector/ctor_size.cpp, line: 34)
+Size: 26 (file: tests/vector/ctor_size.cpp, line: 34)
+
+Vector content:
+uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv uvg6KqtcgduR31n3ajsv 
+
+Capacity Ok (file: tests/vector/ctor_size.cpp, line: 40)
+Size: 0 (file: tests/vector/ctor_size.cpp, line: 40)
+
+Vector content:
+
+
+Length exception (file: tests/vector/ctor_size.cpp, line: 50)
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

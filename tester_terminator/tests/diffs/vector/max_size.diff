@@ -1,0 +1,10 @@
+--- logs/vector/max_size__ft.log	2022-12-02 01:14:13.000000000 +0400
++++ logs/vector/max_size__std.log	2022-12-02 01:14:14.000000000 +0400
+@@ -1,5 +1,5 @@
+-Unsigned Char max size: 18446744073709551615 (file: tests/vector/max_size.cpp, line: 22)
+-Char max size: 18446744073709551615 (file: tests/vector/max_size.cpp, line: 23)
++Unsigned Char max size: 9223372036854775807 (file: tests/vector/max_size.cpp, line: 22)
++Char max size: 9223372036854775807 (file: tests/vector/max_size.cpp, line: 23)
+ Int max size: 4611686018427387903 (file: tests/vector/max_size.cpp, line: 24)
+ Long max size: 2305843009213693951 (file: tests/vector/max_size.cpp, line: 25)
+ Short max size: 9223372036854775807 (file: tests/vector/max_size.cpp, line: 26)

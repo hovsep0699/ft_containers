@@ -1,0 +1,37 @@
+Capacity Ok (file: tests/vector/resize.cpp, line: 24)
+Size: 14 (file: tests/vector/resize.cpp, line: 24)
+
+Vector content:
+HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld 
+
+Capacity Ok (file: tests/vector/resize.cpp, line: 28)
+Size: 6 (file: tests/vector/resize.cpp, line: 28)
+
+Vector content:
+HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld 
+
+Capacity Ok (file: tests/vector/resize.cpp, line: 32)
+Size: 14 (file: tests/vector/resize.cpp, line: 32)
+
+Vector content:
+HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt 
+
+Capacity Ok (file: tests/vector/resize.cpp, line: 36)
+Size: 15 (file: tests/vector/resize.cpp, line: 36)
+
+Vector content:
+HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt olIewtUEvXJgs1lB9bCn 
+
+Capacity Ok (file: tests/vector/resize.cpp, line: 40)
+Size: 64 (file: tests/vector/resize.cpp, line: 40)
+
+Vector content:
+HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld HelloWorld cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt cFBiwjfYw7Js6qEGy5Kt olIewtUEvXJgs1lB9bCn I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors I-like-vectors 
+
+Length exception (file: tests/vector/resize.cpp, line: 50)
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

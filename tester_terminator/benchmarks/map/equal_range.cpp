@@ -6,12 +6,14 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 20:17:10 by mleblanc          #+#    #+#             */
-/*   Updated: 2022/05/23 20:18:16 by mleblanc         ###   ########.fr       */
+/*   Updated: 2022/12/02 01:03:59 by hohayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_prelude.hpp"
-
+//#include <map>
+//#undef NAMESPACE
+//#define NAMESPACE std
 int main()
 {
     SETUP;

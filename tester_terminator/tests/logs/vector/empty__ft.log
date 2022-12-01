@@ -1,0 +1,32 @@
+Capacity Ok (file: tests/vector/empty.cpp, line: 22)
+Size: 0 (file: tests/vector/empty.cpp, line: 22)
+
+Vector content:
+
+
+Empty (file: tests/vector/empty.cpp, line: 25)
+Capacity Ok (file: tests/vector/empty.cpp, line: 32)
+Size: 0 (file: tests/vector/empty.cpp, line: 32)
+
+Vector content:
+
+
+Empty. (file: tests/vector/empty.cpp, line: 35)
+Capacity Ok (file: tests/vector/empty.cpp, line: 42)
+Size: 1 (file: tests/vector/empty.cpp, line: 42)
+
+Vector content:
+64 
+
+Capacity Ok (file: tests/vector/empty.cpp, line: 52)
+Size: 42 (file: tests/vector/empty.cpp, line: 52)
+
+Vector content:
+64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 
+
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

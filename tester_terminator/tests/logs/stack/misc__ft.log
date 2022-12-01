@@ -21,9 +21,9 @@ Empty: true (file: tests/stack/misc.cpp, line: 61)
 Size: 3 (file: tests/stack/misc.cpp, line: 65)
 Empty: false (file: tests/stack/misc.cpp, line: 66)
 Top: 128 (file: tests/stack/misc.cpp, line: 67)
-Called destroy on uninitialized memory: 0x137e067d0
-Called destroy on uninitialized memory: 0x137e067d4
-Called destroy on uninitialized memory: 0x137e067d8
+Called destroy on uninitialized memory: 0x7f8ce5402a90
+Called destroy on uninitialized memory: 0x7f8ce5402a94
+Called destroy on uninitialized memory: 0x7f8ce5402a98
 ========================================
 No leak detected
 ========================================

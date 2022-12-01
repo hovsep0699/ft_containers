@@ -6,7 +6,7 @@
 /*   By: mleblanc <mleblanc@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 20:05:55 by mleblanc          #+#    #+#             */
-/*   Updated: 2022/05/23 20:11:01 by mleblanc         ###   ########.fr       */
+/*   Updated: 2022/12/02 01:22:09 by hohayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main()
         t.reset();
         for (int i = 0; i < 100; ++i) {
             NAMESPACE::map<int, int>::iterator it = m.begin();
-            std::advance(it, i % 2 == 0 ? 2400 : 3064);
+            NAMESPACE::advance(it, i % 2 == 0 ? 2400 : 3064);
             m.erase(m.begin(), it);
         }
 

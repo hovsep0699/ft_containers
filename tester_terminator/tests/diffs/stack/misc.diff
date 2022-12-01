@@ -1,12 +1,12 @@
---- logs/stack/misc__ft.log	2022-11-26 08:37:57.000000000 +0400
-+++ logs/stack/misc__std.log	2022-11-26 08:37:58.000000000 +0400
+--- logs/stack/misc__ft.log	2022-12-02 01:13:16.000000000 +0400
++++ logs/stack/misc__std.log	2022-12-02 01:13:17.000000000 +0400
 @@ -21,9 +21,6 @@
  Size: 3 (file: tests/stack/misc.cpp, line: 65)
  Empty: false (file: tests/stack/misc.cpp, line: 66)
  Top: 128 (file: tests/stack/misc.cpp, line: 67)
--Called destroy on uninitialized memory: 0x137e067d0
--Called destroy on uninitialized memory: 0x137e067d4
--Called destroy on uninitialized memory: 0x137e067d8
+-Called destroy on uninitialized memory: 0x7f8ce5402a90
+-Called destroy on uninitialized memory: 0x7f8ce5402a94
+-Called destroy on uninitialized memory: 0x7f8ce5402a98
  ========================================
  No leak detected
  ========================================

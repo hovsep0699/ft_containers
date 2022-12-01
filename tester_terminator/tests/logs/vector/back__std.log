@@ -1,0 +1,10 @@
+Back: 9 (file: tests/vector/back.cpp, line: 22)
+Back: 543 (file: tests/vector/back.cpp, line: 32)
+Back: 9 (file: tests/vector/back.cpp, line: 42)
+Back: 543 (file: tests/vector/back.cpp, line: 53)
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================

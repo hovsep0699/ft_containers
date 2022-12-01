@@ -1,0 +1,11 @@
+Greater than or equal (file: tests/vector/comparisons_ge.cpp, line: 22)
+Greater than or equal. (file: tests/vector/comparisons_ge.cpp, line: 31)
+Greater than or equal... (file: tests/vector/comparisons_ge.cpp, line: 49)
+Greater than or equal... (file: tests/vector/comparisons_ge.cpp, line: 58)
+Greater than or equal.... (file: tests/vector/comparisons_ge.cpp, line: 67)
+========================================
+No leak detected
+========================================
+========================================
+Every objects destroyed
+========================================
